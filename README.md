@@ -1,7 +1,7 @@
-# cryptidsnft
+# CryptidsNFT
 
-Hello world!
+Welcome to Nos Atomos...
 
-test 123
+This reposity contains all of the required files to generate Cryptids NFT.  
 
-1 2 3
+
