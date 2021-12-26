@@ -1,0 +1,100 @@
+{
+  "dna": "f5f4692299fb6b0ea8edcfc481d41263641152b24876c81a23e4641376121cf4",
+  "name": "Lion-Test #13",
+  "description": "Administrators of the metaverse.",
+  "image": "ipfs://NewUriToReplace/13.png",
+  "imageHash": "fc4cb3b3c59090d74511eb690bc3fa24a87c181a87a58f7f2763270e3e7f2cd8",
+  "edition": 13,
+  "date": 1639349912544,
+  "attributes": [
+    {
+      "trait_type": "NeckBase",
+      "value": "Blue"
+    },
+    {
+      "trait_type": "NeckTexture",
+      "value": "White"
+    },
+    {
+      "trait_type": "FurBase",
+      "value": "FluffyGold"
+    },
+    {
+      "trait_type": "FurAccent",
+      "value": "AccentFluffyWhite"
+    },
+    {
+      "trait_type": "FurTexture",
+      "value": "TextureFluffy"
+    },
+    {
+      "trait_type": "RightFrontLegBase",
+      "value": "RFL_WolfOrange"
+    },
+    {
+      "trait_type": "RightFrontLegTexture",
+      "value": "RFL_WolfTexture"
+    },
+    {
+      "trait_type": "EarsColor",
+      "value": "LynxBlue"
+    },
+    {
+      "trait_type": "EarsAccent",
+      "value": "LynxAccent"
+    },
+    {
+      "trait_type": "EarsTexture",
+      "value": "LynxTexture"
+    },
+    {
+      "trait_type": "HeadBase",
+      "value": "FluffyMagenta"
+    },
+    {
+      "trait_type": "HeadAccent",
+      "value": "White"
+    },
+    {
+      "trait_type": "HeadPattern",
+      "value": "LionPurpleSpots"
+    },
+    {
+      "trait_type": "HeadTexture",
+      "value": "Fluffy"
+    },
+    {
+      "trait_type": "Mouth",
+      "value": "Fangs"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "Wise"
+    },
+    {
+      "display_type": "boost_number",
+      "trait_type": "Charisma",
+      "value": 45
+    },
+    {
+      "display_type": "boost_number",
+      "trait_type": "Magic",
+      "value": 49
+    },
+    {
+      "display_type": "boost_number",
+      "trait_type": "Empathy",
+      "value": 1
+    },
+    {
+      "display_type": "boost_number",
+      "trait_type": "Morality",
+      "value": 92
+    },
+    {
+      "display_type": "boost_number",
+      "trait_type": "Wisdom",
+      "value": 39
+    }
+  ]
+}

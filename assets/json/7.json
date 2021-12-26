@@ -1,0 +1,88 @@
+{
+  "dna": "d3ede14b56ab4e8a268b9859c1833045d80c805baa5ab97da9ddbfc9839e7856",
+  "name": "Lion-Test #11",
+  "description": "Administrators of the metaverse.",
+  "image": "ipfs://NewUriToReplace/11.png",
+  "imageHash": "f8b801b7f93cd994baf602c26e269bddf1dbbcb0e84e186bab715f4b14a04d87",
+  "edition": 11,
+  "date": 1639349914502,
+  "attributes": [
+    {
+      "trait_type": "NeckBase",
+      "value": "Orange"
+    },
+    {
+      "trait_type": "NeckPattern",
+      "value": "NeckYellowSpots"
+    },
+    {
+      "trait_type": "NeckTexture",
+      "value": "White"
+    },
+    {
+      "trait_type": "RightFrontLegBase",
+      "value": "RFL_HorseOrange"
+    },
+    {
+      "trait_type": "RightFrontLegTexture",
+      "value": "RFL_HorseTexture"
+    },
+    {
+      "trait_type": "EarsColor",
+      "value": "FloppyBlue"
+    },
+    {
+      "trait_type": "EarsAccent",
+      "value": "FloppyAccent"
+    },
+    {
+      "trait_type": "EarsTexture",
+      "value": "FloppyTexture"
+    },
+    {
+      "trait_type": "HeadBase",
+      "value": "FluffyMagenta"
+    },
+    {
+      "trait_type": "HeadPattern",
+      "value": "LionYellowSpots"
+    },
+    {
+      "trait_type": "HeadTexture",
+      "value": "Fluffy"
+    },
+    {
+      "trait_type": "Mouth",
+      "value": "Fangs"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "Pedator"
+    },
+    {
+      "display_type": "boost_number",
+      "trait_type": "Charisma",
+      "value": 37
+    },
+    {
+      "display_type": "boost_number",
+      "trait_type": "Magic",
+      "value": 20
+    },
+    {
+      "display_type": "boost_number",
+      "trait_type": "Empathy",
+      "value": 6
+    },
+    {
+      "display_type": "boost_number",
+      "trait_type": "Morality",
+      "value": 80
+    },
+    {
+      "display_type": "boost_number",
+      "trait_type": "Wisdom",
+      "value": 77
+    }
+  ]
+}
