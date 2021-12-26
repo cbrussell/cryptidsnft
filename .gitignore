@@ -3,9 +3,10 @@ __pycache__
 .history
 .hypothesis/
 build/
+interfaces/
 reports/
 assets/
 *.yaml
 git_instructions.txt
 pinata-key.txt
-
+.DS_Store
