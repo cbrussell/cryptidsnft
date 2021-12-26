@@ -6,5 +6,6 @@ build/
 reports/
 assets/
 *.yaml
+git_instructions.txt
 pinata-key.txt
 
