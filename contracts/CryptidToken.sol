@@ -166,12 +166,12 @@ contract CryptidToken is ERC721, ERC721Enumerable, Pausable, Ownable{
     }
     
     function setTeamMintSupply(uint256 _newTeamMintSupply) public onlyOwner() {
-        require(stage < 4, "Team sale is concluded.");
+        require(stage < 3, "Team sale is initiated.");
         teamMintSupply = _newTeamMintSupply;
     }
 
     function setPresalePrice(uint256 _newPresalePrice) public onlyOwner {
-        require(stage < 3, "Presale is concluded.");
+        require(stage < 2, "Presale is initiated.");
         presalePrice = _newPresalePrice;
     }
 
