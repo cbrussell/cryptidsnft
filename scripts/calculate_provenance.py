@@ -18,29 +18,20 @@ for i in range(1, (image_count + 1)):
     f = open(new_path, "rb")
     bytes = f.read()
     readable_hash = hashlib.sha256(bytes).hexdigest();
-    print(f"The hash for {i}.png is {readable_hash} \n")
     combined_hash_string += readable_hash
     table.append([i, i, readable_hash])
 
 print(f"The combined hash string is: {combined_hash_string}. \n")
 
 cryptid_array = np.array(table)
-
-
 provenance_hash = hashlib.sha256(combined_hash_string.encode('utf-8')).hexdigest()
 
-print(f"The final provenance hash is {provenance_hash}. \n")
 
 column_values = ["Init", "Shifted", "Hash"]
-
 df =pd.DataFrame(data=cryptid_array, columns=column_values)
-
-
 df['Shifted'] = np.roll(df['Shifted'], shift = 3)
-
-# tabulate data
 shifted_table = tabulate(df, column_values, tablefmt="fancy_grid", showindex=False)
 
 # output
-print(shifted_table)
-print("\n")
+print(f"Final shifted table is: \n{shifted_table} \n")
+print(f"The final provenance hash is {provenance_hash}. \n")
