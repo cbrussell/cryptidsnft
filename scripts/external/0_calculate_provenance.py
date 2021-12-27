@@ -7,9 +7,10 @@ import fnmatch
 import pandas as pd
 
 
-image_path = Path(__file__).resolve().parents[1] / "assets/images/"
+image_path = Path(__file__).resolve().parents[2] / "assets/images/"
 image_list = fnmatch.filter(os.listdir(image_path), '*.png')
 image_count = len(image_list)
+shift_value = 3
 
 combined_hash_string = ""
 table = []
@@ -30,7 +31,7 @@ provenance_hash = hashlib.sha256(combined_hash_string.encode('utf-8')).hexdigest
 
 column_values = ["Init", "Shifted", "Hash"]
 df =pd.DataFrame(data=cryptid_array, columns=column_values)
-df['Shifted'] = np.roll(df['Shifted'], shift = 3)
+df['Shifted'] = np.roll(df['Shifted'], shift = shift_value)
 shifted_table = tabulate(df, column_values, tablefmt="fancy_grid", showindex=False)
 
 # output
