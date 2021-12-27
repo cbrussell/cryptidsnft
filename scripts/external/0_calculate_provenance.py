@@ -6,6 +6,7 @@ from tabulate import tabulate
 import fnmatch
 import pandas as pd
 
+
 image_path = Path(__file__).resolve().parents[1] / "assets/images/"
 image_list = fnmatch.filter(os.listdir(image_path), '*.png')
 image_count = len(image_list)
