@@ -4,7 +4,7 @@ from pathlib import Path
 import fnmatch
 
 # Renames image directory based on community generated shift-value
-shift_amount = 1
+shift_amount = 5
 
 # Determine image path
 image_path = Path(__file__).resolve().parents[2] / "assets/images/"

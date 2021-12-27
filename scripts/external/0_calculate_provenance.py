@@ -10,7 +10,7 @@ import pandas as pd
 image_path = Path(__file__).resolve().parents[2] / "assets/images/"
 image_list = fnmatch.filter(os.listdir(image_path), '*.png')
 image_count = len(image_list)
-shift_value = 3
+shift_value = 5
 
 combined_hash_string = ""
 table = []
