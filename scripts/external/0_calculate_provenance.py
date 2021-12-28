@@ -10,7 +10,7 @@ import pandas as pd
 image_path = Path(__file__).resolve().parents[2] / "assets/images/"
 image_list = fnmatch.filter(os.listdir(image_path), '*.png')
 image_count = len(image_list)
-shift_value = 5
+shift_value = 229183
 
 combined_hash_string = ""
 table = []
@@ -37,3 +37,4 @@ shifted_table = tabulate(df, column_values, tablefmt="fancy_grid", showindex=Fal
 # output
 print(f"Final shifted table is: \n{shifted_table} \n")
 print(f"The final provenance hash is {provenance_hash}. \n")
+print(f"\nThe shift amount is: {shift_value}.\n")

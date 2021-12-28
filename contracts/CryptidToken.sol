@@ -18,10 +18,12 @@ contract CryptidToken is ERC721, ERC721Enumerable, Pausable, Ownable{
     string public provenanceHash;
     string public baseURI = "";
     string public defaultURI;
+    string public baseExtension = ".json";
     uint8 private stage = 0;
     uint256 public maxMintPerTx;     
     bool public tokenURIFrozen = false;
     bool public provenanceHashFrozen = false;
+    
 
     // ~ Sale stages ~
     // stage 0: Init (no minting)
@@ -170,6 +172,10 @@ contract CryptidToken is ERC721, ERC721Enumerable, Pausable, Ownable{
         teamMintSupply = _newTeamMintSupply;
     }
 
+    function setBaseExtension(string memory _newBaseExtension) public onlyOwner {
+        baseExtension = _newBaseExtension;
+    }
+
     function setPresalePrice(uint256 _newPresalePrice) public onlyOwner {
         require(stage < 2, "Presale is initiated.");
         presalePrice = _newPresalePrice;
@@ -220,7 +226,7 @@ contract CryptidToken is ERC721, ERC721Enumerable, Pausable, Ownable{
     function tokenURI(uint256 tokenId) public view virtual override returns (string memory) {
         require(_exists(tokenId), "ERC721Metadata: URI query for nonexistent token");
         return bytes(baseURI).length > 0
-            ? string(abi.encodePacked(baseURI, tokenId.toString()))
+            ? string(abi.encodePacked(baseURI, tokenId.toString(), baseExtension))
             : defaultURI;
     }
 

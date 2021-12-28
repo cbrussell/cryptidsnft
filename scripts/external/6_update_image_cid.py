@@ -3,16 +3,16 @@ from pathlib import Path
 import fnmatch
 import json
 
-# Renames image directory based on community generated shift-value
+# Replaces exisitng CID in metadata - no number changes.
 
 base_url = "ipfs://"
 
 # Set new CID here from Step 2
-new_image_cid = "QmdHezMSvgTCLap9GLyNvziQeuWrE5BsNfSorqgCwjcP4Y/"
+new_image_cid = "QmRWxQhDAGNYMcmryvvuw1ewD9xeZU9E12ytp8ysDpFo9k/"
 image_extension = ".png"
 
 # Determine image path
-json_path = Path(__file__).resolve().parents[2] / "assets/json/"
+json_path = Path(__file__).resolve().parents[2] / "assets/shifted_json/"
 
 # sort directory of json files
 json_list = fnmatch.filter(os.listdir(json_path), '*.json')

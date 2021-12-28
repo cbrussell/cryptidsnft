@@ -8,7 +8,7 @@ from pinatapy import PinataPy
 
 # Function will upload image directory to IPFS then pin file to Pinata
 
-image_path = Path(__file__).resolve().parents[2] / "assets/images/"
+image_path = Path(__file__).resolve().parents[2] / "assets/shifted_images/"
 image_list = fnmatch.filter(os.listdir(image_path), '*.png')
 image_count = len(image_list)
 

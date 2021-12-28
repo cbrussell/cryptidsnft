@@ -2,11 +2,12 @@ from collections import deque
 import os
 from pathlib import Path 
 import fnmatch
+import shutil
 
 # Renames image directory based on community generated shift-value
-shift_amount = 5
+shift_amount = 229183
 
-# Determine image path
+# Determine image paths
 image_path = Path(__file__).resolve().parents[2] / "assets/images/"
 new_path = Path(__file__).resolve().parents[2] / "assets/shifted_images/"
 
@@ -32,9 +33,12 @@ print(f"\nShifted list is: {shifted_list}\n")
 
 # Replace original files for new name (changing folders)
 for i in range(image_count):
-    
+
+
     new_name = Path(new_path / shifted_list[i]) #file
     original_name = Path(image_path / image_list[i]) #location
 
-    original_name.rename(new_name)
+    shutil.copy(original_name, new_name)
+    
+    # original_name.rename(new_name)
 
