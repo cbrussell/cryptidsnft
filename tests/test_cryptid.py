@@ -8,7 +8,6 @@ def token():
     return accounts[0].deploy(CryptidToken, "Cryptids", "CRYPTID", "", 10, 10, 30, 5)
 
 
-
 # revert to deployed state after each test
 @pytest.fixture(autouse=True)
 def isolation(fn_isolation):
@@ -304,9 +303,6 @@ def test_mint_exceed_whitelisted(token):
     with brownie.reverts("Transaction exceeds remaining whitelist mints"):
         token.mint(3, {'from': user})
 
-# require(whitelistUsers[msg.sender] > 0, "Minter not whitelisted.");
-            # require(_mintAmount + whitelistMintCount[msg.sender] <= whitelistUsers[msg.sender], "Transaction exceeds remaining whitelist mints");
-
 # mint as non whitelist user
 def test_whitelist_not_on_list(token):
     owner = accounts[0]
@@ -342,10 +338,47 @@ def test_owner_of(token):
     token.mint(mints, {'from': user})
     assert(user == token.ownerOf(1))
 
-# mint presale
-def test_presale(token):
+#set presale user but sale is concluded
+def test_set_presale_but_sale_over(token):
     owner = accounts[0]
     user = accounts[1]
     _setFreezeProvenance(token)
     _nextStage(token)
-    
+    _nextStage(token)
+    _nextStage(token)
+    with brownie.reverts("Presale is concluded."):
+        token.setPresaleUsers([user], {'from': owner})
+
+
+#check presale user enabled
+def test_set_presale(token):
+    owner = accounts[0]
+    user = accounts[1]
+    token.setPresaleUsers([user], {'from': owner})
+    assert(token.presaleUsers(user) == True)
+
+# mint presale
+def test_presale(token):
+    owner = accounts[0]
+    user = accounts[1]
+    user_2 = accounts[2]
+    user_3 = accounts[3]
+    _setFreezeProvenance(token)
+    _nextStage(token)
+    token.setPresaleUsers([user], {'from': owner})
+    _nextStage(token)
+    mint = 5
+    with brownie.reverts("Not enough ether sent"):
+        token.mint(mint, {'from': user, 'value': "0 ether"})
+    token.mint(mint, {'from': user, 'value': "0.2 ether"})
+    assert(user == token.ownerOf(mint))
+    with brownie.reverts("Transaction exceeds max allowed presale mints"):
+        token.mint(1, {'from': user, 'value': "0 ether"})
+    with brownie.reverts("Address not on presale list"):
+        token.mint(mint, {'from': user_2, 'value': "0.2 ether"})
+    token.setPresaleUsers([user_2], {'from': owner})
+    token.mint(mint, {'from': user_2, 'value': "0.2 ether"})
+    token.setPresaleUsers([user_3], {'from': owner})
+    with brownie.reverts("Transaction exceeds pre-sale supply"):
+        token.mint(mint, {'from': user_3, 'value': "0.2 ether"})
+

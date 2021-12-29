@@ -81,7 +81,7 @@ contract CryptidToken is ERC721, ERC721Enumerable, Pausable, Ownable{
             whitelistMintCount[msg.sender] += _mintAmount;
     }   else if (stage == 2) {
         // Presale  
-            require(presaleUsers[msg.sender], "Address not whitelisted for presale");
+            require(presaleUsers[msg.sender], "Address not on presale list");
             require(totalSupply() + _mintAmount <= presaleSupply, "Transaction exceeds pre-sale supply");
             require(_mintAmount + presaleMintCount[msg.sender] <= presaleMintMax, "Transaction exceeds max allowed presale mints");      
             require(msg.value >= presalePrice.mul(_mintAmount), "Not enough ether sent");
