@@ -20,7 +20,7 @@ contract CryptidToken is ERC721, ERC721Enumerable, Pausable, Ownable{
     string public defaultURI;
     string public baseExtension = ".json";
     uint8 private stage = 0;
-    uint256 public maxMintPerTx;     
+    uint8 public maxMintPerTx;     
     bool public tokenURIFrozen = false;
     bool public provenanceHashFrozen = false;
     
@@ -33,14 +33,15 @@ contract CryptidToken is ERC721, ERC721Enumerable, Pausable, Ownable{
     // stage 4: Public sale
 
     // Whitelist mint (stage=1)
-    mapping(address => uint256) public whitelistUsers;
+    mapping(address => uint8) public whitelistUsers;
+    mapping(address => uint8) public whitelistMintCount;
 
     // Presale mint (stage=2)
     mapping(address => bool) public presaleUsers;
     uint256 public presaleSupply;                       
     uint256 public presalePrice = 0.04 ether;
-    uint256 public presaleMintMax = 5;                  
-    mapping(address => uint256) public presaleMintCount;
+    uint8 public presaleMintMax = 5;                  
+    mapping(address => uint8) public presaleMintCount;
 
     // Team Mint (stage=3)
     uint256 public teamMintSupply;                          
@@ -57,7 +58,7 @@ contract CryptidToken is ERC721, ERC721Enumerable, Pausable, Ownable{
         uint256 _presaleSupply,
         uint256 _teamMintSupply,
         uint256 _totalSaleSupply,
-        uint256 _maxMintPerTx
+        uint8 _maxMintPerTx
 
     )   ERC721(_name, _symbol) {
         presaleSupply = _presaleSupply;
@@ -69,20 +70,20 @@ contract CryptidToken is ERC721, ERC721Enumerable, Pausable, Ownable{
     }
 
     //Public mint function
-    function mint(uint256 _mintAmount) public payable whenNotPaused {
+    function mint(uint8 _mintAmount) public payable whenNotPaused {
         require(stage > 0, "Minting not initiated. Currenly on stage 0 (init).");
         require(_mintAmount > 0, "Mint amount must be greater than 0");
         require(_mintAmount <= maxMintPerTx, "Exceeds max allowed amount per transaction");
         if (stage == 1) {
         // Whitelist
-            require(whitelistUsers[msg.sender] > 0, "Minter not on free whitelist or all mints retrieved.");
-            require(whitelistUsers[msg.sender] - _mintAmount >= 0, "Transaction exceeds awarded free-mint amount");
-            whitelistUsers[msg.sender] -= _mintAmount;
+            require(whitelistUsers[msg.sender] > 0, "Minter not whitelisted.");
+            require(_mintAmount + whitelistMintCount[msg.sender] <= whitelistUsers[msg.sender], "Transaction exceeds remaining whitelist mints");
+            whitelistMintCount[msg.sender] += _mintAmount;
     }   else if (stage == 2) {
         // Presale  
             require(presaleUsers[msg.sender], "Address not whitelisted for presale");
             require(totalSupply() + _mintAmount <= presaleSupply, "Transaction exceeds pre-sale supply");
-            require(_mintAmount + presaleMintCount[msg.sender] <= presaleMintMax, "Transaction exceeds max allow presale mints");      
+            require(_mintAmount + presaleMintCount[msg.sender] <= presaleMintMax, "Transaction exceeds max allowed presale mints");      
             require(msg.value >= presalePrice.mul(_mintAmount), "Not enough ether sent");
             presaleMintCount[msg.sender] += _mintAmount;
     }   else if (stage == 3) {
@@ -110,7 +111,7 @@ contract CryptidToken is ERC721, ERC721Enumerable, Pausable, Ownable{
         _unpause();
     }
 
-    function airdropCryptid(uint256 _mintAmount, address _to) public onlyOwner {
+    function airdropCryptid(uint8 _mintAmount, address _to) public onlyOwner {
         require(provenanceHashFrozen == true, "Provenance hash must be frozen before minting can start.");
         require(stage < 2, "Past whitelist sale.");
         require(_mintAmount <= maxMintPerTx, "Exceeds max allowed amount per transaction");
@@ -123,7 +124,7 @@ contract CryptidToken is ERC721, ERC721Enumerable, Pausable, Ownable{
         }
     }
 
-    function setWhitelistUsers(address[] memory _users, uint256[] memory _mints) public onlyOwner {
+    function setWhitelistUsers(address[] memory _users, uint8[] memory _mints) public onlyOwner {
         require(stage < 2, "Whitelist sale is concluded.");
         for(uint256 i=0;i<_users.length;i++)
         whitelistUsers[_users[i]] = _mints[i];
@@ -137,7 +138,7 @@ contract CryptidToken is ERC721, ERC721Enumerable, Pausable, Ownable{
 
     function removeWhitelistUser(address _user) public onlyOwner {
         require(stage < 2, "Whitelist sale is concluded.");
-        require(whitelistUsers[msg.sender] > 0, "User is not on whitelist or has all mints retrieved.");
+        require(whitelistUsers[_user] > 0, "User is not on whitelist.");
         whitelistUsers[_user] = 0;
     }
 
@@ -185,7 +186,7 @@ contract CryptidToken is ERC721, ERC721Enumerable, Pausable, Ownable{
         salePrice = _newSalePrice;
     }
 
-    function setMaxMintPerTx(uint256 _newmaxMintPerTx) public onlyOwner {
+    function setMaxMintPerTx(uint8 _newmaxMintPerTx) public onlyOwner {
         maxMintPerTx = _newmaxMintPerTx;
     }
 
