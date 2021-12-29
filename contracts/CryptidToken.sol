@@ -81,10 +81,10 @@ contract CryptidToken is ERC721, ERC721Enumerable, Pausable, Ownable{
             whitelistMintCount[msg.sender] += _mintAmount;
     }   else if (stage == 2) {
         // Presale  
+            require(msg.value >= presalePrice.mul(_mintAmount), "Not enough ether sent");
             require(presaleUsers[msg.sender], "Address not on presale list");
             require(totalSupply() + _mintAmount <= presaleSupply, "Transaction exceeds pre-sale supply");
             require(_mintAmount + presaleMintCount[msg.sender] <= presaleMintMax, "Transaction exceeds max allowed presale mints");      
-            require(msg.value >= presalePrice.mul(_mintAmount), "Not enough ether sent");
             presaleMintCount[msg.sender] += _mintAmount;
     }   else if (stage == 3) {
         // Team Sale
@@ -93,8 +93,8 @@ contract CryptidToken is ERC721, ERC721Enumerable, Pausable, Ownable{
             teamMintCount += _mintAmount;
     }   else {
         // Public Sale
-            require(totalSupply()  + _mintAmount <= totalSaleSupply, "Transaction exceeds total sale supply");
             require(msg.value >= salePrice.mul(_mintAmount), "Not enough ether sent");
+            require(totalSupply()  + _mintAmount <= totalSaleSupply, "Transaction exceeds total sale supply");
         }
         for (uint256 i = 1; i <= _mintAmount; i++) {
             _safeMint(msg.sender, _tokenIdCounter.current());

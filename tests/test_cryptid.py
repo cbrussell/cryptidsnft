@@ -1,12 +1,11 @@
 import pytest
 import brownie
-from brownie import CryptidToken, accounts, exceptions;
+from brownie import CryptidToken, TestContract, accounts, exceptions;
 
 # deploy CryptidToken
 @pytest.fixture(scope="module", autouse=True)
 def token():
     return accounts[0].deploy(CryptidToken, "Cryptids", "CRYPTID", "", 10, 10, 30, 5)
-
 
 # revert to deployed state after each test
 @pytest.fixture(autouse=True)
@@ -194,6 +193,24 @@ def test_airdrop_too_many(token):
     with brownie.reverts("Exceeds max allowed amount per transaction"):
         token.airdropCryptid(tokens, user, {'from': owner})
 
+def test_airdrop_to_contract(token):
+    owner = accounts[0]
+    user = accounts[1]
+    tokens = 2
+    _setFreezeProvenance(token)
+    test = accounts[0].deploy(TestContract).address
+    # test_address = test.address()
+    with brownie.reverts("ERC721: transfer to non ERC721Receiver implementer"):
+        token.airdropCryptid(tokens, test, {'from': owner})
+
+def test_airdrop_to_zero(token):
+    owner = accounts[0]
+    user = "0x0000000000000000000000000000000000000000"
+    tokens = 2
+    _setFreezeProvenance(token)
+    with brownie.reverts():
+        token.airdropCryptid(tokens, user, {'from': owner})
+
 # airdrop at whitelist
 def test_airdrop_at_whitelist(token):
     owner = accounts[0]
@@ -338,6 +355,13 @@ def test_owner_of(token):
     token.mint(mints, {'from': user})
     assert(user == token.ownerOf(1))
 
+# ownerOf assert
+def test_owner_of_nonexistent_token(token):
+    user = accounts[1]
+    with brownie.reverts("ERC721: owner query for nonexistent token"):
+        token.ownerOf(1)
+
+
 #set presale user but sale is concluded
 def test_set_presale_but_sale_over(token):
     owner = accounts[0]
@@ -348,7 +372,6 @@ def test_set_presale_but_sale_over(token):
     _nextStage(token)
     with brownie.reverts("Presale is concluded."):
         token.setPresaleUsers([user], {'from': owner})
-
 
 #check presale user enabled
 def test_set_presale(token):
@@ -373,7 +396,7 @@ def test_presale(token):
     token.mint(mint, {'from': user, 'value': "0.2 ether"})
     assert(user == token.ownerOf(mint))
     with brownie.reverts("Transaction exceeds max allowed presale mints"):
-        token.mint(1, {'from': user, 'value': "0 ether"})
+        token.mint(1, {'from': user, 'value': "0.2 ether"})
     with brownie.reverts("Address not on presale list"):
         token.mint(mint, {'from': user_2, 'value': "0.2 ether"})
     token.setPresaleUsers([user_2], {'from': owner})
@@ -381,4 +404,99 @@ def test_presale(token):
     token.setPresaleUsers([user_3], {'from': owner})
     with brownie.reverts("Transaction exceeds pre-sale supply"):
         token.mint(mint, {'from': user_3, 'value': "0.2 ether"})
+    assert(token.totalSupply() == mint + mint)
+    assert(token.presaleMintCount(user_2) == mint)
 
+def test_ERC615(token):
+    # ERC721
+    assert(True == token.supportsInterface("0x80ac58cd"))
+    # ERC165 itself
+    assert(True == token.supportsInterface("0x01ffc9a7"))
+    # ERC721 Metadata 
+    assert(True == token.supportsInterface("0x5b5e139f"))
+
+def test_name_symbol(token):
+    name = token.name()
+    symbol = token.symbol()
+    assert(len(name) > 0)
+    assert(len(symbol) > 0)
+
+# test team mint
+def test_team_mint(token):
+    owner = accounts[0]
+    user = accounts[1]
+    _setFreezeProvenance(token)
+    _nextStage(token)
+    _nextStage(token)
+    _nextStage(token)
+    mint = 5
+    balance_before = token.balanceOf(owner)
+    token.mint(mint, {'from': owner})
+    balance_after = token.balanceOf(owner)
+    assert(balance_after == balance_before + mint)
+    with brownie.reverts("Only Owner can mint at this stage"):
+        token.mint(mint, {'from': user})
+    token.mint(mint, {'from': owner})
+    with brownie.reverts("Transaction exceeds total team-sale supply"):
+        token.mint(mint, {'from': owner})
+    assert(token.teamMintCount() == 10)
+
+def test_public_sale(token):
+    user = accounts[1]
+    mint = 5
+    _setFreezeProvenance(token)
+    with brownie.reverts("Minting not initiated. Currenly on stage 0 (init)."):
+        token.mint(mint, {'from': user, 'value': "0.3 ether"})
+    _nextStage(token)
+    with brownie.reverts("Mint amount must be greater than 0"):
+        token.mint(0, {'from': user, 'value': "0.3 ether"})
+    with brownie.reverts("Exceeds max allowed amount per transaction"):
+        token.mint(mint + 1, {'from': user, 'value': "0.3 ether"})
+    _nextStage(token)
+    _nextStage(token)
+    _nextStage(token)
+    balance_before = token.balanceOf(user)
+    token.mint(mint, {'from': user, 'value': "0.3 ether"})
+    balance_after = token.balanceOf(user)
+    assert(balance_after == balance_before + mint)
+    token.mint(mint, {'from': user, 'value': "0.3 ether"})
+    token.mint(mint, {'from': user, 'value': "0.3 ether"})
+    token.mint(mint, {'from': user, 'value': "0.3 ether"})
+    token.mint(mint, {'from': user, 'value': "0.3 ether"})
+    token.mint(mint, {'from': user, 'value': "0.3 ether"})
+    with brownie.reverts("Transaction exceeds total sale supply"):
+        token.mint(mint, {'from': user, 'value': "0.3 ether"})
+    with brownie.reverts("Not enough ether sent"):
+        token.mint(mint, {'from': user, 'value': "0.2 ether"})
+
+# mint as zero address during public sale - will revert
+def test_public_sale_to_contract(token):
+    owner = accounts[0]
+    _setFreezeProvenance(token)
+    _nextStage(token)
+    _nextStage(token)
+    _nextStage(token)
+    _nextStage(token)
+    tokens = 5
+    test = accounts[0].deploy(TestContract).address
+    accounts[0].transfer(test, "10 ether", gas_price=0)
+    with brownie.reverts():
+        token.mint(tokens, {'from': test, 'value': "0.3 ether"})
+
+def test_set_frozen_base_uri(token):
+    owner = accounts[0]
+    with brownie.reverts("baseURI cannot be empty"):
+        token.freezeBaseURI({'from': owner})
+    baseUri = "http://testuri.io/"
+    token.setBaseURI(baseUri, {'from': owner})
+    assert(token.baseURI() == baseUri)
+    token.freezeBaseURI({'from': owner})
+    assert(token.tokenURIFrozen() == True)
+    with brownie.reverts("BaseURI is already frozen."):
+        token.freezeBaseURI({'from': owner})
+
+def test_set_default_uri(token):
+    owner = accounts[0]
+    new_defaultURI = "test"
+    token.setDefaultURI(new_defaultURI, {'from':owner})
+    assert(token.defaultURI() == new_defaultURI)
