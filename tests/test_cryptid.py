@@ -37,7 +37,6 @@ def _verifyTransferEvent(txn_receipt, _from, to, tokenID):
     assert(event['from'] == _from)
 
 # Verify that an ApprovalForAll event has been logged
-
 def _verifyApprovalForAllEvent(txn_receipt, owner, operator, approved):
     event = txn_receipt.events['ApprovalForAll']
     assert(event['owner'] == owner)
@@ -54,9 +53,7 @@ def _mint(token, tokenID, owner):
     _nextStage(token)
     token.mint(tokenID, {'from': owner, 'value': "0.06 ether"})
 
-#
 # Verify that an Approval event has been logged
-#
 def _verifyApprovalEvent(txn_receipt, owner, approved, tokenID):
     event = txn_receipt.events['Approval']
     assert(event['tokenId'] == tokenID)
@@ -185,7 +182,6 @@ def test_move_to_stage_1_after_provenance(token):
     assert(stage_after == stage_before + 1)
 
 # no stages after 4
-
 def test_only_four_stages(token):
     owner = accounts[0]
     _setFreezeProvenance(token)
@@ -195,6 +191,7 @@ def test_only_four_stages(token):
     _nextStage(token)
     with brownie.reverts("No stages after public sale"):
         token.nextStage({'from': owner})
+    assert(token.getStage() == 4)
 
 # airdrop before provenance is set
 
@@ -740,7 +737,7 @@ def test_safe_transfer_from_not_owner(token):
         token.safeTransferFrom(bob, alice, tokenID, hexbytes.HexBytes(""), {"from": bob})
 
 # Test an safe invalid transfer - to is the zero address
-def test_safeTransferFrom_toZeroAddress(token):
+def test_safe_transfer_from_to_zero_address(token):
     me = accounts[0]
     tokenID = 1
     _mint(token, tokenID, me)
@@ -768,7 +765,7 @@ def test_safe_transfer_from_not_authorized(token):
         token.safeTransferFrom(me, alice, tokenID, hexbytes.HexBytes(""), {"from": bob})
 
 # Test a valid safe transfer to a contract returning the proper magic value
-def test_safeTransferFrom(token):
+def test_safe_transfer_from(token):
     data = "0x1234"
     me = accounts[0]
     tokenID = 1
@@ -800,7 +797,7 @@ def test_safeTransferFrom(token):
 #
 # Test a valid safe transfer to a contract returning the wrong proper magic value
 #
-def test_safeTransferFrom_wrongMagicValue(token):
+def test_safe_transfer_from_wrong_magic_value(token):
     me = accounts[0]
     tokenID = 1
     _mint(token, tokenID, me)
@@ -814,7 +811,7 @@ def test_safeTransferFrom_wrongMagicValue(token):
     tokenReceiver.setReturnCorrectValue(True)
 
 # Test a valid safe transfer to a contract returning the proper magic value - no data
-def test_safeTransferFrom_noData(token):
+def test_safe_transfer_from_no_data(token):
     me = accounts[0]
     tokenID = 1
     _mint(token, tokenID, me)
@@ -842,7 +839,7 @@ def test_safeTransferFrom_noData(token):
     _verifyTransferEvent(txn_receipt, me, tokenReceiver.address, tokenID)
 
 # Test an approval which is not authorized
-def test_approval_notAuthorized(token):
+def test_approval_not_authorized(token):
     me = accounts[0]
     alice = accounts[1]
     tokenID = 1
@@ -871,7 +868,7 @@ def test_approval(token):
     _verifyApprovalEvent(txn_receipt, me, bob, tokenID) # owner, approved, tokenID
 
 # Test that approval is reset to zero address if token is transferred
-def test_approval_resetUponTransfer(token):
+def test_approval_reset_upon_transfer(token):
     me = accounts[0]
     alice = accounts[1]
     bob = accounts[2]
@@ -940,7 +937,7 @@ def test_approval_authorization(token):
     token.setApprovalForAll(alice, False, {"from": me})
 
 # Test a valid transfer, initiated by an operator for the current owner of the token
-def test_transferFrom_operator(token):
+def test_transfer_from_operator(token):
     me = accounts[0]
     alice = accounts[1]
     bob = accounts[2]

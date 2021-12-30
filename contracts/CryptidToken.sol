@@ -118,7 +118,6 @@ contract CryptidToken is ERC721, Pausable, Ownable, ERC721Burnable{
         require(_mintAmount <= maxMintPerTx, "Exceeds max allowed amount per transaction");
         require(_mintAmount > 0, "Airdrop amount must be greater than 0");
         require(totalSupply()+ _mintAmount <= presaleSupply, "Mint amount will exceed presale supply.");
-       
         for (uint256 i = 1; i <= _mintAmount; i++) {
             _safeMint(_to, _tokenIdCounter.current());
             _tokenIdCounter.increment();
@@ -163,13 +162,13 @@ contract CryptidToken is ERC721, Pausable, Ownable, ERC721Burnable{
         tokenURIFrozen = true;
     }
 
-    function nextStage() public onlyOwner() {
+    function nextStage() public onlyOwner {
         require(provenanceHashFrozen == true, "Provenance hash must be frozen before minting can start.");
         require(stage < 4, "No stages after public sale");
         stage++;
     }
     
-    function setTeamMintSupply(uint256 _newTeamMintSupply) public onlyOwner() {
+    function setTeamMintSupply(uint256 _newTeamMintSupply) public onlyOwner {
         teamMintSupply = _newTeamMintSupply;
     }
 
