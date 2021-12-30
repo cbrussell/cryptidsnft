@@ -1,6 +1,7 @@
 import pytest
-import brownie
-from brownie import CryptidToken, TestContract, accounts, exceptions;
+import brownie 
+import hexbytes;
+from brownie import CryptidToken, TestContract, ReceiverContract, accounts, exceptions;
 
 # deploy CryptidToken
 @pytest.fixture(scope="module", autouse=True)
@@ -28,6 +29,39 @@ def _whitelistUser(token):
     user = accounts[1]
     mints = 5
     token.setWhitelistUsers([user], [mints], {'from': owner})
+
+def _verifyTransferEvent(txn_receipt, _from, to, tokenID):
+    event = txn_receipt.events['Transfer']
+    assert(event['tokenId'] == tokenID)
+    assert(event['to'] == to)
+    assert(event['from'] == _from)
+
+# Verify that an ApprovalForAll event has been logged
+
+def _verifyApprovalForAllEvent(txn_receipt, owner, operator, approved):
+    event = txn_receipt.events['ApprovalForAll']
+    assert(event['owner'] == owner)
+    assert(event['operator'] == operator)
+    assert(event['approved'] == approved)
+
+def _mint(token, tokenID, owner):
+    owner = accounts[0]
+    tokenID = 1
+    _setFreezeProvenance(token)
+    _nextStage(token)
+    _nextStage(token)
+    _nextStage(token)
+    _nextStage(token)
+    token.mint(tokenID, {'from': owner, 'value': "0.06 ether"})
+
+#
+# Verify that an Approval event has been logged
+#
+def _verifyApprovalEvent(txn_receipt, owner, approved, tokenID):
+    event = txn_receipt.events['Approval']
+    assert(event['tokenId'] == tokenID)
+    assert(event['owner'] == owner)
+    assert(event['approved'] == approved)
 
 # ensure whitelist works
 def test_whitelist_add(token):
@@ -208,7 +242,7 @@ def test_airdrop_to_zero(token):
     user = "0x0000000000000000000000000000000000000000"
     tokens = 2
     _setFreezeProvenance(token)
-    with brownie.reverts():
+    with brownie.reverts("ERC721: mint to the zero address"):
         token.airdropCryptid(tokens, user, {'from': owner})
 
 # airdrop at whitelist
@@ -377,8 +411,12 @@ def test_set_presale_but_sale_over(token):
 def test_set_presale(token):
     owner = accounts[0]
     user = accounts[1]
+    with brownie.reverts("User not on presale list."):
+        token.removePresaleUser(user)
     token.setPresaleUsers([user], {'from': owner})
     assert(token.presaleUsers(user) == True)
+    token.removePresaleUser(user)
+    assert(token.presaleUsers(user) == False)
 
 # mint presale
 def test_presale(token):
@@ -470,7 +508,7 @@ def test_public_sale(token):
         token.mint(mint, {'from': user, 'value': "0.2 ether"})
 
 # mint as zero address during public sale - will revert
-def test_public_sale_to_contract(token):
+def test_public_sale_to_non_erc_contract(token):
     owner = accounts[0]
     _setFreezeProvenance(token)
     _nextStage(token)
@@ -480,23 +518,485 @@ def test_public_sale_to_contract(token):
     tokens = 5
     test = accounts[0].deploy(TestContract).address
     accounts[0].transfer(test, "10 ether", gas_price=0)
-    with brownie.reverts():
+    with brownie.reverts("ERC721: transfer to non ERC721Receiver implementer"):
         token.mint(tokens, {'from': test, 'value': "0.3 ether"})
 
 def test_set_frozen_base_uri(token):
     owner = accounts[0]
+    user = accounts[1]
     with brownie.reverts("baseURI cannot be empty"):
         token.freezeBaseURI({'from': owner})
     baseUri = "http://testuri.io/"
     token.setBaseURI(baseUri, {'from': owner})
     assert(token.baseURI() == baseUri)
+    with brownie.reverts("Ownable: caller is not the owner"):
+        token.setBaseURI(baseUri, {'from': user})
     token.freezeBaseURI({'from': owner})
     assert(token.tokenURIFrozen() == True)
     with brownie.reverts("BaseURI is already frozen."):
         token.freezeBaseURI({'from': owner})
+    with brownie.reverts("BaseURI is frozen."):
+        token.setBaseURI(baseUri, {'from': owner})
+
 
 def test_set_default_uri(token):
     owner = accounts[0]
     new_defaultURI = "test"
     token.setDefaultURI(new_defaultURI, {'from':owner})
     assert(token.defaultURI() == new_defaultURI)
+
+# mint a token to a receiver contract
+def test_public_sale_to_contract(token):
+    owner = accounts[0]
+    _setFreezeProvenance(token)
+    _nextStage(token)
+    _nextStage(token)
+    _nextStage(token)
+    _nextStage(token)
+    tokens = 1
+    test = accounts[0].deploy(ReceiverContract).address
+    accounts[0].transfer(test, "10 ether", gas_price=0)
+    txn_receipt = token.mint(tokens, {'from': test, 'value': "0.3 ether"})
+    assert(test == token.ownerOf(tokens))
+    event = txn_receipt.events['Transfer']
+    assert(event['tokenId'] == tokens)
+    assert(event['from'] == "0x"+"0"*40)
+    assert(event['to'] == test)
+
+def test_mint_four_person(token):
+    user_1 = accounts[1]
+    user_2 = accounts[2]
+    user_3 = accounts[3]
+    user_4 = accounts[4]
+    _setFreezeProvenance(token)
+    _nextStage(token)
+    _nextStage(token)
+    _nextStage(token)
+    _nextStage(token)
+    txn_1 = token.mint(1, {'from': user_1, 'value': "0.06 ether"})
+    txn_2 = token.mint(1, {'from': user_2, 'value': "0.06 ether"})
+    txn_3 = token.mint(1, {'from': user_3, 'value': "0.06 ether"})
+    txn_4 = token.mint(1, {'from': user_4, 'value': "0.06 ether"})
+    assert(user_1 == token.ownerOf(1))
+    assert(user_2 == token.ownerOf(2))
+    assert(user_3 == token.ownerOf(3))
+    assert(user_4 == token.ownerOf(4))
+
+    event = txn_1.events['Transfer']
+    assert(event['tokenId'] == 1)
+    assert(event['from'] == "0x"+"0"*40)
+    assert(event['to'] == user_1)
+
+    event = txn_2.events['Transfer']
+    assert(event['tokenId'] == 2)
+    assert(event['from'] == "0x"+"0"*40)
+    assert(event['to'] == user_2)
+
+    event = txn_3.events['Transfer']
+    assert(event['tokenId'] == 3)
+    assert(event['from'] == "0x"+"0"*40)
+    assert(event['to'] == user_3)
+
+    event = txn_4.events['Transfer']
+    assert(event['tokenId'] == 4)
+    assert(event['from'] == "0x"+"0"*40)
+    assert(event['to'] == user_4)        
+
+# Inquire the balance for the zero address - this should raise an exception
+def test_balanceOfZeroAddress(token):
+    with brownie.reverts('ERC721: balance query for the zero address'):
+        balance = token.balanceOf("0x"+"0"*40)
+
+# Inquire the balance for a non-zero address 
+def test_balance_of_non_zero_address(token):
+    balance = token.balanceOf("0x1"+"0"*39)
+    assert(0 == balance);   
+
+# Burn a token
+def test_burn(token):
+    user = accounts[1]
+    tokens = 1
+    _setFreezeProvenance(token)
+    _nextStage(token)
+    _nextStage(token)
+    _nextStage(token)
+    _nextStage(token)
+    token.mint(1, {'from': user, 'value': "0.06 ether"})
+    txn_receipt = token.burn(tokens, {"from": user})
+    _verifyTransferEvent(txn_receipt, user, "0x"+40*"0", tokens)
+
+# Burn a token when not owner, willr evert
+def test_burn_as_not_owner(token):
+    owner = accounts[0]
+    user = accounts[1]
+    tokens = 1
+    _setFreezeProvenance(token)
+    _nextStage(token)
+    _nextStage(token)
+    _nextStage(token)
+    _nextStage(token)
+    token.mint(1, {'from': user, 'value': "0.06 ether"})
+    with brownie.reverts('ERC721Burnable: caller is not owner nor approved'):
+        token.burn(tokens, {"from": owner})
+
+# Test a valid transfer, initiated by the current owner of the token
+def test_transfer_from(token):
+    owner = accounts[0]
+    user = accounts[1]
+    tokenID = 1
+    _setFreezeProvenance(token)
+    _nextStage(token)
+    _nextStage(token)
+    _nextStage(token)
+    _nextStage(token)
+    token.mint(tokenID, {'from': owner, 'value': "0.06 ether"})
+    oldBalanceMe = token.balanceOf(owner)
+    oldBalanceAlice = token.balanceOf(user)
+    txn_receipt = token.transferFrom(owner, user, tokenID, {"from": owner})
+    assert(user == token.ownerOf(tokenID))
+    newBalanceMe = token.balanceOf(owner)
+    newBalanceAlice = token.balanceOf(user)
+    assert (newBalanceMe + 1 == oldBalanceMe)
+    assert (oldBalanceAlice + 1 == newBalanceAlice)
+    _verifyTransferEvent(txn_receipt, owner, user, tokenID)
+
+# transfer from non-owner
+def test_transfer_from_non_owner(token):
+    owner = accounts[0]
+    user = accounts[1]
+    user_2 = accounts[2]
+    tokenID = 1
+    _setFreezeProvenance(token)
+    _nextStage(token)
+    _nextStage(token)
+    _nextStage(token)
+    _nextStage(token)
+    token.mint(tokenID, {'from': owner, 'value': "0.06 ether"})
+    with brownie.reverts("ERC721: transfer caller is not owner nor approved"):
+        token.transferFrom(user_2, user, tokenID,{"from": user_2})
+
+# Test an invalid transfer - to is the zero address
+def test_transfer_to_zero_address(token):
+    owner = accounts[0]
+    tokenID = 1
+    _setFreezeProvenance(token)
+    _nextStage(token)
+    _nextStage(token)
+    _nextStage(token)
+    _nextStage(token)
+    token.mint(tokenID, {'from': owner, 'value': "0.06 ether"})
+    # Now do the transfer
+    with brownie.reverts('ERC721: transfer to the zero address'):
+        token.transferFrom(owner, "0x"+40*"0", tokenID, {"from": owner})
+
+# transfer from non owner
+def test_transfer_from_non_approved_owner(token):
+    owner = accounts[0]
+    user = accounts[1]
+    user_2 = accounts[2]
+    tokenID = 1
+    _setFreezeProvenance(token)
+    _nextStage(token)
+    _nextStage(token)
+    _nextStage(token)
+    _nextStage(token)
+    token.mint(tokenID, {'from': owner, 'value': "0.06 ether"})
+    with brownie.reverts("ERC721: transfer caller is not owner nor approved"):
+        token.transferFrom(owner, user, tokenID,{"from": user})
+
+# Test a valid safe transfer, initiated by the current owner of the token
+def test_safe_transfer_from(token):
+    owner = accounts[0]
+    alice = accounts[1]
+    tokenID = 1
+    _mint(token, tokenID, owner)
+    # Remember balances
+    oldBalanceMe = token.balanceOf(owner)
+    oldBalanceAlice = token.balanceOf(alice)
+    # Now do the transfer
+    txn_receipt = token.safeTransferFrom(owner, alice, tokenID, hexbytes.HexBytes(""), {"from": owner})
+    # check owner of NFT
+    assert(alice == token.ownerOf(tokenID))
+    # Check balances
+    newBalanceMe = token.balanceOf(owner)
+    newBalanceAlice = token.balanceOf(alice)
+    assert (newBalanceMe + 1 == oldBalanceMe)
+    assert (oldBalanceAlice + 1 == newBalanceAlice)
+    # Verify that an Transfer event has been logged
+    _verifyTransferEvent(txn_receipt, owner, alice, tokenID)
+
+# Test an invalid safe transfer - from is not current owner
+def test_safe_transfer_from_not_owner(token):
+    me = accounts[0]
+    alice = accounts[1]
+    bob = accounts[2]
+    tokenID = 1
+    _mint(token, tokenID, me)
+    # Now do the transfer
+    with brownie.reverts("ERC721: transfer caller is not owner nor approved"):
+        token.safeTransferFrom(bob, alice, tokenID, hexbytes.HexBytes(""), {"from": bob})
+
+# Test an safe invalid transfer - to is the zero address
+def test_safeTransferFrom_toZeroAddress(token):
+    me = accounts[0]
+    tokenID = 1
+    _mint(token, tokenID, me)
+    # Now do the transfer
+    with brownie.reverts("ERC721: transfer to the zero address"):
+        token.safeTransferFrom(me, "0x"+40*"0", tokenID, hexbytes.HexBytes(""), {"from": me})
+
+# Test an invalid safe transfer - invalid token ID
+def test_safe_transfer_from_to_zero_address(token):
+    me = accounts[0]
+    alice = accounts[1]
+    tokenID = 1
+    with brownie.reverts("ERC721: operator query for nonexistent token"):
+        token.safeTransferFrom(me, alice, tokenID, hexbytes.HexBytes(""), {"from": me})
+
+# Test an invalid safe transfer - not authorized
+def test_safe_transfer_from_not_authorized(token):
+    me = accounts[0]
+    alice = accounts[1]
+    bob = accounts[2]
+    tokenID = 1
+    _mint(token, tokenID, me)
+    # Now do the transfer
+    with brownie.reverts("ERC721: transfer caller is not owner nor approved"):
+        token.safeTransferFrom(me, alice, tokenID, hexbytes.HexBytes(""), {"from": bob})
+
+# Test a valid safe transfer to a contract returning the proper magic value
+def test_safeTransferFrom(token):
+    data = "0x1234"
+    me = accounts[0]
+    tokenID = 1
+    _mint(token, tokenID, me)
+    tokenReceiver = accounts[0].deploy(ReceiverContract)
+    oldInvocationCount = tokenReceiver.getInvocationCount()
+    # Remember balances
+    oldBalanceMe = token.balanceOf(me)
+    oldBalanceToken = token.balanceOf(tokenReceiver.address)
+    # Make sure that the contract returns the correct magic value
+    tokenReceiver.setReturnCorrectValue(True)
+    # Now do the transfer
+    txn_receipt = token.safeTransferFrom(me, tokenReceiver.address, tokenID, hexbytes.HexBytes(data), {"from": me})
+    # check owner of NFT
+    assert(tokenReceiver.address == token.ownerOf(tokenID))
+    # Check balances
+    newBalanceMe = token.balanceOf(me)
+    newBalanceToken = token.balanceOf(tokenReceiver.address)
+    assert (newBalanceMe + 1 == oldBalanceMe)
+    assert (oldBalanceToken + 1 == newBalanceToken)
+    # get current invocation count of test contract
+    newInvocationCount = tokenReceiver.getInvocationCount()
+    assert(oldInvocationCount + 1 == newInvocationCount)
+    # Check that data has been stored
+    assert(tokenReceiver.getData() == data)
+    # Verify that an Transfer event has been logged
+    _verifyTransferEvent(txn_receipt, me, tokenReceiver.address, tokenID)
+
+#
+# Test a valid safe transfer to a contract returning the wrong proper magic value
+#
+def test_safeTransferFrom_wrongMagicValue(token):
+    me = accounts[0]
+    tokenID = 1
+    _mint(token, tokenID, me)
+    tokenReceiver = accounts[0].deploy(ReceiverContract)
+    # Make sure that the contract returns the wrong magic value
+    tokenReceiver.setReturnCorrectValue(False)
+    # Now do the transfer
+    with brownie.reverts("ERC721: transfer to non ERC721Receiver implementer"):
+        token.safeTransferFrom(me, tokenReceiver.address, tokenID, hexbytes.HexBytes(""), {"from": me})
+    # Reset behaviour of test contract
+    tokenReceiver.setReturnCorrectValue(True)
+
+# Test a valid safe transfer to a contract returning the proper magic value - no data
+def test_safeTransferFrom_noData(token):
+    me = accounts[0]
+    tokenID = 1
+    _mint(token, tokenID, me)
+    tokenReceiver = accounts[0].deploy(ReceiverContract)
+    # get current invocation count of test contract
+    oldInvocationCount = tokenReceiver.getInvocationCount()
+    # Remember balances
+    oldBalanceMe = token.balanceOf(me)
+    oldBalanceToken = token.balanceOf(tokenReceiver.address)
+    # Make sure that the contract returns the correct magic value
+    tokenReceiver.setReturnCorrectValue(True)
+    # Now do the transfer
+    txn_receipt = token.safeTransferFrom(me, tokenReceiver.address, tokenID,  {"from": me})
+    # check owner of NFT
+    assert(tokenReceiver.address == token.ownerOf(tokenID))
+    # Check balances
+    newBalanceMe = token.balanceOf(me)
+    newBalanceToken = token.balanceOf(tokenReceiver.address)
+    assert (newBalanceMe + 1 == oldBalanceMe)
+    assert (oldBalanceToken + 1 == newBalanceToken)
+    # get current invocation count of test contract
+    newInvocationCount = tokenReceiver.getInvocationCount()
+    assert(oldInvocationCount + 1 == newInvocationCount)
+    # Verify that an Transfer event has been logged
+    _verifyTransferEvent(txn_receipt, me, tokenReceiver.address, tokenID)
+
+# Test an approval which is not authorized
+def test_approval_notAuthorized(token):
+    me = accounts[0]
+    alice = accounts[1]
+    tokenID = 1
+    _mint(token, tokenID, me)
+    with brownie.reverts("ERC721: approve caller is not owner nor approved for all"):
+        token.approve(alice, tokenID, {"from": alice})
+
+# Test setting and getting approval
+def test_approval(token):
+    me = accounts[0]
+    bob = accounts[2]
+    tokenID = 1
+    # Get approval - should raise
+    with brownie.reverts("ERC721: approved query for nonexistent token"):
+        token.getApproved(tokenID)
+    # Approve - should raise
+    with brownie.reverts("ERC721: owner query for nonexistent token"):
+        token.approve(bob, tokenID, {"from": me})
+    # Mint
+    _mint(token, tokenID, me)
+    # Approve for bob 
+    txn_receipt = token.approve(bob, tokenID, {"from": me})
+    # Check
+    assert(bob == token.getApproved(tokenID))
+    # Verify events
+    _verifyApprovalEvent(txn_receipt, me, bob, tokenID) # owner, approved, tokenID
+
+# Test that approval is reset to zero address if token is transferred
+def test_approval_resetUponTransfer(token):
+    me = accounts[0]
+    alice = accounts[1]
+    bob = accounts[2]
+    tokenID = 1
+    _mint(token, tokenID, me)
+    # Approve for bob 
+    token.approve(bob, tokenID, {"from": me})
+    # Check
+    assert(bob == token.getApproved(tokenID))
+    # Do transfer
+    token.transferFrom(me, alice, tokenID, {"from": bob})
+    # Check that approval has been reset
+    assert(("0x"+40*"0") == token.getApproved(tokenID))
+
+# Test setting and clearing the operator flag
+def test_set_get_operator(token):
+    me = accounts[0]
+    alice = accounts[1]
+    bob = accounts[2]
+    assert(False == token.isApprovedForAll(me, bob))
+    assert(False == token.isApprovedForAll(me, alice))
+    # Declare bob as operator for me 
+    txn_receipt = token.setApprovalForAll(bob, True, {"from": me})
+    # Check
+    assert(True == token.isApprovedForAll(me, bob))
+    assert(False == token.isApprovedForAll(me, alice))
+    # Check events
+    _verifyApprovalForAllEvent(txn_receipt, me, bob, True)
+    # Do the same for alice
+    txn_receipt = token.setApprovalForAll(alice, True, {"from": me})
+    # Check
+    assert(True == token.isApprovedForAll(me, bob))
+    assert(True == token.isApprovedForAll(me, alice))
+    # Check events
+    _verifyApprovalForAllEvent(txn_receipt, me, alice, True)
+    # Reset both
+    txn_receipt = token.setApprovalForAll(bob, False, {"from": me})
+    # Check events
+    _verifyApprovalForAllEvent(txn_receipt, me, bob, False)
+    txn_receipt = token.setApprovalForAll(alice, False, {"from": me})
+    # Check events
+    _verifyApprovalForAllEvent(txn_receipt, me, alice, False)
+    # Check
+    assert(False == token.isApprovedForAll(me, bob))
+    assert(False == token.isApprovedForAll(me, alice))
+
+# Test authorization logic for setting and getting approval
+def test_approval_authorization(token):
+    me = accounts[0]
+    alice = accounts[1]
+    bob = accounts[2]
+    tokenID = 1
+    _mint(token, tokenID, me)
+    # Try to approve for bob while not being owner or operator - this should raise an exception
+    with brownie.reverts("ERC721: approve caller is not owner nor approved for all"):
+        token.approve(bob, tokenID, {"from": alice})
+    # Now make alice an operator for me
+    token.setApprovalForAll(alice, True, {"from": me})
+    # Approve for bob again - this should now work
+    txn_receipt = token.approve(bob, tokenID, {"from": alice})
+    # Check
+    assert(bob == token.getApproved(tokenID))
+    # Verify events
+    _verifyApprovalEvent(txn_receipt, me, bob, tokenID)
+    # Reset
+    token.setApprovalForAll(alice, False, {"from": me})
+
+# Test a valid transfer, initiated by an operator for the current owner of the token
+def test_transferFrom_operator(token):
+    me = accounts[0]
+    alice = accounts[1]
+    bob = accounts[2]
+    tokenID = 1
+    _mint(token, tokenID, me)
+    # Now make bob an operator for me
+    token.setApprovalForAll(bob, True, {"from": me})
+    # Remember balances
+    oldBalanceMe = token.balanceOf(me)
+    oldBalanceAlice = token.balanceOf(alice)
+    # Now do the transfer
+    txn_receipt = token.transferFrom(me, alice, tokenID, {"from": bob})
+    # Reset
+    token.setApprovalForAll(bob, False, {"from": me})
+    # check owner of NFT
+    assert(alice == token.ownerOf(tokenID))
+    # Check balances
+    newBalanceMe = token.balanceOf(me)
+    newBalanceAlice = token.balanceOf(alice)
+    assert (newBalanceMe + 1 == oldBalanceMe)
+    assert (oldBalanceAlice + 1 == newBalanceAlice)
+    # Verify that an Transfer event has been logged
+    _verifyTransferEvent(txn_receipt, me, alice, tokenID)
+
+def test_last_mint_address(token):
+    me = accounts[0]
+    tokenID = 1
+    with brownie.reverts("No cryptid exists yet."):
+            token.lastMintAddress()
+    _mint(token, tokenID, me)
+    assert(token.lastMintAddress() == me)
+
+def test_last_mint_id(token):
+    me = accounts[0]
+    tokenID = 1
+    with brownie.reverts("No cryptid exists yet."):
+            token.lastMintID()
+    _mint(token, tokenID, me)
+    assert(token.lastMintID() == tokenID)
+
+def test_set_presale_price(token):
+    me = accounts[0]
+    alice = accounts[1]
+    bob = accounts[2]
+    tokenID = 1
+    presale_price = 50000000000000000
+    token.setPresalePrice(presale_price)
+    assert(token.presalePrice() == presale_price)
+
+def test_token_uri(token):
+    owner = accounts[0]
+    tokenID = 1
+    _mint(token, tokenID, owner)
+    new_default_URI = "http://test.io/"
+    token.setDefaultURI(new_default_URI, {'from': owner})
+    assert(token.defaultURI() == new_default_URI )
+    uri = token.tokenURI(tokenID)
+    assert(uri == new_default_URI)
+    with brownie.reverts("ERC721Metadata: URI query for nonexistent token"):
+        token.tokenURI(2)
+    token.setBaseURI("http://baseuri.com/", {'from': owner})
+    assert(token.tokenURI(1) == "http://baseuri.com/1.json")

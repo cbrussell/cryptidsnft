@@ -7,8 +7,9 @@ import '@openzeppelin/contracts/access/Ownable.sol';
 import '@openzeppelin/contracts/utils/math/SafeMath.sol';
 import '@openzeppelin/contracts/utils/Counters.sol';
 import '@openzeppelin/contracts/security/Pausable.sol';
+import '@openzeppelin/contracts/token/ERC721/extensions/ERC721Burnable.sol';
 
-contract CryptidToken is ERC721, ERC721Enumerable, Pausable, Ownable{
+contract CryptidToken is ERC721, ERC721Enumerable, Pausable, Ownable, ERC721Burnable{
     using Strings for uint256;
     using SafeMath for uint256;
     using Counters for Counters.Counter;
@@ -23,6 +24,8 @@ contract CryptidToken is ERC721, ERC721Enumerable, Pausable, Ownable{
     uint8 public maxMintPerTx;     
     bool public tokenURIFrozen = false;
     bool public provenanceHashFrozen = false;
+    address public withdrawDest1 = 0x1953bc1fF76f5e61cD775A4482bd85BAc56aD1Eb;
+    address public withdrawDest2 = 0x12B58f5331a6DC897932AA7FB5101667ACdf03e2;
     
 
     // ~ Sale stages ~
@@ -169,7 +172,6 @@ contract CryptidToken is ERC721, ERC721Enumerable, Pausable, Ownable{
     }
     
     function setTeamMintSupply(uint256 _newTeamMintSupply) public onlyOwner() {
-        require(stage < 3, "Team sale is initiated.");
         teamMintSupply = _newTeamMintSupply;
     }
 
@@ -178,7 +180,7 @@ contract CryptidToken is ERC721, ERC721Enumerable, Pausable, Ownable{
     }
 
     function setPresalePrice(uint256 _newPresalePrice) public onlyOwner {
-        require(stage < 2, "Presale is initiated.");
+        require(stage < 3, "Presale is concluded.");
         presalePrice = _newPresalePrice;
     }
 
@@ -195,6 +197,11 @@ contract CryptidToken is ERC721, ERC721Enumerable, Pausable, Ownable{
         provenanceHash = _provenanceHash;
     }
 
+    function setWithdrawAddress(address _dest1, address _dest2) public onlyOwner {
+        withdrawDest1 = _dest1;
+        withdrawDest2 = _dest2;
+    }
+
     function freezeProvenanceHash() public onlyOwner {
         require(bytes(provenanceHash).length > 0, "Provenance hash cannot be empty.");
         require(!provenanceHashFrozen, "Provenance hash is already frozen.");
@@ -203,13 +210,13 @@ contract CryptidToken is ERC721, ERC721Enumerable, Pausable, Ownable{
 
     function withdraw() public payable onlyOwner {
         require(address(this).balance > 0, "Contract balance is 0.");
-        (bool hs, ) = payable(0x1953bc1fF76f5e61cD775A4482bd85BAc56aD1Eb).call{value: address(this).balance.mul(50).div(100)}("");
+        (bool hs, ) = payable(withdrawDest1).call{value: address(this).balance.mul(50).div(100)}("");
         require(hs, "withdrawl 1 failed");
-        (bool os, ) = payable(owner()).call{value: address(this).balance}("");
+        (bool os, ) = payable(withdrawDest2).call{value: address(this).balance}("");
         require(os, "withdrawl 2 failed");
     }
 
-    // Public view functions
+    // Public view functionsbrown
     function lastMintAddress() public view returns (address){
         require(totalSupply() > 0, "No cryptid exists yet.");
         return ownerOf(totalSupply());
@@ -252,8 +259,6 @@ contract CryptidToken is ERC721, ERC721Enumerable, Pausable, Ownable{
         return super.supportsInterface(interfaceId);
     }
 
-    // Internal functions
-    // The following functions are overrides required by Solidity.
     function _beforeTokenTransfer(address from, address to, uint256 tokenId) internal whenNotPaused override(ERC721, ERC721Enumerable) {
         super._beforeTokenTransfer(from, to, tokenId);
     }
