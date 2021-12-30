@@ -2,14 +2,13 @@
 pragma solidity ^0.8.10;
 
 import '@openzeppelin/contracts/token/ERC721/ERC721.sol';
-import '@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol';
 import '@openzeppelin/contracts/access/Ownable.sol';
 import '@openzeppelin/contracts/utils/math/SafeMath.sol';
 import '@openzeppelin/contracts/utils/Counters.sol';
 import '@openzeppelin/contracts/security/Pausable.sol';
 import '@openzeppelin/contracts/token/ERC721/extensions/ERC721Burnable.sol';
 
-contract CryptidToken is ERC721, ERC721Enumerable, Pausable, Ownable, ERC721Burnable{
+contract CryptidToken is ERC721, Pausable, Ownable, ERC721Burnable{ 
     using Strings for uint256;
     using SafeMath for uint256;
     using Counters for Counters.Counter;
@@ -27,13 +26,12 @@ contract CryptidToken is ERC721, ERC721Enumerable, Pausable, Ownable, ERC721Burn
     address public withdrawDest1 = 0x1953bc1fF76f5e61cD775A4482bd85BAc56aD1Eb;
     address public withdrawDest2 = 0x12B58f5331a6DC897932AA7FB5101667ACdf03e2;
     
-
     // ~ Sale stages ~
-    // stage 0: Init (no minting)
-    // stage 1: Whitelist (free)
-    // stage 2: Presale (discount)
-    // stage 3: Team Mint (up to teamMintSupply)
-    // stage 4: Public sale
+    // stage 0: Init 
+    // stage 1: Free Whitelist 
+    // stage 2: Presale 
+    // stage 3: Team Mint 
+    // stage 4: Public Sale
 
     // Whitelist mint (stage=1)
     mapping(address => uint8) public whitelistUsers;
@@ -216,7 +214,7 @@ contract CryptidToken is ERC721, ERC721Enumerable, Pausable, Ownable, ERC721Burn
         require(os, "withdrawl 2 failed");
     }
 
-    // Public view functionsbrown
+    // Public view functions
     function lastMintAddress() public view returns (address){
         require(totalSupply() > 0, "No cryptid exists yet.");
         return ownerOf(totalSupply());
@@ -227,7 +225,7 @@ contract CryptidToken is ERC721, ERC721Enumerable, Pausable, Ownable, ERC721Burn
         return(totalSupply());
     }
 
-    function totalSupply() public view override returns (uint256) {
+    function totalSupply() public view returns (uint256) {
         return _tokenIdCounter.current() - 1;
     }
 
@@ -246,20 +244,7 @@ contract CryptidToken is ERC721, ERC721Enumerable, Pausable, Ownable, ERC721Burn
         return stage;
     }
 
-    function walletOfOwner(address _owner) public view returns (uint256[] memory){
-        uint256 ownerTokenCount = balanceOf(_owner);
-        uint256[] memory tokenIds = new uint256[](ownerTokenCount);
-        for (uint256 i; i < ownerTokenCount; i++) {
-            tokenIds[i] = tokenOfOwnerByIndex(_owner, i);
-        }
-    return tokenIds;
-    }
-
-    function supportsInterface(bytes4 interfaceId) public view override(ERC721, ERC721Enumerable) returns (bool) {
-        return super.supportsInterface(interfaceId);
-    }
-
-    function _beforeTokenTransfer(address from, address to, uint256 tokenId) internal whenNotPaused override(ERC721, ERC721Enumerable) {
+    function _beforeTokenTransfer(address from, address to, uint256 tokenId) internal whenNotPaused override(ERC721) {
         super._beforeTokenTransfer(from, to, tokenId);
     }
 

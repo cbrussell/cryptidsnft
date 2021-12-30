@@ -196,7 +196,6 @@ def test_only_four_stages(token):
     with brownie.reverts("No stages after public sale"):
         token.nextStage({'from': owner})
 
-
 # airdrop before provenance is set
 
 def test_airdrop_before_provinence_set(token):
@@ -562,6 +561,10 @@ def test_public_sale_to_contract(token):
     assert(event['tokenId'] == tokens)
     assert(event['from'] == "0x"+"0"*40)
     assert(event['to'] == test)
+    token.pause({'from':owner})
+    with brownie.reverts('Pausable: paused'):
+        token.mint(tokens, {'from': test, 'value': "0.3 ether"})
+
 
 def test_mint_four_person(token):
     user_1 = accounts[1]
@@ -1000,3 +1003,28 @@ def test_token_uri(token):
         token.tokenURI(2)
     token.setBaseURI("http://baseuri.com/", {'from': owner})
     assert(token.tokenURI(1) == "http://baseuri.com/1.json")
+
+def test_withdraw(token):
+    owner = accounts[0]
+    chris = accounts[1]
+    chris_before = chris.balance()
+    steph = accounts[2]
+    steph_before = steph.balance()
+    tokenID = 1
+    with brownie.reverts("Contract balance is 0."):
+        token.withdraw({'from': owner})
+    _mint(token, tokenID, owner)
+    token.setWithdrawAddress(chris, steph, {'from':owner})
+    assert(token.balance() == "0.06 ether")
+    token.withdraw({'from':owner})
+    assert(steph.balance() == steph_before + "0.03 ether")
+    assert(chris.balance() == chris_before + "0.03 ether")
+
+def test_transfer_ownership(token):
+    owner = accounts[0]
+    chris = accounts[1]
+    steph = accounts[2]
+    with brownie.reverts("Ownable: caller is not the owner"):
+        token.transferOwnership(chris, {'from':steph})
+    token.transferOwnership(chris, {'from':owner})
+    assert(token.owner() == chris)
