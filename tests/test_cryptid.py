@@ -1031,7 +1031,6 @@ def test_withdraw(token):
     with brownie.reverts("withdrawl 2 failed"):
         token.withdraw({'from':owner})
 
-
 def test_transfer_ownership(token):
     owner = accounts[0]
     chris = accounts[1]
