@@ -1,7 +1,7 @@
 import pytest
 import brownie 
 import hexbytes;
-from brownie import CryptidToken, TestContract, ReceiverContract, accounts, exceptions;
+from brownie import CryptidToken, TestContract, ReceiverContract, NonreceiverContract, accounts, exceptions;
 
 # deploy CryptidToken
 @pytest.fixture(scope="module", autouse=True)
@@ -1008,6 +1008,8 @@ def test_withdraw(token):
     steph = accounts[2]
     steph_before = steph.balance()
     tokenID = 1
+    with brownie.reverts("Ownable: caller is not the owner"):
+        token.withdraw({'from': chris})
     with brownie.reverts("Contract balance is 0."):
         token.withdraw({'from': owner})
     _mint(token, tokenID, owner)
@@ -1016,6 +1018,19 @@ def test_withdraw(token):
     token.withdraw({'from':owner})
     assert(steph.balance() == steph_before + "0.03 ether")
     assert(chris.balance() == chris_before + "0.03 ether")
+    with brownie.reverts("Contract balance is 0."):
+        token.withdraw({'from':owner})
+    test = accounts[0].deploy(NonreceiverContract).address
+    token.mint(tokenID, {'from': owner, 'value': "0.06 ether"})
+    token.setWithdrawAddress(test, steph, {'from':owner})
+    pre_balance = token.balance()
+    with brownie.reverts("withdrawl 1 failed"):
+        token.withdraw({'from':owner})
+    assert(token.balance() == "0.06 ether")
+    token.setWithdrawAddress(steph, test, {'from':owner})
+    with brownie.reverts("withdrawl 2 failed"):
+        token.withdraw({'from':owner})
+
 
 def test_transfer_ownership(token):
     owner = accounts[0]
