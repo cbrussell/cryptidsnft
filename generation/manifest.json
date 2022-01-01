@@ -1,1 +1,214 @@
-{'attribute': 'left-arm', 'multiple': False, 'categories': [{'category': 'leftarm', 'multiple': False, 'rarity': 1, 'files': [{'file': 'leftarm-8ball', 'rarity': 0.25}, {'file': 'leftarm-alienjoint', 'rarity': 0.1}, {'file': 'leftarm-antennae', 'rarity': 1}, {'file': 'leftarm-banana', 'rarity': 0.25}, {'file': 'leftarm-boba', 'rarity': 0.25}, {'file': 'leftarm-bone', 'rarity': 0.25}, {'file': 'leftarm-bong', 'rarity': 0.25}, {'file': 'leftarm-booze', 'rarity': 0.25}, {'file': 'leftarm-burn', 'rarity': 0.25}, {'file': 'leftarm-button-big', 'rarity': 1}, {'file': 'leftarm-button-row', 'rarity': 1}, {'file': 'leftarm-button-row-slider', 'rarity': 1}, {'file': 'leftarm-buttons', 'rarity': 1}, {'file': 'leftarm-chicken', 'rarity': 0.25}, {'file': 'leftarm-coffee', 'rarity': 0.25}, {'file': 'leftarm-egg', 'rarity': 0.25}, {'file': 'leftarm-eth', 'rarity': 0.1}, {'file': 'leftarm-flag', 'rarity': 0.25}, {'file': 'leftarm-flower', 'rarity': 0.25}, {'file': 'leftarm-gearshift', 'rarity': 1}, {'file': 'leftarm-gearshift-alien', 'rarity': 1}, {'file': 'leftarm-goldfish', 'rarity': 0.25}, {'file': 'leftarm-handcrank', 'rarity': 1}, {'file': 'leftarm-hologram', 'rarity': 1}, {'file': 'leftarm-hook', 'rarity': 0.25}, {'file': 'leftarm-hotdog', 'rarity': 0.1}, {'file': 'leftarm-jar', 'rarity': 0.25}, {'file': 'leftarm-jar-eyes', 'rarity': 0.1}, {'file': 'leftarm-jar-shrooms', 'rarity': 0.1}, {'file': 'leftarm-joint', 'rarity': 0.1}, {'file': 'leftarm-knife', 'rarity': 0.25}, {'file': 'leftarm-laser', 'rarity': 0.25}, {'file': 'leftarm-orbit', 'rarity': 0.25}, {'file': 'leftarm-pizza', 'rarity': 0.25}, {'file': 'leftarm-porn', 'rarity': 0.1}, {'file': 'leftarm-robocharge', 'rarity': 0.1}, {'file': 'leftarm-shifter', 'rarity': 1}, {'file': 'leftarm-shrooms', 'rarity': 0.25}, {'file': 'leftarm-skull', 'rarity': 0.1}, {'file': 'leftarm-slider', 'rarity': 1}, {'file': 'leftarm-swipe', 'rarity': 1}, {'file': 'leftarm-syringe', 'rarity': 0.25}, {'file': 'leftarm-tablet', 'rarity': 1}, {'file': 'leftarm-takeout', 'rarity': 0.25}, {'file': 'leftarm-thrust', 'rarity': 1}, {'file': 'leftarm-treasure', 'rarity': 1}, {'file': 'leftarm-v-steering', 'rarity': 1}, {'file': 'leftarm-watch', 'rarity': 0.25}, {'file': 'leftarm-whiskey', 'rarity': 0.25}, {'file': 'leftarm-wine', 'rarity': 0.25}, {'file': 'leftarm-zombie', 'rarity': 0.25}]}]}
+[
+    {
+        "attribute": "0_background",
+        "rarity": 1,
+        "categories": [
+            {
+                "category": "solid",
+                "weight": 1,
+                "traits": [
+                    {
+                        "trait": "solid_white",
+                        "weight": 1
+                    },
+                    {
+                        "trait": "solid_orange",
+                        "weight": 1
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "attribute": "1_tail",
+        "rarity": 1,
+        "categories": [
+            {
+                "category": "brush",
+                "weight": 1,
+                "traits": [
+                    {
+                        "trait": "brush_red",
+                        "weight": 1
+                    },
+                    {
+                        "trait": "brush_green",
+                        "weight": 1
+                    },
+                    {
+                        "trait": "brush_blue",
+                        "weight": 1
+                    },
+                    {
+                        "trait": "brush_purple",
+                        "weight": 1
+                    },
+                    {
+                        "trait": "brush_blue",
+                        "weight": 1
+                    }
+                ]
+            },
+            {
+                "category": "devil",
+                "weight": 1,
+                "traits": [
+                    {
+                        "trait": "devil_red",
+                        "weight": 1
+                    },
+                    {
+                        "trait": "devil_blue",
+                        "weight": 1
+                    }
+                ]
+            },
+            {
+                "category": "fire",
+                "weight": 1,
+                "traits": [
+                    {
+                        "trait": "fire_red",
+                        "weight": 1
+                    },
+                    {
+                        "trait": "fire_blue",
+                        "weight": 1
+                    }
+                ]
+            },
+            {
+                "category": "fluffy",
+                "weight": 1,
+                "traits": [
+                    {
+                        "trait": "fluffy_red",
+                        "weight": 1
+                    },
+                    {
+                        "trait": "fluffy_blue",
+                        "weight": 1
+                    }
+                ]
+            },
+            {
+                "category": "horse",
+                "weight": 1,
+                "traits": [
+                    {
+                        "trait": "horse_red",
+                        "weight": 1
+                    },
+                    {
+                        "trait": "horse_blue",
+                        "weight": 1
+                    }
+                ]
+            },
+            {
+                "category": "kitsune",
+                "weight": 1,
+                "traits": [
+                    {
+                        "trait": "kitsune_red",
+                        "weight": 1
+                    },
+                    {
+                        "trait": "kitsune_blue",
+                        "weight": 1
+                    }
+                ]
+            },
+            {
+                "category": "lion",
+                "weight": 1,
+                "traits": [
+                    {
+                        "trait": "lion_red",
+                        "weight": 1
+                    },
+                    {
+                        "trait": "lion_blue",
+                        "weight": 1
+                    }
+                ]
+            },
+            {
+                "category": "scorpion",
+                "weight": 1,
+                "traits": [
+                    {
+                        "trait": "scorpion_red",
+                        "weight": 1
+                    },
+                    {
+                        "trait": "scorpion_blue",
+                        "weight": 1
+                    }
+                ]
+            },
+            {
+                "category": "silky",
+                "weight": 1,
+                "traits": [
+                    {
+                        "trait": "silky_red",
+                        "weight": 1
+                    },
+                    {
+                        "trait": "silky_blue",
+                        "weight": 1
+                    }
+                ]
+            },
+            {
+                "category": "unicorn",
+                "weight": 1,
+                "traits": [
+                    {
+                        "trait": "unicorn_red",
+                        "weight": 1
+                    },
+                    {
+                        "trait": "unicorn_blue",
+                        "weight": 1
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "attribute": "2_left_back_leg",
+        "rarity": 1,
+        "categories": [
+            {
+                "category": "deer",
+                "weight": 1,
+                "traits": [
+                    {
+                        "trait": "deer_red",
+                        "weight": 1
+                    },
+                    {
+                        "trait": "deer_blue",
+                        "weight": 1
+                    }
+                ]
+            },
+            {
+                "category": "wolf",
+                "weight": 1,
+                "traits": [
+                    {
+                        "trait": "wolf_red",
+                        "weight": 1
+                    },
+                    {
+                        "trait": "wolf_blue",
+                        "weight": 1
+                    }
+                ]
+            }
+        ]
+    }
+]

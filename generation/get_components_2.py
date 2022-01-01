@@ -20,6 +20,8 @@ def fetch_categories(manifest) -> List:
     # If not multiple then pick one based on relative rarity.
     # However, if there are multiple available, then all categories are selected. The base chance will
     # be compounded by individual files.
+
+    # not sure this does anything...
     if not manifest["multiple"]:
         categories = random.choices(
             population=categories, weights=[x["rarity"] for x in categories], k=1
