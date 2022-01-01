@@ -2,8 +2,14 @@
 
 import os.path
 import random
-from typing import List
+from typing import List, Dict, Union
 import json
+from dataclasses import dataclass
+
+class Frames:
+    def __init(self, tail: list, left_back_leg: list):
+        self.tail=tail
+        self.left_back_leg = left_back_leg
 
 class Manifest:
     def __init__(self, manifest):
@@ -16,9 +22,9 @@ class Manifest:
 def chance(rarity):
     return random.random() < rarity
 
-
-def get_tail():
+def get_tail() -> Union[List, Dict]:
     # get file directory
+    
     dir_path = os.path.dirname(os.path.realpath(__file__))
 
     # establish manifest 
@@ -40,13 +46,26 @@ def get_tail():
         # list of files in winner of above choice
         files = category["files"]
         # use same choice mechanism, pick winnin file
-        file = random.choices(population = files, weights = [x["weight"] for x in files], k=1)
-        
-        print(file)
+        file = random.choices(population = files, weights = [x["weight"] for x in files], k=1)[0]
     else:
-        return []
+        return [], {}
 
-    return file
+    data = {}
 
+    data['tail']=file['file']
+    # print(file, data)
+
+
+
+    return file, data
+
+
+
+
+# def get_attributes(manifest: Manifest) ->List[Frames, Dict]:
+
+#     data = {}
+
+#     tail, d = 
 if __name__ == "__main__":
     get_tail()
