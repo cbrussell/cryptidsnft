@@ -447,6 +447,58 @@
                 ]
             }
         ]
+    },
+    {
+        "attribute": "8_rightbackleg",
+        "rarity": 1,
+        "categories": [
+            {
+                "category": "eagle",
+                "weight": 1,
+                "traits": [
+                    {
+                        "trait": "rightbackleg_eagle_red",
+                        "weight": 1
+                    }
+                ]
+            },
+            {
+                "category": "wolf",
+                "weight": 1,
+                "traits": [
+                    {
+                        "trait": "rightbackleg_wolf_red",
+                        "weight": 1
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "attribute": "9_rightfrontleg",
+        "rarity": 1,
+        "categories": [
+            {
+                "category": "eagle",
+                "weight": 1,
+                "traits": [
+                    {
+                        "trait": "rightfrontleg_eagle_red",
+                        "weight": 1
+                    }
+                ]
+            },
+            {
+                "category": "wolf",
+                "weight": 1,
+                "traits": [
+                    {
+                        "trait": "rightfrontleg_wolf_red",
+                        "weight": 1
+                    }
+                ]
+            }
+        ]
     }
     
 ]

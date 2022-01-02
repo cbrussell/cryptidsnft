@@ -20,8 +20,8 @@ class Frames:
     torsopattern_frames: list
     neckbase_frames: list
     fur_frames: list
-
-
+    rightbackleg_frames: list
+    rightfrontleg_frames: list
 
 class Manifest:
     def __init__(self, manifest):
@@ -36,11 +36,11 @@ def to_hash(data):
 def chance(rarity):
     return random.random() < rarity
 
-
 def main():
+    # Project properties here
     hashlist = []
     edition = 0
-    collection_size = 10
+    collection_size = 1
     attempts = 0
     unique_dna_tolerance = 1000
     dir_path = os.path.dirname(os.path.realpath(__file__))
@@ -86,7 +86,6 @@ def get_dna() -> Union[Frames, dict]:
     tail, tail_frames = get_trait(manifest, "1_tail")[0:3:2]
     data.update(tail)
 
-
     leftbackleg, backanimalleg, leftbackleg_frames = get_trait(manifest, "2_leftbackleg")
     data.update(leftbackleg)
 
@@ -112,7 +111,13 @@ def get_dna() -> Union[Frames, dict]:
     fur, fur_frames = get_trait(manifest, "7_fur")[0:3:2]
     data.update(fur) 
 
-    return Frames(background_frames, tail_frames, leftbackleg_frames, leftfrontleg_frames, back_frames, torsobase_frames, torsoaccent_frames, torsopattern_frames, neckbase_frames, fur_frames), data
+    rightbackleg, rightbackleg_frames = get_trait_related(manifest, "8_rightbackleg", backanimalleg)[0:3:2]
+    data.update(rightbackleg)
+
+    rightfrontleg, rightfrontleg_frames = get_trait_related(manifest, "9_rightfrontleg", frontanimalleg)[0:3:2]
+    data.update(rightfrontleg)
+
+    return Frames(background_frames, tail_frames, leftbackleg_frames, leftfrontleg_frames, back_frames, torsobase_frames, torsoaccent_frames, torsopattern_frames, neckbase_frames, fur_frames, rightbackleg_frames, rightfrontleg_frames), data
 
 
 def get_trait(manifest: Manifest, attribute: str) -> Union[dict, str, list]:
@@ -157,11 +162,19 @@ def get_trait_related(manifest: Manifest, attribute: str, type: str) -> Union[di
     return data, category['category'], images
 
 def combine_attributes(frames: Frames, prefix: str):
+    # random frame color backhround
+    R = random.randint(0,255)
+    G = random.randint(0,255)
+    B = random.randint(0,255)
+    
     dir_path = os.path.dirname(os.path.realpath(__file__))
-    for (n, background) in enumerate(frames.background_frames):
-        print(background)
-        print(n)
-        frame = Image.open(background)
+    # for (n, background) in enumerate(frames.background_frames):
+    for n in range(72):
+
+        # use this is background color
+        # frame = Image.open(background)
+
+        frame = Image.new('RGB', (1100, 1100), (R, G, B))
 
         if frames.tail_frames:
             print(frames.tail_frames[n])
@@ -199,11 +212,20 @@ def combine_attributes(frames: Frames, prefix: str):
             frame.paste(neckbase, mask=neckbase)
 
         if frames.fur_frames:
-            fur= Image.open(frames.fur_frames[n])
+            fur = Image.open(frames.fur_frames[n])
             frame.paste(fur, mask=fur)
+
+        if frames.rightbackleg_frames:
+            rightbackleg = Image.open(frames.rightbackleg_frames[n])
+            frame.paste(rightbackleg, mask=rightbackleg)
+        
+        if frames.rightfrontleg_frames:
+            rightfrontleg = Image.open(frames.rightfrontleg_frames[n])
+            frame.paste(rightfrontleg, mask=rightfrontleg)
+            
         print("almost there")
 
-        frame.save(f"{dir_path}/output/raw/{prefix}/{prefix}_{n:05}.png")
+        frame.save(f"{dir_path}/output/raw/{prefix}/{prefix}_{n:03}.png")
         print(dir_path)
 
 if __name__ == "__main__":
