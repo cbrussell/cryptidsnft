@@ -154,7 +154,7 @@
                     },
                     {
                         "trait": "leftbackleg_wolf_blue",
-                        "weight": 1
+                        "weight": 0
                     }
                 ]
             },
@@ -168,7 +168,7 @@
                     },
                     {
                         "trait": "leftbackleg_eagle_blue",
-                        "weight": 1
+                        "weight": 0
                     }
                 ]
             },
@@ -212,11 +212,11 @@
                 "traits": [
                     {
                         "trait": "leftfrontleg_deer_red",
-                        "weight": 1
+                        "weight": 0
                     },
                     {
                         "trait": "leftfrontleg_deer_blue",
-                        "weight": 1
+                        "weight": 0
                     }
                 ]
             },
@@ -230,7 +230,7 @@
                     },
                     {
                         "trait": "leftfrontleg_wolf_blue",
-                        "weight": 1
+                        "weight": 0
                     }
                 ]
             },
@@ -241,10 +241,6 @@
                     {
                         "trait": "leftfrontleg_eagle_red",
                         "weight": 1
-                    },
-                    {
-                        "trait": "leftfrontleg_eagle_blue",
-                        "weight": 1
                     }
                 ]
             },
@@ -254,11 +250,11 @@
                 "traits": [
                     {
                         "trait": "leftfrontleg_lion_red",
-                        "weight": 1
+                        "weight": 0
                     },
                     {
                         "trait": "leftfrontleg_lion_blue",
-                        "weight": 1
+                        "weight": 0
                     }
                 ]
             },
@@ -268,11 +264,11 @@
                 "traits": [
                     {
                         "trait": "leftfrontleg_horse_red",
-                        "weight": 1
+                        "weight": 0
                     },
                     {
                         "trait": "leftfrontleg_horse_blue",
-                        "weight": 1
+                        "weight": 0
                     }
                 ]
             }
@@ -287,13 +283,10 @@
                 "weight": 1,
                 "traits": [
                     {
-                        "trait": "leftfrontleg_deer_red",
-                        "weight": 1
-                    },
-                    {
-                        "trait": "leftfrontleg_deer_blue",
+                        "trait": "back_featherwings_red",
                         "weight": 1
                     }
+                    
                 ]
             }
         ]
@@ -371,7 +364,7 @@
         ]
     },
     {
-        "attribute": "5c_torspattern",
+        "attribute": "5c_torsopattern",
         "rarity": 0,
         "categories": [
             {
@@ -379,12 +372,81 @@
                 "weight": 1,
                 "traits": [
                     {
-                        "trait": "torsopattern_medium_white",
+                        "trait": "torsopattern_medium_spots",
+                        "weight": 1
+                    },
+                    {
+                        "trait": "torsopattern_medium_stripes",
+                        "weight": 1
+                    }
+                    
+                ]
+            }
+        ]
+    },
+    {
+        "attribute": "6a_neckbase",
+        "rarity": 1,
+        "categories": [
+            {
+                "category": "regular",
+                "weight": 1,
+                "traits": [
+                    {
+                        "trait": "neckbase_regular_red",
+                        "weight": 1
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "attribute": "6b_neckaccent",
+        "rarity": 1,
+        "categories": [
+            {
+                "category": "throat",
+                "weight": 1,
+                "traits": [
+                    {
+                        "trait": "neckaccent_throat_white",
+                        "weight": 1
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "attribute": "6c_neckpattern",
+        "rarity": 0,
+        "categories": [
+            {
+                "category": "throat",
+                "weight": 1,
+                "traits": [
+                    {
+                        "trait": "neckpattern_throat_white",
+                        "weight": 1
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "attribute": "7_fur",
+        "rarity": 0.5,
+        "categories": [
+            {
+                "category": "wooly",
+                "weight": 1,
+                "traits": [
+                    {
+                        "trait": "fur_wooly_black",
                         "weight": 1
                     }
                 ]
             }
         ]
     }
-
+    
 ]
