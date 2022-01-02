@@ -8,11 +8,11 @@
                 "weight": 1,
                 "traits": [
                     {
-                        "trait": "solid_white",
+                        "trait": "background_solid_white",
                         "weight": 1
                     },
                     {
-                        "trait": "solid_orange",
+                        "trait": "background_solid_orange",
                         "weight": 1
                     }
                 ]
@@ -28,23 +28,7 @@
                 "weight": 1,
                 "traits": [
                     {
-                        "trait": "brush_red",
-                        "weight": 1
-                    },
-                    {
-                        "trait": "brush_green",
-                        "weight": 1
-                    },
-                    {
-                        "trait": "brush_blue",
-                        "weight": 1
-                    },
-                    {
-                        "trait": "brush_purple",
-                        "weight": 1
-                    },
-                    {
-                        "trait": "brush_blue",
+                        "trait": "tail_brush_red",
                         "weight": 1
                     }
                 ]
@@ -54,11 +38,7 @@
                 "weight": 1,
                 "traits": [
                     {
-                        "trait": "devil_red",
-                        "weight": 1
-                    },
-                    {
-                        "trait": "devil_blue",
+                        "trait": "tail_devil_red",
                         "weight": 1
                     }
                 ]
@@ -68,11 +48,7 @@
                 "weight": 1,
                 "traits": [
                     {
-                        "trait": "fire_red",
-                        "weight": 1
-                    },
-                    {
-                        "trait": "fire_blue",
+                        "trait": "tail_fire_red",
                         "weight": 1
                     }
                 ]
@@ -82,11 +58,7 @@
                 "weight": 1,
                 "traits": [
                     {
-                        "trait": "fluffy_red",
-                        "weight": 1
-                    },
-                    {
-                        "trait": "fluffy_blue",
+                        "trait": "tail_fluffy_red",
                         "weight": 1
                     }
                 ]
@@ -96,13 +68,10 @@
                 "weight": 1,
                 "traits": [
                     {
-                        "trait": "horse_red",
-                        "weight": 1
-                    },
-                    {
-                        "trait": "horse_blue",
+                        "trait": "tail_horse_red",
                         "weight": 1
                     }
+
                 ]
             },
             {
@@ -110,11 +79,7 @@
                 "weight": 1,
                 "traits": [
                     {
-                        "trait": "kitsune_red",
-                        "weight": 1
-                    },
-                    {
-                        "trait": "kitsune_blue",
+                        "trait": "tail_kitsune_red",
                         "weight": 1
                     }
                 ]
@@ -124,11 +89,7 @@
                 "weight": 1,
                 "traits": [
                     {
-                        "trait": "lion_red",
-                        "weight": 1
-                    },
-                    {
-                        "trait": "lion_blue",
+                        "trait": "tail_lion_red",
                         "weight": 1
                     }
                 ]
@@ -138,11 +99,7 @@
                 "weight": 1,
                 "traits": [
                     {
-                        "trait": "scorpion_red",
-                        "weight": 1
-                    },
-                    {
-                        "trait": "scorpion_blue",
+                        "trait": "tail_scorpion_red",
                         "weight": 1
                     }
                 ]
@@ -152,11 +109,7 @@
                 "weight": 1,
                 "traits": [
                     {
-                        "trait": "silky_red",
-                        "weight": 1
-                    },
-                    {
-                        "trait": "silky_blue",
+                        "trait": "tail_silky_red",
                         "weight": 1
                     }
                 ]
@@ -166,11 +119,7 @@
                 "weight": 1,
                 "traits": [
                     {
-                        "trait": "unicorn_red",
-                        "weight": 1
-                    },
-                    {
-                        "trait": "unicorn_blue",
+                        "trait": "tail_unicorn_red",
                         "weight": 1
                     }
                 ]
@@ -178,19 +127,19 @@
         ]
     },
     {
-        "attribute": "2_left_back_leg",
+        "attribute": "2_leftbackleg",
         "rarity": 1,
         "categories": [
             {
                 "category": "deer",
-                "weight": 1,
+                "weight": 0,
                 "traits": [
                     {
-                        "trait": "deer_red",
+                        "trait": "leftbackleg_deer_red",
                         "weight": 1
                     },
                     {
-                        "trait": "deer_blue",
+                        "trait": "leftbackleg_deer_blue",
                         "weight": 1
                     }
                 ]
@@ -200,11 +149,149 @@
                 "weight": 1,
                 "traits": [
                     {
-                        "trait": "wolf_red",
+                        "trait": "leftbackleg_wolf_red",
                         "weight": 1
                     },
                     {
-                        "trait": "wolf_blue",
+                        "trait": "leftbackleg_wolf_blue",
+                        "weight": 1
+                    }
+                ]
+            },
+            {
+                "category": "eagle",
+                "weight": 1,
+                "traits": [
+                    {
+                        "trait": "leftbackleg_eagle_red",
+                        "weight": 1
+                    },
+                    {
+                        "trait": "leftbackleg_eagle_blue",
+                        "weight": 1
+                    }
+                ]
+            },
+            {
+                "category": "lion",
+                "weight": 0,
+                "traits": [
+                    {
+                        "trait": "leftbackleg_lion_red",
+                        "weight": 1
+                    },
+                    {
+                        "trait": "leftbackleg_lion_blue",
+                        "weight": 1
+                    }
+                ]
+            },
+            {
+                "category": "horse",
+                "weight": 0,
+                "traits": [
+                    {
+                        "trait": "leftbackleg_horse_red",
+                        "weight": 1
+                    },
+                    {
+                        "trait": "leftbackleg_horse_blue",
+                        "weight": 1
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "attribute": "3_leftfrontleg",
+        "rarity": 1,
+        "categories": [
+            {
+                "category": "deer",
+                "weight": 0,
+                "traits": [
+                    {
+                        "trait": "leftfrontleg_deer_red",
+                        "weight": 1
+                    },
+                    {
+                        "trait": "leftfrontleg_deer_blue",
+                        "weight": 1
+                    }
+                ]
+            },
+            {
+                "category": "wolf",
+                "weight": 1,
+                "traits": [
+                    {
+                        "trait": "leftfrontleg_wolf_red",
+                        "weight": 1
+                    },
+                    {
+                        "trait": "leftfrontleg_wolf_blue",
+                        "weight": 1
+                    }
+                ]
+            },
+            {
+                "category": "eagle",
+                "weight": 1,
+                "traits": [
+                    {
+                        "trait": "leftfrontleg_eagle_red",
+                        "weight": 1
+                    },
+                    {
+                        "trait": "leftfrontleg_eagle_blue",
+                        "weight": 1
+                    }
+                ]
+            },
+            {
+                "category": "lion",
+                "weight": 0,
+                "traits": [
+                    {
+                        "trait": "leftfrontleg_lion_red",
+                        "weight": 1
+                    },
+                    {
+                        "trait": "leftfrontleg_lion_blue",
+                        "weight": 1
+                    }
+                ]
+            },
+            {
+                "category": "horse",
+                "weight": 0,
+                "traits": [
+                    {
+                        "trait": "leftfrontleg_horse_red",
+                        "weight": 1
+                    },
+                    {
+                        "trait": "leftfrontleg_horse_blue",
+                        "weight": 1
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "attribute": "4_back",
+        "rarity": 0.5,
+        "categories": [
+            {
+                "category": "featherwings",
+                "weight": 1,
+                "traits": [
+                    {
+                        "trait": "leftfrontleg_deer_red",
+                        "weight": 1
+                    },
+                    {
+                        "trait": "leftfrontleg_deer_blue",
                         "weight": 1
                     }
                 ]
