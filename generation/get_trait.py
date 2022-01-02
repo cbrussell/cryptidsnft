@@ -35,41 +35,72 @@ def get_dna():
 
     background, type = get_trait(manifest, "0_background")
     data.update(background)
-    print(type)
+    # print(type)
 
     tail, type = get_trait(manifest, "1_tail")
     data.update(tail)
-    print(type)
+    # print(type)
 
     leftbackleg, animal = get_trait(manifest, "2_leftbackleg")
     data.update(leftbackleg)
-    print(animal)
+    # print(animal)
 
     leftfrontleg, animal = get_trait(manifest, "3_leftfrontleg")
     data.update(leftfrontleg)
-    print(animal)
+    # print(animal)
 
     back, type = get_trait(manifest, "4_back")
     data.update(back)
-    print(type)
+    # print(type)
+
+    torsobase, type = get_trait(manifest, "5a_torsobase")
+    data.update(torsobase)
+    # print(type)
+
+    torsoaccent, color = get_trait_related(manifest, "5b_torsoaccent", type)
+
+
+    # print(torsoaccent)
+    # print(color)
+    data.update(torsoaccent)
 
     print(data)
-
 
 
 def get_trait(manifest: Manifest, attribute: str) -> Dict:
     attrib = manifest.attribute(attribute)
     categories = attrib["categories"]
+    # print(categories)
     if chance(attrib["rarity"]):
         category = random.choices(population = categories, weights = [x["weight"] for x in categories], k=1)[0]
+
+        # print(category)
         traits = category["traits"]
         trait = random.choices(population = traits, weights = [x["weight"] for x in traits], k=1)[0]
     else:
         return {}, ''
     data = {}
     data[attribute]=trait['trait']
-
     return data, category['category']
+
+def get_trait_related(manifest: Manifest, attribute: str, type: str) -> Dict:
+    attrib = manifest.attribute(attribute)
+    categories = attrib["categories"]
+    # print(categories)
+    if chance(attrib["rarity"]):
+        category = random.choices(population = [x for x in categories if x["category"] == type], weights = [x["weight"] for x in categories if x["category"] == type], k=1)[0]
+
+        # print(category)
+        traits = category["traits"]
+        trait = random.choices(population = traits, weights = [x["weight"] for x in traits], k=1)[0]
+    else:
+        return {}, ''
+    data = {}
+    data[attribute]=trait['trait']
+    return data, category['category']
+
+    # [x for x in categories if x["category"] == type][0]
+
 
 if __name__ == "__main__":
     get_dna()

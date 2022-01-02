@@ -297,5 +297,78 @@
                 ]
             }
         ]
+    },
+    {
+        "attribute": "5a_torsobase",
+        "rarity": 1,
+        "categories": [
+            {
+                "category": "medium",
+                "weight": 1,
+                "traits": [
+                    {
+                        "trait": "torsobase_medium_red",
+                        "weight": 1
+                    }
+                ]
+            },
+            {
+                "category": "heavy",
+                "weight": 1,
+                "traits": [
+                    {
+                        "trait": "torsobase_heavy_red",
+                        "weight": 1
+                    }
+                ]
+            }
+        ]
+    },
+
+    {
+        "attribute": "5b_torsoaccent",
+        "rarity": 1,
+        "categories": [
+            {
+                "category": "medium",
+                "weight": 1,
+                "traits": [
+                    {
+                        "trait": "torsoaccent_medium_white",
+                        "weight": 1
+                    }
+                ]
+            },
+            {
+                "category": "medium",
+                "weight": 1,
+                "traits": [
+                    {
+                        "trait": "torsoaccent_medium_blue",
+                        "weight": 1
+                    }
+                ]
+            },
+            {
+                "category": "heavy",
+                "weight": 1,
+                "traits": [
+                    {
+                        "trait": "torsoaccent_heavy_white",
+                        "weight": 1
+                    }
+                ]
+            },
+            {
+                "category": "heavy",
+                "weight": 1,
+                "traits": [
+                    {
+                        "trait": "torsoaccent_heavy_blue",
+                        "weight": 1
+                    }
+                ]
+            }
+        ]
     }
 ]
