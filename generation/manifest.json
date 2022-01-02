@@ -314,7 +314,7 @@
             },
             {
                 "category": "heavy",
-                "weight": 1,
+                "weight": 0,
                 "traits": [
                     {
                         "trait": "torsobase_heavy_red",
@@ -324,7 +324,6 @@
             }
         ]
     },
-
     {
         "attribute": "5b_torsoaccent",
         "rarity": 1,
@@ -341,7 +340,7 @@
             },
             {
                 "category": "medium",
-                "weight": 1,
+                "weight": 0,
                 "traits": [
                     {
                         "trait": "torsoaccent_medium_blue",
@@ -351,7 +350,7 @@
             },
             {
                 "category": "heavy",
-                "weight": 1,
+                "weight": 0,
                 "traits": [
                     {
                         "trait": "torsoaccent_heavy_white",
@@ -361,7 +360,7 @@
             },
             {
                 "category": "heavy",
-                "weight": 1,
+                "weight": 0,
                 "traits": [
                     {
                         "trait": "torsoaccent_heavy_blue",
@@ -370,5 +369,22 @@
                 ]
             }
         ]
+    },
+    {
+        "attribute": "5c_torspattern",
+        "rarity": 0,
+        "categories": [
+            {
+                "category": "medium",
+                "weight": 1,
+                "traits": [
+                    {
+                        "trait": "torsopattern_medium_white",
+                        "weight": 1
+                    }
+                ]
+            }
+        ]
     }
+
 ]
