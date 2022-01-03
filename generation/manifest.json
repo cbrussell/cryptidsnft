@@ -319,7 +319,7 @@
     },
     {
         "attribute": "5b_torsoaccent",
-        "rarity": 1,
+        "rarity": 0.5,
         "categories": [
             {
                 "category": "medium",
@@ -433,6 +433,62 @@
         ]
     },
     {
+        "attribute": "6d_neckshadow",
+        "rarity": 1,
+        "categories": [
+            {
+                "category": "bear",
+                "weight": 1,
+                "traits": [
+                    {
+                        "trait": "neckshadow_bear",
+                        "weight": 1
+                    }
+                ]
+            },
+            {
+                "category": "eagle",
+                "weight": 0,
+                "traits": [
+                    {
+                        "trait": "neckshadow_eagle",
+                        "weight": 1
+                    }
+                ]
+            },
+            {
+                "category": "horse",
+                "weight": 1,
+                "traits": [
+                    {
+                        "trait": "neckshadow_horse",
+                        "weight": 1
+                    }
+                ]
+            },
+            {
+                "category": "lion",
+                "weight": 1,
+                "traits": [
+                    {
+                        "trait": "neckshadow_lion",
+                        "weight": 1
+                    }
+                ]
+            },
+            {
+                "category": "wolf",
+                "weight": 1,
+                "traits": [
+                    {
+                        "trait": "neckshadow_wolf",
+                        "weight": 1
+                    }
+                ]
+            }
+        ]
+    },
+    {
         "attribute": "7_fur",
         "rarity": 0.5,
         "categories": [
@@ -499,6 +555,87 @@
                 ]
             }
         ]
+    },
+    {
+        "attribute": "10_ears",
+        "rarity": 1,
+        "categories": [
+            {
+                "category": "lamb",
+                "weight": 1,
+                "traits": [
+                    {
+                        "trait": "ears_lamb_red",
+                        "weight": 1
+                    }
+                ]
+            },
+            {
+                "category": "prick",
+                "weight": 1,
+                "traits": [
+                    {
+                        "trait": "ears_prick_red",
+                        "weight": 1
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "attribute": "11a_headbase",
+        "rarity": 1,
+        "categories": [
+            {
+                "category": "bear",
+                "weight": 1,
+                "traits": [
+                    {
+                        "trait": "headbase_bear_red",
+                        "weight": 1
+                    }
+                ]
+            },
+            {
+                "category": "eagle",
+                "weight": 1,
+                "traits": [
+                    {
+                        "trait": "headbase_eagle_red",
+                        "weight": 1
+                    }
+                ]
+            },
+            {
+                "category": "horse",
+                "weight": 1,
+                "traits": [
+                    {
+                        "trait": "headbase_horse_red",
+                        "weight": 1
+                    }
+                ]
+            },
+            {
+                "category": "lion",
+                "weight": 1,
+                "traits": [
+                    {
+                        "trait": "headbase_lion_red",
+                        "weight": 1
+                    }
+                ]
+            },
+            {
+                "category": "wolf",
+                "weight": 1,
+                "traits": [
+                    {
+                        "trait": "headbase_wolf_red",
+                        "weight": 1
+                    }
+                ]
+            }
+        ]
     }
-    
 ]
