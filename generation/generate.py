@@ -34,6 +34,8 @@ class Frames:
     rightbackleg_frames: list
     rightfrontleg_frames: list
     ears_frames: list
+    horns_frames: list
+    eyes_frames: list
 
 class Manifest:
     def __init__(self, manifest):
@@ -195,6 +197,12 @@ def get_dna() -> Union[Frames, dict]:
     ears, ears_frames = get_trait(manifest, "10_ears")[0:3:2]
     data.update(ears)
 
+    horns, horns_frames = get_trait(manifest, "13_horns")[0:3:2]
+    data.update(horns)
+
+    eyes, eyes_frames = get_trait(manifest, "14_eyes")[0:3:2]
+    data.update(eyes)
+
     return Frames(background_frames
                 , tail_frames
                 , leftbackleg_frames
@@ -215,6 +223,8 @@ def get_dna() -> Union[Frames, dict]:
                 , rightbackleg_frames
                 , rightfrontleg_frames
                 , ears_frames
+                , horns_frames
+                , eyes_frames
                 ), data
 
 
@@ -362,6 +372,14 @@ def combine_attributes(frames: Frames, prefix: str):
         if frames.mouth_frames:
             mouth = Image.open(frames.mouth_frames[n])
             frame.paste(mouth, mask=mouth)
+
+        if frames.horns_frames:
+            horns = Image.open(frames.horns_frames[n])
+            frame.paste(horns, mask=horns)
+        
+        if frames.eyes_frames:
+            eyes = Image.open(frames.eyes_frames[n])
+            frame.paste(eyes, mask=eyes)
 
         print("Almost there...")
 

@@ -809,5 +809,47 @@
                 ]
             }
         ]
+    },
+    {
+        "attribute": "13_horns",
+        "rarity": 0.5,
+        "categories": [
+            {
+                "category": "ram",
+                "weight": 1,
+                "traits": [
+                    {
+                        "trait": "horns_ram_black",
+                        "weight": 1
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "attribute": "14_eyes",
+        "rarity": 1,
+        "categories": [
+            {
+                "category": "beast",
+                "weight": 1,
+                "traits": [
+                    {
+                        "trait": "eyes_beast_blue",
+                        "weight": 1
+                    }
+                ]
+            },
+            {
+                "category": "predator",
+                "weight": 1,
+                "traits": [
+                    {
+                        "trait": "eyes_predator_blue",
+                        "weight": 1
+                    }
+                ]
+            }
+        ]
     }
 ]
