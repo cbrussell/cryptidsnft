@@ -5,3 +5,4 @@ RENDERS/
 .DS_Store
 output/**
 test_archive/**
+*.DS_Store
