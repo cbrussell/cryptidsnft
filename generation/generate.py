@@ -55,8 +55,8 @@ def chance(rarity):
 
 def main():
     start_time = datetime.now()
-    procs = 5
-    n = 5
+    procs = 10
+    n = 10
     increment = int(n / procs)
     jobs = []
     start = 1
@@ -289,7 +289,7 @@ def combine_attributes(frames: Frames, prefix: str):
     # array = get_gradient()
     dir_path = os.path.dirname(os.path.realpath(__file__))
     # for (n, background) in enumerate(frames.background_frames):
-    for n in range(0, 1):
+    for n in range(72):
 
         # use this is background color
         # frame = Image.open(background)
@@ -300,7 +300,7 @@ def combine_attributes(frames: Frames, prefix: str):
         # frame = Image.fromarray(array).rotate(90, expand=False)
 
         if frames.tail_frames:
-            # print(frames.tail_frames[n])
+            print(frames.tail_frames[n])
             tail = Image.open(frames.tail_frames[n])
             frame.paste(tail, mask=tail)
 
@@ -389,15 +389,16 @@ def combine_attributes(frames: Frames, prefix: str):
             eyes = Image.open(frames.eyes_frames[n])
             frame.paste(eyes, mask=eyes)
 
-        # print("Almost there...")
+        print("Almost there...")
 
          
+        # find texts with "find {/System,}/Library/Fonts -name *ttf"
         Width, Height = frame.size 
 
         drawn = ImageDraw.Draw(frame) 
-        text = "testing..."
+        text = "A watermark."
 
-        font = ImageFont.truetype("Arial Black", 150)
+        font = ImageFont.truetype("Arial Black", 138)
         
         textwidth, textheight = drawn.textsize(text, font)
 
