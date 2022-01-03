@@ -10,7 +10,7 @@ from shutil import copy
 from PIL import Image
 import numpy as np
 from multiprocessing import Process, Manager, Value
-from datetime import datetime
+from datetime import datetime, time
 
 from numpy.core.multiarray import array
 from background import get_gradient
@@ -56,9 +56,8 @@ def chance(rarity):
 def main():
     start_time = datetime.now()
     procs = 10
-    n = 10
+    n = 500
     increment = int(n / procs)
-    count = int(n/procs)
     jobs = []
     start = 1
     stop = increment + 1
@@ -67,7 +66,7 @@ def main():
         hashlist = manager.list()
         duplicates = manager.Value('duplicates', 0)
         for i in range(0, procs):
-            process = Process(target=worker, args=(start, stop, count, hashlist, duplicates))
+            process = Process(target=worker, args=(start, stop, hashlist, duplicates))
             start = stop
             stop += increment
             jobs.append(process)
@@ -83,36 +82,35 @@ def main():
      
     return
 
-def worker(start: int, stop: int, count: int, hashlist: list, duplicates: int):
+def worker(start: int, stop: int, hashlist: list, duplicates: int):
     number = 0
-
     unique_dna_tolerance = 100000
-
     dir_path = os.path.dirname(os.path.realpath(__file__))
-
-    while duplicates.value < unique_dna_tolerance:
+    for edition in range(start, stop):
         images, dna  = get_dna()
-        hashed_dna = to_hash(dna)
-
-        if number == count:
-            break
-
-        for edition in range(start, stop):
+        hashed_dna = to_hash(dna)   
+        while duplicates.value < unique_dna_tolerance:
             if hashed_dna not in hashlist:
                 hashlist.append(hashed_dna)
-                number += 1
-                print(edition)
-                os.makedirs(f"{dir_path}/output/raw/{str(edition)}", exist_ok=True)
-                os.makedirs(f"{dir_path}/output/metadata", exist_ok=True)
-                with open(f"{dir_path}/output/metadata/{str(edition)}.json", "w") as f:
-                    json.dump(dna, f, indent=4)
-                combine_attributes(images, str(edition))
-                print(f"Done {edition}")
+                break
             else:
                 duplicates.value += 1
-                print(f'Duplicate DNA found... {duplicates.value}/{unique_dna_tolerance}')
-
-    collection_total = len(hashlist)
+                images, dna  = get_dna()
+                hashed_dna = to_hash(dna)
+                print(f'Duplicate DNA found... {duplicates.value}/{unique_dna_tolerance}')   
+        if duplicates.value >= unique_dna_tolerance:
+            print('Found {duplicates.values} duplicates (MAX). Tolerance is set to {unique_dna_tolerance}.')
+            return
+        else:
+            print(f'Building edition #{edition}/{stop - 1}')
+            os.makedirs(f"{dir_path}/output/raw/{str(edition)}", exist_ok=True)
+            os.makedirs(f"{dir_path}/output/metadata", exist_ok=True)
+            with open(f"{dir_path}/output/metadata/{str(edition)}.json", "w") as f:
+                json.dump(dna, f, indent=4)
+                combine_attributes(images, str(edition))
+                number += 1
+                print(f"Completed edition #{edition}/{stop - 1}")
+ 
     print(f'Multiprocess job complete! For process ID {os.getpid()}, {number} generated. Found {duplicates.value} duplicates.')
 
 def get_dna() -> Union[Frames, dict]:
@@ -291,7 +289,7 @@ def combine_attributes(frames: Frames, prefix: str):
     # array = get_gradient()
     dir_path = os.path.dirname(os.path.realpath(__file__))
     # for (n, background) in enumerate(frames.background_frames):
-    for n in range(72):
+    for n in range(0, 1):
 
         # use this is background color
         # frame = Image.open(background)
@@ -302,7 +300,7 @@ def combine_attributes(frames: Frames, prefix: str):
         # frame = Image.fromarray(array).rotate(90, expand=False)
 
         if frames.tail_frames:
-            print(frames.tail_frames[n])
+            # print(frames.tail_frames[n])
             tail = Image.open(frames.tail_frames[n])
             frame.paste(tail, mask=tail)
 
@@ -379,17 +377,30 @@ def combine_attributes(frames: Frames, prefix: str):
             frame.paste(mouth, mask=mouth)
 
         if frames.horns_frames:
-            horns = Image.open(frames.horns_frames[n])
-            frame.paste(horns, mask=horns)
+            try:
+
+                horns = Image.open(frames.horns_frames[n])
+                frame.paste(horns, mask=horns)
+            except:
+                print("horn error")
+                continue
         
         if frames.eyes_frames:
             eyes = Image.open(frames.eyes_frames[n])
             frame.paste(eyes, mask=eyes)
 
-        print("Almost there...")
+        # print("Almost there...")
 
         frame.save(f"{dir_path}/output/raw/{prefix}/{prefix}_{n:03}.png")
 
+        if n == 0:
+            time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            frame.save(f"{dir_path}/output/stills/{prefix}_{time}.png")
+            frame = Image.fromarray(np.uint8(array)).save(f"{dir_path}/output/bg/{prefix}_bg_{time}_{R1}_{G1}_{B1}_{R}_{G}_{G}.png", "PNG")
+
+    # f = open(f"{dir_path}/output/raw/{prefix}/bg.txt","w+")
+    # f.write(f"Background colors are: [{R}, {G}, {B}], [{R1}, {G1}, {B1}]")
+    # f.close()
 
 
 def get_gradient_2d(start, stop, width, height, is_horizontal):
