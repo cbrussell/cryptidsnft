@@ -640,7 +640,7 @@
     },
     {
         "attribute": "11b_headaccent",
-        "rarity": 1,
+        "rarity": 0.5,
         "categories": [
             {
                 "category": "bear",
@@ -688,6 +688,122 @@
                 "traits": [
                     {
                         "trait": "headaccent_wolf_mask_white",
+                        "weight": 1
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "attribute": "11c_headpattern",
+        "rarity": 0.5,
+        "categories": [
+            {
+                "category": "bear",
+                "weight": 0,
+                "traits": [
+                    {
+                        "trait": "headpattern_bear_spots",
+                        "weight": 1
+                    }
+                ]
+            },
+            {
+                "category": "eagle",
+                "weight": 0,
+                "traits": [
+                    {
+                        "trait": "headpattern_eagle_spots",
+                        "weight": 1
+                    }
+                ]
+            },
+            {
+                "category": "horse",
+                "weight": 0,
+                "traits": [
+                    {
+                        "trait": "headpattern_horse_spots",
+                        "weight": 1
+                    }
+                ]
+            },
+            {
+                "category": "lion",
+                "weight": 0,
+                "traits": [
+                    {
+                        "trait": "headpattern_lion_spots",
+                        "weight": 1
+                    }
+                ]
+            },
+            {
+                "category": "wolf",
+                "weight": 0,
+                "traits": [
+                    {
+                        "trait": "headpattern_wolf_spots",
+                        "weight": 1
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "attribute": "12_mouth",
+        "rarity": 1,
+        "categories": [
+            {
+                "category": "bear",
+                "weight": 1,
+                "traits": [
+                    {
+                        "trait": "mouth_bear",
+                        "weight": 1
+                    }
+                ]
+            },
+            {
+                "category": "eagle",
+                "weight": 1,
+                "traits": [
+                    {
+                        "trait": "mouth_eagle",
+                        "weight": 1
+                    }
+                ]
+            },
+            {
+                "category": "horse",
+                "weight": 1,
+                "traits": [
+                    {
+                        "trait": "mouth_horse",
+                        "weight": 1
+                    }
+                ]
+            },
+            {
+                "category": "lion",
+                "weight": 1,
+                "traits": [
+                    {
+                        "trait": "mouth_lion_empty",
+                        "weight": 1
+                    },
+                    {
+                        "trait": "mouth_lion_teeth",
+                        "weight": 1
+                    }
+                ]
+            },
+            {
+                "category": "wolf",
+                "weight": 1,
+                "traits": [
+                    {
+                        "trait": "mouth_wolf",
                         "weight": 1
                     }
                 ]

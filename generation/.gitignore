@@ -1,7 +1,7 @@
-venv/
+venv/**
 output/*.mp4
 output/*.png
 RENDERS/
 .DS_Store
-output/
-archive/
+output/**
+test_archive/**

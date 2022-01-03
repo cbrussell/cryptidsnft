@@ -25,6 +25,8 @@ class Frames:
     fur_frames: list
     headbase_frames: list
     headaccent_frames: list
+    headpattern_frames: list
+    mouth_frames: list
     neckbase_frames: list
     neckaccent_frames: list
     neckpattern_frames: list
@@ -147,6 +149,12 @@ def get_dna() -> Union[Frames, dict]:
     headaccent, headaccent_frames = get_trait_related(manifest, "11b_headaccent", animal)[0:3:2]
     data.update(headaccent)
 
+    headpattern, headpattern_frames = get_trait_related(manifest, "11c_headpattern", animal)[0:3:2]
+    data.update(headpattern)
+
+    mouth, mouth_frames = get_trait_related(manifest, "12_mouth", animal)[0:3:2]
+    data.update(mouth)
+
     # if fur, ignore neck DNA
     if fur:
         neckbase_frames = []
@@ -198,6 +206,8 @@ def get_dna() -> Union[Frames, dict]:
                 , fur_frames
                 , headbase_frames
                 , headaccent_frames
+                , headpattern_frames
+                , mouth_frames
                 , neckbase_frames
                 , neckaccent_frames
                 , neckpattern_frames
@@ -232,7 +242,8 @@ def get_trait_related(manifest: Manifest, attribute: str, type: str) -> Union[di
     attrib = manifest.attribute(attribute)
     categories = attrib["categories"]
     if chance(attrib["rarity"]):
-        if [x["weight"] for x in categories if x["category"] == type][0] ==0:
+        if [x["weight"] for x in categories if x["category"] == type][0] == 0:
+            print(f'No weights set for {attribute}/{type}')
             return {}, '', []
         else:
 
@@ -343,6 +354,14 @@ def combine_attributes(frames: Frames, prefix: str):
         if frames.headaccent_frames:
             headaccent = Image.open(frames.headaccent_frames[n])
             frame.paste(headaccent, mask=headaccent)
+
+        if frames.headpattern_frames:
+            headpattern = Image.open(frames.headpattern_frames[n])
+            frame.paste(headpattern, mask=headpattern)
+
+        if frames.mouth_frames:
+            mouth = Image.open(frames.mouth_frames[n])
+            frame.paste(mouth, mask=mouth)
 
         print("Almost there...")
 
