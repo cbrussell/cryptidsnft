@@ -12,6 +12,9 @@ import numpy as np
 from multiprocessing import Process, Manager, Value
 from datetime import datetime
 
+from numpy.core.multiarray import array
+from background import get_gradient
+
 @dataclass
 class Frames:
     background_frames: list
@@ -276,15 +279,16 @@ def combine_attributes(frames: Frames, prefix: str):
     # R = random.randint(0,255)
     # G = random.randint(0,255)
     # B = random.randint(0,255)
-    R = 255
-    G = 255
-    B = 255
-    # R2 = random.randint(0,255)
-    # G2 = random.randint(0,255)
-    # B2 = random.randint(0,255)
-    
-    # array = get_gradient_3d(1100, 1100, (R2, G2, B2), (R, G, B), (True, False, False))
+    R = np.random.randint(0, 256)
+    G = np.random.randint(0, 256)
+    B = np.random.randint(0, 256)
 
+    R1 = np.random.randint(0, 256)
+    G1 = np.random.randint(0, 256)
+    B1 = np.random.randint(0, 256)
+    
+    array = get_gradient_3d(1100, 1100, (R1, G1, B1), (R, G, B), (True, False, False))
+    # array = get_gradient()
     dir_path = os.path.dirname(os.path.realpath(__file__))
     # for (n, background) in enumerate(frames.background_frames):
     for n in range(72):
@@ -292,9 +296,10 @@ def combine_attributes(frames: Frames, prefix: str):
         # use this is background color
         # frame = Image.open(background)
 
-        frame = Image.new('RGB', (1100, 1100), (R, G, B))
-
-        # frame = Image.fromarray(np.uint8(array))
+        # frame = Image.new('RGB', (1100, 1100), (R, G, B))
+        # frame = background
+        frame = Image.fromarray(np.uint8(array))
+        # frame = Image.fromarray(array).rotate(90, expand=False)
 
         if frames.tail_frames:
             print(frames.tail_frames[n])

@@ -832,7 +832,7 @@
         "categories": [
             {
                 "category": "beast",
-                "weight": 1,
+                "weight": 0,
                 "traits": [
                     {
                         "trait": "eyes_beast_blue",
