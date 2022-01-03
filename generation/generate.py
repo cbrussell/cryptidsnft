@@ -1,3 +1,4 @@
+import multiprocessing
 from os import dup, error
 import os.path
 import random
@@ -23,6 +24,7 @@ class Frames:
     torsopattern_frames: list
     fur_frames: list
     headbase_frames: list
+    headaccent_frames: list
     neckbase_frames: list
     neckaccent_frames: list
     neckpattern_frames: list
@@ -44,13 +46,10 @@ def to_hash(data):
 def chance(rarity):
     return random.random() < rarity
 
-
-
-
 def main():
     start_time = datetime.now()
-    procs = 20
-    n = 20
+    procs = 10
+    n = 10
     increment = int(n / procs)
     count = int(n/procs)
     jobs = []
@@ -74,13 +73,13 @@ def main():
         print(elapsed_time)
         collection_total = (len(hashlist))
         print(f'{collection_total} of {n} cryptids generated in {elapsed_time}. {duplicates.value} duplicates found.')
-
+     
     return
 
 def worker(start: int, stop: int, count: int, hashlist: list, duplicates: int):
     number = 0
 
-    unique_dna_tolerance = 10000
+    unique_dna_tolerance = 100000
 
     dir_path = os.path.dirname(os.path.realpath(__file__))
 
@@ -103,12 +102,11 @@ def worker(start: int, stop: int, count: int, hashlist: list, duplicates: int):
                 combine_attributes(images, str(edition))
                 print(f"Done {edition}")
             else:
-                with duplicates.get_lock():
-                    duplicates.value += 1
-                print("Duplicate DNA found...")
+                duplicates.value += 1
+                print(f'Duplicate DNA found... {duplicates.value}/{unique_dna_tolerance}')
 
     collection_total = len(hashlist)
-    print(f'Complete!\nFor this job, {number} generated. Found {duplicates.value} duplicates.')
+    print(f'Multiprocess job complete! For process ID {os.getpid()}, {number} generated. Found {duplicates.value} duplicates.')
 
 def get_dna() -> Union[Frames, dict]:
     dir_path = os.path.dirname(os.path.realpath(__file__))
@@ -145,6 +143,9 @@ def get_dna() -> Union[Frames, dict]:
 
     headbase, animal, headbase_frames = get_trait(manifest, "11a_headbase")
     data.update(headbase)
+
+    headaccent, headaccent_frames = get_trait_related(manifest, "11b_headaccent", animal)[0:3:2]
+    data.update(headaccent)
 
     # if fur, ignore neck DNA
     if fur:
@@ -196,6 +197,7 @@ def get_dna() -> Union[Frames, dict]:
                 , torsopattern_frames
                 , fur_frames
                 , headbase_frames
+                , headaccent_frames
                 , neckbase_frames
                 , neckaccent_frames
                 , neckpattern_frames
@@ -203,7 +205,6 @@ def get_dna() -> Union[Frames, dict]:
                 , rightbackleg_frames
                 , rightfrontleg_frames
                 , ears_frames
-
                 ), data
 
 
@@ -226,17 +227,18 @@ def get_trait(manifest: Manifest, attribute: str) -> Union[dict, str, list]:
         images.append(file_name)
     return data, category['category'], images
 
-
-# based on previous trait, only look at related subcategories for random choice
-# weigh category groups to themselves as 
 def get_trait_related(manifest: Manifest, attribute: str, type: str) -> Union[dict, str, list]:
     dir_path = os.path.dirname(os.path.realpath(__file__))
     attrib = manifest.attribute(attribute)
     categories = attrib["categories"]
     if chance(attrib["rarity"]):
-        category = random.choices(population = [x for x in categories if x["category"] == type], weights = [x["weight"] for x in categories if x["category"] == type], k=1)[0]
-        traits = category["traits"]
-        trait = random.choices(population = traits, weights = [x["weight"] for x in traits], k=1)[0]
+        if [x["weight"] for x in categories if x["category"] == type][0] ==0:
+            return {}, '', []
+        else:
+
+            category = random.choices(population = [x for x in categories if x["category"] == type], weights = [x["weight"] for x in categories if x["category"] == type], k=1)[0]
+            traits = category["traits"]
+            trait = random.choices(population = traits, weights = [x["weight"] for x in traits], k=1)[0]
     else:
         return {}, '', []
     data = {}
@@ -337,11 +339,15 @@ def combine_attributes(frames: Frames, prefix: str):
         if frames.headbase_frames:
             headbase = Image.open(frames.headbase_frames[n])
             frame.paste(headbase, mask=headbase)
+        
+        if frames.headaccent_frames:
+            headaccent = Image.open(frames.headaccent_frames[n])
+            frame.paste(headaccent, mask=headaccent)
 
         print("Almost there...")
 
         frame.save(f"{dir_path}/output/raw/{prefix}/{prefix}_{n:03}.png")
-        print(dir_path)
+
 
 
 def get_gradient_2d(start, stop, width, height, is_horizontal):

@@ -637,5 +637,61 @@
                 ]
             }
         ]
+    },
+    {
+        "attribute": "11b_headaccent",
+        "rarity": 1,
+        "categories": [
+            {
+                "category": "bear",
+                "weight": 0,
+                "traits": [
+                    {
+                        "trait": "headaccent_bear_mask_white",
+                        "weight": 1
+                    }
+                ]
+            },
+            {
+                "category": "eagle",
+                "weight": 0,
+                "traits": [
+                    {
+                        "trait": "headaccent_eagle_mask_white",
+                        "weight": 1
+                    }
+                ]
+            },
+            {
+                "category": "horse",
+                "weight": 0,
+                "traits": [
+                    {
+                        "trait": "headaccent_horse_mask_white",
+                        "weight": 1
+                    }
+                ]
+            },
+            {
+                "category": "lion",
+                "weight": 0,
+                "traits": [
+                    {
+                        "trait": "headaccent_lion_mask_white",
+                        "weight": 1
+                    }
+                ]
+            },
+            {
+                "category": "wolf",
+                "weight": 1,
+                "traits": [
+                    {
+                        "trait": "headaccent_wolf_mask_white",
+                        "weight": 1
+                    }
+                ]
+            }
+        ]
     }
 ]
