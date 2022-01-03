@@ -4,3 +4,4 @@ output/*.png
 RENDERS/
 .DS_Store
 output/
+archive/
