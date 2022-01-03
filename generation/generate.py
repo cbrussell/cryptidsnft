@@ -7,7 +7,7 @@ from typing import Union
 from dataclasses import dataclass
 import hashlib
 from shutil import copy
-from PIL import Image
+from PIL import Image, ImageFont, ImageDraw
 import numpy as np
 from multiprocessing import Process, Manager, Value
 from datetime import datetime, time
@@ -55,8 +55,8 @@ def chance(rarity):
 
 def main():
     start_time = datetime.now()
-    procs = 10
-    n = 500
+    procs = 5
+    n = 5
     increment = int(n / procs)
     jobs = []
     start = 1
@@ -390,6 +390,25 @@ def combine_attributes(frames: Frames, prefix: str):
             frame.paste(eyes, mask=eyes)
 
         # print("Almost there...")
+
+         
+        Width, Height = frame.size 
+
+        drawn = ImageDraw.Draw(frame) 
+        text = "testing..."
+
+        font = ImageFont.truetype("Arial Black", 150)
+        
+        textwidth, textheight = drawn.textsize(text, font)
+
+        # calculate the x,y coordinates of the text 
+        margin = 5
+        x = Width - textwidth
+        y = Height - textheight
+
+        # draw watermark in the bottom right corner 
+        drawn.text(((x/2), (y/2)), text, font=font) 
+
 
         frame.save(f"{dir_path}/output/raw/{prefix}/{prefix}_{n:03}.png")
 
