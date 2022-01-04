@@ -1,0 +1,100 @@
+{
+  "dna": "50cdcbaa2da8a7aac92a93cbc6426423fc8a870aaf6bc58e659149703f0fe7ec",
+  "name": "Lion-Test #4",
+  "description": "Administrators of the metaverse.",
+  "image": "ipfs://QmRWxQhDAGNYMcmryvvuw1ewD9xeZU9E12ytp8ysDpFo9k/1.png",
+  "imageHash": "bc8fe0ebba56127e2abce712e9d5f92c8b8457dcf11c94166c64d571c7e96c92",
+  "edition": 4,
+  "date": 1639349888157,
+  "attributes": [
+    {
+      "trait_type": "NeckBase",
+      "value": "Magenta"
+    },
+    {
+      "trait_type": "NeckAccent",
+      "value": "White"
+    },
+    {
+      "trait_type": "NeckPattern",
+      "value": "NeckYellowSpots"
+    },
+    {
+      "trait_type": "NeckTexture",
+      "value": "White"
+    },
+    {
+      "trait_type": "FurBase",
+      "value": "WoolyBrown"
+    },
+    {
+      "trait_type": "FurTexture",
+      "value": "TextureWooly"
+    },
+    {
+      "trait_type": "RightFrontLegBase",
+      "value": "RFL_EagleOrange"
+    },
+    {
+      "trait_type": "RightFrontLegTexture",
+      "value": "RFL_EagleTexture"
+    },
+    {
+      "trait_type": "EarsColor",
+      "value": "FeatherBlue"
+    },
+    {
+      "trait_type": "EarsAccent",
+      "value": "FeatherAccent"
+    },
+    {
+      "trait_type": "EarsTexture",
+      "value": "FeatherTexture"
+    },
+    {
+      "trait_type": "HeadBase",
+      "value": "FluffyBlue"
+    },
+    {
+      "trait_type": "HeadPattern",
+      "value": "LionYellowSpots"
+    },
+    {
+      "trait_type": "HeadTexture",
+      "value": "Fluffy"
+    },
+    {
+      "trait_type": "Mouth",
+      "value": "Fangs"
+    },
+    {
+      "trait_type": "Eyes",
+      "value": "Wise"
+    },
+    {
+      "display_type": "boost_number",
+      "trait_type": "Charisma",
+      "value": 59
+    },
+    {
+      "display_type": "boost_number",
+      "trait_type": "Magic",
+      "value": 14
+    },
+    {
+      "display_type": "boost_number",
+      "trait_type": "Empathy",
+      "value": 25
+    },
+    {
+      "display_type": "boost_number",
+      "trait_type": "Morality",
+      "value": 88
+    },
+    {
+      "display_type": "boost_number",
+      "trait_type": "Wisdom",
+      "value": 13
+    }
+  ]
+}

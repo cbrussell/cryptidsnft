@@ -3,13 +3,19 @@ import json
 from datetime import datetime
 from multiprocessing import Process, Manager, Value
 from dna import get_dna, to_hash
-from traits import Manifest
+from traits import TraitManifest, ColorManifest
 from combine import combine_attributes
 
 def main():
+
+    dir_path = os.path.dirname(os.path.realpath(__file__))
+
+    trait_manifest = TraitManifest(json.load(open(f'{dir_path}/trait_manifest.json')))
+    color_manifest = ColorManifest(json.load(open(f'{dir_path}/color_manifest.json')))
+
     start_time = datetime.now()
     procs = 10
-    n = 100
+    n = 10
     increment = int(n / procs)
     jobs = []
     start = 1
@@ -19,7 +25,7 @@ def main():
         hashlist = manager.list()
         duplicates = manager.Value('duplicates', 0)
         for i in range(0, procs):
-            process = Process(target=worker, args=(start, stop, hashlist, duplicates))
+            process = Process(target=worker, args=(start, stop, hashlist, duplicates, trait_manifest, color_manifest))
             start = stop
             stop += increment
             jobs.append(process)
@@ -35,13 +41,12 @@ def main():
      
     return
 
-def worker(start: int, stop: int, hashlist: list, duplicates: int):
+def worker(start: int, stop: int, hashlist: list, duplicates: int, trait_manifest: TraitManifest, color_manifest: ColorManifest):
     number = 0
     unique_dna_tolerance = 100000
     dir_path = os.path.dirname(os.path.realpath(__file__))
-    manifest = Manifest(json.load(open(f'{dir_path}/manifest.json')))
     for edition in range(start, stop):
-        images, dna  = get_dna(manifest)
+        images, dna  = get_dna(trait_manifest, color_manifest)
         hashed_dna = to_hash(dna)   
         while duplicates.value < unique_dna_tolerance:
             if hashed_dna not in hashlist:

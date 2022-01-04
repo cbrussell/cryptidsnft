@@ -1,6 +1,6 @@
 import json
 
-f = json.load(open("manifest.json"))
+f = json.load(open("trait_manifest.json"))
 
 print(f)
 data = {}

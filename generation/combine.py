@@ -1,7 +1,6 @@
 import os
 import numpy as np
 from datetime import datetime
-from dataclasses import dataclass
 from numpy.core.multiarray import array
 from PIL import Image, ImageFont, ImageDraw
 from background import get_gradient, get_gradient_3d
