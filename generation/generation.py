@@ -2,7 +2,9 @@ import os
 import json
 from datetime import datetime
 from multiprocessing import Process, Manager, Value
-from components import get_dna, combine_attributes, to_hash, Manifest
+from dna import get_dna, to_hash
+from traits import Manifest
+from combine import combine_attributes
 
 def main():
     start_time = datetime.now()

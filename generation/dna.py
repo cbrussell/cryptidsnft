@@ -1,0 +1,148 @@
+
+import json
+import hashlib
+from dataclasses import dataclass
+from typing import Union
+from traits import Manifest, get_trait, get_trait_related
+
+@dataclass
+class Frames:
+    background_frames: list
+    tail_frames: list
+    leftbackleg_frames: list
+    leftfrontleg_frames: list
+    back_frames: list
+    torsobase_frames: list
+    torsoaccent_frames: list
+    torsopattern_frames: list
+    fur_frames: list
+    headbase_frames: list
+    headaccent_frames: list
+    headpattern_frames: list
+    mouth_frames: list
+    neckbase_frames: list
+    neckaccent_frames: list
+    neckpattern_frames: list
+    neckshadow_frames: list
+    rightbackleg_frames: list
+    rightfrontleg_frames: list
+    ears_frames: list
+    horns_frames: list
+    eyes_frames: list
+
+def to_hash(data):
+    return hashlib.sha256(json.dumps(data).encode('utf-8')).hexdigest()
+
+def get_dna(manifest: Manifest) -> Union[Frames, dict]:
+    
+    data = {}
+    # only use first returned variable with [0]
+    background, background_frames = get_trait(manifest, "0_background")[0:3:2]
+    data.update(background)
+
+    tail, tail_frames = get_trait(manifest, "1_tail")[0:3:2]
+    data.update(tail)
+
+    leftbackleg, backanimalleg, leftbackleg_frames = get_trait(manifest, "2_leftbackleg")
+    data.update(leftbackleg)
+
+    leftfrontleg, frontanimalleg, leftfrontleg_frames  = get_trait(manifest, "3_leftfrontleg")
+    data.update(leftfrontleg)
+
+    back, back_frames = get_trait(manifest, "4_back")[0:3:2]
+    data.update(back)
+
+    torsobase, torsotype, torsobase_frames = get_trait(manifest, "5a_torsobase")
+    data.update(torsobase)
+
+    # torso accent needs to relate to torso base, input type
+    torsoaccent, torsoaccent_frames = get_trait_related(manifest, "5b_torsoaccent", torsotype)[0:3:2]
+    data.update(torsoaccent)
+
+    torsopattern, torsopattern_frames = get_trait_related(manifest, "5c_torsopattern", torsotype)[0:3:2]
+    data.update(torsopattern)
+
+    fur, fur_frames = get_trait(manifest, "7_fur")[0:3:2]
+    data.update(fur) 
+
+    headbase, animal, headbase_frames = get_trait(manifest, "11a_headbase")
+    data.update(headbase)
+
+    headaccent, headaccent_frames = get_trait_related(manifest, "11b_headaccent", animal)[0:3:2]
+    data.update(headaccent)
+
+    headpattern, headpattern_frames = get_trait_related(manifest, "11c_headpattern", animal)[0:3:2]
+    data.update(headpattern)
+
+    mouth, mouth_frames = get_trait_related(manifest, "12_mouth", animal)[0:3:2]
+    data.update(mouth)
+
+    # if fur, ignore neck DNA
+    if fur:
+        neckbase_frames = []
+        neckaccent_frames = []
+        neckpattern_frames = []
+        neckshadow_frames = []
+    else:
+        neckbase, neckbase_frames = get_trait(manifest, "6a_neckbase")[0:3:2]
+        data.update(neckbase)
+
+        # if accent on torso, must be accent on neck
+        # neckaccent rarity driven by torso accent
+        if torsoaccent:
+            neckaccent, neckaccent_frames = get_trait(manifest, "6b_neckaccent")[0:3:2]
+            data.update(neckaccent)
+        else:
+            neckaccent_frames = []
+        
+        if torsopattern:
+            neckpattern, neckpattern_frames = get_trait(manifest, "6c_neckpattern")[0:3:2]
+            data.update(neckpattern)
+        else:
+            neckpattern_frames = []
+        
+        # no neckshadow on eagle
+        if animal == 'eagle':
+            neckshadow_frames = []
+        else:
+            neckshadow, neckshadow_frames = get_trait_related(manifest, "6d_neckshadow", animal)[0:3:2]
+            data.update(neckshadow)
+
+    rightbackleg, rightbackleg_frames = get_trait_related(manifest, "8_rightbackleg", backanimalleg)[0:3:2]
+    data.update(rightbackleg)
+
+    rightfrontleg, rightfrontleg_frames = get_trait_related(manifest, "9_rightfrontleg", frontanimalleg)[0:3:2]
+    data.update(rightfrontleg)
+
+    ears, ears_frames = get_trait(manifest, "10_ears")[0:3:2]
+    data.update(ears)
+
+    horns, horns_frames = get_trait(manifest, "13_horns")[0:3:2]
+    data.update(horns)
+
+    eyes, eyes_frames = get_trait(manifest, "14_eyes")[0:3:2]
+    data.update(eyes)
+
+    return Frames(background_frames
+                , tail_frames
+                , leftbackleg_frames
+                , leftfrontleg_frames
+                , back_frames
+                , torsobase_frames
+                , torsoaccent_frames
+                , torsopattern_frames
+                , fur_frames
+                , headbase_frames
+                , headaccent_frames
+                , headpattern_frames
+                , mouth_frames
+                , neckbase_frames
+                , neckaccent_frames
+                , neckpattern_frames
+                , neckshadow_frames
+                , rightbackleg_frames
+                , rightfrontleg_frames
+                , ears_frames
+                , horns_frames
+                , eyes_frames
+                ), data
