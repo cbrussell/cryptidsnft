@@ -34,7 +34,6 @@ def to_hash(data):
 
 def get_dna(trait_manifest: TraitManifest, color_manifest: ColorManifest) -> Union[Frames, dict]:
     data = {}
-    # only use first returned variable with [0]
 
     color = color_manifest.get()
     data["Base"] = color
