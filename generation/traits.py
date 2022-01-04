@@ -40,7 +40,7 @@ def get_trait(manifest: TraitManifest, attribute: str) -> Union[dict, str, list]
         images.append(file_name)
     return data, category['category'], images
 
-def get_trait_related(manifest: TraitManifest, attribute: str, type: str) -> Union[dict, str, list]:
+def get_trait_category(manifest: TraitManifest, attribute: str, type: str) -> Union[dict, str, list]:
     dir_path = os.path.dirname(os.path.realpath(__file__))
     attrib = manifest.attribute(attribute)
     categories = attrib["categories"]
@@ -64,3 +64,8 @@ def get_trait_related(manifest: TraitManifest, attribute: str, type: str) -> Uni
         images.append(file_name)
     return data, category['category'], images
 
+def get_trait_category_color():
+
+
+def get_trait_color():
+    

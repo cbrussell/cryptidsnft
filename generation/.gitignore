@@ -6,3 +6,4 @@ RENDERS/
 output/**
 test_archive/**
 *.DS_Store
+assets/*

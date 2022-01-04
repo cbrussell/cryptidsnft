@@ -35,7 +35,6 @@ def main():
 
         end_time = datetime.now()
         elapsed_time = end_time - start_time
-        print(elapsed_time)
         collection_total = (len(hashlist))
         print(f'{collection_total} of {n} cryptids generated in {elapsed_time}. {duplicates.value} duplicates found.')
      
