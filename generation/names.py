@@ -1,18 +1,19 @@
 import json
 
-f = json.load(open("files_manifest.json"))
+f = json.load(open("manifest.json"))
 
+print(f)
 data = {}
 
 for a in f:
     # print(a)
     for c in a["categories"]:
         # print(c)
-        for fi in c["files"]:
+        for fi in c["traits"]:
             # print(fi)
 
-            data[fi["file"]] = ""
+            data[fi["trait"]] = ""
 
 
-with open(f"names2.json", "w") as w:
-    json.dump(data, w)
+with open(f"names33.json", "w") as w:
+    json.dump(data, w, indent=4)

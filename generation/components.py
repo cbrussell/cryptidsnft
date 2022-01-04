@@ -1,19 +1,22 @@
-import multiprocessing
-from os import dup, error
-import os.path
-import random
+import os
 import json
-from typing import Union
-from dataclasses import dataclass
+import random
 import hashlib
-from shutil import copy
-from PIL import Image, ImageFont, ImageDraw
 import numpy as np
-from multiprocessing import Process, Manager, Value
-from datetime import datetime, time
-
+from datetime import datetime
+from dataclasses import dataclass
+from typing import Union
 from numpy.core.multiarray import array
-from background import get_gradient
+from PIL import Image, ImageFont, ImageDraw
+from background import get_gradient, get_gradient_3d
+
+
+class Manifest:
+    def __init__(self, manifest):
+        self.manifest=manifest
+
+    def attribute(self, attr:str):
+        return [x for x in self.manifest if x["attribute"] == attr][0]
 
 @dataclass
 class Frames:
@@ -40,82 +43,9 @@ class Frames:
     horns_frames: list
     eyes_frames: list
 
-class Manifest:
-    def __init__(self, manifest):
-        self.manifest=manifest
-
-    def attribute(self, attr:str):
-        return [x for x in self.manifest if x["attribute"] == attr][0]
-
-def to_hash(data):
-    return hashlib.sha256(json.dumps(data).encode('utf-8')).hexdigest()
-
-def chance(rarity):
-    return random.random() < rarity
-
-def main():
-    start_time = datetime.now()
-    procs = 10
-    n = 10
-    increment = int(n / procs)
-    jobs = []
-    start = 1
-    stop = increment + 1
-
-    with Manager() as manager:
-        hashlist = manager.list()
-        duplicates = manager.Value('duplicates', 0)
-        for i in range(0, procs):
-            process = Process(target=worker, args=(start, stop, hashlist, duplicates))
-            start = stop
-            stop += increment
-            jobs.append(process)
-
-        [j.start() for j in jobs]
-        [j.join() for j in jobs]
-
-        end_time = datetime.now()
-        elapsed_time = end_time - start_time
-        print(elapsed_time)
-        collection_total = (len(hashlist))
-        print(f'{collection_total} of {n} cryptids generated in {elapsed_time}. {duplicates.value} duplicates found.')
-     
-    return
-
-def worker(start: int, stop: int, hashlist: list, duplicates: int):
-    number = 0
-    unique_dna_tolerance = 100000
-    dir_path = os.path.dirname(os.path.realpath(__file__))
-    for edition in range(start, stop):
-        images, dna  = get_dna()
-        hashed_dna = to_hash(dna)   
-        while duplicates.value < unique_dna_tolerance:
-            if hashed_dna not in hashlist:
-                hashlist.append(hashed_dna)
-                break
-            else:
-                duplicates.value += 1
-                images, dna  = get_dna()
-                hashed_dna = to_hash(dna)
-                print(f'Duplicate DNA found... {duplicates.value}/{unique_dna_tolerance}')   
-        if duplicates.value >= unique_dna_tolerance:
-            print('Found {duplicates.values} duplicates (MAX). Tolerance is set to {unique_dna_tolerance}.')
-            return
-        else:
-            print(f'Building edition #{edition}/{stop - 1}')
-            os.makedirs(f"{dir_path}/output/raw/{str(edition)}", exist_ok=True)
-            os.makedirs(f"{dir_path}/output/metadata", exist_ok=True)
-            with open(f"{dir_path}/output/metadata/{str(edition)}.json", "w") as f:
-                json.dump(dna, f, indent=4)
-                combine_attributes(images, str(edition))
-                number += 1
-                print(f"Completed edition #{edition}/{stop - 1}")
- 
-    print(f'Multiprocess job complete! For process ID {os.getpid()}, {number} generated. Found {duplicates.value} duplicates.')
-
-def get_dna() -> Union[Frames, dict]:
-    dir_path = os.path.dirname(os.path.realpath(__file__))
-    manifest = Manifest(json.load(open(f'{dir_path}/manifest.json')))
+def get_dna(manifest: Manifest) -> Union[Frames, dict]:
+    # dir_path = os.path.dirname(os.path.realpath(__file__))
+    
     data = {}
     # only use first returned variable with [0]
     background, background_frames = get_trait(manifest, "0_background")[0:3:2]
@@ -228,6 +158,11 @@ def get_dna() -> Union[Frames, dict]:
                 , eyes_frames
                 ), data
 
+def chance(rarity):
+    return random.random() < rarity
+
+def to_hash(data):
+    return hashlib.sha256(json.dumps(data).encode('utf-8')).hexdigest()
 
 def get_trait(manifest: Manifest, attribute: str) -> Union[dict, str, list]:
     dir_path = os.path.dirname(os.path.realpath(__file__))
@@ -289,7 +224,7 @@ def combine_attributes(frames: Frames, prefix: str):
     # array = get_gradient()
     dir_path = os.path.dirname(os.path.realpath(__file__))
     # for (n, background) in enumerate(frames.background_frames):
-    for n in range(72):
+    for n in range(0,1):
 
         # use this is background color
         # frame = Image.open(background)
@@ -391,27 +326,19 @@ def combine_attributes(frames: Frames, prefix: str):
 
         print("Almost there...")
 
-         
+        # watermark settings
         # find texts with "find {/System,}/Library/Fonts -name *ttf"
-        Width, Height = frame.size 
 
-        drawn = ImageDraw.Draw(frame) 
-        text = "A watermark."
-
-        font = ImageFont.truetype("Arial Black", 138)
-        
-        textwidth, textheight = drawn.textsize(text, font)
-
-        # calculate the x,y coordinates of the text 
-        margin = 5
-        x = Width - textwidth
-        y = Height - textheight
-
-        # draw watermark in the bottom right corner 
-        drawn.text(((x/2), (y/2)), text, font=font) 
-
-
-        frame.save(f"{dir_path}/output/raw/{prefix}/{prefix}_{n:03}.png")
+        # Width, Height = frame.size 
+        # drawn = ImageDraw.Draw(frame) 
+        # text = "A watermark."
+        # font = ImageFont.truetype("Arial Black", 138)
+        # textwidth, textheight = drawn.textsize(text, font)
+        # margin = 5
+        # x = Width - textwidth
+        # y = Height - textheight
+        # drawn.text(((x/2), (y/2)), text, font=font) 
+        # frame.save(f"{dir_path}/output/raw/{prefix}/{prefix}_{n:03}.png")
 
         if n == 0:
             time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
@@ -421,19 +348,3 @@ def combine_attributes(frames: Frames, prefix: str):
     # f = open(f"{dir_path}/output/raw/{prefix}/bg.txt","w+")
     # f.write(f"Background colors are: [{R}, {G}, {B}], [{R1}, {G1}, {B1}]")
     # f.close()
-
-
-def get_gradient_2d(start, stop, width, height, is_horizontal):
-    if is_horizontal:
-        return np.tile(np.linspace(start, stop, width), (height, 1))
-    else:
-        return np.tile(np.linspace(start, stop, height), (width, 1)).T
-def get_gradient_3d(width, height, start_list, stop_list, is_horizontal_list):
-    result = np.zeros((height, width, len(start_list)), dtype=np.float)
-    for i, (start, stop, is_horizontal) in enumerate(zip(start_list, stop_list, is_horizontal_list)):
-        result[:, :, i] = get_gradient_2d(start, stop, width, height, is_horizontal)
-    return result
-
-if __name__ == "__main__":
-    main()
-
