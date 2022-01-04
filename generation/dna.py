@@ -2,7 +2,7 @@ import json
 import hashlib
 from dataclasses import dataclass
 from typing import Union
-from traits import TraitManifest, ColorManifest, get_trait, get_trait_related
+from traits import TraitManifest, ColorManifest, get_trait, get_trait_category
 
 @dataclass
 class Frames:
@@ -59,10 +59,10 @@ def get_dna(trait_manifest: TraitManifest, color_manifest: ColorManifest) -> Uni
     data.update(torsobase)
 
     # torso accent needs to relate to torso base, input type
-    torsoaccent, torsoaccent_frames = get_trait_related(trait_manifest, "5b_torsoaccent", torsotype)[0:3:2]
+    torsoaccent, torsoaccent_frames = get_trait_category(trait_manifest, "5b_torsoaccent", torsotype)[0:3:2]
     data.update(torsoaccent)
 
-    torsopattern, torsopattern_frames = get_trait_related(trait_manifest, "5c_torsopattern", torsotype)[0:3:2]
+    torsopattern, torsopattern_frames = get_trait_category(trait_manifest, "5c_torsopattern", torsotype)[0:3:2]
     data.update(torsopattern)
 
     fur, fur_frames = get_trait(trait_manifest, "7_fur")[0:3:2]
@@ -71,13 +71,13 @@ def get_dna(trait_manifest: TraitManifest, color_manifest: ColorManifest) -> Uni
     headbase, animal, headbase_frames = get_trait(trait_manifest, "11a_headbase")
     data.update(headbase)
 
-    headaccent, headaccent_frames = get_trait_related(trait_manifest, "11b_headaccent", animal)[0:3:2]
+    headaccent, headaccent_frames = get_trait_category(trait_manifest, "11b_headaccent", animal)[0:3:2]
     data.update(headaccent)
 
-    headpattern, headpattern_frames = get_trait_related(trait_manifest, "11c_headpattern", animal)[0:3:2]
+    headpattern, headpattern_frames = get_trait_category(trait_manifest, "11c_headpattern", animal)[0:3:2]
     data.update(headpattern)
 
-    mouth, mouth_frames = get_trait_related(trait_manifest, "12_mouth", animal)[0:3:2]
+    mouth, mouth_frames = get_trait_category(trait_manifest, "12_mouth", animal)[0:3:2]
     data.update(mouth)
 
     # if fur, ignore neck DNA
@@ -108,13 +108,13 @@ def get_dna(trait_manifest: TraitManifest, color_manifest: ColorManifest) -> Uni
         if animal == 'eagle':
             neckshadow_frames = []
         else:
-            neckshadow, neckshadow_frames = get_trait_related(trait_manifest, "6d_neckshadow", animal)[0:3:2]
+            neckshadow, neckshadow_frames = get_trait_category(trait_manifest, "6d_neckshadow", animal)[0:3:2]
             data.update(neckshadow)
 
-    rightbackleg, rightbackleg_frames = get_trait_related(trait_manifest, "8_rightbackleg", backanimalleg)[0:3:2]
+    rightbackleg, rightbackleg_frames = get_trait_category(trait_manifest, "8_rightbackleg", backanimalleg)[0:3:2]
     data.update(rightbackleg)
 
-    rightfrontleg, rightfrontleg_frames = get_trait_related(trait_manifest, "9_rightfrontleg", frontanimalleg)[0:3:2]
+    rightfrontleg, rightfrontleg_frames = get_trait_category(trait_manifest, "9_rightfrontleg", frontanimalleg)[0:3:2]
     data.update(rightfrontleg)
 
     ears, ears_frames = get_trait(trait_manifest, "10_ears")[0:3:2]
