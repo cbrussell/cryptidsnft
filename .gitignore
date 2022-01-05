@@ -1,0 +1,9 @@
+.DS_Store
+generation/venv/
+generation/output/
+generation/assets/
+generation/__pycache__
+generation/RENDERS/
+test_archive/**
+assets/*
+__pycache__/
