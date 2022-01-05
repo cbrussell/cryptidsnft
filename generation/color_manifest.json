@@ -1,38 +1,38 @@
 [
     {
-        "color": "Red",
+        "color": "red",
         "weight": 1
     },
     {
-        "color": "Orange",
-        "weight": 5
-    },
-    {
-        "color": "Yellow",
+        "color": "orange",
         "weight": 1
     },
     {
-        "color": "Blue",
-        "weight": 1
+        "color": "yellow",
+        "weight": 0
     },
     {
-        "color": "Purple",
-        "weight": 1
+        "color": "blue",
+        "weight": 0
     },
     {
-        "color": "Brown",
-        "weight": 1
+        "color": "purple",
+        "weight": 0
     },
     {
-        "color": "Grey",
-        "weight": 1
+        "color": "brown",
+        "weight": 0
     },
     {
-        "color": "Black",
-        "weight": 1
+        "color": "grey",
+        "weight": 0
     },
     {
-        "color": "White",
-        "weight": 1
+        "color": "black",
+        "weight": 0
+    },
+    {
+        "color": "white",
+        "weight": 0
     }
 ]

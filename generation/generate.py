@@ -14,8 +14,8 @@ def main():
     color_manifest = ColorManifest(json.load(open(f'{dir_path}/color_manifest.json')))
 
     start_time = datetime.now()
-    procs = 10
-    n = 10
+    procs = 20
+    n = 20
     increment = int(n / procs)
     jobs = []
     start = 1

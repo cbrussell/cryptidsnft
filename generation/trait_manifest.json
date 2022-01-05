@@ -16,16 +16,6 @@
                                 "weight": 1
                             }
                         ]
-                    },
-                    {
-                        "color": "orange",
-                        "weight": 1,
-                        "traits": [
-                            {
-                                "trait": "background_solid_orange",
-                                "weight": 1
-                            }
-                        ]
                     }
                 ]
             }
@@ -540,7 +530,7 @@
         "rarity": 1,
         "categories": [
             {
-                "category": "throat",
+                "category": "medium",
                 "weight": 1,
                 "colors": [
                     {
@@ -548,7 +538,7 @@
                         "weight": 1,
                         "traits": [
                             {
-                                "trait": "neckaccent_throat_white",
+                                "trait": "neckaccent_medium_white",
                                 "weight": 1
                             }
                         ]
@@ -656,7 +646,7 @@
                         "weight": 1,
                         "traits": [
                             {
-                                "trait": "neckshadow_lion",
+                                "trait": "neckshadow_lion_black",
                                 "weight": 1
                             }
                         ]
@@ -1210,7 +1200,7 @@
                         "weight": 1,
                         "traits": [
                             {
-                                "trait": "mouth_bear",
+                                "trait": "mouth_bear_empty",
                                 "weight": 1
                             }
                         ]
@@ -1226,7 +1216,7 @@
                         "weight": 1,
                         "traits": [
                             {
-                                "trait": "mouth_eagle",
+                                "trait": "mouth_eagle_empty",
                                 "weight": 1
                             }
                         ]
@@ -1242,7 +1232,7 @@
                         "weight": 1,
                         "traits": [
                             {
-                                "trait": "mouth_horse",
+                                "trait": "mouth_horse_teeth",
                                 "weight": 1
                             }
                         ]
@@ -1278,7 +1268,11 @@
                         "weight": 1,
                         "traits": [
                             {
-                                "trait": "mouth_wolf",
+                                "trait": "mouth_wolf_empty",
+                                "weight": 1
+                            },
+                            {
+                                "trait": "mouth_wolf_teeth",
                                 "weight": 1
                             }
                         ]

@@ -21,16 +21,23 @@ def combine_attributes(frames: Frames, prefix: str):
     
     array = get_gradient_3d(1100, 1100, (R1, G1, B1), (R, G, B), (True, False, False))
     # array = get_gradient()
+
     dir_path = os.path.dirname(os.path.realpath(__file__))
+
+    # use this for metadatabackground
     # for (n, background) in enumerate(frames.background_frames):
-    for n in range(0,1):
+
+    for n in range(0,72): #0,72
 
         # use this is background color
         # frame = Image.open(background)
 
         # frame = Image.new('RGB', (1100, 1100), (R, G, B))
         # frame = background
+
+        # 4 way gradient
         frame = Image.fromarray(np.uint8(array))
+
         # frame = Image.fromarray(array).rotate(90, expand=False)
 
         if frames.tail_frames:
@@ -111,13 +118,8 @@ def combine_attributes(frames: Frames, prefix: str):
             frame.paste(mouth, mask=mouth)
 
         if frames.horns_frames:
-            try:
-
-                horns = Image.open(frames.horns_frames[n])
-                frame.paste(horns, mask=horns)
-            except:
-                print("horn error")
-                continue
+            horns = Image.open(frames.horns_frames[n])
+            frame.paste(horns, mask=horns)
         
         if frames.eyes_frames:
             eyes = Image.open(frames.eyes_frames[n])
@@ -127,6 +129,7 @@ def combine_attributes(frames: Frames, prefix: str):
 
         # watermark settings
         # find texts with "find {/System,}/Library/Fonts -name *ttf"
+        ######
 
         # Width, Height = frame.size 
         # drawn = ImageDraw.Draw(frame) 
@@ -137,14 +140,15 @@ def combine_attributes(frames: Frames, prefix: str):
         # x = Width - textwidth
         # y = Height - textheight
         # drawn.text(((x/2), (y/2)), text, font=font) 
-        # frame.save(f"{dir_path}/output/raw/{prefix}/{prefix}_{n:03}.png")
+
+        #####
+
+
+        frame.save(f"{dir_path}/output/raw/{prefix}/{prefix}_{n:03}.png")
 
         if n == 0:
             time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-            frame.save(f"{dir_path}/output/stills/{prefix}_{time}.png")
+            frame.save(f"{dir_path}/output/stills/{prefix}.png")
             frame = Image.fromarray(np.uint8(array)).save(f"{dir_path}/output/bg/{prefix}_bg_{time}_{R1}_{G1}_{B1}_{R}_{G}_{G}.png", "PNG")
 
-    # f = open(f"{dir_path}/output/raw/{prefix}/bg.txt","w+")
-    # f.write(f"Background colors are: [{R}, {G}, {B}], [{R1}, {G1}, {B1}]")
-    # f.close()
     
