@@ -6,16 +6,23 @@ from dna import get_dna, to_hash
 from traits import TraitManifest, ColorManifest
 from combine import combine_attributes
 
+# this script takes the input from names.py
+# and formats the outputted json data from generate.py
+# I still need to add a way to remove dna elemnts I dont want in the final 
+# metadata...
+
 def main():
 
     dir_path = os.path.dirname(os.path.realpath(__file__))
 
     trait_manifest = TraitManifest(json.load(open(f'{dir_path}/trait_manifest.json')))
     color_manifest = ColorManifest(json.load(open(f'{dir_path}/color_manifest.json')))
+    os.makedirs(f"{dir_path}/output/stills", exist_ok=True)
+    os.makedirs(f"{dir_path}/output/bg", exist_ok=True)
 
     start_time = datetime.now()
     procs = 10
-    n = 50
+    n = 10
     increment = int(n / procs)
     jobs = []
     start = 1

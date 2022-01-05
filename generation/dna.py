@@ -89,7 +89,7 @@ def get_dna(trait_manifest: TraitManifest, color_manifest: ColorManifest) -> Uni
     else:
         neckbase, neckbase_frames = get_trait(trait_manifest, "6a_neckbase")[0:4:3]
         data.update(neckbase)
-
+        
         # if accent on torso, must be accent on neck
         # neckaccent rarity driven by torso accent
         # match accent type of neck to accent type of torso

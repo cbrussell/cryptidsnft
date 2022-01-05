@@ -17,7 +17,6 @@ contract CryptidToken is ERC721, Pausable, Ownable, ERC721Burnable{
 
     string public provenanceHash;
     string public baseURI = "";
-    string public defaultURI;
     string public baseExtension = ".json";
     uint8 private stage = 0;
     uint8 public maxMintPerTx;     
@@ -55,7 +54,7 @@ contract CryptidToken is ERC721, Pausable, Ownable, ERC721Burnable{
     constructor(
         string memory _name,
         string memory _symbol,
-        string memory _defaultURI,
+        string memory _baseURI,
         uint256 _presaleSupply,
         uint256 _teamMintSupply,
         uint256 _totalSaleSupply,
@@ -66,7 +65,7 @@ contract CryptidToken is ERC721, Pausable, Ownable, ERC721Burnable{
         teamMintSupply = _teamMintSupply;
         totalSaleSupply = _totalSaleSupply;
         maxMintPerTx = _maxMintPerTx;
-        defaultURI = _defaultURI;
+        baseURI = _baseURI;
         _tokenIdCounter.increment();
     }
 
@@ -150,11 +149,7 @@ contract CryptidToken is ERC721, Pausable, Ownable, ERC721Burnable{
     function setBaseURI(string memory _newBaseURI) public onlyOwner {
         require(!tokenURIFrozen, "BaseURI is frozen.");
         baseURI = _newBaseURI;
-    }
-
-    function setDefaultURI(string memory _newDefaultURI) public onlyOwner {
-        defaultURI = _newDefaultURI;
-    }    
+    } 
     
     function freezeBaseURI() public onlyOwner {
         require(bytes(baseURI).length > 0, "baseURI cannot be empty");
@@ -230,9 +225,8 @@ contract CryptidToken is ERC721, Pausable, Ownable, ERC721Burnable{
 
     function tokenURI(uint256 tokenId) public view virtual override returns (string memory) {
         require(_exists(tokenId), "ERC721Metadata: URI query for nonexistent token");
-        return bytes(baseURI).length > 0
-            ? string(abi.encodePacked(baseURI, tokenId.toString(), baseExtension))
-            : defaultURI;
+        return string(abi.encodePacked(baseURI, tokenId.toString(), baseExtension));
+            
     }
 
     function getTokensLeft() public view returns (uint256) {

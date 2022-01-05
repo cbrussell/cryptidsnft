@@ -10,13 +10,14 @@ from pinatapy import PinataPy
 
 # Only do this with test - not ALL files
 
-image_path = Path(__file__).resolve().parents[2] / "assets/images/"
-image_list = fnmatch.filter(os.listdir(image_path), '*.png')
+# image_path = Path(__file__).resolve().parents[2] / "/Users/chrisrussell/CryptidToken/generation/assets/images"
+image_path = "/Users/chrisrussell/CryptidToken/generation/output/videos"
+image_list = fnmatch.filter(os.listdir(image_path), '*.mp4')
 image_count = len(image_list)
 
 client = ipfshttpclient.connect()
 
-response = client.add(image_path, wrap_with_directory=False, pattern='*.png')
+response = client.add(image_path, wrap_with_directory=False, pattern='*.mp4')
 ipfs_hash_directory = response[image_count]['Hash']
 
 base_url = 'https://ipfs.io/ipfs/'

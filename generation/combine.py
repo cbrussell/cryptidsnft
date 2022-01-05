@@ -23,24 +23,21 @@ def combine_attributes(frames: Frames, prefix: str):
     # array = get_gradient()
 
     dir_path = os.path.dirname(os.path.realpath(__file__))
-
     # use this for metadatabackground
     # for (n, background) in enumerate(frames.background_frames):
 
     for n in range(0,72): #0,72
 
         # use this is background color
-        # frame = Image.open(background)
+        # frame = Image.open(background) # background of data
 
-        # frame = Image.new('RGB', (1100, 1100), (R, G, B))
-        # frame = background
+        # frame = Image.new('RGB', (1100, 1100), (R, G, B)) # random solid
+        
 
         # 4 way gradient
         # frame = Image.fromarray(np.uint8(array))
 
-        frame = Image.new('RGB', (1100, 1100), (255, 255, 255))
-
-        # frame = Image.fromarray(array).rotate(90, expand=False)
+        frame = Image.new('RGB', (1100, 1100), (255, 255, 255)) # white bg
 
         if frames.tail_frames:
             print(frames.tail_frames[n])
@@ -133,15 +130,15 @@ def combine_attributes(frames: Frames, prefix: str):
         # find texts with "find {/System,}/Library/Fonts -name *ttf"
         ######
 
-        # Width, Height = frame.size 
-        # drawn = ImageDraw.Draw(frame) 
-        # text = "test mint test mint test mint"
-        # font = ImageFont.truetype("Arial Black", 138)
-        # textwidth, textheight = drawn.textsize(text, font)
-        # margin = 5
-        # x = Width - textwidth
-        # y = Height - textheight
-        # drawn.text(((x/2), (y/2)), text, font=font) 
+        Width, Height = frame.size 
+        drawn = ImageDraw.Draw(frame) 
+        text = "test mint"
+        font = ImageFont.truetype("Arial Black", 138)
+        textwidth, textheight = drawn.textsize(text, font)
+        margin = 5
+        x = Width - textwidth
+        y = Height - textheight
+        drawn.text(((x/2), (y/2)), text, font=font) 
 
         #####
 
@@ -149,10 +146,8 @@ def combine_attributes(frames: Frames, prefix: str):
         frame.save(f"{dir_path}/output/raw/{prefix}/{prefix}_{n:03}.png")
 
         if n == 0:
-            # time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-            os.makedirs(f"{dir_path}/output/stills", exist_ok=True)
+            time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             frame.save(f"{dir_path}/output/stills/{prefix}.png")
-            os.makedirs(f"{dir_path}/output/bg", exist_ok=True)
             # frame = Image.fromarray(np.uint8(array)).save(f"{dir_path}/output/bg/{prefix}_bg_{time}_{R1}_{G1}_{B1}_{R}_{G}_{G}.png", "PNG")
 
     

@@ -10,7 +10,7 @@ dir_path = os.path.dirname(os.path.realpath(__file__))
 image_path = Path(__file__).resolve().parents[1] / "output/stills/"
 image_list = fnmatch.filter(os.listdir(image_path), '*.png')
 image_count = len(image_list)
-shift_value = 229183
+shift_value = 589123
 
 combined_hash_string = ""
 table = []

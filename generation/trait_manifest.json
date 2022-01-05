@@ -240,6 +240,16 @@
                                 "weight": 1
                             }
                         ]
+                    },
+                    {
+                        "color": "orange",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "leftbackleg_wolf_orange",
+                                "weight": 1
+                            }
+                        ]
                     }
                 ]
             },
@@ -256,12 +266,22 @@
                                 "weight": 1
                             }
                         ]
+                    },
+                    {
+                        "color": "orange",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "leftbackleg_eagle_orange",
+                                "weight": 1
+                            }
+                        ]
                     }
                 ]
             },
             {
                 "category": "lion",
-                "weight": 0,
+                "weight": 1,
                 "colors": [
                     {
                         "color": "red",
@@ -272,12 +292,22 @@
                                 "weight": 1
                             }
                         ]
+                    },
+                    {
+                        "color": "orange",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "leftbackleg_lion_orange",
+                                "weight": 1
+                            }
+                        ]
                     }
                 ]
             },
             {
                 "category": "horse",
-                "weight": 0,
+                "weight": 1,
                 "colors": [
                     {
                         "color": "red",
@@ -285,6 +315,16 @@
                         "traits": [
                             {
                                 "trait": "leftbackleg_horse_red",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "orange",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "leftbackleg_horse_orange",
                                 "weight": 1
                             }
                         ]
@@ -336,6 +376,16 @@
                                 "weight": 1
                             }
                         ]
+                    },
+                    {
+                        "color": "orange",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "leftfrontleg_wolf_orange",
+                                "weight": 1
+                            }
+                        ]
                     }
                 ]
             },
@@ -352,12 +402,22 @@
                                 "weight": 1
                             }
                         ]
+                    },
+                    {
+                        "color": "orange",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "leftfrontleg_eagle_orange",
+                                "weight": 1
+                            }
+                        ]
                     }
                 ]
             },
             {
                 "category": "lion",
-                "weight": 0,
+                "weight": 1,
                 "colors": [
                     {
                         "color": "red",
@@ -368,12 +428,22 @@
                                 "weight": 1
                             }
                         ]
+                    },
+                    {
+                        "color": "orange",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "leftfrontleg_lion_orange",
+                                "weight": 1
+                            }
+                        ]
                     }
                 ]
             },
             {
                 "category": "horse",
-                "weight": 0,
+                "weight": 1,
                 "colors": [
                     {
                         "color": "red",
@@ -381,7 +451,17 @@
                         "traits": [
                             {
                                 "trait": "leftfrontleg_horse_red",
-                                "weight": 0
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "orange",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "leftfrontleg_horse_orange",
+                                "weight": 1
                             }
                         ]
                     }
@@ -416,7 +496,111 @@
                                 "weight": 1
                             }
                         ]
+                    },
+                    {
+                        "color": "yellow",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "back_featherwings_yellow",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "blue",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "back_featherwings_blue",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "purple",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "back_featherwings_purple",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "brown",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "back_featherwings_brown",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "grey",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "back_featherwings_gray",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "black",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "back_featherwings_black",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "white",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "back_featherwings_white",
+                                "weight": 1
+                            }
+                        ]
                     }
+                ]
+            },
+            {
+                "category": "batwings",
+                "weight": 1,
+                "colors": [
+                    {
+                        "color": "red",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "back_batwings_red",
+                                "weight": 1
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "category": "spike",
+                "weight": 1,
+                "colors": [
+                    {
+                        "color": "red",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "back_spike_red",
+                                "weight": 1
+                            }
+                        ]
+                    }
+                
+                  
                 ]
             }
         ]
@@ -435,6 +619,42 @@
                         "traits": [
                             {
                                 "trait": "torsobase_medium_red",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "orange",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "torsobase_medium_orange",
+                                "weight": 1
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "category": "shaggy",
+                "weight": 1,
+                "colors": [
+                    {
+                        "color": "red",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "torsobase_shaggy_red",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "orange",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "torsobase_shaggy_orange",
                                 "weight": 1
                             }
                         ]
@@ -457,6 +677,22 @@
                         "traits": [
                             {
                                 "trait": "torsoaccent_medium_white",
+                                "weight": 1
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "category": "shaggy",
+                "weight": 1,
+                "colors": [
+                    {
+                        "color": "white",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "torsoaccent_shaggy_white",
                                 "weight": 1
                             }
                         ]
@@ -522,6 +758,22 @@
                         ]
                     }
                 ]
+            },
+            {
+                "category": "regular",
+                "weight": 1,
+                "colors": [
+                    {
+                        "color": "orange",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "neckbase_regular_orange",
+                                "weight": 1
+                            }
+                        ]
+                    }
+                ]
             }
         ]
     },
@@ -531,6 +783,22 @@
         "categories": [
             {
                 "category": "medium",
+                "weight": 1,
+                "colors": [
+                    {
+                        "color": "white",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "neckaccent_medium_white",
+                                "weight": 1
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "category": "shaggy",
                 "weight": 1,
                 "colors": [
                     {
@@ -736,6 +1004,16 @@
                                 "weight": 1
                             }
                         ]
+                    },
+                    {
+                        "color": "orange",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "rightbackleg_wolf_orange",
+                                "weight": 1
+                            }
+                        ]
                     }
                 ]
             },
@@ -764,6 +1042,58 @@
                         ]
                     }
                 ]
+            },
+            {
+                "category": "horse",
+                "weight": 1,
+                "colors": [
+                    {
+                        "color": "orange",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "rightbackleg_horse_orange",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "red",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "rightbackleg_horse_red",
+                                "weight": 1
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "category": "lion",
+                "weight": 1,
+                "colors": [
+                    {
+                        "color": "orange",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "rightbackleg_lion_orange",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "red",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "rightbackleg_lion_red",
+                                "weight": 1
+                            }
+                        ]
+                    }
+                ]
             }
         ]
     },
@@ -787,7 +1117,7 @@
                     },
                     {
                         "color": "orange",
-                        "weight": 0,
+                        "weight": 1,
                         "traits": [
                             {
                                 "trait": "rightfrontleg_eagle_orange",
@@ -810,6 +1140,42 @@
                                 "weight": 1
                             }
                         ]
+                    },
+                    {
+                        "color": "orange",
+                        "weight": 0,
+                        "traits": [
+                            {
+                                "trait": "rightfrontleg_wolf_orange",
+                                "weight": 1
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "category": "horse",
+                "weight": 1,
+                "colors": [
+                    {
+                        "color": "orange",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "rightfrontleg_horse_orange",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "red",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "rightfrontleg_horse_red",
+                                "weight": 1
+                            }
+                        ]
                     }
                 ]
             },
@@ -819,7 +1185,7 @@
                 "colors": [
                     {
                         "color": "orange",
-                        "weight": 0,
+                        "weight": 1,
                         "traits": [
                             {
                                 "trait": "rightfrontleg_deer_orange",
@@ -833,6 +1199,32 @@
                         "traits": [
                             {
                                 "trait": "rightfrontleg_deer_red",
+                                "weight": 1
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "category": "lion",
+                "weight": 1,
+                "colors": [
+                    {
+                        "color": "orange",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "rightfrontleg_lion_orange",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "red",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "rightfrontleg_lion_red",
                                 "weight": 1
                             }
                         ]

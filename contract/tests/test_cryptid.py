@@ -535,11 +535,7 @@ def test_set_frozen_base_uri(token):
         token.setBaseURI(baseUri, {'from': owner})
 
 
-def test_set_default_uri(token):
-    owner = accounts[0]
-    new_defaultURI = "test"
-    token.setDefaultURI(new_defaultURI, {'from':owner})
-    assert(token.defaultURI() == new_defaultURI)
+
 
 # mint a token to a receiver contract
 def test_public_sale_to_contract(token):
@@ -991,11 +987,6 @@ def test_token_uri(token):
     owner = accounts[0]
     tokenID = 1
     _mint(token, tokenID, owner)
-    new_default_URI = "http://test.io/"
-    token.setDefaultURI(new_default_URI, {'from': owner})
-    assert(token.defaultURI() == new_default_URI )
-    uri = token.tokenURI(tokenID)
-    assert(uri == new_default_URI)
     with brownie.reverts("ERC721Metadata: URI query for nonexistent token"):
         token.tokenURI(2)
     token.setBaseURI("http://baseuri.com/", {'from': owner})
