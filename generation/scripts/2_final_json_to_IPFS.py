@@ -10,7 +10,8 @@ from pinatapy import PinataPy
 
 # Only do this with test - not ALL files, or final images.
 
-json_path = Path(__file__).resolve().parents[2] / "assets/shifted_json/"
+# json_path = Path(__file__).resolve().parents[2] / "assets/shifted_json/"
+json_path = "/Users/chrisrussell/CryptidToken/generation/output/new_metadata"
 json_list = fnmatch.filter(os.listdir(json_path), '*.json')
 json_count = len(json_list)
 
@@ -21,8 +22,11 @@ ipfs_hash_directory = response[json_count]['Hash']
 
 base_url = 'https://ipfs.io/ipfs/'
 final_url = base_url + ipfs_hash_directory
-print(f" \nIPFS json directory CID is: {ipfs_hash_directory}\n")
+print(f" \nIPFS json directory CID is: {ipfs_hash_directory}/\n")
 print(f" \nGo to folder: {final_url}\n")
+
+base_uri = 'ipfs://' + ipfs_hash_directory
+print(f" \nBase URI for contract is: {base_uri}\n")
 
 api_key = os.environ.get("PINATA_API_KEY")
 secret_key = os.environ.get("PINATA_SECRET_API_KEY")
@@ -31,7 +35,7 @@ if api_key and secret_key:
 else:
     raise ValueError("No API keys in environment variables")
 
-response = pinata.pin_hash_to_ipfs(ipfs_hash_directory, "Json")
+response = pinata.pin_hash_to_ipfs(ipfs_hash_directory, "Final JSONs")
 
 print(response)
 

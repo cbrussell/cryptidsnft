@@ -5,23 +5,25 @@ color_manifest = json.load(open("/Users/chrisrussell/CryptidToken/generation/col
 
 data = {}
 
+# get trait names
 for attributes in trait_manifest:
-    # print(a)
     for categories in attributes["categories"]:
-        # print(c)
         for colors in categories["colors"]:
-            # print(fi)
             for color in colors["traits"]:
-
                 data[color["trait"]] = color["trait"]
 
+# get colors
 for colors in color_manifest:
     data[colors["color"]] = colors["color"]
 
+# get attribute names
 for attributes in trait_manifest:
     data[attributes["attribute"]] = attributes["attribute"]
 
+# add base color
 data["base_color"] = "base_color"
+
+# save json file to be modified
 with open("names.json", "w") as w:
     json.dump(data, w, indent=4)
 
