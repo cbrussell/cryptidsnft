@@ -28,6 +28,7 @@ def transform_json(data, names, file_name):
     metadata = {
         "name": f"Cyptid #{file_name}",
         "description": "",
+        "animation_url": f"ipfs://{still_cid}/{file_name}.png",
         "image": f"ipfs://{mp4_cid}/{file_name}.mp4",
         "attributes": []
 
