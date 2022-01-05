@@ -28,8 +28,8 @@ def transform_json(data, names, file_name):
     metadata = {
         "name": f"Cyptid #{file_name}",
         "description": "",
-        "animation_url": f"ipfs://{still_cid}/{file_name}.png",
-        "image": f"ipfs://{mp4_cid}/{file_name}.mp4",
+        "image": f"ipfs://{still_cid}/{file_name}.png",
+        "animation_url": f"ipfs://{mp4_cid}/{file_name}.mp4",
         "attributes": []
 
     }
@@ -43,11 +43,11 @@ def transform_json(data, names, file_name):
             metadata["attributes"].append({"trait_type": names[x[0]], "value": names[x[1]]})
    
     # Boost attributes
-    magic = random.randint(50,101)
-    empathy = random.randint(50,101)
-    morality = random.randint(50,101)
-    wisdom = random.randint(50,101)
-    chaos = random.randint(50,101)
+    magic = random.randint(50,100)
+    empathy = random.randint(50,100)
+    morality = random.randint(50,100)
+    wisdom = random.randint(50,100)
+    chaos = random.randint(50,100)
 
     metadata["attributes"].append(
             {"display_type": "boost_number", "trait_type": "Magic", "value": magic}

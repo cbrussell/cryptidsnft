@@ -8,7 +8,7 @@ def main():
     dev = accounts.add(config['wallets']['from_key'])
     print(dev)
     cryptids = CryptidToken[len(CryptidToken)-1]
-    provenance = '19d40dc2c4830ac6ee83fd335d393a8fe5d7bca3d8daa54ff863920d4b0f3f8e'
+    provenance = '13ecf85915c0c913cf660cc6250a126d09e4bf6cab0ed016719056ca5b40544c'
     transaction = cryptids.setProvenanceHash(provenance, {"from": dev})
     print(f'Provenance hash set at: {transaction}')
     provenancehash = cryptids.provenanceHash()

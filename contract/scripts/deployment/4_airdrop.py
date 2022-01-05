@@ -11,7 +11,7 @@ def main():
     print(f'Active network is: {active_network}')
     
     cryptids = CryptidToken[len(CryptidToken)-1]
-    airdrop_amount = 3
+    airdrop_amount = 2
     airdrop_address = "0x1953bc1fF76f5e61cD775A4482bd85BAc56aD1Eb"
     # "0x1953bc1fF76f5e61cD775A4482bd85BAc56aD1Eb"
 

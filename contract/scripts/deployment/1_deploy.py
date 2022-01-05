@@ -13,9 +13,9 @@ def main():
     
     # network.gas_limit(80000000)
     cryptids = CryptidToken.deploy(
-        "Cryptids",     # name
+        "Cryptids V3",     # name
         "CRYPTID",      # symbol
-        "ipfs://QmUDYY47FW4DH5aCLPgy4EnZmCEAtuwdAvtNfhkiN77Bkg",             # defaulturi
+        "ipfs://QmW4kLda1gmhFKnBU1qJvyCvDm8g9P4GKoiNcEB972Q9rD/",             # base
         3000,           # presale supply
         500,            # team supply
         10000,          # total supply
