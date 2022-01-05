@@ -15,12 +15,12 @@ def main():
     cryptids = CryptidToken.deploy(
         "Cryptids",     # name
         "CRYPTID",      # symbol
-        "",             # defaulturi
+        "ipfs://QmUDYY47FW4DH5aCLPgy4EnZmCEAtuwdAvtNfhkiN77Bkg",             # defaulturi
         3000,           # presale supply
         500,            # team supply
         10000,          # total supply
         5,              # max mint per tx
-        {"from": dev },  # 129729334, 139723666 for arb, add:  "gas_limit": 80000000000, "allow_revert": True
-        publish_source=False,
+        {"from": dev},  # 129729334, 139723666 for arb, add:  "gas_limit": 80000000000, "allow_revert": True
+        publish_source=True,
     )
     return cryptids
