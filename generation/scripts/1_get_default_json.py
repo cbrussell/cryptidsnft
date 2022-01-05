@@ -8,14 +8,15 @@ from pinatapy import PinataPy
 
 # Function will upload image directory to IPFS then pin file to Pinata
 
-image_path = Path(__file__).resolve().parents[2] / "assets/shifted_images/"
-image_list = fnmatch.filter(os.listdir(image_path), '*.png')
-image_count = len(image_list)
+image_path = Path(__file__).resolve().parents[1] / "assets/default_image/loading.png"
+# image_list = fnmatch.filter(os.listdir(image_path), '*.png')
+# image_count = len(image_list)
 
 client = ipfshttpclient.connect()
 
 response = client.add(image_path, wrap_with_directory=False, pattern='*.png')
-ipfs_hash_directory = response[image_count]['Hash']
+print(response)
+ipfs_hash_directory = response['Hash']
 
 base_url = 'https://ipfs.io/ipfs/'
 final_url = base_url + ipfs_hash_directory
@@ -29,15 +30,6 @@ if api_key and secret_key:
 else:
     raise ValueError("No API keys in environment variables")
 
-response = pinata.pin_hash_to_ipfs(ipfs_hash_directory, "Images")
+response = pinata.pin_hash_to_ipfs(ipfs_hash_directory, "Prereveal Images")
 
 print(response)
-
-
-
-
-
-
-
-
-

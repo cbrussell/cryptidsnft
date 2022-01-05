@@ -967,7 +967,7 @@
     },
     {
         "attribute": "11b_headaccent",
-        "rarity": 0.5,
+        "rarity": 0.75,
         "categories": [
             {
                 "category": "bear",
@@ -1270,10 +1270,6 @@
                             {
                                 "trait": "mouth_wolf_empty",
                                 "weight": 1
-                            },
-                            {
-                                "trait": "mouth_wolf_teeth",
-                                "weight": 1
                             }
                         ]
                     }
@@ -1333,6 +1329,38 @@
                         "traits": [
                             {
                                 "trait": "eyes_predator_blue",
+                                "weight": 1
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "category": "prey",
+                "weight": 1,
+                "colors": [
+                    {
+                        "color": "blue",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "eyes_prey_blue",
+                                "weight": 1
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "category": "wise",
+                "weight": 1,
+                "colors": [
+                    {
+                        "color": "blue",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "eyes_wise_blue",
                                 "weight": 1
                             }
                         ]

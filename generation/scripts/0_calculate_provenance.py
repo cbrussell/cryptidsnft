@@ -6,8 +6,8 @@ from tabulate import tabulate
 import fnmatch
 import pandas as pd
 
-
-image_path = Path(__file__).resolve().parents[2] / "assets/images/"
+dir_path = os.path.dirname(os.path.realpath(__file__))
+image_path = Path(__file__).resolve().parents[1] / "output/stills/"
 image_list = fnmatch.filter(os.listdir(image_path), '*.png')
 image_count = len(image_list)
 shift_value = 229183
@@ -19,7 +19,7 @@ for i in range(1, (image_count + 1)):
     new_path = image_path / f"{i}.png"
     f = open(new_path, "rb")
     bytes = f.read()
-    readable_hash = hashlib.sha256(bytes).hexdigest();
+    readable_hash = hashlib.sha256(bytes).hexdigest()
     combined_hash_string += readable_hash
     table.append([i, i, readable_hash])
 

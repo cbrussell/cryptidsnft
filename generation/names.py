@@ -15,5 +15,7 @@ for attributes in trait_manifest:
                 data[color["trait"]] = color["trait"]
 
 
-with open(f"names.json", "w") as w:
+with open("names.json", "w") as w:
     json.dump(data, w, indent=4)
+
+print("Success!")

@@ -36,7 +36,9 @@ def combine_attributes(frames: Frames, prefix: str):
         # frame = background
 
         # 4 way gradient
-        frame = Image.fromarray(np.uint8(array))
+        # frame = Image.fromarray(np.uint8(array))
+
+        frame = Image.new('RGB', (1100, 1100), (255, 255, 255))
 
         # frame = Image.fromarray(array).rotate(90, expand=False)
 
@@ -133,7 +135,7 @@ def combine_attributes(frames: Frames, prefix: str):
 
         # Width, Height = frame.size 
         # drawn = ImageDraw.Draw(frame) 
-        # text = "A watermark."
+        # text = "test mint test mint test mint"
         # font = ImageFont.truetype("Arial Black", 138)
         # textwidth, textheight = drawn.textsize(text, font)
         # margin = 5
@@ -147,8 +149,10 @@ def combine_attributes(frames: Frames, prefix: str):
         frame.save(f"{dir_path}/output/raw/{prefix}/{prefix}_{n:03}.png")
 
         if n == 0:
-            time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            # time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            os.makedirs(f"{dir_path}/output/stills", exist_ok=True)
             frame.save(f"{dir_path}/output/stills/{prefix}.png")
-            frame = Image.fromarray(np.uint8(array)).save(f"{dir_path}/output/bg/{prefix}_bg_{time}_{R1}_{G1}_{B1}_{R}_{G}_{G}.png", "PNG")
+            os.makedirs(f"{dir_path}/output/bg", exist_ok=True)
+            # frame = Image.fromarray(np.uint8(array)).save(f"{dir_path}/output/bg/{prefix}_bg_{time}_{R1}_{G1}_{B1}_{R}_{G}_{G}.png", "PNG")
 
     

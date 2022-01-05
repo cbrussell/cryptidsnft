@@ -1,6 +1,9 @@
 # Launch Timeline
 
 ### Prelaunch  
+
+1. Upload default image/metadata using `1_get_default_json.py`
+
 1. Use `generate.py` to generate PNG sequences (72 frames)
 2. Use `ff.sh` to convert sequences into 12 second videos (initial frames, looped 3 times)
 3. Calculate provenance of collection using still frames (frist frame of video) with `0_calculate_provenance.py`.
