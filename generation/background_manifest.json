@@ -1,13 +1,5 @@
 [
     {
-        "color": "dark_blue",
-        "weight": 1
-    },
-    {
-        "color": "red_purple",
-        "weight": 1
-    },
-    {
         "color": "pink_purple",
         "weight": 1
     },
@@ -17,6 +9,14 @@
     },
     {
         "color": "purple",
+        "weight": 1
+    },
+    {
+        "color": "midnight_sky",
+        "weight": 1
+    },
+    {
+        "color": "pinkv2",
         "weight": 1
     }
   

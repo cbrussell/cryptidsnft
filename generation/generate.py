@@ -23,7 +23,7 @@ def main():
 
     start_time = datetime.now()
     procs = 10
-    n = 3040
+    n = 10
     increment = int(n / procs)
     jobs = []
     start = 1
