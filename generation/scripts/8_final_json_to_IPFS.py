@@ -1,16 +1,10 @@
 import os
-from pathlib import Path 
 import ipfshttpclient
 import fnmatch
 from pinatapy import PinataPy
 
 # IPFS Daemon must be running
 
-# Function will upload json directory to IPFS then pin file to Pinata
-
-# Only do this with test - not ALL files, or final images.
-
-# json_path = Path(__file__).resolve().parents[2] / "assets/shifted_json/"
 json_path = "/Users/chrisrussell/CryptidToken/generation/output/metadata_shifted_final"
 json_list = fnmatch.filter(os.listdir(json_path), '*.json')
 json_count = len(json_list)
