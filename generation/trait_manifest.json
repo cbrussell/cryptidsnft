@@ -1,27 +1,5 @@
 [
     {
-        "attribute": "0_background",
-        "rarity": 1,
-        "categories": [
-            {
-                "category": "solid",
-                "weight": 1,
-                "colors": [
-                    {
-                        "color": "white",
-                        "weight": 1,
-                        "traits": [
-                            {
-                                "trait": "background_solid_white",
-                                "weight": 1
-                            }
-                        ]
-                    }
-                ]
-            }
-        ]
-    },
-    {
         "attribute": "1_tail",
         "rarity": 1,
         "categories": [

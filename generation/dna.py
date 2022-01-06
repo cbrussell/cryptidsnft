@@ -2,11 +2,11 @@ import json
 import hashlib
 from dataclasses import dataclass
 from typing import Union
-from traits import TraitManifest, ColorManifest, get_trait, get_trait_category, get_trait_category_color, get_trait_color
+from traits import TraitManifest, ColorManifest, BackgroundManifest, get_trait, get_trait_category, get_trait_category_color, get_trait_color
 
 @dataclass
 class Frames:
-    background_frames: list
+    background_frame: list
     tail_frames: list
     leftbackleg_frames: list
     leftfrontleg_frames: list
@@ -32,15 +32,21 @@ class Frames:
 def to_hash(data):
     return hashlib.sha256(json.dumps(data).encode('utf-8')).hexdigest()
 
-def get_dna(trait_manifest: TraitManifest, color_manifest: ColorManifest) -> Union[Frames, dict]:
+def get_dna(trait_manifest: TraitManifest, color_manifest: ColorManifest, background_manifest: BackgroundManifest) -> Union[Frames, dict]:
+    # print("Getting new DNA...")
     data = {}
 
     color = color_manifest.get()
     data["base_color"] = color
 
     # get background, independet trait
-    background, background_frames = get_trait(trait_manifest, "0_background")[0:4:3]
-    data.update(background)
+    # background, background_frames = get_trait(trait_manifest, "0_background")[0:4:3]
+    # data.update(background)
+
+    background, background_frame = background_manifest.get()
+
+    data["background"] = background
+
 
     # force brush tail to color of base fur
     tail, tail_frames = get_trait(trait_manifest, "1_tail")[0:4:3]
@@ -128,7 +134,7 @@ def get_dna(trait_manifest: TraitManifest, color_manifest: ColorManifest) -> Uni
     eyes, eyes_frames = get_trait(trait_manifest, "14_eyes")[0:4:3]
     data.update(eyes)
 
-    return Frames(background_frames
+    return Frames(background_frame
                 , tail_frames
                 , leftbackleg_frames
                 , leftfrontleg_frames

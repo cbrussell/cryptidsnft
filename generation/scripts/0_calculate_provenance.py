@@ -15,6 +15,7 @@ shift_value = 589123
 combined_hash_string = ""
 table = []
 
+
 for i in range(1, (image_count + 1)):
     new_path = image_path / f"{i}.png"
     f = open(new_path, "rb")

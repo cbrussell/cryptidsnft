@@ -1,0 +1,130 @@
+{
+    "tail_brush_red": "Brush",
+    "tail_brush_orange": "Brush",
+    "tail_devil_red": "Devil",
+    "tail_fire_red": "Fire",
+    "tail_fluffy_red": "Fluffy",
+    "tail_horse_red": "Horse",
+    "tail_kitsune_red": "Kitsune",
+    "tail_lion_red": "Lion",
+    "tail_scorpion_red": "Scorpion",
+    "tail_silky_red": "Silky",
+    "tail_unicorn_red": "Unicorn",
+
+    "leftbackleg_deer_red": "Deer",
+    "leftbackleg_deer_orange": "Deer",
+    "leftbackleg_wolf_red": "Wolf",
+    "leftbackleg_wolf_orange": "Wolf",
+    "leftbackleg_eagle_red": "Eagle",
+    "leftbackleg_eagle_orange": "Eagle",
+    "leftbackleg_lion_red": "Lion",
+    "leftbackleg_lion_orange": "Lion",
+    "leftbackleg_horse_red": "Horse",
+    "leftbackleg_horse_orange": "Horse",
+
+    "leftfrontleg_deer_red": "Deer",
+    "leftfrontleg_deer_orange": "Deer",
+    "leftfrontleg_wolf_red": "Wolf",
+    "leftfrontleg_wolf_orange": "Wolf",
+    "leftfrontleg_eagle_red": "Eagle",
+    "leftfrontleg_eagle_orange": "Eagle",
+    "leftfrontleg_lion_red": "Lion",
+    "leftfrontleg_lion_orange": "Lion",
+    "leftfrontleg_horse_red": "Horse",
+    "leftfrontleg_horse_orange": "Horse",
+
+    "back_featherwings_red": "Featherwings Red",
+    "back_featherwings_orange": "Featherwings Orange",
+    "back_featherwings_yellow": "Featherwings Yellow",
+    "back_featherwings_blue": "Featherwings Blue",
+    "back_featherwings_purple": "Featherwings Purple",
+    "back_featherwings_brown": "Featherwings Brown",
+    "back_featherwings_gray": "Featherwings Gray",
+    "back_featherwings_black": "Featherwings Black",
+    "back_featherwings_white": "Featherwings White",
+    "back_batwings_red": "Batwings Red",
+    "back_spike_red": "Spike Red",
+
+    "torsobase_medium_red": "Medium",
+    "torsobase_medium_orange": "Medium",
+    "torsobase_shaggy_red": "Shaggy",
+    "torsobase_shaggy_orange": "Shaggy",
+
+    "torsoaccent_medium_white": "Medium",
+    "torsoaccent_shaggy_white": "Shaggy",
+
+    "torsopattern_spripes_black": "Stripes Black",
+    "torsopattern_spots_black": "Spots Black",
+
+    "fur_wooly_black": "Wooly Black",
+ 
+    "ears_lamb_red": "Lamb",
+    "ears_prick_red": "Prick",
+    "headbase_bear_red": "Bear",
+    "headbase_eagle_red": "Eagle",
+    "headbase_horse_red": "Horse",
+    "headbase_lion_red": "Lion",
+    "headbase_wolf_red": "Wolf",
+
+    "headaccent_bear_white": "Mask",
+    "headaccent_eagle_white": "Mask",
+    "headaccent_horse_white": "Mask",
+    "headaccent_lion_mask_white": "Mask",
+    "headaccent_wolf_mask_white": "Mask",
+
+    "headpattern_bear_stripes": "Stripes Black",
+    "headpattern_bear_spots": "Spots Black",
+    "headpattern_eagle_stripes": "Stripes Black",
+    "headpattern_eagle_spots": "Spots Black",
+    "headpattern_horse_stripes": "Stripes Black",
+    "headpattern_horse_spots": "Spots Black",
+    "headpattern_lion_stripes": "Stripes Black",
+    "headpattern_lion_spots": "Spots Black",
+    "headpattern_wolf_stripes": "Stripes Black",
+    "headpattern_wolf_spots": "Spots Black",
+
+    "mouth_horse_teeth": "Tusks",
+    "mouth_lion_teeth": "Fangs",
+
+    "horns_ram_black": "Ram",
+
+    "eyes_beast_blue": "Beast Blue",
+    "eyes_predator_blue": "Predator Blue",
+    "eyes_prey_blue": "Prey Blue",
+    "eyes_wise_blue": "Wise Blue",
+
+    "red": "Red",
+    "orange": "Orange",
+    "yellow": "Yellow",
+    "blue": "Blue",
+    "purple": "Purple",
+    "brown": "Brown",
+    "grey": "Grey",
+    "black": "Black",
+    "white": "White",
+
+    "1_tail": "Tail",
+
+    "2_leftbackleg": "Back Legs",
+    "3_leftfrontleg": "Front Legs",
+
+    "4_back": "Back",
+
+    "5a_torsobase": "Torso",
+    "5b_torsoaccent": "Body Accent",
+    "5c_torsopattern": "Torso Pattern",
+
+    "7_fur": "Mane",
+
+    "10_ears": "Ears",
+
+    "11a_headbase": "Head",
+    "11b_headaccent": "Head Accent",
+    "11c_headpattern": "Head Pattern",
+
+    "12_mouth": "Mouth",
+    "13_horns": "Horns",
+    "14_eyes": "Eyes",
+    
+    "base_color": "Color"
+}

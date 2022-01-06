@@ -18,8 +18,24 @@ class ColorManifest:
         color = color["color"]
         return color
 
+class BackgroundManifest:
+    def __init__(self, manifest):
+        self.manifest = manifest
+
+    def get(self):
+        dir_path = os.path.dirname(os.path.realpath(__file__))
+        background = random.choices(population=self.manifest, weights=[x["weight"] for x in self.manifest], k=1)[0]
+        background = background["color"]
+        frame = []
+        file_name = f"{dir_path}/RENDERS/0_background/{background}.png"
+        frame.append(file_name)
+        return background, frame
+
 def chance(rarity):
     return random.random() < rarity
+
+def get_background(color):
+    return []
 
 # get random trait, output {attrib: trait} (dict), category (str), color (str), frames (list of strings)
 def get_trait(manifest: TraitManifest, attribute: str) -> Union[dict, str, str, list]:
@@ -55,7 +71,7 @@ def get_trait_category(manifest: TraitManifest, attribute: str, type: str) -> Un
     categories = attrib["categories"]
     if chance(attrib["rarity"]):
         if [x["weight"] for x in categories if x["category"] == type][0] == 0:
-            print(f'No weights set for {attribute}/{type}')
+            # print(f'No weights set for {attribute}/{type}')
             return {}, '', '', []
         else:
 
@@ -88,7 +104,7 @@ def get_trait_category_color(manifest: TraitManifest, attribute: str, type: str,
     categories = attrib["categories"]
     if chance(attrib["rarity"]):
         if [x["weight"] for x in categories if x["category"] == type][0] == 0:
-            print(f'No weights set for {attribute}/{type}')
+            # print(f'No weights set for {attribute}/{type}')
             return {}, '', '', []
         else:
             category = random.choices(population = [x for x in categories if x["category"] == type], weights = [x["weight"] for x in categories if x["category"] == type], k=1)[0]

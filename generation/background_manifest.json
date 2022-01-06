@@ -1,0 +1,27 @@
+[
+    {
+        "color": "dark_blue",
+        "weight": 1
+    },
+    {
+        "color": "red_purple",
+        "weight": 1
+    },
+    {
+        "color": "pink_purple",
+        "weight": 1
+    },
+    {
+        "color": "pink",
+        "weight": 1
+    },
+    {
+        "color": "purple",
+        "weight": 1
+    },
+    {
+        "color": "rainbow",
+        "weight": 0.5
+    }
+  
+]

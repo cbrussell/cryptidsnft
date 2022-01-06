@@ -9,7 +9,7 @@ mp4_cid = "QmXtbW1G1nhvNDWTRijEzMaN6eFm6PwhXpbckUuuYE8srb"
 still_cid = "QmRyamcnES53h1aKoskqQxeUXkGt8MEm3J5sic4c31jCXV"
 
 def main():
-    names = json.load(open("/Users/chrisrussell/CryptidToken/generation/names.json"))
+    names = json.load(open("/Users/chrisrussell/CryptidToken/generation/names2.json"))
     for filename in os.scandir("/Users/chrisrussell/CryptidToken/generation/output/metadata"):
         if len(filename.name.split(".")) != 2:
             continue
@@ -24,7 +24,7 @@ def main():
 
 
 def transform_json(data, names, file_name):
-    print(file_name)
+    # print(file_name)
     metadata = {
         "name": f"Cyptid #{file_name}",
         "description": "",
@@ -34,12 +34,15 @@ def transform_json(data, names, file_name):
 
     }
     for x in data.items():
-        
-        if x[0] in names.keys():
-            print(data.items())
-            # For each sub-item in attribute
-            print(x[0])
+        # print(x)
+        print(x[1])
+        print(names.values())
+        if x[1] in names.keys():
             print(x[1])
+            print(names.values())
+           
+            # For each sub-item in attribute
+        
             metadata["attributes"].append({"trait_type": names[x[0]], "value": names[x[1]]})
    
     # Boost attributes

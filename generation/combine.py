@@ -5,6 +5,7 @@ from numpy.core.multiarray import array
 from PIL import Image, ImageFont, ImageDraw
 from background import get_gradient, get_gradient_3d
 from dna import Frames
+from time import sleep
 
 def combine_attributes(frames: Frames, prefix: str):
     # random frame color backhround
@@ -25,6 +26,7 @@ def combine_attributes(frames: Frames, prefix: str):
     dir_path = os.path.dirname(os.path.realpath(__file__))
     # use this for metadatabackground
     # for (n, background) in enumerate(frames.background_frames):
+    # print("Generating frames...")
 
     for n in range(0,1): #0,72
 
@@ -32,10 +34,11 @@ def combine_attributes(frames: Frames, prefix: str):
         # frame = Image.open(background) # background of data
 
         # frame = Image.new('RGB', (1100, 1100), (R, G, B)) # random solid
-        
-
+    
         # 4 way gradient
-        frame = Image.fromarray(np.uint8(array))
+        # frame = Image.fromarray(np.uint8(array))
+
+        frame = Image.open(frames.background_frame[0])
 
         # frame = Image.new('RGB', (1100, 1100), (255, 255, 255)) # white bg
 
@@ -146,8 +149,8 @@ def combine_attributes(frames: Frames, prefix: str):
         frame.save(f"{dir_path}/output/raw/{prefix}/{prefix}_{n:03}.png")
 
         if n == 0:
-            time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        #     time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             frame.save(f"{dir_path}/output/stills/{prefix}.png")
-            frame = Image.fromarray(np.uint8(array)).save(f"{dir_path}/output/bg/{prefix}_bg_{time}_{R1}_{G1}_{B1}_{R}_{G}_{G}.png", "PNG")
+        #     frame = Image.fromarray(np.uint8(array)).save(f"{dir_path}/output/bg/{prefix}_bg_{time}_{R1}_{G1}_{B1}_{R}_{G}_{G}.png", "PNG")
 
     
