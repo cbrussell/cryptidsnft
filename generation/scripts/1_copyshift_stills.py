@@ -4,22 +4,16 @@ from pathlib import Path
 import fnmatch
 import shutil
 
-# Renames image directory based on community generated shift-value
-shift_amount = 229183
+shift_amount = 589123
 
-# Determine image paths
-image_path = Path(__file__).resolve().parents[2] / "assets/images/"
-new_path = Path(__file__).resolve().parents[2] / "assets/shifted_images/"
+still_path= Path(__file__).resolve().parents[1] / "output/stills/"
 
-print(image_path)
+shifted_still_path = Path(__file__).resolve().parents[1] / "output/stills_shifted"
 
-# Make list of images
-image_list = fnmatch.filter(os.listdir(image_path), '*.png')
+image_list = fnmatch.filter(os.listdir(still_path), '*.png')
 
-# Size of image list
 image_count = len(image_list)
 
-# Sort image list
 image_list = sorted(image_list, key=lambda x: int(os.path.splitext(x)[0]))
 
 # Rotate list using deque
@@ -34,11 +28,10 @@ print(f"\nShifted list is: {shifted_list}\n")
 # Replace original files for new name (changing folders)
 for i in range(image_count):
 
+    new_name = Path(shifted_still_path / shifted_list[i]) #file
 
-    new_name = Path(new_path / shifted_list[i]) #file
-    original_name = Path(image_path / image_list[i]) #location
+    original_name = Path(still_path / image_list[i]) #location
 
     shutil.copy(original_name, new_name)
-    
-    # original_name.rename(new_name)
+
 

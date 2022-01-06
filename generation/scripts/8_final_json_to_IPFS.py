@@ -11,7 +11,7 @@ from pinatapy import PinataPy
 # Only do this with test - not ALL files, or final images.
 
 # json_path = Path(__file__).resolve().parents[2] / "assets/shifted_json/"
-json_path = "/Users/chrisrussell/CryptidToken/generation/output/new_metadata"
+json_path = "/Users/chrisrussell/CryptidToken/generation/output/metadata_shifted_final"
 json_list = fnmatch.filter(os.listdir(json_path), '*.json')
 json_count = len(json_list)
 
@@ -38,12 +38,3 @@ else:
 response = pinata.pin_hash_to_ipfs(ipfs_hash_directory, "Final JSONs")
 
 print(response)
-
-
-
-
-
-
-
-
-

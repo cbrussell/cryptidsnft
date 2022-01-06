@@ -1,16 +1,13 @@
 import json
-import random
 import os
 import numpy as np
-
-import hidden_metadata
 
 mp4_cid = "QmXtbW1G1nhvNDWTRijEzMaN6eFm6PwhXpbckUuuYE8srb"
 still_cid = "QmRyamcnES53h1aKoskqQxeUXkGt8MEm3J5sic4c31jCXV"
 
 def main():
     names = json.load(open("/Users/chrisrussell/CryptidToken/generation/names2.json"))
-    for filename in os.scandir("/Users/chrisrussell/CryptidToken/generation/output/metadata"):
+    for filename in os.scandir("/Users/chrisrussell/CryptidToken/generation/output/metadata_shifted"):
         if len(filename.name.split(".")) != 2:
             continue
         file_name = filename.name.split(".")[0]
@@ -18,10 +15,9 @@ def main():
             json.load(open(filename.path)), names, file_name
         )
 
-        with open(f"/Users/chrisrussell/CryptidToken/generation/output/new_metadata/{file_name}.json", "w") as o:
+        with open(f"/Users/chrisrussell/CryptidToken/generation/output/metadata_shifted_final/{file_name}.json", "w") as o:
             json.dump(transformed, o, indent=4)
-
-
+    print('Success!')
 
 def transform_json(data, names, file_name):
     # print(file_name)
@@ -46,11 +42,11 @@ def transform_json(data, names, file_name):
             metadata["attributes"].append({"trait_type": names[x[0]], "value": names[x[1]]})
    
     # Boost attributes
-    magic = random.randint(50,100)
-    empathy = random.randint(50,100)
-    morality = random.randint(50,100)
-    wisdom = random.randint(50,100)
-    chaos = random.randint(50,100)
+    magic = np.random.randint(50,100)
+    empathy = np.random.randint(50,100)
+    morality = np.random.randint(50,100)
+    wisdom = np.random.randint(50,100)
+    chaos = np.random.randint(50,100)
 
     metadata["attributes"].append(
             {"display_type": "boost_number", "trait_type": "Magic", "value": magic}
@@ -68,8 +64,26 @@ def transform_json(data, names, file_name):
             {"display_type": "boost_number", "trait_type": "Chaos", "value": chaos}
         )
 
-    return metadata
+    metadata["attributes"].append(
+            {"trait_type": "Magic", "value": magic}
+        )
+    metadata["attributes"].append(
+            {"trait_type": "Empathy", "value": empathy}
+        )
+    metadata["attributes"].append(
+            {"trait_type": "Morality", "value": morality}
+        )
+    metadata["attributes"].append(
+            {"trait_type": "Wisdom", "value": wisdom}
+        )
+    metadata["attributes"].append(
+            {"trait_type": "Chaos", "value": chaos}
+        )
+    metadata["attributes"].append(
+            {"display_type": "number", "trait_type": "Generation", "value": 1}
+        )
 
+    return metadata
 
 if __name__ == "__main__":
     main()

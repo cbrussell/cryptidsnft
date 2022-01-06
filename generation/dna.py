@@ -36,19 +36,12 @@ def get_dna(trait_manifest: TraitManifest, color_manifest: ColorManifest, backgr
     # print("Getting new DNA...")
     data = {}
 
+    background, background_frame = background_manifest.get()
+    data["background"] = background
+
     color = color_manifest.get()
     data["base_color"] = color
 
-    # get background, independet trait
-    # background, background_frames = get_trait(trait_manifest, "0_background")[0:4:3]
-    # data.update(background)
-
-    background, background_frame = background_manifest.get()
-
-    data["background"] = background
-
-
-    # force brush tail to color of base fur
     tail, tail_frames = get_trait(trait_manifest, "1_tail")[0:4:3]
     data.update(tail)
 

@@ -5,12 +5,12 @@ import fnmatch
 import shutil
 
 # Determine image path
-json_path = Path(__file__).resolve().parents[2] / "assets/json/"
-new_path = Path(__file__).resolve().parents[2] / "assets/shifted_json/"
+json_path = Path(__file__).resolve().parents[1] / "output/videos/"
+new_path = Path(__file__).resolve().parents[1] / "output/videos_shifted/"
 
 # Renames image directory based on community generated shift-value
-shift_amount = 229183
-json_list = fnmatch.filter(os.listdir(json_path), '*.json')
+shift_amount = 589123
+json_list = fnmatch.filter(os.listdir(json_path), '*.mp4')
 sorted_json_list = sorted(json_list, key=lambda x: int(os.path.splitext(x)[0]))
 json_count = len(sorted_json_list)
 

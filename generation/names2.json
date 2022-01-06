@@ -60,11 +60,20 @@
  
     "ears_lamb_red": "Lamb",
     "ears_prick_red": "Prick",
+
     "headbase_bear_red": "Bear",
     "headbase_eagle_red": "Eagle",
     "headbase_horse_red": "Horse",
     "headbase_lion_red": "Lion",
     "headbase_wolf_red": "Wolf",
+
+
+    "headbase_bear_orange": "Bear",
+    "headbase_eagle_orange": "Eagle",
+    "headbase_horse_orange": "Horse",
+    "headbase_lion_orange": "Lion",
+    "headbase_wolf_orange": "Wolf",
+
 
     "headaccent_bear_white": "Mask",
     "headaccent_eagle_white": "Mask",
@@ -126,5 +135,6 @@
     "13_horns": "Horns",
     "14_eyes": "Eyes",
     
-    "base_color": "Color"
+    "base_color": "Base Color",
+    "background": "Zone"
 }
