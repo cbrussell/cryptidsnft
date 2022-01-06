@@ -109,8 +109,13 @@ def get_trait_category_color(manifest: TraitManifest, attribute: str, type: str,
         else:
             category = random.choices(population = [x for x in categories if x["category"] == type], weights = [x["weight"] for x in categories if x["category"] == type], k=1)[0]
             colors = category["colors"]
+            print([x["weight"] for x in colors if x["color"] == base_color])
+
+            print(f'\n{colors}\n')
             color = random.choices(population = [x for x in colors if x["color"] == base_color], weights = [x["weight"] for x in colors if x["color"] == base_color], k=1)[0]
             traits = color["traits"]
+
+
             trait = random.choices(population = traits, weights = [x["weight"] for x in traits], k=1)[0]
     else:
         return {}, '', '', []
@@ -131,7 +136,12 @@ def get_trait_color(manifest: TraitManifest, attribute: str, base_color: str) ->
     if chance(attrib["rarity"]):
         category = random.choices(population = categories, weights = [x["weight"] for x in categories], k=1)[0]
         colors = category["colors"]
-
+        print(base_color)
+        print(attribute)
+        print([x["weight"] for x in colors if x["color"] == base_color])
+        
+        print(f'\n{colors}\n')
+        print([x for x in colors if x["color"] == base_color])
         # get random color
         color = random.choices(population = [x for x in colors if x["color"] == base_color], weights = [x["weight"] for x in colors if x["color"] == base_color], k=1)[0]
         traits = color["traits"]

@@ -146,7 +146,7 @@ def combine_attributes(frames: Frames, prefix: str):
         #####
 
 
-        frame.save(f"{dir_path}/output/raw/{prefix}/{prefix}_{n:03}.png")
+        frame.save(f"{dir_path}/output/raw/{prefix}/{prefix}_{n:03}.png", quality=100) 
 
         if n == 0:
         #     time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")

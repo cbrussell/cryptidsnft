@@ -46,7 +46,7 @@
                 ]
             },
             {
-                "category": "fire",
+                "category": "snake",
                 "weight": 1,
                 "colors": [
                     {
@@ -54,7 +54,7 @@
                         "weight": 1,
                         "traits": [
                             {
-                                "trait": "tail_fire_red",
+                                "trait": "tail_snake_red",
                                 "weight": 1
                             }
                         ]
@@ -185,7 +185,7 @@
                 "colors": [
                     {
                         "color": "red",
-                        "weight": 0,
+                        "weight": 1,
                         "traits": [
                             {
                                 "trait": "leftbackleg_deer_red",
@@ -577,8 +577,6 @@
                             }
                         ]
                     }
-                
-                  
                 ]
             }
         ]
@@ -734,13 +732,7 @@
                                 "weight": 1
                             }
                         ]
-                    }
-                ]
-            },
-            {
-                "category": "regular",
-                "weight": 1,
-                "colors": [
+                    },
                     {
                         "color": "orange",
                         "weight": 1,
@@ -908,7 +900,7 @@
                         "weight": 1,
                         "traits": [
                             {
-                                "trait": "neckshadow_wolf",
+                                "trait": "neckshadow_wolf_black",
                                 "weight": 1
                             }
                         ]
@@ -1121,7 +1113,7 @@
                     },
                     {
                         "color": "orange",
-                        "weight": 0,
+                        "weight": 1,
                         "traits": [
                             {
                                 "trait": "rightfrontleg_wolf_orange",
@@ -1266,6 +1258,16 @@
                                 "weight": 1
                             }
                         ]
+                    },
+                    {
+                        "color": "orange",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "headbase_bear_orange",
+                                "weight": 1
+                            }
+                        ]
                     }
                 ]
             },
@@ -1279,6 +1281,16 @@
                         "traits": [
                             {
                                 "trait": "headbase_eagle_red",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "orange",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "headbase_eagle_orange",
                                 "weight": 1
                             }
                         ]
@@ -1298,6 +1310,16 @@
                                 "weight": 1
                             }
                         ]
+                    },
+                    {
+                        "color": "orange",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "headbase_horse_orange",
+                                "weight": 1
+                            }
+                        ]
                     }
                 ]
             },
@@ -1314,6 +1336,16 @@
                                 "weight": 1
                             }
                         ]
+                    },
+                    {
+                        "color": "orange",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "headbase_lion_orange",
+                                "weight": 1
+                            }
+                        ]
                     }
                 ]
             },
@@ -1327,6 +1359,16 @@
                         "traits": [
                             {
                                 "trait": "headbase_wolf_red",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "orange",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "headbase_wolf_orange",
                                 "weight": 1
                             }
                         ]
@@ -1675,7 +1717,7 @@
         "categories": [
             {
                 "category": "beast",
-                "weight": 0,
+                "weight": 1,
                 "colors": [
                     {
                         "color": "blue",
