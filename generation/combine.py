@@ -151,6 +151,6 @@ def combine_attributes(frames: Frames, prefix: str):
         if n == 0:
         #     time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             frame.save(f"{dir_path}/output/stills/{prefix}.png")
-        #     frame = Image.fromarray(np.uint8(array)).save(f"{dir_path}/output/bg/{prefix}_bg_{time}_{R1}_{G1}_{B1}_{R}_{G}_{G}.png", "PNG")
+        #     frame = Image.fromarray(np.uint8(array)).save(f"{dir_path}/output/bg/{prefix}_bg_{time}_{R1}_{G1}_{B1}_{R}_{G}_{B}.png", "PNG")
 
     
