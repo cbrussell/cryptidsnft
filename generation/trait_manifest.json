@@ -449,11 +449,11 @@
     },
     {
         "attribute": "4_back",
-        "rarity": 0.5,
+        "rarity": 0.8,
         "categories": [
             {
                 "category": "featherwings",
-                "weight": 1,
+                "weight": 2.5,
                 "colors": [
                     {
                         "color": "red",
@@ -641,7 +641,7 @@
     },
     {
         "attribute": "5b_torsoaccent",
-        "rarity": 0.5,
+        "rarity": 0.8,
         "categories": [
             {
                 "category": "medium",

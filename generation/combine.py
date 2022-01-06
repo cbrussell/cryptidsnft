@@ -12,15 +12,17 @@ def combine_attributes(frames: Frames, prefix: str):
     # R = random.randint(0,255)
     # G = random.randint(0,255)
     # B = random.randint(0,255)
-    R = np.random.randint(0, 256)
-    G = np.random.randint(0, 256)
-    B = np.random.randint(0, 256)
 
-    R1 = np.random.randint(0, 256)
-    G1 = np.random.randint(0, 256)
-    B1 = np.random.randint(0, 256)
+    # R = np.random.randint(0, 256)
+    # G = np.random.randint(0, 256)
+    # B = np.random.randint(0, 256)
+
+    # R1 = np.random.randint(0, 256)
+    # G1 = np.random.randint(0, 256)
+    # B1 = np.random.randint(0, 256)
     
-    array = get_gradient_3d(1100, 1100, (R1, G1, B1), (R, G, B), (True, False, False))
+    # array = get_gradient_3d(1100, 1100, (R1, G1, B1), (R, G, B), (True, False, False)) # 4 way gradient
+
     # array = get_gradient()
 
     dir_path = os.path.dirname(os.path.realpath(__file__))
@@ -33,14 +35,16 @@ def combine_attributes(frames: Frames, prefix: str):
         # use this is background color
         # frame = Image.open(background) # background of data
 
-        # frame = Image.new('RGB', (1100, 1100), (R, G, B)) # random solid
+        
     
         # 4 way gradient
         # frame = Image.fromarray(np.uint8(array))
 
-        frame = Image.open(frames.background_frame[0])
+        # frame = Image.new('RGB', (1100, 1100), (R, G, B)) # random solid
 
-        # frame = Image.new('RGB', (1100, 1100), (255, 255, 255)) # white bg
+        # frame = Image.open(frames.background_frame[0]) # use chosen background from DNA
+
+        frame = Image.new('RGB', (1100, 1100), (0, 0, 0)) # white bg
 
         if frames.tail_frames:
             print(frames.tail_frames[n])
@@ -149,8 +153,8 @@ def combine_attributes(frames: Frames, prefix: str):
         frame.save(f"{dir_path}/output/raw/{prefix}/{prefix}_{n:03}.png", quality=100) 
 
         if n == 0:
-        #     time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            # time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             frame.save(f"{dir_path}/output/stills/{prefix}.png")
-        #     frame = Image.fromarray(np.uint8(array)).save(f"{dir_path}/output/bg/{prefix}_bg_{time}_{R1}_{G1}_{B1}_{R}_{G}_{B}.png", "PNG")
+            # frame = Image.fromarray(np.uint8(array)).save(f"{dir_path}/output/bg/{prefix}_bg_{time}_{R1}_{G1}_{B1}_{R}_{G}_{B}.png", "PNG")
 
     
