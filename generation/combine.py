@@ -6,13 +6,9 @@ from PIL import Image, ImageFont, ImageDraw
 from background import get_gradient, get_gradient_3d
 from dna import Frames
 from time import sleep
+from background_2d_generator import get_2d_gradient
 
 def combine_attributes(frames: Frames, prefix: str):
-    # random frame color backhround
-    # R = random.randint(0,255)
-    # G = random.randint(0,255)
-    # B = random.randint(0,255)
-
     # R = np.random.randint(0, 256)
     # G = np.random.randint(0, 256)
     # B = np.random.randint(0, 256)
@@ -25,6 +21,9 @@ def combine_attributes(frames: Frames, prefix: str):
 
     # array = get_gradient()
 
+    # use for 2d gradient
+    # array = get_2d_gradient(R, G, B, R1, G1, B1)
+    
     dir_path = os.path.dirname(os.path.realpath(__file__))
     # use this for metadatabackground
     # for (n, background) in enumerate(frames.background_frames):
@@ -35,16 +34,17 @@ def combine_attributes(frames: Frames, prefix: str):
         # use this is background color
         # frame = Image.open(background) # background of data
 
-        
+        # 2d array
+        # frame = Image.fromarray(np.uint8(array)).rotate(270)
     
         # 4 way gradient
         # frame = Image.fromarray(np.uint8(array))
 
         # frame = Image.new('RGB', (1100, 1100), (R, G, B)) # random solid
 
-        # frame = Image.open(frames.background_frame[0]) # use chosen background from DNA
+        frame = Image.open(frames.background_frame[0]) # use chosen background from DNA
 
-        frame = Image.new('RGB', (1100, 1100), (0, 0, 0)) # white bg
+        # frame = Image.new('RGB', (1100, 1100), (0, 0, 0)) # black bg
 
         if frames.tail_frames:
             print(frames.tail_frames[n])
@@ -155,6 +155,12 @@ def combine_attributes(frames: Frames, prefix: str):
         if n == 0:
             # time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             frame.save(f"{dir_path}/output/stills/{prefix}.png")
+
+
+            # frame = Image.fromarray(np.uint8(array)).rotate(270).save(f"{dir_path}/output/bg/{prefix}_bg_{time}_{R1}_{G1}_{B1}_{R}_{G}_{B}.png", "PNG")
+           
+            # frame = Image.new('RGB', (1100, 1100), (R, G, B)).save(f"{dir_path}/output/bg/{prefix}_bg_{time}_{R}_{G}_{B}.png", "PNG")
+           
             # frame = Image.fromarray(np.uint8(array)).save(f"{dir_path}/output/bg/{prefix}_bg_{time}_{R1}_{G1}_{B1}_{R}_{G}_{B}.png", "PNG")
 
     

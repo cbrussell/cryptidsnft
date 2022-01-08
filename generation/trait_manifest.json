@@ -42,6 +42,16 @@
                                 "weight": 1
                             }
                         ]
+                    },
+                    {
+                        "color": "orange",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "tail_devil_orange",
+                                "weight": 1
+                            }
+                        ]
                     }
                 ]
             },
@@ -55,6 +65,16 @@
                         "traits": [
                             {
                                 "trait": "tail_snake_red",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "orange",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "tail_snake_orange",
                                 "weight": 1
                             }
                         ]
@@ -74,6 +94,16 @@
                                 "weight": 1
                             }
                         ]
+                    },
+                    {
+                        "color": "orange",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "tail_fluffy_orange",
+                                "weight": 1
+                            }
+                        ]
                     }
                 ]
             },
@@ -87,6 +117,16 @@
                         "traits": [
                             {
                                 "trait": "tail_horse_red",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "orange",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "tail_horse_orange",
                                 "weight": 1
                             }
                         ]
@@ -106,6 +146,16 @@
                                 "weight": 1
                             }
                         ]
+                    },
+                    {
+                        "color": "orange",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "tail_kitsune_orange",
+                                "weight": 1
+                            }
+                        ]
                     }
                 ]
             },
@@ -119,6 +169,16 @@
                         "traits": [
                             {
                                 "trait": "tail_lion_red",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "orange",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "tail_lion_orange",
                                 "weight": 1
                             }
                         ]
@@ -138,6 +198,16 @@
                                 "weight": 1
                             }
                         ]
+                    },
+                    {
+                        "color": "orange",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "tail_scorpion_orange",
+                                "weight": 1
+                            }
+                        ]
                     }
                 ]
             },
@@ -154,6 +224,16 @@
                                 "weight": 1
                             }
                         ]
+                    },
+                    {
+                        "color": "orange",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "tail_silky_orange",
+                                "weight": 1
+                            }
+                        ]
                     }
                 ]
             },
@@ -167,6 +247,16 @@
                         "traits": [
                             {
                                 "trait": "tail_unicorn_red",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "orange",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "tail_unicorn_orange",
                                 "weight": 1
                             }
                         ]
@@ -449,11 +539,11 @@
     },
     {
         "attribute": "4_back",
-        "rarity": 0.8,
+        "rarity": 0.75,
         "categories": [
             {
                 "category": "featherwings",
-                "weight": 2.5,
+                "weight": 1,
                 "colors": [
                     {
                         "color": "red",
@@ -516,7 +606,7 @@
                         ]
                     },
                     {
-                        "color": "grey",
+                        "color": "gray",
                         "weight": 1,
                         "traits": [
                             {
@@ -548,15 +638,95 @@
                 ]
             },
             {
-                "category": "batwings",
+                "category": "dragonwings",
                 "weight": 1,
                 "colors": [
+                    {
+                        "color": "black",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "back_dragonwings_black",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "blue",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "back_dragonwings_blue",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "brown",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "back_dragonwings_brown",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "gray",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "back_dragonwings_gray",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "orange",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "back_dragonwings_orange",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "purple",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "back_dragonwings_purple",
+                                "weight": 1
+                            }
+                        ]
+                    },
                     {
                         "color": "red",
                         "weight": 1,
                         "traits": [
                             {
-                                "trait": "back_batwings_red",
+                                "trait": "back_dragonwings_red",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "white",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "back_dragonwings_white",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "yellow",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "back_dragonwings_yellow",
                                 "weight": 1
                             }
                         ]
@@ -573,6 +743,86 @@
                         "traits": [
                             {
                                 "trait": "back_spike_red",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "black",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "back_spike_black",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "blue",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "back_spike_blue",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "white",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "back_spike_white",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "yellow",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "back_spike_yellow",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "purple",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "back_spike_purple",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "brown",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "back_spike_brown",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "gray",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "back_spike_gray",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "orange",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "back_spike_orange",
                                 "weight": 1
                             }
                         ]
@@ -641,7 +891,7 @@
     },
     {
         "attribute": "5b_torsoaccent",
-        "rarity": 0.8,
+        "rarity": 0.75,
         "categories": [
             {
                 "category": "medium",
@@ -844,22 +1094,6 @@
                 ]
             },
             {
-                "category": "eagle",
-                "weight": 0,
-                "colors": [
-                    {
-                        "color": "black",
-                        "weight": 1,
-                        "traits": [
-                            {
-                                "trait": "neckshadow_eagle_black",
-                                "weight": 1
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
                 "category": "horse",
                 "weight": 1,
                 "colors": [
@@ -911,18 +1145,80 @@
     },
     {
         "attribute": "7_fur",
-        "rarity": 0.5,
+        "rarity": 0.65,
         "categories": [
             {
-                "category": "wooly",
+                "category": "bushy",
                 "weight": 1,
                 "colors": [
                     {
-                        "color": "black",
+                        "color": "red",
                         "weight": 1,
                         "traits": [
                             {
-                                "trait": "fur_wooly_black",
+                                "trait": "fur_bushy_red",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "orange",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "fur_bushy_orange",
+                                "weight": 1
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "category": "silky",
+                "weight": 1,
+                "colors": [
+                    {
+                        "color": "red",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "fur_silky_red",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "orange",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "fur_silky_orange",
+                                "weight": 1
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "category": "windy",
+                "weight": 1,
+                "colors": [
+                    {
+                        "color": "red",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "fur_windy_red",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "orange",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "fur_windy_orange",
                                 "weight": 1
                             }
                         ]
@@ -1220,6 +1516,16 @@
                                 "weight": 1
                             }
                         ]
+                    },
+                    {
+                        "color": "orange",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "ears_lamb_orange",
+                                "weight": 1
+                            }
+                        ]
                     }
                 ]
             },
@@ -1233,6 +1539,146 @@
                         "traits": [
                             {
                                 "trait": "ears_prick_red",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "orange",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "ears_prick_orange",
+                                "weight": 1
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "category": "feather",
+                "weight": 1,
+                "colors": [
+                    {
+                        "color": "red",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "ears_feather_red",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "orange",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "ears_feather_orange",
+                                "weight": 1
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "category": "flop",
+                "weight": 1,
+                "colors": [
+                    {
+                        "color": "red",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "ears_flop_red",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "orange",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "ears_flop_orange",
+                                "weight": 1
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "category": "lynx",
+                "weight": 1,
+                "colors": [
+                    {
+                        "color": "red",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "ears_lynx_red",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "orange",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "ears_lynx_orange",
+                                "weight": 1
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "category": "round",
+                "weight": 1,
+                "colors": [
+                    {
+                        "color": "red",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "ears_round_red",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "orange",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "ears_round_orange",
+                                "weight": 1
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "category": "fox",
+                "weight": 1,
+                "colors": [
+                    {
+                        "color": "red",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "ears_fox_red",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "orange",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "ears_fox_orange",
                                 "weight": 1
                             }
                         ]
@@ -1645,6 +2091,10 @@
                         "traits": [
                             {
                                 "trait": "mouth_horse_teeth",
+                                "weight": 0.5
+                            },
+                            {
+                                "trait": "mouth_horse_empty",
                                 "weight": 1
                             }
                         ]
@@ -1665,7 +2115,7 @@
                             },
                             {
                                 "trait": "mouth_lion_teeth",
-                                "weight": 1
+                                "weight": 0.5
                             }
                         ]
                     }
@@ -1691,18 +2141,182 @@
     },
     {
         "attribute": "13_horns",
-        "rarity": 0.5,
+        "rarity": 0.6,
         "categories": [
             {
                 "category": "ram",
                 "weight": 1,
                 "colors": [
                     {
-                        "color": "black",
+                        "color": "light",
                         "weight": 1,
                         "traits": [
                             {
-                                "trait": "horns_ram_black",
+                                "trait": "horns_ram_light",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "medium",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "horns_ram_medium",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "dark",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "horns_ram_dark",
+                                "weight": 1
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "category": "unicorn",
+                "weight": 1,
+                "colors": [
+                    {
+                        "color": "light",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "horns_unicorn_light",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "medium",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "horns_unicorn_medium",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "dark",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "horns_unicorn_dark",
+                                "weight": 1
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "category": "goat",
+                "weight": 1,
+                "colors": [
+                    {
+                        "color": "light",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "horns_goat_light",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "medium",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "horns_goat_medium",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "dark",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "horns_goat_dark",
+                                "weight": 1
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "category": "bull",
+                "weight": 1,
+                "colors": [
+                    {
+                        "color": "light",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "horns_bull_light",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "medium",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "horns_bull_medium",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "dark",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "horns_bull_dark",
+                                "weight": 1
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "category": "antlers",
+                "weight": 1,
+                "colors": [
+                    {
+                        "color": "light",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "horns_antlers_light",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "medium",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "horns_antlers_medium",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "dark",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "horns_antlers_dark",
                                 "weight": 1
                             }
                         ]
@@ -1728,6 +2342,96 @@
                                 "weight": 1
                             }
                         ]
+                    },
+                    {
+                        "color": "brown",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "eyes_beast_brown",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "gray",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "eyes_beast_gray",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "green",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "eyes_beast_green",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "orange",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "eyes_beast_orange",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "pink",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "eyes_beast_pink",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "purple",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "eyes_beast_purple",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "red",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "eyes_beast_red",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "yellow",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "eyes_beast_yellow",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "white",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "eyes_beast_white",
+                                "weight": 1
+                            }
+                        ]
                     }
                 ]
             },
@@ -1741,6 +2445,96 @@
                         "traits": [
                             {
                                 "trait": "eyes_predator_blue",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "brown",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "eyes_predator_brown",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "gray",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "eyes_predator_gray",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "green",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "eyes_predator_green",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "orange",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "eyes_predator_orange",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "pink",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "eyes_predator_pink",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "purple",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "eyes_predator_purple",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "red",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "eyes_predator_red",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "yellow",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "eyes_predator_yellow",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "white",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "eyes_predator_white",
                                 "weight": 1
                             }
                         ]
@@ -1760,6 +2554,96 @@
                                 "weight": 1
                             }
                         ]
+                    },
+                    {
+                        "color": "brown",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "eyes_prey_brown",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "gray",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "eyes_prey_gray",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "green",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "eyes_prey_green",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "orange",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "eyes_prey_orange",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "pink",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "eyes_prey_pink",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "purple",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "eyes_prey_purple",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "red",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "eyes_prey_red",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "yellow",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "eyes_prey_yellow",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "white",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "eyes_prey_white",
+                                "weight": 1
+                            }
+                        ]
                     }
                 ]
             },
@@ -1773,6 +2657,96 @@
                         "traits": [
                             {
                                 "trait": "eyes_wise_blue",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "brown",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "eyes_wise_brown",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "gray",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "eyes_wise_gray",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "green",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "eyes_wise_green",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "orange",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "eyes_wise_orange",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "pink",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "eyes_wise_pink",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "purple",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "eyes_wise_purple",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "red",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "eyes_wise_red",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "yellow",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "eyes_wise_yellow",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "white",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "eyes_wise_white",
                                 "weight": 1
                             }
                         ]
