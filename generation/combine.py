@@ -40,7 +40,8 @@ def combine_attributes(frames: Frames, prefix: str):
         # 4 way gradient
         # frame = Image.fromarray(np.uint8(array))
 
-        # frame = Image.new('RGB', (1100, 1100), (R, G, B)) # random solid
+        # frame = Image.new('RGBA', (1180, 1180), (R, G, B)) # random solid
+        
 
         frame = Image.open(frames.background_frame[0]) # use chosen background from DNA
 
@@ -49,87 +50,88 @@ def combine_attributes(frames: Frames, prefix: str):
         if frames.tail_frames:
             print(frames.tail_frames[n])
             tail = Image.open(frames.tail_frames[n])
-            frame.paste(tail, mask=tail)
+            frame.paste(tail, box=(40, 40), mask=tail)
 
         if frames.leftbackleg_frames:
             leftbackleg = Image.open(frames.leftbackleg_frames[n])
-            frame.paste(leftbackleg, mask=leftbackleg)
+            frame.paste(leftbackleg, box=(40, 40), mask=leftbackleg)
 
         if frames.leftfrontleg_frames[n]:
             leftfrontleg = Image.open(frames.leftfrontleg_frames[n])
-            frame.paste(leftfrontleg, mask=leftfrontleg)
+            frame.paste(leftfrontleg, box=(40, 40), mask=leftfrontleg)
 
         if frames.back_frames:
             back = Image.open(frames.back_frames[n])
-            frame.paste(back, mask=back)
+            frame.paste(back, box=(40, 40), mask=back)
        
         if frames.torsobase_frames:
             torsobase = Image.open(frames.torsobase_frames[n])
-            frame.paste(torsobase, mask=torsobase)
+            frame.paste(torsobase, box=(40, 40), mask=torsobase)
 
         if frames.torsoaccent_frames:
             torsoaccent = Image.open(frames.torsoaccent_frames[n])
-            frame.paste(torsoaccent, mask=torsoaccent)
+            torsoaccent = torsoaccent
+            frame.paste(torsoaccent, box=(40, 40), mask=torsoaccent)
 
         if frames.torsopattern_frames:
             torsopattern = Image.open(frames.torsopattern_frames[n])
-            frame.paste(torsopattern, mask=torsopattern)
+            frame.paste(torsopattern, box=(40, 40), mask=torsopattern)
 
         if frames.neckbase_frames:
             neckbase = Image.open(frames.neckbase_frames[n])
-            frame.paste(neckbase, mask=neckbase)
+            frame.paste(neckbase, box=(40, 40), mask=neckbase)
         
         if frames.neckaccent_frames:
             neckaccent = Image.open(frames.neckaccent_frames[n])
-            frame.paste(neckaccent, mask=neckaccent)
+            frame.paste(neckaccent, box=(40, 40), mask=neckaccent)
 
         if frames.neckpattern_frames:
             neckpattern = Image.open(frames.neckpattern_frames[n])
-            frame.paste(neckpattern, mask=neckpattern)
+            frame.paste(neckpattern, box=(40, 40), mask=neckpattern)
         
         if frames.neckshadow_frames:
             neckshadow = Image.open(frames.neckshadow_frames[n])
-            frame.paste(neckshadow, mask=neckshadow)
+            frame.paste(neckshadow, box=(40, 40), mask=neckshadow)
 
         if frames.fur_frames:
             fur = Image.open(frames.fur_frames[n])
-            frame.paste(fur, mask=fur)
+            frame.paste(fur, box=(40, 40), mask=fur)
 
         if frames.rightbackleg_frames:
             rightbackleg = Image.open(frames.rightbackleg_frames[n])
-            frame.paste(rightbackleg, mask=rightbackleg)
+            frame.paste(rightbackleg, box=(40, 40), mask=rightbackleg)
         
         if frames.rightfrontleg_frames:
             rightfrontleg = Image.open(frames.rightfrontleg_frames[n])
-            frame.paste(rightfrontleg, mask=rightfrontleg)
+            frame.paste(rightfrontleg, box=(40, 40), mask=rightfrontleg)
 
         if frames.ears_frames:
             ears = Image.open(frames.ears_frames[n])
-            frame.paste(ears, mask=ears)
+            frame.paste(ears, box=(40, 40), mask=ears)
 
         if frames.headbase_frames:
             headbase = Image.open(frames.headbase_frames[n])
-            frame.paste(headbase, mask=headbase)
+            frame.paste(headbase, box=(40, 40), mask=headbase)
         
         if frames.headaccent_frames:
             headaccent = Image.open(frames.headaccent_frames[n])
-            frame.paste(headaccent, mask=headaccent)
+            frame.paste(headaccent, box=(40, 40), mask=headaccent)
 
         if frames.headpattern_frames:
             headpattern = Image.open(frames.headpattern_frames[n])
-            frame.paste(headpattern, mask=headpattern)
+            frame.paste(headpattern, box=(40, 40), mask=headpattern)
 
         if frames.mouth_frames:
             mouth = Image.open(frames.mouth_frames[n])
-            frame.paste(mouth, mask=mouth)
+            frame.paste(mouth, box=(40, 40), mask=mouth)
 
         if frames.horns_frames:
             horns = Image.open(frames.horns_frames[n])
-            frame.paste(horns, mask=horns)
+            frame.paste(horns, box=(40, 40), mask=horns)
         
         if frames.eyes_frames:
             eyes = Image.open(frames.eyes_frames[n])
-            frame.paste(eyes, mask=eyes)
+            frame.paste(eyes, box=(40, 40), mask=eyes)
 
         print("Almost there...")
 
@@ -150,7 +152,7 @@ def combine_attributes(frames: Frames, prefix: str):
         #####
 
 
-        frame.save(f"{dir_path}/output/raw/{prefix}/{prefix}_{n:03}.png", quality=100) 
+        frame.save(f"{dir_path}/output/raw/{prefix}/{prefix}_{n:03}.png", format="png") 
 
         if n == 0:
             # time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")

@@ -63,5 +63,9 @@
     {
         "color": "deep",
         "weight": 1
+    },
+    {
+        "color": "custom_purple2",
+        "weight": 0
     }
 ]
