@@ -1829,14 +1829,30 @@
         "categories": [
             {
                 "category": "bear",
-                "weight": 0,
+                "weight": 1,
                 "colors": [
                     {
                         "color": "white",
                         "weight": 1,
                         "traits": [
                             {
-                                "trait": "headaccent_bear_white",
+                                "trait": "headaccent_bear_blaze_white",
+                                "weight": 1
+                            },
+                            {
+                                "trait": "headaccent_bear_face_white",
+                                "weight": 1
+                            },
+                            {
+                                "trait": "headaccent_bear_mask_white",
+                                "weight": 1
+                            },
+                            {
+                                "trait": "headaccent_bear_points_white",
+                                "weight": 1
+                            },
+                            {
+                                "trait": "headaccent_bear_star_white",
                                 "weight": 1
                             }
                         ]
@@ -1852,6 +1868,10 @@
                         "weight": 1,
                         "traits": [
                             {
+                                "trait": "headaccent_eagle_blaze_white",
+                                "weight": 1
+                            },
+                            {
                                 "trait": "headaccent_eagle_face_white",
                                 "weight": 1
                             },
@@ -1861,6 +1881,10 @@
                             },
                             {
                                 "trait": "headaccent_eagle_points_white",
+                                "weight": 1
+                            },
+                            {
+                                "trait": "headaccent_eagle_star_white",
                                 "weight": 1
                             }
                         ]
@@ -1880,7 +1904,15 @@
                                 "weight": 1
                             },
                             {
+                                "trait": "headaccent_horse_face_white",
+                                "weight": 1
+                            },
+                            {
                                 "trait": "headaccent_horse_mask_white",
+                                "weight": 1
+                            },
+                            {
+                                "trait": "headaccent_horse_points_white",
                                 "weight": 1
                             },
                             {
@@ -1893,14 +1925,30 @@
             },
             {
                 "category": "lion",
-                "weight": 0,
+                "weight": 1,
                 "colors": [
                     {
                         "color": "white",
                         "weight": 1,
                         "traits": [
                             {
+                                "trait": "headaccent_lion_blaze_white",
+                                "weight": 1
+                            },
+                            {
+                                "trait": "headaccent_lion_face_white",
+                                "weight": 1
+                            },
+                            {
                                 "trait": "headaccent_lion_mask_white",
+                                "weight": 1
+                            },
+                            {
+                                "trait": "headaccent_lion_points_white",
+                                "weight": 1
+                            },
+                            {
+                                "trait": "headaccent_lion_star_white",
                                 "weight": 1
                             }
                         ]
@@ -1916,7 +1964,23 @@
                         "weight": 1,
                         "traits": [
                             {
+                                "trait": "headaccent_wolf_blaze_white",
+                                "weight": 1
+                            },
+                            {
+                                "trait": "headaccent_wolf_face_white",
+                                "weight": 1
+                            },
+                            {
                                 "trait": "headaccent_wolf_mask_white",
+                                "weight": 1
+                            },
+                            {
+                                "trait": "headaccent_wolf_points_white",
+                                "weight": 1
+                            },
+                            {
+                                "trait": "headaccent_wolf_star_white",
                                 "weight": 1
                             }
                         ]
