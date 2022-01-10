@@ -29,7 +29,7 @@ def combine_attributes(frames: Frames, prefix: str):
     # for (n, background) in enumerate(frames.background_frames):
     # print("Generating frames...")
 
-    for n in range(0,1): #0,72
+    for n in range(0,72): #0,72
 
         # use this is background color
         # frame = Image.open(background) # background of data
@@ -139,15 +139,15 @@ def combine_attributes(frames: Frames, prefix: str):
         # find texts with "find {/System,}/Library/Fonts -name *ttf"
         ######
 
-        # Width, Height = frame.size 
-        # drawn = ImageDraw.Draw(frame) 
-        # text = "test mint"
-        # font = ImageFont.truetype("Arial Black", 138)
-        # textwidth, textheight = drawn.textsize(text, font)
-        # margin = 5
-        # x = Width - textwidth
-        # y = Height - textheight
-        # drawn.text(((x/2), (y/2)), text, font=font) 
+        Width, Height = frame.size 
+        drawn = ImageDraw.Draw(frame) 
+        text = "test mint"
+        font = ImageFont.truetype("Arial Black", 138)
+        textwidth, textheight = drawn.textsize(text, font)
+        margin = 5
+        x = Width - textwidth
+        y = Height - textheight
+        drawn.text(((x/2), (y/2)), text, font=font) 
 
         #####
 

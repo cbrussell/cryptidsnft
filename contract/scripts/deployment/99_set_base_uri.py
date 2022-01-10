@@ -5,7 +5,7 @@ def main():
     print(dev)
     cryptids = CryptidToken[len(CryptidToken)-1]
     print(cryptids)
-    base_uri = "ipfs://QmVPDuRZ5JYPbGvqMF9Q5r1JDMAjikjq5aVjL7dx5bPMo2" + "/"
+    base_uri = "ipfs://QmRLLfvoQQgbRoPodzVtjhPynmk9Kc1CvPvg6ucC9w9gmZ" + "/"
     transaction = cryptids.setBaseURI(base_uri, {"from": dev})
 
     print(f'BaseURI set on: {transaction}')

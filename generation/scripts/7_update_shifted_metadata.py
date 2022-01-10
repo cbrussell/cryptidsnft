@@ -2,8 +2,8 @@ import json
 import os
 import numpy as np
 
-mp4_cid = "QmfPquqfXLorY6ND6phCD6TNkBYppP3L8wjf7f6bzoM4tB"
-still_cid = "QmePkK65j5947mpJ1JfzB98u58UfEHiX5XA5kXerHPd7KA"
+mp4_cid = "QmXkFbUZUNqNUk7G2c4VNBAV6Ty6jpwuphc6oJADjFHdhr"
+still_cid = "QmS8T7GJCD47sHRrrM9TcimgUfrxvyTQ2BBseWXv2c1mDZ"
 
 def main():
     names = json.load(open("/Users/chrisrussell/CryptidToken/generation/names2.json"))
