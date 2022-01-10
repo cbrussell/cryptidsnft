@@ -28,7 +28,7 @@ def main():
 
             if x[1] in names.keys():
             
-                combined = str(names[x[0]]+ ' : ' + names[x[1]])
+                combined = str(names[x[0]]+ ', ' + names[x[1]])
 
                 if combined in metadata:
                     metadata[combined] += 1
@@ -37,7 +37,7 @@ def main():
 
     new = {k: v for k, v in sorted(metadata.items(), key=lambda item: item[1], reverse=True)}
 
-    with open("rarity.json", "w") as w:
+    with open("/Users/chrisrussell/CryptidToken/generation/rarity.json", "w") as w:
         json.dump(new, w, indent=4)
 
     print('Success!')

@@ -10,7 +10,7 @@
 
     {
         "color": "egg",
-        "weight": 1
+        "weight": 1.2
     },
     {
         "color": "gold",
@@ -34,7 +34,7 @@
     },
     {
         "color": "superdark",
-        "weight": 1
+        "weight": 0.8
     },
     {
         "color": "tan",
@@ -58,7 +58,7 @@
     },
     {
         "color": "deep",
-        "weight": 1
+        "weight": 0.8
     },
     {
         "color": "custom_purple2",

@@ -891,7 +891,7 @@
     },
     {
         "attribute": "5b_torsoaccent",
-        "rarity": 0.75,
+        "rarity": 0.65,
         "categories": [
             {
                 "category": "medium",
@@ -1505,7 +1505,7 @@
         "categories": [
             {
                 "category": "lamb",
-                "weight": 1,
+                "weight": 0.8,
                 "colors": [
                     {
                         "color": "red",
@@ -1693,7 +1693,7 @@
         "categories": [
             {
                 "category": "bear",
-                "weight": 1,
+                "weight": 0.8,
                 "colors": [
                     {
                         "color": "red",
@@ -1745,7 +1745,7 @@
             },
             {
                 "category": "horse",
-                "weight": 1,
+                "weight": 0.8,
                 "colors": [
                     {
                         "color": "red",
@@ -1825,7 +1825,7 @@
     },
     {
         "attribute": "11b_headaccent",
-        "rarity": 0.75,
+        "rarity": 0.65,
         "categories": [
             {
                 "category": "bear",
@@ -2239,7 +2239,7 @@
                     },
                     {
                         "color": "medium",
-                        "weight": 1,
+                        "weight": 0.7,
                         "traits": [
                             {
                                 "trait": "horns_ram_medium",
@@ -2275,7 +2275,7 @@
                     },
                     {
                         "color": "medium",
-                        "weight": 1,
+                        "weight": 0.7,
                         "traits": [
                             {
                                 "trait": "horns_unicorn_medium",
@@ -2311,7 +2311,7 @@
                     },
                     {
                         "color": "medium",
-                        "weight": 1,
+                        "weight": 0.7,
                         "traits": [
                             {
                                 "trait": "horns_goat_medium",
@@ -2347,7 +2347,7 @@
                     },
                     {
                         "color": "medium",
-                        "weight": 1,
+                        "weight": 0.7,
                         "traits": [
                             {
                                 "trait": "horns_bull_medium",
@@ -2383,7 +2383,7 @@
                     },
                     {
                         "color": "medium",
-                        "weight": 1,
+                        "weight": 0.7,
                         "traits": [
                             {
                                 "trait": "horns_antlers_medium",
