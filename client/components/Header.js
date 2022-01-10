@@ -1,14 +1,20 @@
 import Head from "next/head";
 import Link from "next/link";
+import { useState, useEffect} from 'react';
 
 const Header = () => {
+  const [walletAddress, setWalletAddress] = useState("");
 
+  const connectWalletPressed = async () => {
+    const walletResponse = await connectWallet();
+    setWalletAddress(walletResponse.address);
+  }
   return (
     <>
       <Head>
-        <title>Emoji Faces NFT</title>
+        <title>Cryptids</title>
         <meta name="description" content="Nft Minting Tutorial" />
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon"  href="/favicon.ico" />
       </Head>
 
       <header className="sticky inset-x-0 top-0 z-10 h-20 min-w-full text-white border-b border-purple-900 bg-primary backdrop-filter backdrop-blur-lg bg-opacity-30">
@@ -16,8 +22,8 @@ const Header = () => {
           {/* Logo */}
           <Link href="#">
             <a className="text-2xl font-bold">
-              <span className="pr-2 text-transparent bg-clip-text bg-gradient-to-br from-blue-400 to-purple-600">
-                CryptidsNFT
+              <span className="pr-2 text-transparent bg-clip-text bg-gradient-to-br from-blue-400 to-white">
+                Cryptids
               </span>
             </a>
           </Link>
@@ -45,10 +51,10 @@ const Header = () => {
               </li>
 
               <li className="hover:text-purple-500 hover:border-purple-500 cursor-pointer px-4 py-2 font-extrabold text-purple-300 border border-purple-300 rounded-md">
-                {/* <a
+                <a
                   className=""
-                  id="walletButton"
-                  onClick={connectWalletPressed}
+                  id="walletButton" onClick={connectWalletPressed}
+            
                 >
                   {walletAddress.length > 0 ? (
                     "Connected: " +
@@ -58,7 +64,7 @@ const Header = () => {
                   ) : (
                     <span>Connect Wallet</span>
                   )}
-                </a> */}
+                </a>
               </li>
             </ul>
           </nav>
