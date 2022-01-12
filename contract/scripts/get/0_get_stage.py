@@ -9,7 +9,7 @@ def main():
     print(f'Ruinnng functions as dev: {dev}')
     print(f'Active network is: {active_network}')
     cryptids = CryptidToken[len(CryptidToken)-1]
-    stage = cryptids.stage()
+    stage = cryptids.getStage()
     print(f'Current stage is: {stage}') 
 
 

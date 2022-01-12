@@ -5,7 +5,7 @@ def main():
     print(dev)
     cryptids = CryptidToken[len(CryptidToken)-1]
     print(cryptids)
-    whitelistUsers = ["0x12B58f5331a6DC897932AA7FB5101667ACdf03e2"]
+    whitelistUsers = ["0xB2aa6e21ED6B1307Dd5467Ce191a984285957ba1"]
     whitelistMints = [5]
     transaction = cryptids.setWhitelistUsers(whitelistUsers, whitelistMints, {"from": dev})
     print(f'whitelistUsers set on: {transaction}')

@@ -12,7 +12,7 @@ export default function MyApp() {
         <div class="md:py-36 py-20">
           <h1
             role="heading"
-            class="xl:text-6xl md:text-4xl text-xl font-bold leading-10 text-white"
+            className="xl:text-6xl md:text-4xl text-xl font-bold leading-10 text-white"
           >
             Frequently asked questions
           </h1>

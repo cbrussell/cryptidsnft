@@ -1,6 +1,7 @@
 incompatible_list = [ 
 
     # avoid black wings with "black2", "superdark", "purp2", "forest", "varsity", "skyish", "sky", "egg"
+
     {"4_back": "back_featherwings_black","background": "black2"},
     {"4_back": "back_dragonwings_black", "background": "black2"},
     {"4_back": "back_spike_black",       "background": "black2"},
@@ -56,6 +57,9 @@ incompatible_list = [
     { "4_back": "back_dragonwings_blue", "background": "skyish"},
     { "4_back": "back_featherwings_blue", "background": "skyish"},
 
+    # purple spike clash with varsity
+    { "4_back": "back_spike_purple",   "background": "varsity"},
+
     # avoid red background clashes
     { "base_color": "red", "background": "apricot"},
     { "base_color": "red", "background": "varsity"},
@@ -63,7 +67,10 @@ incompatible_list = [
     { "base_color": "red", "background": "purp2"},
 
     # tail and background clashes
-
+    { "1_tail": "tail_kitsune_orange","background": "superdark"},
+    { "1_tail": "tail_lion_red", "background": "superdark"},
+    { "1_tail": "tail_kitsune_red","background": "superdark"},
+    { "1_tail": "tail_lion_orange", "background": "superdark"},
 
     # avoid dorange and apricot
     { "base_color": "orange", "background": "apricot"},

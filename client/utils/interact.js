@@ -1,6 +1,9 @@
-// const contract = require("../artifacts/contracts/EmojiFaces.sol/EmojiFaces.json");
-// const contractAddress = "0x249F5fF0D0A4604912e2C27107cb5c22d8eD8dE1";
-// const nftContract = new web3.eth.Contract(contract.abi, contractAddress);
+const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
+const web3 = createAlchemyWeb3(process.env.NEXT_PUBLIC_API_URL);
+const contract = require(`../../contract/build/deployments/4/0xA3131D7E499a84f4d52DEf7Df9AF74454c611605.json`);
+const contractAddress = "0xA3131D7E499a84f4d52DEf7Df9AF74454c611605";
+
+const nftContract = new web3.eth.Contract(contract.abi, contractAddress);
 
 export const connectWallet = async () => {
   if (window.ethereum) {
@@ -86,7 +89,7 @@ export const getCurrentWalletConnected = async () => {
 // Contract Methods
 
 export const getMaxMintAmount = async () => {
-  const result = await nftContract.methods.maxTokenPurchase().call();
+  const result = await nftContract.methods.maxMintPerTx().call();
   return result;
 };
 
@@ -96,13 +99,13 @@ export const getTotalSupply = async () => {
 };
 
 export const getNftPrice = async () => {
-  const result = await nftContract.methods.tokenPrice().call();
+  const result = await nftContract.methods.salePrice().call();
   const resultEther = web3.utils.fromWei(result, "ether");
   return resultEther;
 };
 
-export const getSaleState = async () => {
-  const result = await nftContract.methods.saleIsActive().call();
+export const getStage = async () => {
+  const result = await nftContract.methods. getStage().call();
   return result;
 };
 
@@ -123,11 +126,11 @@ export const mintNFT = async (mintAmount) => {
   const transactionParameters = {
     to: contractAddress, // Required except during contract publications.
     from: window.ethereum.selectedAddress, // must match user's active address.
-    value: parseInt(web3.utils.toWei("0.0019", "ether") * mintAmount).toString(
+    value: parseInt(web3.utils.toWei("0.05", "ether") * mintAmount).toString(
       16
     ), // hex
     gasLimit: "0",
-    data: nftContract.methods.mintEmoji(mintAmount).encodeABI(), //make call to NFT smart contract
+    data: nftContract.methods.mint(mintAmount).encodeABI(), //make call to NFT smart contract
   };
   //sign the transaction via Metamask
   try {

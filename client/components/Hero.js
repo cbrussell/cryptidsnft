@@ -7,7 +7,7 @@ import {
   getTotalSupply,
   getNftPrice,
   mintNFT,
-  getSaleState,
+  getStage,
 } from "../utils/interact";
 
 const Hero = () => {
@@ -17,14 +17,14 @@ const Hero = () => {
   const [maxMintAmount, setMaxMintAmount] = useState(0);
   const [totalSupply, setTotalSupply] = useState(0);
   const [nftPrice, setNftPrice] = useState("0.111");
-  const [isSaleActive, setIsSaleActive] = useState(false);
+  const [isSaleActive, setIsSaleActive] = useState(0);
 
-  // useEffect(async () => {
-  //   setMaxMintAmount(await getMaxMintAmount());
-  //   setNftPrice(await getNftPrice());
-  //   setIsSaleActive(await getSaleState());
-  //   await updateTotalSupply();
-  // });
+  useEffect(async () => {
+    setMaxMintAmount(await getMaxMintAmount());
+    setNftPrice(await getNftPrice());
+    setIsSaleActive(await getStage());
+    await updateTotalSupply();
+  });
 
   const updateTotalSupply = async () => {
     const mintedCount = await getTotalSupply();
@@ -52,18 +52,18 @@ const Hero = () => {
   };
 
   return (
-    <main id="main" className="h-screen py-16 bg-pattern">
+    <main id="main" className="h-screen py-8 bg-pattern">
       <div className="container max-w-6xl mx-auto flex flex-col items-center pt-4">
         <div className="flex flex-col items-center">
           <Image
             src="/images/BlankCryptid.png"
-            width="570"
-            height="570"
+            width="300"
+            height="300"
             alt="emoji faces gif"
             className="rounded-md"
           />
 
-          {isSaleActive ? (
+          {isSaleActive > 0 ? (
             <>
               {/* Minted NFT Ratio */}
               <p className="bg-gray-100 rounded-md text-gray-800 font-extrabold text-lg my-4 py-1 px-3">
