@@ -93,7 +93,6 @@ def get_dna(trait_manifest: TraitManifest, color_manifest: ColorManifest, backgr
             else:
                 neckaccent_frames = []
 
-
             if torsopattern:
                 neckpattern, neckpattern_frames = get_trait_category(trait_manifest, "6c_neckpattern", torsopattern_category )[0:4:3]
                 data.update(neckpattern)

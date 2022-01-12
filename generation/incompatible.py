@@ -158,6 +158,3 @@ incompatible_list = [
     { "background": "egg", "13_horns": "horns_antlers_dark"}
  
 ]  
-
-
-

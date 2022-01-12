@@ -107,7 +107,6 @@ def get_trait_category(manifest: TraitManifest, attribute: str, type: str) -> Un
         images.append(file_name)
     return data, category['category'], color['color'], images
 
-
 # given a category, get a random trait (from a random color)
 def get_trait_category_color(manifest: TraitManifest, attribute: str, type: str, base_color: str) -> Union[dict, str, str, list]:
     dir_path = os.path.dirname(os.path.realpath(__file__))
