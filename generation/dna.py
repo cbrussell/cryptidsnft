@@ -2,12 +2,11 @@ import json
 import hashlib
 from dataclasses import dataclass
 from typing import Union
-from traits import TraitManifest, ColorManifest, BackgroundManifest, get_trait, get_trait_category, get_trait_category_color, get_trait_color
-
+from traits import TraitManifest, ColorManifest, BackgroundManifest, get_trait, get_trait_category, get_trait_category_color, get_trait_color, get_trait_color_avoid_category
+from incompatible import incompatible_list
 @dataclass
 class Frames:
-    background_frame: list
-    tail_frames: list
+
     leftbackleg_frames: list
     leftfrontleg_frames: list
     back_frames: list
@@ -27,6 +26,8 @@ class Frames:
     rightfrontleg_frames: list
     ears_frames: list
     horns_frames: list
+    background_frame: list
+    tail_frames: list
     eyes_frames: list
 
 def to_hash(data):
@@ -34,119 +35,165 @@ def to_hash(data):
 
 def get_dna(trait_manifest: TraitManifest, color_manifest: ColorManifest, background_manifest: BackgroundManifest) -> Union[Frames, dict]:
     # print("Getting new DNA...")
-    data = {}
+    while True:
+        data = {}
 
-    background, background_frame = background_manifest.get()
-    data["background"] = background
+        color = color_manifest.get()
+        data["base_color"] = color
 
-    color = color_manifest.get()
-    data["base_color"] = color
+        tail, tailtype, tailcolor, tail_frames = get_trait_color(trait_manifest, "1_tail", color)
+        data.update(tail)
 
-    tail, tail_frames = get_trait_color(trait_manifest, "1_tail", color)[0:4:3]
-    data.update(tail)
+        leftbackleg, backanimalleg, leftbackleg_color, leftbackleg_frames = get_trait_color(trait_manifest, "2_leftbackleg", color)
+        data.update(leftbackleg)
 
-    leftbackleg, backanimalleg, leftbackleg_color, leftbackleg_frames = get_trait_color(trait_manifest, "2_leftbackleg", color)
-    data.update(leftbackleg)
+        leftfrontleg, frontanimalleg, leftfrontleg_color, leftfrontleg_frames  = get_trait_color(trait_manifest, "3_leftfrontleg", color)
+        data.update(leftfrontleg)
 
-    leftfrontleg, frontanimalleg, leftfrontleg_color, leftfrontleg_frames  = get_trait_color(trait_manifest, "3_leftfrontleg", color)
-    data.update(leftfrontleg)
+        back, backtype, backcolor, back_frames = get_trait(trait_manifest, "4_back")
+        data.update(back)
 
-    back, back_frames = get_trait(trait_manifest, "4_back")[0:4:3]
-    data.update(back)
+        torsobase, torsotype, torsobase_color, torsobase_frames = get_trait_color(trait_manifest, "5a_torsobase", color)
+        data.update(torsobase)
 
-    torsobase, torsotype, torsobase_color, torsobase_frames = get_trait_color(trait_manifest, "5a_torsobase", color)
-    data.update(torsobase)
+        # torso accent needs to relate to torso base, input type
+        torsoaccent, torsoaccent_category, torsoaccent_color, torsoaccent_frames = get_trait_category(trait_manifest, "5b_torsoaccent", torsotype)
+        data.update(torsoaccent)
 
-    # torso accent needs to relate to torso base, input type
-    torsoaccent, torsoaccent_category, torsoaccent_color, torsoaccent_frames = get_trait_category(trait_manifest, "5b_torsoaccent", torsotype)
-    data.update(torsoaccent)
+        torsopattern, torsopattern_category, torsopattern_color, torsopattern_frames = get_trait_category(trait_manifest, "5c_torsopattern", torsotype)
+        data.update(torsopattern)
 
-    torsopattern, torsopattern_category, torsopattern_color, torsopattern_frames = get_trait_category(trait_manifest, "5c_torsopattern", torsotype)
-    data.update(torsopattern)
+        fur, fur_frames = get_trait(trait_manifest, "7_fur")[0:4:3]
+        data.update(fur) 
 
-    fur, fur_frames = get_trait(trait_manifest, "7_fur")[0:4:3]
-    data.update(fur) 
+        headbase, animal, animalcolor, headbase_frames = get_trait_color(trait_manifest, "11a_headbase", color)
+        data.update(headbase)
 
-    headbase, animal, animalcolor, headbase_frames = get_trait_color(trait_manifest, "11a_headbase", color)
-    data.update(headbase)
+        headaccent, headaccent_frames = get_trait_category(trait_manifest, "11b_headaccent", animal)[0:4:3]
+        data.update(headaccent)
 
-    headaccent, headaccent_frames = get_trait_category(trait_manifest, "11b_headaccent", animal)[0:4:3]
-    data.update(headaccent)
+        headpattern, headpattern_frames = get_trait_category(trait_manifest, "11c_headpattern", animal)[0:4:3]
+        data.update(headpattern)
 
-    headpattern, headpattern_frames = get_trait_category(trait_manifest, "11c_headpattern", animal)[0:4:3]
-    data.update(headpattern)
+        mouth, mouth_frames = get_trait_category(trait_manifest, "12_mouth", animal)[0:4:3]
+        data.update(mouth)
 
-    mouth, mouth_frames = get_trait_category(trait_manifest, "12_mouth", animal)[0:4:3]
-    data.update(mouth)
-
-    # if fur, ignore neck DNA
-    if fur:
-        neckbase_frames = []
-        neckaccent_frames = []
-        neckpattern_frames = []
-        neckshadow_frames = []
-    else:
-        neckbase, neckbase_frames = get_trait_color(trait_manifest, "6a_neckbase", color)[0:4:3]
-        data.update(neckbase)
-        
-        # if accent on torso, must be accent on neck
-        # neckaccent rarity driven by torso accent
-        # match accent type of neck to accent type of torso
-        if torsoaccent:
-            neckaccent, neckaccent_frames = get_trait_category(trait_manifest, "6b_neckaccent", torsoaccent_category)[0:4:3]
-            data.update(neckaccent)
-        else:
+        # if fur, ignore neck DNA
+        if fur:
+            neckbase_frames = []
             neckaccent_frames = []
-        
-
-        if torsopattern:
-            neckpattern, neckpattern_frames = get_trait_category(trait_manifest, "6c_neckpattern", torsopattern_category )[0:4:3]
-            data.update(neckpattern)
-        else:
             neckpattern_frames = []
-        
-        # no neckshadow on eagle
-        if animal == 'eagle':
             neckshadow_frames = []
         else:
-            neckshadow, neckshadow_frames = get_trait_category(trait_manifest, "6d_neckshadow", animal)[0:4:3]
-            data.update(neckshadow)
+            neckbase, neckbase_frames = get_trait_color(trait_manifest, "6a_neckbase", color)[0:4:3]
+            data.update(neckbase)
 
-    rightbackleg, rightbackleg_frames = get_trait_category_color(trait_manifest, "8_rightbackleg", backanimalleg, color)[0:4:3]
-    data.update(rightbackleg)
+            # if accent on torso, must be accent on neck
+            # neckaccent rarity driven by torso accent
+            # match accent type of neck to accent type of torso
+            if torsoaccent:
+                neckaccent, neckaccent_frames = get_trait_category(trait_manifest, "6b_neckaccent", torsoaccent_category)[0:4:3]
+                data.update(neckaccent)
+            else:
+                neckaccent_frames = []
 
-    rightfrontleg, rightfrontleg_frames = get_trait_category_color(trait_manifest, "9_rightfrontleg", frontanimalleg, color)[0:4:3]
-    data.update(rightfrontleg)
 
-    ears, ears_frames = get_trait_color(trait_manifest, "10_ears", color)[0:4:3]
-    data.update(ears)
+            if torsopattern:
+                neckpattern, neckpattern_frames = get_trait_category(trait_manifest, "6c_neckpattern", torsopattern_category )[0:4:3]
+                data.update(neckpattern)
+            else:
+                neckpattern_frames = []
 
-    horns, horns_frames = get_trait(trait_manifest, "13_horns")[0:4:3]
-    data.update(horns)
+            # no neckshadow on eagle
+            if animal == 'eagle':
+                neckshadow_frames = []
+            else:
+                neckshadow, neckshadow_frames = get_trait_category(trait_manifest, "6d_neckshadow", animal)[0:4:3]
+                data.update(neckshadow)
 
-    eyes, eyes_frames = get_trait(trait_manifest, "14_eyes")[0:4:3]
-    data.update(eyes)
+        rightbackleg, rightbackleg_frames = get_trait_category_color(trait_manifest, "8_rightbackleg", backanimalleg, color)[0:4:3]
+        data.update(rightbackleg)
 
-    return Frames(background_frame
-                , tail_frames
-                , leftbackleg_frames
-                , leftfrontleg_frames
-                , back_frames
-                , torsobase_frames
-                , torsoaccent_frames
-                , torsopattern_frames
-                , fur_frames
-                , headbase_frames
-                , headaccent_frames
-                , headpattern_frames
-                , mouth_frames
-                , neckbase_frames
-                , neckaccent_frames
-                , neckpattern_frames
-                , neckshadow_frames
-                , rightbackleg_frames
-                , rightfrontleg_frames
-                , ears_frames
-                , horns_frames
-                , eyes_frames
-                ), data
+        rightfrontleg, rightfrontleg_frames = get_trait_category_color(trait_manifest, "9_rightfrontleg", frontanimalleg, color)[0:4:3]
+        data.update(rightfrontleg)
+
+        ears, ears_frames = get_trait_color(trait_manifest, "10_ears", color)[0:4:3]
+        data.update(ears)
+
+        horns, hornstype, hornscolor, horns_frames = get_trait(trait_manifest, "13_horns")
+        data.update(horns)
+
+        # red body rules
+        if color == "red":
+
+            if hornscolor in ["medium", "dark"] or backcolor == "black":
+                background, background_frame = background_manifest.get_avoid(["black2", "superdark", "purp2", "forest", "varsity", "skyish", "sky", "egg"])
+                data["background"] = background
+                print("Avoided horn/background clash for red body!")
+
+            # normal background avoidances for red
+            else:
+                background, background_frame = background_manifest.get_avoid(["varsity", "skyish", "sky", "egg"])
+                data["background"] = background
+
+        elif color == "orange":
+
+            if hornscolor in ["medium", "dark"] or backcolor == "black":
+                background, background_frame = background_manifest.get_avoid(["black2", "superdark", "purp2", "forest", "apricot"])
+                data["background"] = background
+                print("Avoided horn/background clash for orange body!")
+
+            # normal background avoidances for orange
+            else:
+                background, background_frame = background_manifest.get_avoid(["apricot"])
+                data["background"] = background
+                print("Avoided orange/apricot")
+
+
+        if background in ["superdark", "black2"]:
+            tail, tail_frames = get_trait_color_avoid_category(trait_manifest, "1_tail", color, ["kitsune", "scorpion", "lion"])[0:4:3]
+            data.update(tail)
+            print("Avoid kitsune/lion/scorpion clash with superdark.")
+        else:
+            tail, tail_frames = get_trait_color(trait_manifest, "1_tail", color)[0:4:3]
+            data.update(tail)
+
+
+
+        eyes, eyes_frames = get_trait(trait_manifest, "14_eyes")[0:4:3]
+        data.update(eyes)
+
+        #check if compiled DNA in incompatible list
+
+            # my_dict == my_dict | subset_dict
+        for i in range(len(incompatible_list)):
+            if data == data | incompatible_list[i]:
+                print("Bad DNA found, regenerating...")
+                break
+            else:
+                continue
+        else:
+            
+            return Frames(leftbackleg_frames
+                    , leftfrontleg_frames
+                    , back_frames
+                    , torsobase_frames
+                    , torsoaccent_frames
+                    , torsopattern_frames
+                    , fur_frames
+                    , headbase_frames
+                    , headaccent_frames
+                    , headpattern_frames
+                    , mouth_frames
+                    , neckbase_frames
+                    , neckaccent_frames
+                    , neckpattern_frames
+                    , neckshadow_frames
+                    , rightbackleg_frames
+                    , rightfrontleg_frames
+                    , ears_frames
+                    , horns_frames
+                    , background_frame
+                    , tail_frames
+                    , eyes_frames
+                    ), data

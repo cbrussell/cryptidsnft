@@ -10,7 +10,7 @@ from combine import combine_attributes
 # and formats the outputted json data from generate.py
 # I still need to add a way to remove dna elemnts I dont want in the final 
 # metadata...
-2
+
 def main():
 
     dir_path = os.path.dirname(os.path.realpath(__file__))
@@ -23,7 +23,7 @@ def main():
 
     start_time = datetime.now()
     procs = 10
-    n = 20 # collection size
+    n = 1000 # collection size
     increment = int(n / procs)
     jobs = []
     start = 1

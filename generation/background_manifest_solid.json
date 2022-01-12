@@ -13,14 +13,6 @@
         "weight": 1.2
     },
     {
-        "color": "gold",
-        "weight": 1
-    },
-    {
-        "color": "peach",
-        "weight": 1
-    },
-    {
         "color": "purp2",
         "weight": 1
     },
@@ -45,23 +37,11 @@
         "weight": 1
     },
     {
-        "color": "varsity2",
-        "weight": 1
-    },
-    {
         "color": "sand2",
         "weight": 1
     },
     {
         "color": "forest",
         "weight": 1
-    },
-    {
-        "color": "deep",
-        "weight": 0.8
-    },
-    {
-        "color": "custom_purple2",
-        "weight": 0
     }
 ]

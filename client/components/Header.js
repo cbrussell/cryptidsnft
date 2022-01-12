@@ -48,7 +48,7 @@ const Header = () => {
         <div className="flex items-center container mx-auto max-w-7xl justify-between h-full">
           {/* Logo */}
           <Link href="#">
-            <a className="text-2xl font-bold">
+            <a className="text-3xl font-bold">
               <span className="pr-2 text-transparent bg-clip-text bg-gradient-to-br from-pink-400 to-white">
                 Cryptids
               </span>
