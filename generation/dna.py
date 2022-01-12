@@ -78,7 +78,6 @@ def get_dna(trait_manifest: TraitManifest, color_manifest: ColorManifest, backgr
         mouth, mouth_frames = get_trait_category(trait_manifest, "12_mouth", animal)[0:4:3]
         data.update(mouth)
 
-        # if fur, ignore neck DNA
         if fur:
             neckbase_frames = []
             neckaccent_frames = []
@@ -88,9 +87,6 @@ def get_dna(trait_manifest: TraitManifest, color_manifest: ColorManifest, backgr
             neckbase, neckbase_frames = get_trait_color(trait_manifest, "6a_neckbase", color)[0:4:3]
             data.update(neckbase)
 
-            # if accent on torso, must be accent on neck
-            # neckaccent rarity driven by torso accent
-            # match accent type of neck to accent type of torso
             if torsoaccent:
                 neckaccent, neckaccent_frames = get_trait_category(trait_manifest, "6b_neckaccent", torsoaccent_category)[0:4:3]
                 data.update(neckaccent)
@@ -123,49 +119,15 @@ def get_dna(trait_manifest: TraitManifest, color_manifest: ColorManifest, backgr
         horns, hornstype, hornscolor, horns_frames = get_trait(trait_manifest, "13_horns")
         data.update(horns)
 
-        # red body rules
-        if color == "red":
+        background, background_frame = background_manifest.get()
+        data["background"] = background
 
-            if hornscolor in ["medium", "dark"] or backcolor == "black":
-                background, background_frame = background_manifest.get_avoid(["black2", "superdark", "purp2", "forest", "varsity", "skyish", "sky", "egg"])
-                data["background"] = background
-                print("Avoided horn/background clash for red body!")
-
-            # normal background avoidances for red
-            else:
-                background, background_frame = background_manifest.get_avoid(["varsity", "skyish", "sky", "egg"])
-                data["background"] = background
-
-        elif color == "orange":
-
-            if hornscolor in ["medium", "dark"] or backcolor == "black":
-                background, background_frame = background_manifest.get_avoid(["black2", "superdark", "purp2", "forest", "apricot"])
-                data["background"] = background
-                print("Avoided horn/background clash for orange body!")
-
-            # normal background avoidances for orange
-            else:
-                background, background_frame = background_manifest.get_avoid(["apricot"])
-                data["background"] = background
-                print("Avoided orange/apricot")
-
-
-        if background in ["superdark", "black2"]:
-            tail, tail_frames = get_trait_color_avoid_category(trait_manifest, "1_tail", color, ["kitsune", "scorpion", "lion"])[0:4:3]
-            data.update(tail)
-            print("Avoid kitsune/lion/scorpion clash with superdark.")
-        else:
-            tail, tail_frames = get_trait_color(trait_manifest, "1_tail", color)[0:4:3]
-            data.update(tail)
-
-
+        tail, tail_frames = get_trait_color(trait_manifest, "1_tail", color)[0:4:3]
+        data.update(tail)
 
         eyes, eyes_frames = get_trait(trait_manifest, "14_eyes")[0:4:3]
         data.update(eyes)
 
-        #check if compiled DNA in incompatible list
-
-            # my_dict == my_dict | subset_dict
         for i in range(len(incompatible_list)):
             if data == data | incompatible_list[i]:
                 print("Bad DNA found, regenerating...")
