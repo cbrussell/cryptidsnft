@@ -38,19 +38,21 @@ const Header = () => {
   return (
     
     <>
-      <Head>
-        <title>Cryptids</title>
-        <meta name="description" content="Nft Minting Tutorial" />
-        <link rel="icon"  href="/favicon.ico" />
+      <Head font-custom>
+     
+          <title class="ykar">Cryptids</title>
+          <meta name="description" content="Adminstrators of the Metaverse." />
+          <link rel="icon"  href="/favicon.ico" />
+
       </Head>
 
-      <header className="sticky inset-x-0 top-0 z-10 h-20 min-w-full text-white border-b border-purple-900 bg-primary backdrop-filter backdrop-blur-lg ">
+      <header className="sticky inset-x-5 top-0 z-10 h-20 min-w-full text-white border-b border-purple-900 bg-primary backdrop-filter backdrop-blur-lg ">
         <div className="flex items-center container mx-auto max-w-7xl justify-between h-full">
           {/* Logo */}
           <Link href="#">
-            <a className="text-3xl font-bold">
-              <span className="pr-2 text-transparent bg-clip-text bg-gradient-to-br from-pink-400 to-white">
-                Cryptids
+            <a className="text-4xl font-thin">
+              <span className="pr-2 font-custom tracking-widest text-transparent bg-clip-text bg-gradient-to-br from-pink-400 to-white">
+                cRyptids
               </span>
             </a>
           </Link>
