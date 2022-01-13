@@ -1952,6 +1952,18 @@
     "minimalistic-assert" "^1.0.1"
     "minimalistic-crypto-utils" "^1.0.1"
 
+"embla-carousel-react@^6.0.2":
+  "integrity" "sha512-oHNicBXb1V3o8KmKzgw38hf4SBy1i//7WY6dsHr7KAyrhyg9vGJck4h3S93TeIFtWJuctrxonlm6zlYzV9LYMQ=="
+  "resolved" "https://registry.npmjs.org/embla-carousel-react/-/embla-carousel-react-6.0.2.tgz"
+  "version" "6.0.2"
+  dependencies:
+    "embla-carousel" "6.0.2"
+
+"embla-carousel@6.0.2":
+  "integrity" "sha512-6unBWN0u6ryxwHxTafQs2z9VnvOT3J7FGzLlmISFWw+kPEi8k8rlReRcqvotg6BTYRjsPmpH909xhPe/7DsUYw=="
+  "resolved" "https://registry.npmjs.org/embla-carousel/-/embla-carousel-6.0.2.tgz"
+  "version" "6.0.2"
+
 "emoji-regex@^9.2.2":
   "integrity" "sha512-L18DaJsXSUk2+42pv8mLs5jJT2hqFkFE4j21wOmgbUqsZ2hL72NsUU785g9RXgo3s0ZNgVl42TiHp3ZtOv/Vyg=="
   "resolved" "https://registry.npmjs.org/emoji-regex/-/emoji-regex-9.2.2.tgz"
@@ -5079,6 +5091,11 @@
   "version" "3.1.5"
   dependencies:
     "is-typedarray" "^1.0.0"
+
+"typeface-exo@^1.1.13":
+  "integrity" "sha512-7NtSfWR2w7Bw2bKoXa3Tw+s3uMJq7+9lmddmTNV3TBDbbUWbANyZklGciGoum95/1rc3DUqUFaDA4Qt/QxovFQ=="
+  "resolved" "https://registry.npmjs.org/typeface-exo/-/typeface-exo-1.1.13.tgz"
+  "version" "1.1.13"
 
 "typescript@>=2.8.0 || >= 3.2.0-dev || >= 3.3.0-dev || >= 3.4.0-dev || >= 3.5.0-dev || >= 3.6.0-dev || >= 3.6.0-beta || >= 3.7.0-dev || >= 3.7.0-beta", "typescript@>=3.3.1":
   "integrity" "sha512-VgYs2A2QIRuGphtzFV7aQJduJ2gyfTljngLzjpfW9FoYZF6xuw1W0vW9ghCKLfcWrCFxK81CSGRAvS1pn4fIUg=="

@@ -43,7 +43,7 @@ const Hero = () => {
     }
   };
 
-  const mintEmojiFace = async () => {
+  const mintCryptid = async () => {
     const { status } = await mintNFT(count);
     setStatus(status);
 
@@ -67,7 +67,7 @@ const Hero = () => {
             <>
               {/* Minted NFT Ratio */}
               <p className="bg-gray-100 rounded-md text-gray-800 font-extrabold text-lg my-4 py-1 px-3">
-                <span className="text-purple-600">{`${totalSupply}`}</span> /
+                <span className="text-[#985be7]">{`${totalSupply}`}</span> /
                 11,111
               </p>
 
@@ -124,10 +124,10 @@ const Hero = () => {
 
               {/* Mint Button */}
               <button
-                className="mt-6 py-2 px-4 text-center text-white uppercase bg-pink-500 border-b-4 border-pink-700 rounded hover:bg-pink-400 hover:border-pink-500"
-                onClick={mintEmojiFace}
+                className="mt-6 py-2 px-4 text-center text-white uppercase bg-[#222222] border-b-4 border-pink-700 rounded hover:bg-pink-400 hover:border-pink-500"
+                onClick={mintCryptid}
               >
-                Mint now!
+                Mint Cryptid
               </button>
             </>
           ) : (

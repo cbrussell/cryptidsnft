@@ -110,6 +110,9 @@ export const getStage = async () => {
 };
 
 export const mintNFT = async (mintAmount) => {
+  const result = await nftContract.methods.salePrice().call();
+  const resultEther = web3.utils.fromWei(result, "ether");
+
   if (!window.ethereum.selectedAddress) {
     return {
       success: false,
@@ -126,7 +129,7 @@ export const mintNFT = async (mintAmount) => {
   const transactionParameters = {
     to: contractAddress, // Required except during contract publications.
     from: window.ethereum.selectedAddress, // must match user's active address.
-    value: parseInt(web3.utils.toWei("0.05", "ether") * mintAmount).toString(
+    value: parseInt(web3.utils.toWei(resultEther, "ether") * mintAmount).toString(
       16
     ), // hex
     gasLimit: "0",

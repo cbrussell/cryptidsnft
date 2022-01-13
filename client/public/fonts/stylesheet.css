@@ -18,3 +18,12 @@
     font-display: swap;
 }
 
+@font-face {
+    font-family: 'Exo';
+    src: local('Exo Regular'), local('Exo-Regular'),
+        url('Exo-Regular.woff2') format('woff2'),
+        url('Exo-Regular.woff') format('woff');
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
+}
