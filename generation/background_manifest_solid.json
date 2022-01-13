@@ -43,5 +43,13 @@
     {
         "color": "forest",
         "weight": 1
+    },
+    {
+        "color": "black444",
+        "weight": 1
+    },
+    {
+        "color": "purple444",
+        "weight": 1
     }
 ]

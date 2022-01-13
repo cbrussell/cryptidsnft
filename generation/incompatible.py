@@ -1,10 +1,14 @@
 incompatible_list = [ 
 
-    # avoid black wings with "black2", "superdark", "purp2", "forest", "varsity", "skyish", "sky", "egg"
+    # avoid black wings with "black2", "superdark", "purp2", "forest", "varsity", "skyish", "sky", "egg", black444
 
     {"4_back": "back_featherwings_black","background": "black2"},
     {"4_back": "back_dragonwings_black", "background": "black2"},
     {"4_back": "back_spike_black",       "background": "black2"},
+
+    {"4_back": "back_featherwings_black","background": "black444"},
+    {"4_back": "back_dragonwings_black", "background": "black444"},
+    {"4_back": "back_spike_black",       "background": "black444"},
 
     {"4_back": "back_featherwings_black","background": "superdark"},
     {"4_back": "back_dragonwings_black", "background": "superdark"},
@@ -72,10 +76,20 @@ incompatible_list = [
     { "1_tail": "tail_kitsune_red","background": "superdark"},
     { "1_tail": "tail_lion_orange", "background": "superdark"},
 
+    { "1_tail": "tail_kitsune_orange","background":     "black444"},
+    { "1_tail": "tail_lion_red", "background":          "black444"},
+    { "1_tail": "tail_kitsune_red","background":        "black444"},
+    { "1_tail": "tail_lion_orange", "background":       "black444"},
+
+    { "1_tail": "tail_kitsune_orange","background":     "black2"},
+    { "1_tail": "tail_lion_red", "background":          "black2"},
+    { "1_tail": "tail_kitsune_red","background":        "black2"},
+    { "1_tail": "tail_lion_orange", "background":       "black2"},
+
     # avoid dorange and apricot
     { "base_color": "orange", "background": "apricot"},
 
-    # avoid dark backround and dark horns 
+    # avoid dark backround and medium/dark horns 
     { "background": "black2", "13_horns": "horns_ram_medium"},
     { "background": "black2", "13_horns": "horns_ram_dark"},
     { "background": "black2", "13_horns": "horns_unicorn_medium"},
@@ -86,6 +100,17 @@ incompatible_list = [
     { "background": "black2", "13_horns": "horns_bull_dark"},
     { "background": "black2", "13_horns": "horns_antlers_medium"},
     { "background": "black2", "13_horns": "horns_antlers_dark"},
+
+    { "background": "black444", "13_horns": "horns_ram_medium"},
+    { "background": "black444", "13_horns": "horns_ram_dark"},
+    { "background": "black444", "13_horns": "horns_unicorn_medium"},
+    { "background": "black444", "13_horns": "horns_unicorn_dark"},
+    { "background": "black444", "13_horns": "horns_goat_medium"},
+    { "background": "black444", "13_horns": "horns_goat_dark"},
+    { "background": "black444", "13_horns": "horns_bull_medium"},
+    { "background": "black444", "13_horns": "horns_bull_dark"},
+    { "background": "black444", "13_horns": "horns_antlers_medium"},
+    { "background": "black444", "13_horns": "horns_antlers_dark"},
 
     { "background": "superdark", "13_horns": "horns_ram_medium"},
     { "background": "superdark", "13_horns": "horns_ram_dark"},

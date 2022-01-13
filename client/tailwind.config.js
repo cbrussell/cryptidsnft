@@ -10,7 +10,7 @@ module.exports = {
         'cryptid-2': '#f5c59f',
         'cryptid-3': '#ee9681',
         'cryptid-4': '#d27a6f',
-        'cryptid-5': '#222222'
+        'cryptid-5': '#222222',
         },
       },
     extend: { 
@@ -25,4 +25,3 @@ module.exports = {
   },
   plugins: [],
 }
-

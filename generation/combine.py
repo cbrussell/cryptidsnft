@@ -40,7 +40,7 @@ def combine_attributes(frames: Frames, prefix: str):
         # 4 way gradient
         # frame = Image.fromarray(np.uint8(array))
 
-        # frame = Image.new('RGBA', (1180, 1180), (R, G, B)) # random solid
+        # frame = Image.new('RGB', (1180, 1180), (R, G, B)) # random solid
         
 
         frame = Image.open(frames.background_frame[0]) # use chosen background from DNA
@@ -161,7 +161,7 @@ def combine_attributes(frames: Frames, prefix: str):
 
             # frame = Image.fromarray(np.uint8(array)).rotate(270).save(f"{dir_path}/output/bg/{prefix}_bg_{time}_{R1}_{G1}_{B1}_{R}_{G}_{B}.png", "PNG")
            
-            # frame = Image.new('RGB', (1100, 1100), (R, G, B)).save(f"{dir_path}/output/bg/{prefix}_bg_{time}_{R}_{G}_{B}.png", "PNG")
+            # frame = Image.new('RGB', (1180, 1180), (R, G, B)).save(f"{dir_path}/output/bg/{prefix}_bg_{time}_{R}_{G}_{B}.png", "PNG")
            
             # frame = Image.fromarray(np.uint8(array)).save(f"{dir_path}/output/bg/{prefix}_bg_{time}_{R1}_{G1}_{B1}_{R}_{G}_{B}.png", "PNG")
 

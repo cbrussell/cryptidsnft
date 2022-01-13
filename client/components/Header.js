@@ -62,19 +62,19 @@ const Header = () => {
 
           <nav aria-label="Main Menu">
             <ul className="flex items-center space-x-8" >
-              <li className="text-black text-semibold hover:font-medium exo-font ">
+              <li className="text-black text-semibold exo-font ">
                 <Link href="#about">
                   <a>roadmap</a>
                 </Link>
               </li>
 
-              <li className="text-black text-semibold hover:font-medium exo-font">
+              <li className="text-black text-semibold exo-font">
                 <Link href="#gallery">
                   <a>docs</a>
                 </Link>
               </li>
 
-              <li className="text-black text-semibold hover:font-medium exo-font">
+              <li className="text-black text-semibold exo-font">
                 <Link href="#faq">
                   <a>team</a>
                 </Link>
@@ -141,7 +141,7 @@ const Header = () => {
           <nav aria-label="Contact Menu">
             <ul className="flex items-center space-x-6">
               
-              <li className="hover:text-black hover:font-medium cursor-pointer px-4 py-2 font-extrabold text-black border exo-font border-black rounded-md">
+              <li className="cursor-pointer px-4 py-2 font-extrabold text-black border exo-font border-black rounded-md">
                 <a
                   className=""
                   id="walletButton" 
