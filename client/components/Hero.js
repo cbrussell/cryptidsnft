@@ -13,7 +13,7 @@ import {
 const Hero = () => {
   const { status, setStatus } = useStatus();
 
-  const [count, setCount] = useState(1);
+  const [count, setCount] = useState(0);
   const [maxMintAmount, setMaxMintAmount] = useState(0);
   const [totalSupply, setTotalSupply] = useState(0);
   const [nftPrice, setNftPrice] = useState("0.111");
@@ -24,6 +24,7 @@ const Hero = () => {
     setNftPrice(await getNftPrice());
     setIsSaleActive(await getStage());
     await updateTotalSupply();
+
   });
 
   const updateTotalSupply = async () => {
@@ -51,6 +52,7 @@ const Hero = () => {
     updateTotalSupply();
   };
 
+  
   return (
     <main id="main" className="h-screen py-8 bg-pattern">
       <div className="container max-w-6xl mx-auto flex flex-col items-center pt-4">
@@ -67,7 +69,7 @@ const Hero = () => {
             <>
               {/* Minted NFT Ratio */}
               <p className="bg-gray-100 rounded-md text-gray-800 font-extrabold text-lg my-4 py-1 px-3">
-                <span className="text-[#985be7]">{`${totalSupply}`}</span> /
+                <span className="text-[#d35c5c]">{`${totalSupply}`}</span> /
                 11,111
               </p>
 
@@ -124,7 +126,7 @@ const Hero = () => {
 
               {/* Mint Button */}
               <button
-                className="mt-6 py-2 px-4 text-center text-white uppercase bg-[#222222] border-b-4 border-pink-700 rounded hover:bg-pink-400 hover:border-pink-500"
+                className="mt-6 py-2 px-4 text-center text-white uppercase bg-[#222222] border-b-4 border-orange-700 rounded hover:bg-orange-500 hover:border-orange-400"
                 onClick={mintCryptid}
               >
                 Mint Cryptid
