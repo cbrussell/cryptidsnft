@@ -7,11 +7,6 @@
         "color": "black2",
         "weight": 1
     },
-
-    {
-        "color": "egg",
-        "weight": 1.2
-    },
     {
         "color": "purp2",
         "weight": 1
@@ -29,10 +24,6 @@
         "weight": 0.8
     },
     {
-        "color": "tan",
-        "weight": 1
-    },
-    {
         "color": "varsity",
         "weight": 1
     },
@@ -41,15 +32,16 @@
         "weight": 1
     },
     {
-        "color": "forest",
-        "weight": 1
-    },
-    {
         "color": "black444",
         "weight": 1
     },
+
     {
-        "color": "purple444",
+        "color": "tan_egg_dark",
+        "weight": 1
+    },
+    {
+        "color": "tan_egg_light",
         "weight": 1
     }
 ]

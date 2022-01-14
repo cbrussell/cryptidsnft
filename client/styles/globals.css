@@ -97,3 +97,21 @@ a:hover, a:focus {
   letter-spacing: 0;
   
 } */
+
+ul {
+  text-align: center;
+}
+ul li {
+  display: inline-block;
+  padding: 5px;
+  font-family: sans-serif;
+  font-size: 18px;
+}
+ul li a {
+  text-decoration: none;
+  color: #000;
+}
+ul li a:hover {
+  font-weight: bold;
+  /* text-shadow: 0 0.0015em #101010,0 -0.0015em #101010,0.01em 0 #101010,-0.01em 0 #101010; */
+}
