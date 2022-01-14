@@ -80,7 +80,7 @@ const Header = () => {
                 </Link>
               </li>
               <li>
-                <a href="https://opensea.io" target="_blank">
+                <a href="https://opensea.io" target="_blank" rel="noreferrer">
                   <svg
                     className="w-7 h-7"
                     viewBox="0 0 90 90"
@@ -96,7 +96,7 @@ const Header = () => {
               </li>
 
               <li>
-                <a href="https://twitter.com/cryptidsnft" target="_blank">
+                <a href="https://twitter.com/cryptidsnft" target="_blank" rel="noreferrer">
                   <svg
                     className="w-7 h-7"
                     stroke="currentColor"
@@ -117,7 +117,7 @@ const Header = () => {
               </li>
 
               <li>
-                <a href="https://discord.gg/PaqreejB" target="_blank">
+                <a href="https://discord.gg/PaqreejB" target="_blank" rel="noreferrer">
                   <svg
                     className="w-7 h-7"
                     stroke="currentColor"
