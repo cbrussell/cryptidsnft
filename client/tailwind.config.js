@@ -13,10 +13,7 @@ module.exports = {
         'cryptid-5': '#222222',
         },
       },
-    extend: { 
-      fontFamily: {
-      },
-    },
+    
   },
   variants: {
     fill: ['hover', 'focus'], // this line does the trick

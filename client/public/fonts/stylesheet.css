@@ -6,9 +6,6 @@
         url('YkarRegular.woff2') format('woff2'),
         url('YkarRegular.woff') format('woff');
     /* ... */
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
 }
 
 @font-face {
@@ -16,7 +13,5 @@
     src: local('Exo Regular'), local('Exo-Regular'),
         url('Exo-Regular.woff2') format('woff2'),
         url('Exo-Regular.woff') format('woff');
-    font-weight: 100;
-    font-style: normal;
-    font-display: swap;
+
 }
