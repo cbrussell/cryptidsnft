@@ -1,6 +1,5 @@
 @import url('/client/public/fonts/stylesheet.css');
-@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Comfortaa:wght@600;700&display=swap");
+
 
 @tailwind base;
 @tailwind components;
