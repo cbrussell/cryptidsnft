@@ -13,8 +13,8 @@ import {
 const Hero = () => {
   const { status, setStatus } = useStatus();
 
-  const [count, setCount] = useState(0);
-  const [maxMintAmount, setMaxMintAmount] = useState(1);
+  const [count, setCount] = useState(1);
+  const [maxMintAmount, setMaxMintAmount] = useState(0);
   const [totalSupply, setTotalSupply] = useState(0);
   const [nftPrice, setNftPrice] = useState("0.08");
   const [isSaleActive, setIsSaleActive] = useState(0);
@@ -83,7 +83,7 @@ const Hero = () => {
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="w-6 h-6 text-pink-400"
+                    className="w-6 h-6 text-[#d35c5c]"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -105,7 +105,7 @@ const Hero = () => {
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="w-6 h-6 text-pink-400"
+                    className="w-6 h-6 text-[#d35c5c]"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"

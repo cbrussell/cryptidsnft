@@ -15,14 +15,17 @@ const Header = () => {
     setStatus(walletResponse.status);
   };
 
+
+
   useEffect( () => {
     async function fetchData() {
     const walletResponse = await getCurrentWalletConnected();
     setWalletAddress(walletResponse.address);
-    setStatus(walletResponse.status); // eslint-disable-next-line react-hooks/exhaustive-deps
+    setStatus(walletResponse.status); 
+
     addWalletListener();
      } fetchData();
-  }, []);
+  });
 
   const addWalletListener = () => {
     if (window.ethereum) {
@@ -37,6 +40,7 @@ const Header = () => {
       });
     }
   };
+  
   return (
     
     <>
@@ -105,7 +109,7 @@ const Header = () => {
                     strokeWidth="0"
                     viewBox="0 0 512 512"
                     xmlns="http://www.w3.org/2000/svg"
-                    fill="fill-blue-500"
+                    // fill="fill-blue-500"
                     
                    
                   >
