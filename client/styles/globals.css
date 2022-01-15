@@ -1,10 +1,24 @@
-@import url('/client/public/fonts/stylesheet.css');
-
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: 'YkarRegular';
+
+  /* ... */
+  src: local('YkarRegular'), local('YkarRegular'),
+      url('/fonts/YkarRegular.woff2') format('woff2'),
+      url('/fonts/YkarRegular.woff') format('woff');
+  /* ... */
+}
+
+@font-face {
+  font-family: 'Exo';
+  src: local('Exo Regular'), local('Exo-Regular'),
+      url('/fonts/Exo-Regular.woff2') format('woff2'),
+      url('/fonts/Exo-Regular.woff') format('woff');
+
+}
 
 
 html {
@@ -37,7 +51,7 @@ html {
 }
 
 .element { 
-  font-family: 'Ykar';
+  font-family: 'YkarRegular';
  }
 
 @keyframes gradient-animation {

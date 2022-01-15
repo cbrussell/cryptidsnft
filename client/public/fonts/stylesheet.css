@@ -1,8 +1,8 @@
 @font-face {
-    font-family: 'Ykar';
+    font-family: 'YkarRegular';
 
     /* ... */
-    src: local('Ykar'), local('YkarRegular'),
+    src: local('YkarRegular'), local('YkarRegular'),
         url('YkarRegular.woff2') format('woff2'),
         url('YkarRegular.woff') format('woff');
     /* ... */
