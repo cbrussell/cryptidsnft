@@ -67,20 +67,20 @@ const Header = () => {
 
           <nav aria-label="Main Menu">
             <ul className="flex items-center space-x-8" >
-              <li className="text-black text-semibold exo-font ">
-                <Link href="#about">
+              <li className="text-black text-semibold exo-font hover:text-orange-900">
+                <Link href="#roadmap">
                   <a>roadmap</a>
                 </Link>
               </li>
 
-              <li className="text-black text-semibold exo-font">
-                <Link href="#gallery">
+              <li className="text-black text-semibold exo-font hover:text-orange-900">
+                <Link href="https://cryptids.gitbook.io/" >
                   <a>docs</a>
                 </Link>
               </li>
 
-              <li className="text-black text-semibold exo-font">
-                <Link href="#faq">
+              <li className="text-black text-semibold exo-font hover:text-orange-900">
+                <Link href="#team">
                   <a>team</a>
                 </Link>
               </li>
