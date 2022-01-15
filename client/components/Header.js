@@ -44,7 +44,7 @@ const Header = () => {
   return (
     
     <>
-      <Head font-custom>
+      <Head>
      
           <title>Cryptids</title>
           <meta name="description" content="Adminstrators of the Metaverse." />
