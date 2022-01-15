@@ -15,8 +15,6 @@ module.exports = {
       },
     extend: { 
       fontFamily: {
-        custom: ['Ykar'],
-        headeritems: ['Exo Regular'],
       },
     },
   },

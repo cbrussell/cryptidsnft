@@ -8,7 +8,6 @@ import Hero from "../components/Hero";
 export default function Home() {
   return (
     <div className="min-h-screen w-full bg-primary">
-      <link rel="preload" href="/fonts/YkarRegular.woff" as="font" type="font/woff2" crossOrigin="anonymous" />
         <Header />
         <Hero />
     </div>

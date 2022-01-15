@@ -52,17 +52,17 @@ const Header = () => {
 
       </Head>
 
-      <header className="sticky inset-x-5 top-0 z-10 h-20 min-w-full text-white border-b border-black backdrop-filter backdrop-blur-lg ">
-        <div className="md:flex items-center  container mx-auto max-w-7xl justify-between h-full">
+      <header className="sticky inset-x-5 top-0 z-10 h-20 min-w-full   text-white border-b border-black backdrop-filter backdrop-blur-lg  ">
+        <div className="md:flex items-center container justify-between  mx-auto max-w-7xl  h-full">
           <div className="flex ">
-          {/* Logo */}
-          <Link href="#">
-            <a className="text-4xl font-thin">
-              <span className="pr-2 font-custom tracking-widest text-transparent bg-clip-text bg-gradient-to-br from-orange-700 to-black">
-                cRyptids
-              </span>
-            </a>
-          </Link>
+            {/* Logo */}
+            <Link href="#">
+              <a className="text-4xl font-thin ">
+                <span className="pr-2 element tracking-widest text-transparent bg-clip-text bg-gradient-to-br from-orange-700 to-black">
+                  cRyptids
+                </span>
+              </a>
+            </Link>
           </div>
 
           {/* Navigation */}
@@ -146,9 +146,9 @@ const Header = () => {
 
           {/* Opensea Twitter Discord Links */}
           <nav aria-label="Contact Menu">
-            <ul className="items-center space-x-6 walletButton">
+            <ul className="walletButton items-center space-x-6 ">
               
-              <li className="cursor-pointer li-hover px-4 py-2 font-extrabold text-black border exo-font border-black rounded-md">
+              <li className="cursor-pointer px-4 py-2 font-extrabold text-black border exo-font border-black rounded-md">
                 <a
                   
                   id="walletButton" 
