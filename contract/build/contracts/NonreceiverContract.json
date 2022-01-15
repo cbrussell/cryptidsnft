@@ -1,0 +1,146 @@
+{
+  "abi": [],
+  "allSourcePaths": {
+    "0": "contracts/NonreceiverContract.sol"
+  },
+  "ast": {
+    "absolutePath": "contracts/NonreceiverContract.sol",
+    "exportedSymbols": {
+      "NonreceiverContract": [
+        2
+      ]
+    },
+    "id": 3,
+    "license": "MIT",
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1,
+        "literals": [
+          "solidity",
+          "^",
+          "0.8",
+          ".10"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "60:24:0"
+      },
+      {
+        "abstract": false,
+        "baseContracts": [],
+        "canonicalName": "NonreceiverContract",
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "fullyImplemented": true,
+        "id": 2,
+        "linearizedBaseContracts": [
+          2
+        ],
+        "name": "NonreceiverContract",
+        "nameLocation": "95:19:0",
+        "nodeType": "ContractDefinition",
+        "nodes": [],
+        "scope": 3,
+        "src": "86:33:0",
+        "usedErrors": []
+      }
+    ],
+    "src": "60:59:0"
+  },
+  "bytecode": "6080604052348015600f57600080fd5b50603f80601d6000396000f3fe6080604052600080fdfea2646970667358221220dad33871bdb80faa752a5db70b59f68a2d6eb118224e8b6ff9aa4f1e41aaa37b64736f6c634300080a0033",
+  "bytecodeSha1": "73df0a6f5d0123eb2b2db0faf62b602aa77c123a",
+  "compiler": {
+    "evm_version": "istanbul",
+    "optimizer": {
+      "enabled": true,
+      "runs": 200
+    },
+    "version": "0.8.10+commit.fc410830"
+  },
+  "contractName": "NonreceiverContract",
+  "coverageMap": {
+    "branches": {
+      "0": {}
+    },
+    "statements": {
+      "0": {}
+    }
+  },
+  "dependencies": [],
+  "deployedBytecode": "6080604052600080fdfea2646970667358221220dad33871bdb80faa752a5db70b59f68a2d6eb118224e8b6ff9aa4f1e41aaa37b64736f6c634300080a0033",
+  "deployedSourceMap": "86:33:0:-:0;;;;;",
+  "language": "Solidity",
+  "natspec": {
+    "kind": "dev",
+    "methods": {},
+    "version": 1
+  },
+  "offset": [
+    86,
+    119
+  ],
+  "opcodes": "PUSH1 0x80 PUSH1 0x40 MSTORE PUSH1 0x0 DUP1 REVERT INVALID LOG2 PUSH5 0x6970667358 0x22 SLT KECCAK256 0xDA 0xD3 CODESIZE PUSH18 0xBDB80FAA752A5DB70B59F68A2D6EB118224E DUP12 PUSH16 0xF9AA4F1E41AAA37B64736F6C63430008 EXP STOP CALLER ",
+  "pcMap": {
+    "0": {
+      "offset": [
+        86,
+        119
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "value": "0x80"
+    },
+    "2": {
+      "fn": null,
+      "offset": [
+        86,
+        119
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "value": "0x40"
+    },
+    "4": {
+      "fn": null,
+      "offset": [
+        86,
+        119
+      ],
+      "op": "MSTORE",
+      "path": "0"
+    },
+    "5": {
+      "fn": null,
+      "offset": [
+        86,
+        119
+      ],
+      "op": "PUSH1",
+      "path": "0",
+      "value": "0x0"
+    },
+    "7": {
+      "fn": null,
+      "offset": [
+        86,
+        119
+      ],
+      "op": "DUP1",
+      "path": "0"
+    },
+    "8": {
+      "fn": null,
+      "offset": [
+        86,
+        119
+      ],
+      "op": "REVERT",
+      "path": "0"
+    }
+  },
+  "sha1": "d3b75771b7fc7a0761f9e8693f7f6651b7d65fd9",
+  "source": "// contracts/MyContract.sol\n// SPDX-License-Identifier: MIT\npragma solidity ^0.8.10;\n\ncontract NonreceiverContract {\n\n}",
+  "sourceMap": "86:33:0:-:0;;;;;;;;;;;;;;;;;;;",
+  "sourcePath": "contracts/NonreceiverContract.sol",
+  "type": "contract"
+}
