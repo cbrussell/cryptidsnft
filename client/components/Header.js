@@ -15,12 +15,13 @@ const Header = () => {
     setStatus(walletResponse.status);
   };
 
-  useEffect(async () => {
+  useEffect( () => {
+    async function fetchData() {
     const walletResponse = await getCurrentWalletConnected();
     setWalletAddress(walletResponse.address);
-    setStatus(walletResponse.status);
-
+    setStatus(walletResponse.status); // eslint-disable-next-line react-hooks/exhaustive-deps
     addWalletListener();
+     } fetchData();
   }, []);
 
   const addWalletListener = () => {
@@ -143,7 +144,7 @@ const Header = () => {
               
               <li className="cursor-pointer li-hover px-4 py-2 font-extrabold text-black border exo-font border-black rounded-md">
                 <a
-                  className=""
+                  
                   id="walletButton" 
                   onClick={connectWalletPressed}
             

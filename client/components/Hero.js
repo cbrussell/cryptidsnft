@@ -14,17 +14,18 @@ const Hero = () => {
   const { status, setStatus } = useStatus();
 
   const [count, setCount] = useState(0);
-  const [maxMintAmount, setMaxMintAmount] = useState(0);
+  const [maxMintAmount, setMaxMintAmount] = useState(1);
   const [totalSupply, setTotalSupply] = useState(0);
-  const [nftPrice, setNftPrice] = useState("0.111");
+  const [nftPrice, setNftPrice] = useState("0.08");
   const [isSaleActive, setIsSaleActive] = useState(0);
 
-  useEffect(async () => {
+  useEffect( () => {
+    async function fetchData() {
     setMaxMintAmount(await getMaxMintAmount());
     setNftPrice(await getNftPrice());
     setIsSaleActive(await getStage());
     await updateTotalSupply();
-
+    } fetchData()
   });
 
   const updateTotalSupply = async () => {
@@ -70,7 +71,7 @@ const Hero = () => {
               {/* Minted NFT Ratio */}
               <p className="bg-gray-100 rounded-md text-gray-800 font-extrabold text-lg my-4 py-1 px-3">
                 <span className="text-[#d35c5c]">{`${totalSupply}`}</span> /
-                11,111
+                8,888
               </p>
 
               <div className="flex items-center mt-6 text-3xl font-bold text-gray-200">
