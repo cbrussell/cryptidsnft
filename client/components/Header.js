@@ -53,7 +53,8 @@ const Header = () => {
       </Head>
 
       <header className="sticky inset-x-5 top-0 z-10 h-20 min-w-full text-white border-b border-black backdrop-filter backdrop-blur-lg ">
-        <div className="flex items-center container mx-auto max-w-7xl justify-between h-full">
+        <div className="md:flex items-center  container mx-auto max-w-7xl justify-between h-full">
+          <div className="flex ">
           {/* Logo */}
           <Link href="#">
             <a className="text-4xl font-thin">
@@ -62,6 +63,7 @@ const Header = () => {
               </span>
             </a>
           </Link>
+          </div>
 
           {/* Navigation */}
 
