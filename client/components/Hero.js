@@ -127,7 +127,7 @@ const Hero = () => {
 
               {/* Mint Button */}
               <button
-                className="mt-6 py-2 px-4 text-center text-white uppercase bg-[#222222] border-b-4 border-orange-700 rounded hover:bg-orange-500 hover:border-orange-400"
+                className="mt-6 py-2 px-4 text-center text-white uppercase bg-[#222222] border-b-4 border-orange-700 rounded hover:bg-cryptid-6 hover:border-orange-400"
                 onClick={mintCryptid}
               >
                 Mint Cryptid

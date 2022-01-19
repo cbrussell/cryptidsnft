@@ -11,6 +11,7 @@ module.exports = {
         'cryptid-3': '#ee9681',
         'cryptid-4': '#d27a6f',
         'cryptid-5': '#222222',
+        'cryptid-6': '#B25E54',
         },
       },
     
