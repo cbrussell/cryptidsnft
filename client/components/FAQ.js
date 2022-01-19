@@ -8,7 +8,7 @@ export default function MyApp() {
 
   return (
     <div id="faq">
-      <div class=" flex flex-col items-center justify-center sm:px-0 px-6 z-20 pb-32">
+      <div class=" flex flex-col items-center justify-center sm:px-0 px-6 z-20 pb-32 bg-cryptid-5">
         <div class="md:py-36 py-20">
           <h1
             role="heading"
@@ -18,7 +18,7 @@ export default function MyApp() {
           </h1>
         </div>
         <div class="lg:w-1/2 md:w-8/12 sm:w-9/12 w-full">
-          <div class="bg-white shadow rounded p-8">
+          <div class="bg-white shadow rounded p-8 ">
             <div class="flex items-center justify-between">
               <div>
                 <h2 class="font-bold font-comfortaa uppercase text-lg leading-none text-gray-800">
@@ -88,7 +88,7 @@ export default function MyApp() {
           <div class="bg-white shadow rounded p-8 mt-8">
             <div class="flex items-center justify-between">
               <div>
-                <h2 class="font-bold font-comfortaa uppercase text-lg leading-none text-gray-800">
+                <h2 class="font-bold font-comfortaa uppercase text-lg leading-none text-gray-800 cursor-pointer">
                   How do I buy an NFT?
                 </h2>
               </div>
@@ -237,6 +237,7 @@ export default function MyApp() {
                     height="6"
                     viewBox="0 0 10 6"
                     fill="none"
+                    
                     xmlns="http://www.w3.org/2000/svg"
                   >
                     <path

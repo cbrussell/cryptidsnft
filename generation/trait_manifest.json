@@ -292,6 +292,76 @@
                                 "weight": 1
                             }
                         ]
+                    },
+                    {
+                        "color": "black",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "leftbackleg_deer_black",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "blue",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "leftbackleg_deer_blue",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "brown",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "leftbackleg_deer_brown",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "gray",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "leftbackleg_deer_gray",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "purple",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "leftbackleg_deer_purple",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "white",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "leftbackleg_deer_white",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "yellow",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "leftbackleg_deer_yellow",
+                                "weight": 1
+                            }
+                        ]
                     }
                 ]
             },
@@ -315,6 +385,76 @@
                         "traits": [
                             {
                                 "trait": "leftbackleg_wolf_orange",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "black",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "leftbackleg_wolf_black",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "blue",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "leftbackleg_wolf_blue",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "brown",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "leftbackleg_wolf_brown",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "gray",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "leftbackleg_wolf_gray",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "purple",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "leftbackleg_wolf_purple",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "white",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "leftbackleg_wolf_white",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "yellow",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "leftbackleg_wolf_yellow",
                                 "weight": 1
                             }
                         ]
@@ -344,6 +484,76 @@
                                 "weight": 1
                             }
                         ]
+                    },
+                    {
+                        "color": "black",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "leftbackleg_eagle_black",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "blue",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "leftbackleg_eagle_blue",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "brown",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "leftbackleg_eagle_brown",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "gray",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "leftbackleg_eagle_gray",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "purple",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "leftbackleg_eagle_purple",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "white",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "leftbackleg_eagle_white",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "yellow",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "leftbackleg_eagle_yellow",
+                                "weight": 1
+                            }
+                        ]
                     }
                 ]
             },
@@ -370,6 +580,76 @@
                                 "weight": 1
                             }
                         ]
+                    },
+                    {
+                        "color": "black",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "leftbackleg_lion_black",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "blue",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "leftbackleg_lion_blue",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "brown",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "leftbackleg_lion_brown",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "gray",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "leftbackleg_lion_gray",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "purple",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "leftbackleg_lion_purple",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "white",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "leftbackleg_lion_white",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "yellow",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "leftbackleg_lion_yellow",
+                                "weight": 1
+                            }
+                        ]
                     }
                 ]
             },
@@ -393,6 +673,76 @@
                         "traits": [
                             {
                                 "trait": "leftbackleg_horse_orange",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "black",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "leftbackleg_horse_black",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "blue",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "leftbackleg_horse_blue",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "brown",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "leftbackleg_horse_brown",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "gray",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "leftbackleg_horse_gray",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "purple",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "leftbackleg_horse_purple",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "white",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "leftbackleg_horse_white",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "yellow",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "leftbackleg_horse_yellow",
                                 "weight": 1
                             }
                         ]
@@ -428,6 +778,76 @@
                                 "weight": 1
                             }
                         ]
+                    },
+                    {
+                        "color": "black",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "leftfrontleg_deer_black",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "blue",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "leftfrontleg_deer_blue",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "brown",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "leftfrontleg_deer_brown",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "gray",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "leftfrontleg_deer_gray",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "purple",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "leftfrontleg_deer_purple",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "white",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "leftfrontleg_deer_white",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "yellow",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "leftfrontleg_deer_yellow",
+                                "weight": 1
+                            }
+                        ]
                     }
                 ]
             },
@@ -451,6 +871,76 @@
                         "traits": [
                             {
                                 "trait": "leftfrontleg_wolf_orange",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "black",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "leftfrontleg_wolf_black",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "blue",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "leftfrontleg_wolf_blue",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "brown",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "leftfrontleg_wolf_brown",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "gray",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "leftfrontleg_wolf_gray",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "purple",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "leftfrontleg_wolf_purple",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "white",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "leftfrontleg_wolf_white",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "yellow",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "leftfrontleg_wolf_yellow",
                                 "weight": 1
                             }
                         ]
@@ -480,6 +970,76 @@
                                 "weight": 1
                             }
                         ]
+                    },
+                    {
+                        "color": "black",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "leftfrontleg_eagle_black",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "blue",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "leftfrontleg_eagle_blue",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "brown",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "leftfrontleg_eagle_brown",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "gray",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "leftfrontleg_eagle_gray",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "purple",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "leftfrontleg_eagle_purple",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "white",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "leftfrontleg_eagle_white",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "yellow",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "leftfrontleg_eagle_yellow",
+                                "weight": 1
+                            }
+                        ]
                     }
                 ]
             },
@@ -506,6 +1066,76 @@
                                 "weight": 1
                             }
                         ]
+                    },
+                    {
+                        "color": "black",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "leftfrontleg_lion_black",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "blue",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "leftfrontleg_lion_blue",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "brown",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "leftfrontleg_lion_brown",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "gray",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "leftfrontleg_lion_gray",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "purple",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "leftfrontleg_lion_purple",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "white",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "leftfrontleg_lion_white",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "yellow",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "leftfrontleg_lion_yellow",
+                                "weight": 1
+                            }
+                        ]
                     }
                 ]
             },
@@ -529,6 +1159,76 @@
                         "traits": [
                             {
                                 "trait": "leftfrontleg_horse_orange",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "black",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "leftfrontleg_horse_black",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "blue",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "leftfrontleg_horse_blue",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "brown",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "leftfrontleg_horse_brown",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "gray",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "leftfrontleg_horse_gray",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "purple",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "leftfrontleg_horse_purple",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "white",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "leftfrontleg_horse_white",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "yellow",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "leftfrontleg_horse_yellow",
                                 "weight": 1
                             }
                         ]
@@ -1312,6 +2012,76 @@
                                 "weight": 1
                             }
                         ]
+                    },
+                    {
+                        "color": "black",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "rightbackleg_eagle_black",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "blue",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "rightbackleg_eagle_blue",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "brown",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "rightbackleg_eagle_brown",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "gray",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "rightbackleg_eagle_gray",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "purple",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "rightbackleg_eagle_purple",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "white",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "rightbackleg_eagle_white",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "yellow",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "rightbackleg_eagle_yellow",
+                                "weight": 1
+                            }
+                        ]
                     }
                 ]
             },
@@ -1338,6 +2108,76 @@
                                 "weight": 1
                             }
                         ]
+                    },
+                    {
+                        "color": "black",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "rightbackleg_wolf_black",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "blue",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "rightbackleg_wolf_blue",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "brown",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "rightbackleg_wolf_brown",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "gray",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "rightbackleg_wolf_gray",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "purple",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "rightbackleg_wolf_purple",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "white",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "rightbackleg_wolf_white",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "yellow",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "rightbackleg_wolf_yellow",
+                                "weight": 1
+                            }
+                        ]
                     }
                 ]
             },
@@ -1345,6 +2185,16 @@
                 "category": "deer",
                 "weight": 1,
                 "colors": [
+                    {
+                        "color": "red",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "rightbackleg_deer_red",
+                                "weight": 1
+                            }
+                        ]
+                    },
                     {
                         "color": "orange",
                         "weight": 1,
@@ -1356,11 +2206,71 @@
                         ]
                     },
                     {
-                        "color": "red",
+                        "color": "black",
                         "weight": 1,
                         "traits": [
                             {
-                                "trait": "rightbackleg_deer_red",
+                                "trait": "rightbackleg_deer_black",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "blue",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "rightbackleg_deer_blue",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "brown",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "rightbackleg_deer_brown",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "gray",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "rightbackleg_deer_gray",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "purple",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "rightbackleg_deer_purple",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "white",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "rightbackleg_deer_white",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "yellow",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "rightbackleg_deer_yellow",
                                 "weight": 1
                             }
                         ]
@@ -1372,6 +2282,16 @@
                 "weight": 1,
                 "colors": [
                     {
+                        "color": "red",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "rightbackleg_horse_red",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
                         "color": "orange",
                         "weight": 1,
                         "traits": [
@@ -1382,11 +2302,71 @@
                         ]
                     },
                     {
-                        "color": "red",
+                        "color": "black",
                         "weight": 1,
                         "traits": [
                             {
-                                "trait": "rightbackleg_horse_red",
+                                "trait": "rightbackleg_horse_black",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "blue",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "rightbackleg_horse_blue",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "brown",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "rightbackleg_horse_brown",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "gray",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "rightbackleg_horse_gray",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "purple",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "rightbackleg_horse_purple",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "white",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "rightbackleg_horse_white",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "yellow",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "rightbackleg_horse_yellow",
                                 "weight": 1
                             }
                         ]
@@ -1398,6 +2378,16 @@
                 "weight": 1,
                 "colors": [
                     {
+                        "color": "red",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "rightbackleg_lion_red",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
                         "color": "orange",
                         "weight": 1,
                         "traits": [
@@ -1408,11 +2398,71 @@
                         ]
                     },
                     {
-                        "color": "red",
+                        "color": "black",
                         "weight": 1,
                         "traits": [
                             {
-                                "trait": "rightbackleg_lion_red",
+                                "trait": "rightbackleg_lion_black",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "blue",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "rightbackleg_lion_blue",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "brown",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "rightbackleg_lion_brown",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "gray",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "rightbackleg_lion_gray",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "purple",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "rightbackleg_lion_purple",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "white",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "rightbackleg_lion_white",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "yellow",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "rightbackleg_lion_yellow",
                                 "weight": 1
                             }
                         ]
@@ -1430,11 +2480,51 @@
                 "weight": 1,
                 "colors": [
                     {
-                        "color": "red",
+                        "color": "black",
                         "weight": 1,
                         "traits": [
                             {
-                                "trait": "rightfrontleg_eagle_red",
+                                "trait": "rightfrontleg_eagle_black",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "blue",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "rightfrontleg_eagle_blue",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "brown",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "rightfrontleg_eagle_brown",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "gray",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "rightfrontleg_eagle_gray",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "purple",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "rightfrontleg_eagle_purple",
                                 "weight": 1
                             }
                         ]
@@ -1448,6 +2538,36 @@
                                 "weight": 1
                             }
                         ]
+                    },
+                    {
+                        "color": "red",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "rightfrontleg_eagle_red",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "white",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "rightfrontleg_eagle_white",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "yellow",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "rightfrontleg_eagle_yellow",
+                                "weight": 1
+                            }
+                        ]
                     }
                 ]
             },
@@ -1456,11 +2576,51 @@
                 "weight": 1,
                 "colors": [
                     {
-                        "color": "red",
+                        "color": "black",
                         "weight": 1,
                         "traits": [
                             {
-                                "trait": "rightfrontleg_wolf_red",
+                                "trait": "rightfrontleg_wolf_black",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "blue",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "rightfrontleg_wolf_blue",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "brown",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "rightfrontleg_wolf_brown",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "gray",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "rightfrontleg_wolf_gray",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "purple",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "rightfrontleg_wolf_purple",
                                 "weight": 1
                             }
                         ]
@@ -1474,6 +2634,36 @@
                                 "weight": 1
                             }
                         ]
+                    },
+                    {
+                        "color": "red",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "rightfrontleg_wolf_red",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "white",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "rightfrontleg_wolf_white",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "yellow",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "rightfrontleg_wolf_yellow",
+                                "weight": 1
+                            }
+                        ]
                     }
                 ]
             },
@@ -1481,6 +2671,56 @@
                 "category": "horse",
                 "weight": 1,
                 "colors": [
+                    {
+                        "color": "black",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "rightfrontleg_horse_black",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "blue",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "rightfrontleg_horse_blue",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "brown",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "rightfrontleg_horse_brown",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "gray",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "rightfrontleg_horse_gray",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "purple",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "rightfrontleg_horse_purple",
+                                "weight": 1
+                            }
+                        ]
+                    },
                     {
                         "color": "orange",
                         "weight": 1,
@@ -1500,6 +2740,26 @@
                                 "weight": 1
                             }
                         ]
+                    },
+                    {
+                        "color": "white",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "rightfrontleg_horse_white",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "yellow",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "rightfrontleg_horse_yellow",
+                                "weight": 1
+                            }
+                        ]
                     }
                 ]
             },
@@ -1507,6 +2767,56 @@
                 "category": "deer",
                 "weight": 1,
                 "colors": [
+                    {
+                        "color": "black",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "rightfrontleg_deer_black",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "blue",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "rightfrontleg_deer_blue",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "brown",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "rightfrontleg_deer_brown",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "gray",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "rightfrontleg_deer_gray",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "purple",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "rightfrontleg_deer_purple",
+                                "weight": 1
+                            }
+                        ]
+                    },
                     {
                         "color": "orange",
                         "weight": 1,
@@ -1526,6 +2836,26 @@
                                 "weight": 1
                             }
                         ]
+                    },
+                    {
+                        "color": "white",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "rightfrontleg_deer_white",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "yellow",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "rightfrontleg_deer_yellow",
+                                "weight": 1
+                            }
+                        ]
                     }
                 ]
             },
@@ -1533,6 +2863,56 @@
                 "category": "lion",
                 "weight": 1,
                 "colors": [
+                    {
+                        "color": "black",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "rightfrontleg_lion_black",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "blue",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "rightfrontleg_lion_blue",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "brown",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "rightfrontleg_lion_brown",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "gray",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "rightfrontleg_lion_gray",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "purple",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "rightfrontleg_lion_purple",
+                                "weight": 1
+                            }
+                        ]
+                    },
                     {
                         "color": "orange",
                         "weight": 1,
@@ -1549,6 +2929,26 @@
                         "traits": [
                             {
                                 "trait": "rightfrontleg_lion_red",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "white",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "rightfrontleg_lion_white",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "yellow",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "rightfrontleg_lion_yellow",
                                 "weight": 1
                             }
                         ]

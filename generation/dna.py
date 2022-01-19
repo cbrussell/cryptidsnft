@@ -44,10 +44,10 @@ def get_dna(trait_manifest: TraitManifest, color_manifest: ColorManifest, backgr
         tail, tailtype, tailcolor, tail_frames = get_trait_color(trait_manifest, "1_tail", color)
         data.update(tail)
 
-        leftbackleg, backanimalleg, leftbackleg_color, leftbackleg_frames = get_trait_color(trait_manifest, "2_leftbackleg", color)
+        leftbackleg, backanimalleg, leftbackleg_color, leftbackleg_frames = get_trait(trait_manifest, "2_leftbackleg")
         data.update(leftbackleg)
 
-        leftfrontleg, frontanimalleg, leftfrontleg_color, leftfrontleg_frames  = get_trait_color(trait_manifest, "3_leftfrontleg", color)
+        leftfrontleg, frontanimalleg, leftfrontleg_color, leftfrontleg_frames  = get_trait(trait_manifest, "3_leftfrontleg")
         data.update(leftfrontleg)
 
         back, backtype, backcolor, back_frames = get_trait(trait_manifest, "4_back")
@@ -106,10 +106,10 @@ def get_dna(trait_manifest: TraitManifest, color_manifest: ColorManifest, backgr
                 neckshadow, neckshadow_frames = get_trait_category(trait_manifest, "6d_neckshadow", animal)[0:4:3]
                 data.update(neckshadow)
 
-        rightbackleg, rightbackleg_frames = get_trait_category_color(trait_manifest, "8_rightbackleg", backanimalleg, color)[0:4:3]
+        rightbackleg, rightbackleg_frames = get_trait_category(trait_manifest, "8_rightbackleg", backanimalleg)[0:4:3]
         data.update(rightbackleg)
 
-        rightfrontleg, rightfrontleg_frames = get_trait_category_color(trait_manifest, "9_rightfrontleg", frontanimalleg, color)[0:4:3]
+        rightfrontleg, rightfrontleg_frames = get_trait_category(trait_manifest, "9_rightfrontleg", frontanimalleg)[0:4:3]
         data.update(rightfrontleg)
 
         ears, ears_frames = get_trait_color(trait_manifest, "10_ears", color)[0:4:3]
