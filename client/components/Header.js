@@ -25,7 +25,7 @@ const Header = () => {
 
     addWalletListener();
      } fetchData();
-  });
+  }, []);
 
   const addWalletListener = () => {
     if (window.ethereum) {
