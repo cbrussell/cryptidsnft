@@ -52,13 +52,13 @@ const Header = () => {
 
       </Head>
 
-      <header className="sticky inset-x-5 top-0 z-10 h-20 min-w-full  space-x-6 text-white border-b border-black backdrop-filter backdrop-blur-lg  ">
+      <header className="sticky inset-x-5 top-0 z-10 h-20 min-w-full  space-x-6 text-white  backdrop-filter backdrop-blur-lg  ">
         <div className="md:flex items-center container justify-between  mx-auto max-w-7xl  h-full">
           <div className="flex ">
             {/* Logo */}
             <Link href="#">
               <a className="text-4xl font-thin ">
-                <span className="pr-2 element tracking-widest text-transparent bg-clip-text bg-gradient-to-br from-orange-700 to-black">
+                <span className="pr-2 element tracking-widest text-transparent bg-clip-text bg-gradient-to-br text-black">
                   cRyptids
                 </span>
               </a>
