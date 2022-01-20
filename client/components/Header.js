@@ -124,7 +124,7 @@ const Header = () => {
               </li>
 
               <li>
-                <a href="https://discord.gg/PaqreejB" target="_blank" rel="noreferrer">
+                <a href="https://discord.gg/cryptids" target="_blank" rel="noreferrer">
                   <svg
                     className="w-7 h-7"
                     stroke="currentColor"
