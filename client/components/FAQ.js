@@ -73,7 +73,7 @@ export default function MyApp() {
             {faq1 && (
               <ul className="">
                 <li>
-                  <p className="text-lg leading-normal text-gray-600 mt-4">
+                  <p className="text-lg leading-normal text-gray-600 mt-4 text-justify">
                   Cryptids are the original inhabitants of the Metaverse, despite the original expectations
                   of the Pioneers. They choose their appearance by looking into the faded memories of their observer (or prey). 
                   To one, a wolf; a fox to another. To some, a form enitrely unknown.  
@@ -142,7 +142,7 @@ export default function MyApp() {
             {faq2 && (
               <ul>
                 <li>
-                  <p className="text-lg leading-normal text-gray-600 mt-4 ">
+                  <p className="text-lg leading-normal text-gray-600 mt-4 text-justify">
                     The Pioneers represent the first wave explorers to enter Nos Atomos. Escaping the unfavorable
                     conditions of Terra, they've bought a one-way ticket with hopes to find a better
                     future in the Metaverse. 
@@ -207,7 +207,7 @@ export default function MyApp() {
             {faq3 && (
               <ul>
                 <li>
-                  <p className="text-lg leading-normal text-gray-600 mt-4 ">
+                  <p className="text-lg leading-normal text-gray-600 mt-4 text-justify">
                     The Metanauts are a trained scientific entity, capable of entering and exiting the
                     Metaverse at yearly cycles. Initially private scientific group, the Metanauts now share their lands
                     with the Pioneers, despite their best attempts to guard their discovery.
@@ -271,7 +271,7 @@ export default function MyApp() {
               {faq4 && (
                 <ul>
                   <li>
-                    <p className="text-lg leading-normal text-gray-600 mt-4 ">
+                    <p className="text-lg leading-normal text-gray-600 mt-4 text-justify">
                       Nos Atomos is the first settled Metaversal Zone, advertised to be most abundant of resources
                       with acceptable climates. Intially thought be uninhabited, the Pioneers have discovered evidence 
                       of prior civilizations.
