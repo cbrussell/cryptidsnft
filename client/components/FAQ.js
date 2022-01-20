@@ -143,9 +143,9 @@ export default function MyApp() {
               <ul>
                 <li>
                   <p className="text-lg leading-normal text-gray-600 mt-4 text-justify">
-                    The Pioneers represent the first wave explorers to enter Nos Atomos. Escaping the unfavorable
+                    {`The Pioneers represent the first wave explorers to enter Nos Atomos. Escaping the unfavorable
                     conditions of Terra, they've bought a one-way ticket with hopes to find a better
-                    future in the Metaverse. 
+                    future in the Metaverse.`}
                   </p>
                 </li>
               </ul>
