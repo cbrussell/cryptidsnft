@@ -58,7 +58,7 @@ const Header = () => {
             {/* Logo */}
             <Link href="#">
               <a className="text-4xl font-thin ">
-                <span className="pr-2 element tracking-widesttext-transparent bg-clip-text bg-gradient-to-br text-black">
+                <span className="pr-2 element tracking-widest bg-clip-text bg-gradient-to-br text-black">
                   cRyptids
                 </span>
               </a>
