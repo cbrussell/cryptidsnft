@@ -74,13 +74,13 @@ export default function MyApp() {
               <ul className="">
                 <li>
                   <p className="text-lg leading-normal text-gray-600 mt-4 text-justify">
-                  Cryptids are the original inhabitants of the Metaverse, despite the original expectations
+                  Cryptids are the original inhabitants of the Metaverse, despite the expectations
                   of the Pioneers. They choose their appearance by looking into the faded memories of their observer (or prey). 
                   To one, a wolf; a fox to another. To some, a form enitrely unknown.  
                   <br></br>
                   <br></br>
             
-                  Only through deeper exploration into Nos Atomos can we discover their true nature of CRYPTIDS...
+                  Only through deeper exploration into Nos Atomos can we discover the true nature of CRYPTIDS...
                   </p>
                 </li>
               </ul>
