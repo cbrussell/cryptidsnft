@@ -52,13 +52,13 @@ const Header = () => {
 
       </Head>
 
-      <header className="sticky inset-x-5 top-0 z-10 h-20 min-w-full  space-x-6 text-white  backdrop-filter bg-cryptid-1 ">
+      <header className="sticky inset-x-5 top-0 z-10 h-20 min-w-full justify- space-x-6 text-white  backdrop-filter bg-cryptid-1 ">
         <div className="md:flex items-center container justify-between  mx-auto max-w-7xl  h-full">
-          <div className="flex ">
+          <div className="flex justify-around">
             {/* Logo */}
             <Link href="#">
               <a className="text-4xl font-thin ">
-                <span className="pr-2 element tracking-widest text-transparent bg-clip-text bg-gradient-to-br text-black">
+                <span className="pr-2 element tracking-widesttext-transparent bg-clip-text bg-gradient-to-br text-black">
                   cRyptids
                 </span>
               </a>
@@ -68,7 +68,8 @@ const Header = () => {
           {/* Navigation */}
 
           <nav aria-label="Main Menu">
-            <ul className="flex items-center space-x-8" >
+            <ul className="flex justify-around items-center space-x-6" >
+             
               <li className="text-black text-semibold exo-font hover:text-orange-900">
                 <Link href="#roadmap">
                   <a>roadmap</a>
