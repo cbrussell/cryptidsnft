@@ -52,7 +52,7 @@ const Header = () => {
 
       </Head>
 
-      <header className="sticky inset-x-5 top-0 z-10 h-20 min-w-full  space-x-6 text-white  backdrop-filter backdrop-blur-lg  ">
+      <header className="sticky inset-x-5 top-0 z-10 h-20 min-w-full  space-x-6 text-white  backdrop-filter bg-cryptid-1 ">
         <div className="md:flex items-center container justify-between  mx-auto max-w-7xl  h-full">
           <div className="flex ">
             {/* Logo */}
