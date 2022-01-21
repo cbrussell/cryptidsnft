@@ -41,7 +41,7 @@ export default function MyApp() {
           </h2>
           <div className="items-start flex flex-row justify-center">
             <div>
-              <div class=" flex flex-row flex-start mb-10 px-44 text-justify ">
+              <div className=" flex flex-row flex-start mb-10 px-44 text-justify ">
                 <div className="element mr-10 text-2xl text-white ">
                   01
                 </div>
@@ -75,7 +75,7 @@ export default function MyApp() {
 
           <div className="items-start flex-start justify-center">
             <div>
-              <div class=" flex flex-row flex-start mb-10 px-44 text-justify ">
+              <div className=" flex flex-row flex-start mb-10 px-44 text-justify ">
                 <div className="element mr-10 text-2xl text-white ">
                   02
                 </div>
@@ -114,7 +114,7 @@ export default function MyApp() {
      
           <div className="items-start flex-start justify-center">
             <div>
-              <div class=" flex flex-row flex-start mb-10 px-44 text-justify ">
+              <div className=" flex flex-row flex-start mb-10 px-44 text-justify ">
                 <div className="element mr-10 text-2xl text-white ">
                   03
                 </div>
@@ -132,7 +132,7 @@ export default function MyApp() {
           </div>
           <div className="items-start flex-start justify-center">
             <div>
-              <div class=" flex flex-row flex-start mb-10 px-44 text-justify ">
+              <div className=" flex flex-row flex-start mb-10 px-44 text-justify ">
                 <div className="element mr-10 text-2xl text-white ">
                   04
                 </div>
