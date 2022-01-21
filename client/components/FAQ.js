@@ -74,9 +74,9 @@ export default function MyApp() {
               <ul className="">
                 <li>
                   <p className="text-lg leading-normal text-gray-600 mt-4 text-justify">
-                  Cryptids are the original inhabitants of the Metaverse, despite the expectations
-                  of the Pioneers. They choose their appearance by looking into the faded memories of their observer (or prey). 
-                  To one, a wolf; a fox to another. To some, a form enitrely unknown.  
+                  Cryptids are the first known inhabitants of the Metaverse. Only recently proven to exist and even more recently began to be understood. 
+                  Cryptids choose their appearance by looking into our faded memories. To one, a wolf; a fox to another. To some, a form enitrely unknown.  
+                   
                   <br></br>
                   <br></br>
             
@@ -143,7 +143,7 @@ export default function MyApp() {
               <ul>
                 <li>
                   <p className="text-lg leading-normal text-gray-600 mt-4 text-justify">
-                    {`The Pioneers represent the first wave explorers to enter Nos Atomos. Escaping the unfavorable
+                    {`The Pioneers represent the first wave explorers to Nos Atomos. Escaping the unfavorable
                     conditions of Terra, they've bought a one-way ticket with hopes to find a better
                     future in the Metaverse.`}
                   </p>
@@ -208,8 +208,8 @@ export default function MyApp() {
               <ul>
                 <li>
                   <p className="text-lg leading-normal text-gray-600 mt-4 text-justify">
-                    The Metanauts are a trained scientific entity, capable of entering and exiting the
-                    Metaverse at yearly cycles. Initially private scientific group, the Metanauts now share their lands
+                    The Metanauts are a private scientific entity, capable of entering and exiting the
+                    Metaverse at yearly cycles. Original a clandestine entity, the Metanauts now share their lands
                     with the Pioneers, despite their best attempts to guard their discovery.
                   </p>
                 </li>
@@ -272,10 +272,9 @@ export default function MyApp() {
                 <ul>
                   <li>
                     <p className="text-lg leading-normal text-gray-600 mt-4 text-justify">
-                      Nos Atomos is the first settled Metaversal Zone, advertised to be most abundant of resources
-                      with acceptable climates. Intially thought be uninhabited, the Pioneers have discovered evidence 
+                      Nos Atomos is the first settled Metaversal Zone, chosen by the Metanauts due to its abundant resources and 
+                      proximity to the Kármán Gate. Intially thought be uninhabited, the Pioneers have discovered evidence 
                       of prior civilizations.
-                      
                     </p>
                   </li>
                 </ul>

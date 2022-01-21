@@ -57,6 +57,13 @@ const Hero = () => {
     <main id="main" className="h-screen py-8 bg-pattern">
       <div className="container max-w-6xl mx-auto flex flex-col items-center pt-4">
         <div className="flex flex-col items-center">
+          <div className="flex"><Image
+            src="/images/BlankCryptid6.png"
+            width="300"
+            height="300"
+            alt="emoji faces gif"
+            className="rounded-md"
+          />
           <Image
             src="/images/BlankCryptid.png"
             width="300"
@@ -64,6 +71,14 @@ const Hero = () => {
             alt="emoji faces gif"
             className="rounded-md"
           />
+          <Image
+            src="/images/BlankCryptid2.png"
+            width="300"
+            height="300"
+            alt="emoji faces gif"
+            className="rounded-md"
+          />
+          </div>
 
           {isSaleActive > 0 ? (
             <>

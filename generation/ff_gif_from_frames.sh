@@ -2,7 +2,7 @@ cd output || exit
 mkdir videos
 cd raw || exit
 
-for i in {1..20}
+for i in {2..2}
 do
     cd "${i}" || exit
 
