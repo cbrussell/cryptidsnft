@@ -73,8 +73,8 @@ const Header = () => {
             <ul className="flex justify-around items-center space-x-6" >
              
               <li className="text-black text-semibold exo-font hover:text-orange-900">
-                <Link href="#roadmap">
-                  <a>roadmap</a>
+                <Link href="#synopsis">
+                  <a>synopsis</a>
                 </Link>
               </li>
 
@@ -85,8 +85,8 @@ const Header = () => {
               </li>
 
               <li className="text-black text-semibold exo-font hover:text-orange-900">
-                <Link href="#team">
-                  <a>team</a>
+                <Link href="#faq">
+                  <a>faq</a>
                 </Link>
               </li>
               <li>

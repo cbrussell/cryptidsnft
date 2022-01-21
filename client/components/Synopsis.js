@@ -4,7 +4,7 @@ export default function MyApp() {
 
 
   return (
-    <div id="about">
+    <div id="synopsis">
       <div className="flex flex-col items-center justify-center sm:px-0 px-6 z-20  bg-cryptid-5 ">
         <div className="md:py-30 py-20">
           <h2 role="heading" className="element md:text-4xl text-2xl mb-6 text-center font-bold  leading-10 text-white">
