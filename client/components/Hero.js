@@ -20,12 +20,15 @@ const Hero = () => {
   const [nftPrice, setNftPrice] = useState("0.08");
   const [isSaleActive, setIsSaleActive] = useState(0);
 
-  useEffect(async () => {
+  useEffect(() => {
+    async function fetchData() {
     setMaxMintAmount(await getMaxMintAmount());
     setNftPrice(await getNftPrice());
     setIsSaleActive(await getStage());
     await updateTotalSupply();
-  });
+    }
+    fetchData();
+  }, []);
 
   const updateTotalSupply = async () => {
     const mintedCount = await getTotalSupply();

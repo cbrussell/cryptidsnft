@@ -10,10 +10,10 @@ export default function MyApp() {
   return (
     <div id="faq">
       <div className=" flex flex-col items-center justify-center sm:px-0 px-6 z-20 pb-32 bg-pattern ">
-        <div className="md:py-36 py-20">
+        <div className="md:py-30 py-20">
           <h1
             role="heading"
-            className="xl:text-6xl md:text-4xl text-lg font-bold leading-10 element text-white"
+            className=" md:text-4xl text-2xl  leading-10 element text-white"
           >
             FAQ
           </h1>
@@ -274,7 +274,7 @@ export default function MyApp() {
                     <p className="text-lg leading-normal text-gray-600 mt-4 text-justify">
                       Nos Atomos is the first settled Metaversal Zone, chosen by the Metanauts due to its abundant resources and 
                       proximity to the Kármán Gate. Intially thought be uninhabited, the Pioneers have discovered evidence 
-                      of prior civilizations.
+                      of prior civilizations. Pe
                     </p>
                   </li>
                 </ul>

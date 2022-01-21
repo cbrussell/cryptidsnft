@@ -19,14 +19,14 @@ const Header = () => {
 
 
 
-  useEffect( () => {
+  useEffect(() => {
     async function fetchData() {
     const walletResponse = await getCurrentWalletConnected();
     setWalletAddress(walletResponse.address);
     setStatus(walletResponse.status); 
-
     addWalletListener();
-     } fetchData();
+    }
+    fetchData();
   }, []);
 
   const addWalletListener = () => {

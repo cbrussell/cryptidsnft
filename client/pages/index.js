@@ -3,6 +3,7 @@ import Image from "next/image";
 
 import Header from "../components/Header";
 import Hero from "../components/Hero";
+import Synopsis from "../components/Synopsis";
 import FAQ from "../components/FAQ";
 
 export default function Home() {
@@ -10,6 +11,7 @@ export default function Home() {
     <div className="min-h-screen w-full bg-primary">
         <Header />
         <Hero />
+        <Synopsis />
         <FAQ />
  
     </div>
