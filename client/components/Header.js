@@ -6,7 +6,9 @@ import { connectWallet, getCurrentWalletConnected } from "../utils/interact";
 require('typeface-exo')
 
 const Header = () => {
+
   const { setStatus } = useStatus();
+  
   const [walletAddress, setWalletAddress] = useState("");
 
   const connectWalletPressed = async () => {

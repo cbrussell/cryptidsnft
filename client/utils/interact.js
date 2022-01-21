@@ -76,7 +76,7 @@ export const getCurrentWalletConnected = async () => {
             {" "}
             🦊{" "}
             
-            <a target="_blank" href="https://metamask.io/download.html">
+            <a target="_blank" href="https://metamask.io/download.html" class="alert">
               You must install Metamask, a virtual Ethereum wallet, in your
               browser.
             </a>
@@ -144,10 +144,14 @@ export const mintNFT = async (mintAmount) => {
     });
     return {
       success: true,
-      status:
-      
-        "✅ Check out your transaction on Etherscan: https://rinkeby.etherscan.io/tx/" +
-        txHash, 
+      status:( 
+        <p>
+          {" "}
+          🦊Check out your transaction on Etherscan: <a target="_blank" href={`https://rinkeby.etherscan.io/tx/` + txHash} className="alert">
+              {"https://rinkeby.etherscan.io/tx/" + txHash}
+            </a>
+        </p>
+        )
     };
   } catch (error) {
     return {

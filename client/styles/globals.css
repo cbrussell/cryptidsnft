@@ -89,3 +89,23 @@ body {
 
 
 
+/* unvisited link */
+/* a:link {
+  color: red;
+} */
+
+/* visited link */
+a.alert:visited {
+  color: #2b1812;
+}
+
+/* mouse over link */
+a.alert:hover {
+  color: #7b341e;
+  text-decoration: underline;
+}
+
+/* selected link */
+a.alert:active {
+  color: black;
+}

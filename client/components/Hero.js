@@ -10,6 +10,7 @@ import {
   getStage,
 } from "../utils/interact";
 
+
 const Hero = () => {
   const { status, setStatus } = useStatus();
 
@@ -76,7 +77,7 @@ const Hero = () => {
                 
 
                 <button
-                  className="flex items-center justify-center w-12 h-12 bg-white rounded-md hover:bg-pink-200 text-center"
+                  className="flex items-center justify-center w-12 h-12 bg-white rounded-md hover:bg-gray-200 text-center"
                   onClick={decrementCount}
                 >
                   <svg
@@ -98,7 +99,7 @@ const Hero = () => {
                 <h2 className="mx-8">{count}</h2>
 
                 <button
-                  className="flex items-center justify-center w-12 h-12 bg-white rounded-md text-black hover:bg-pink-200 text-center"
+                  className="flex items-center justify-center w-12 h-12 bg-white rounded-md text-black hover:bg-gray-200 text-center"
                   onClick={incrementCount}
                 >
                   <svg
@@ -124,12 +125,14 @@ const Hero = () => {
               </h4>
 
               {/* Mint Button */}
+              {!status || status.toString().includes("Something") || JSON.stringify(status).includes("transaction") ? 
               <button
-                className="mt-6 py-2 px-4 text-center text-white uppercase bg-[#222222] border-b-4 border-orange-700 rounded hover:bg-cryptid-6 hover:border-orange-400"
+                className="mt-6 py-2 px-4 text-center text-white uppercase bg-[#222222] border-b-4 border-orange-700 rounded  hover:border-orange-400"
                 onClick={mintCryptid}
               >
                 Mint Cryptid
               </button>
+              : null}     
             </>
           ) : (
             <p className="text-white text-2xl mt-8">
