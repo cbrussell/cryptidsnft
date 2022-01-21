@@ -7,7 +7,7 @@ export default function MyApp() {
     <div id="synopsis">
       <div className="flex flex-col items-center justify-center sm:px-0 px-6 z-20  bg-cryptid-5 ">
         <div className="md:py-30 py-20">
-          <h2 role="heading" className="element md:text-4xl text-2xl mb-6 text-center font-bold  leading-10 text-white">
+          <h2 role="heading" className="element md:text-4xl text-2xl mb-10 text-center font-bold  leading-10 text-white">
             SynOpsis
           </h2>
           <p className="flex flex-row  mb-7 justify-start px-44 text-white text-justify leading-10 font-normal">
@@ -36,10 +36,10 @@ export default function MyApp() {
             We see, and want to harness, the potential NFTs have to connect and empower artists, creators, and visionaries.
 
           </p>
-          <h2 role="heading" className="element md:text-4xl text-2xl mb-6 text-center font-bold mt-20 leading-10 text-white">
+          <h2 role="heading" className="element md:text-4xl text-2xl mb-10 text-center font-bold mt-20 leading-10 text-white">
             ROadmaP
           </h2>
-          <div className="items-start flex flex-row justify-center">
+          <div className="items-start flex-start justify-center">
             <div>
               <div className=" flex flex-row flex-start mb-10 px-44 text-justify ">
                 <div className="element mr-10 text-2xl text-white ">
