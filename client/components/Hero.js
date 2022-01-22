@@ -96,7 +96,7 @@ const Hero = () => {
 
 
                 <button
-                  className="flex items-center justify-center w-12 h-12 bg-white rounded-md hover:bg-gray-200 text-center"
+                  className="flex items-center justify-center w-12 h-12 bg-white rounded-md hover:bg-orange-200 text-center"
                   onClick={decrementCount}
                 >
                   <svg
@@ -118,7 +118,7 @@ const Hero = () => {
                 <h2 className="mx-8">{count}</h2>
 
                 <button
-                  className="flex items-center justify-center w-12 h-12 bg-white rounded-md text-black hover:bg-gray-200 text-center"
+                  className="flex items-center justify-center w-12 h-12 bg-white rounded-md text-black hover:bg-orange-200 text-center"
                   onClick={incrementCount}
                 >
                   <svg
@@ -139,7 +139,8 @@ const Hero = () => {
               </div>
 
               <h4 className="mt-2 font-semibold text-center text-white">
-                {nftPrice} ETH{" "}
+                {/* {nftPrice}  */}
+                TBD ETH{" "}
                 <span className="text-sm text-gray-300"> + GAS</span>
               </h4>
 
@@ -156,7 +157,7 @@ const Hero = () => {
           ) : (
             <p className="text-white text-2xl mt-8">
               {" "}
-              😥 Sale is not active yet!
+              🦊 Sale is not active yet!
             </p>
           )}
 
