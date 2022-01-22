@@ -88,6 +88,7 @@ body {
   font-weight: 300;
   letter-spacing: 0.05em;
   background-image: url(/SandBackground-01.svg);
+
   background-attachment: fixed;
   background-size: cover;
 }
@@ -118,13 +119,13 @@ a.alert:active {
 }
 
 #synopsis{
-  margin-top: -80px;
-  padding-top: 80px;
+  margin-top: -100px;
+  padding-top: 100px;
 }
 
 #faq{
-  margin-top: -80px;
-  padding-top: 80px;
+  margin-top: -20px;
+  padding-top: 20px;
 }
 
 

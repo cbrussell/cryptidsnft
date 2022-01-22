@@ -54,7 +54,7 @@ const Header = () => {
 
       </Head>
 
-      <header className="sticky inset-x-5 top-0 z-10 h-32 md:h-20 min-w-full justify-center space-x-6 text-white  backdrop-filter bg-cryptid-1 ">
+      <header className=" inset-x-5 top-0 z-10 h-32 md:h-20 min-w-full justify-center space-x-6 text-white  backdrop-filter ">
         <div className="md:flex items-center container justify-around  mx-auto max-w-7xl  h-full">
           <div className="flex justify-around">
             {/* Logo */}
