@@ -147,7 +147,7 @@ export const mintNFT = async (mintAmount) => {
       status:( 
         <p>
           {" "}
-          🦊Check out your transaction on Etherscan: <a target="_blank" href={`https://rinkeby.etherscan.io/tx/` + txHash} className="alert">
+          🦊 Check out your transaction on Etherscan: <a target="_blank" href={`https://rinkeby.etherscan.io/tx/` + txHash} className="alert">
               {"https://rinkeby.etherscan.io/tx/" + txHash}
             </a>
         </p>
