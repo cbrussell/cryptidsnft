@@ -139,8 +139,7 @@ const Hero = () => {
               </div>
 
               <h4 className="mt-2 font-semibold text-center text-white">
-                {/* {nftPrice}  */}
-                TBD ETH{" "}
+                {nftPrice} ETH{" "}
                 <span className="text-sm text-gray-300"> + GAS</span>
               </h4>
 

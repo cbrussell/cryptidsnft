@@ -25,25 +25,32 @@ html {
   scroll-behavior: smooth;
 }
 
-.bg-primary {
+/* .bg-primary {
   background-color: #f6d5c0;
   background-attachment: fixed;
   background-size: cover;
 
-}
+} */
 
 .bg-pattern {
   
-  background-image: url(/SandBackground-01.svg);
-  background-attachment: local;
-  background-size: cover;
+  background-image:url(/body-top-swirl.svg);
+  background-position: bottom;
+
+  background-repeat: no-repeat;
+
+
 }
+
 
 .bg-faq {
   
-  background-image: url(/SandBackground-01.svg);
-  background-attachment: fixed;
-  background-size: cover;
+  background-image: url(/body-bottom-swirl.svg);
+  background-attachment: local;
+  background-size: inherit;
+  background-repeat: no-repeat;
+
+
 }
 
 ::-moz-selection {
@@ -80,6 +87,9 @@ body {
   font-family: 'Exo';
   font-weight: 300;
   letter-spacing: 0.05em;
+  background-image: url(/SandBackground-01.svg);
+  background-attachment: fixed;
+  background-size: cover;
 }
 
 .exo-font {
@@ -90,15 +100,6 @@ body {
 }
 
 
-
-
-
-
-
-/* unvisited link */
-/* a:link {
-  color: red;
-} */
 
 /* visited link */
 a.alert:visited {
