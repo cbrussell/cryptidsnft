@@ -26,14 +26,14 @@ export default function MyApp() {
             <br></br>
             <br></br>
 
-            As our story unfolds, so we shall discover their true nature, powers, and intentions.
+            Join our adventures to Nos Atomos and discover the true nature, powers, and intentions of CRYPTIDS.
 
 
 
 
           </p>
           <h2 role="heading" className="element md:text-4xl text-2xl mb-6 text-center font-bold mt-20 leading-10 text-white">
-            Our Story
+            Our StOry
           </h2>
           <p className="flex flex-row justify-start lg:px-44 md:px-14 sm:px-10 text-white text-justify leading-9 font-normal pb-10">
 
