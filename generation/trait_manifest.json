@@ -1616,12 +1616,12 @@
                             {
                                 "trait": "torsobase_medium_white",
                                 "weight": 1
-                            }
+                            } 
                         ]
                     },
                     {
                         "color": "yellow",
-                        "weight": 0,
+                        "weight": 1,
                         "traits": [
                             {
                                 "trait": "torsobase_medium_yellow",
