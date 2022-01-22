@@ -53,7 +53,7 @@ def get_dna(trait_manifest: TraitManifest, color_manifest: ColorManifest, backgr
         back, backtype, backcolor, back_frames = get_trait(trait_manifest, "4_back")
         data.update(back)
 
-        torsobase, torsotype, torsobase_color, torsobase_frames = get_trait_color(trait_manifest, "5a_torsobase", color)
+        torsobase, torsotype, torsobase_color, torsobase_frames = get_trait(trait_manifest, "5a_torsobase")
         data.update(torsobase)
 
         # torso accent needs to relate to torso base, input type
@@ -84,7 +84,7 @@ def get_dna(trait_manifest: TraitManifest, color_manifest: ColorManifest, backgr
             neckpattern_frames = []
             neckshadow_frames = []
         else:
-            neckbase, neckbase_frames = get_trait_color(trait_manifest, "6a_neckbase", color)[0:4:3]
+            neckbase, neckbase_frames = get_trait(trait_manifest, "6a_neckbase")[0:4:3]
             data.update(neckbase)
 
             if torsoaccent:

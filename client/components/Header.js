@@ -27,7 +27,7 @@ const Header = () => {
     addWalletListener();
     }
     fetchData();
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const addWalletListener = () => {
     if (window.ethereum) {
@@ -54,23 +54,23 @@ const Header = () => {
 
       </Head>
 
-      <header className="sticky inset-x-5 top-0 z-10 h-20 min-w-full justify- space-x-6 text-white  backdrop-filter bg-cryptid-1 ">
+      <header className="sticky inset-x-5 top-0 z-10 h-32 md:h-20 min-w-full justify-center space-x-6 text-white  backdrop-filter bg-cryptid-1 ">
         <div className="md:flex items-center container justify-between  mx-auto max-w-7xl  h-full">
           <div className="flex justify-around">
             {/* Logo */}
             <Link href="#">
               <a className="text-4xl font-thin ">
-                <span className="pr-2 element tracking-widest bg-clip-text bg-gradient-to-br text-black">
+                <span className="element tracking-widest bg-clip-text bg-gradient-to-br text-black">
                   cRyptids
                 </span>
               </a>
             </Link>
           </div>
 
-          {/* Navigation */}
+          {/* Synopsis, Docs, FAQ, Links */}
 
           <nav aria-label="Main Menu">
-            <ul className="flex justify-around items-center space-x-6" >
+            <ul className="flex justify-around items-center space-x-9" >
              
               <li className="text-black text-semibold exo-font hover:text-orange-900">
                 <Link href="#synopsis">
@@ -89,7 +89,7 @@ const Header = () => {
                   <a>faq</a>
                 </Link>
               </li>
-              <li>
+              {/* <li>
                 <a href="https://opensea.io" target="_blank" rel="noreferrer">
                   <svg
                     className="w-7 h-7"
@@ -103,7 +103,7 @@ const Header = () => {
                     ></path>
                   </svg>
                 </a>
-              </li>
+              </li> */}
 
               <li>
                 <a href="https://twitter.com/cryptidsnft" target="_blank" rel="noreferrer">
@@ -147,14 +147,16 @@ const Header = () => {
             </ul>
           </nav>
 
-          {/* Opensea Twitter Discord Links */}
-          <nav aria-label="Contact Menu">
-            <ul className="walletButton items-center space-x-6 invisible md:visible " >
+          {/* Wallet */}
+          <nav aria-label="Wallet Button">
+            <ul className="items-center space-x-6 text-center " >
               
-              <li className="px-4 py-2 font-extrabold text-black border exo-font border-black rounded-md cursor-pointer" onClick={connectWalletPressed}>
+              <li className="px-8 py-2 font-extrabold text-black border inline-block exo-font border-black rounded-lg cursor-pointer mt-2 md:mt-0" onClick={connectWalletPressed}>
                 <a
                   
                   id="walletButton" 
+                  
+                  
                   
             
                 >

@@ -1540,11 +1540,41 @@
                 "weight": 1,
                 "colors": [
                     {
-                        "color": "red",
+                        "color": "black",
                         "weight": 1,
                         "traits": [
                             {
-                                "trait": "torsobase_medium_red",
+                                "trait": "torsobase_medium_black",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "blue",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "torsobase_medium_blue",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "brown",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "torsobase_medium_brown",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "gray",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "torsobase_medium_gray",
                                 "weight": 1
                             }
                         ]
@@ -1558,6 +1588,46 @@
                                 "weight": 1
                             }
                         ]
+                    },
+                    {
+                        "color": "purple",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "torsobase_medium_purple",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "red",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "torsobase_medium_red",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "white",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "torsobase_medium_white",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "yellow",
+                        "weight": 0,
+                        "traits": [
+                            {
+                                "trait": "torsobase_medium_yellow",
+                                "weight": 1
+                            }
+                        ]
                     }
                 ]
             },
@@ -1566,11 +1636,41 @@
                 "weight": 1,
                 "colors": [
                     {
-                        "color": "red",
+                        "color": "black",
                         "weight": 1,
                         "traits": [
                             {
-                                "trait": "torsobase_shaggy_red",
+                                "trait": "torsobase_shaggy_black",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "blue",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "torsobase_shaggy_blue",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "brown",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "torsobase_shaggy_brown",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "gray",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "torsobase_shaggy_gray",
                                 "weight": 1
                             }
                         ]
@@ -1584,29 +1684,43 @@
                                 "weight": 1
                             }
                         ]
-                    }
-                ]
-            },
-            {
-                "category": "deep",
-                "weight": 1,
-                "colors": [
+                    },
                     {
-                        "color": "red",
+                        "color": "purple",
                         "weight": 1,
                         "traits": [
                             {
-                                "trait": "torsobase_deep_red",
+                                "trait": "torsobase_shaggy_purple",
                                 "weight": 1
                             }
                         ]
                     },
                     {
-                        "color": "orange",
+                        "color": "red",
                         "weight": 1,
                         "traits": [
                             {
-                                "trait": "torsobase_deep_orange",
+                                "trait": "torsobase_shaggy_red",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "white",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "torsobase_shaggy_white",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "yellow",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "torsobase_shaggy_yellow",
                                 "weight": 1
                             }
                         ]
@@ -1645,22 +1759,6 @@
                         "traits": [
                             {
                                 "trait": "torsoaccent_shaggy_white",
-                                "weight": 1
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "category": "deep",
-                "weight": 1,
-                "colors": [
-                    {
-                        "color": "white",
-                        "weight": 1,
-                        "traits": [
-                            {
-                                "trait": "torsoaccent_deep_white",
                                 "weight": 1
                             }
                         ]
@@ -1731,6 +1829,76 @@
                         "traits": [
                             {
                                 "trait": "neckbase_regular_orange",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "black",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "neckbase_regular_black",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "blue",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "neckbase_regular_blue",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "brown",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "neckbase_regular_brown",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "gray",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "neckbase_regular_gray",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "white",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "neckbase_regular_white",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "purple",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "neckbase_regular_purple",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "yellow",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "neckbase_regular_yellow",
                                 "weight": 1
                             }
                         ]

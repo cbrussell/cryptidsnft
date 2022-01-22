@@ -10,17 +10,17 @@ export default function MyApp() {
           <h2 role="heading" className="element md:text-4xl text-2xl mb-10 text-center font-bold  leading-10 text-white">
             SynOpsis
           </h2>
-          <p className="flex flex-row  mb-7 justify-start px-44 text-white text-justify leading-10 font-normal">
-            HUMANITY must expand. As we search for new riches, a GATEWAY is uncovered.
-            The first pioneers dub a sector NOS ATOMOS as most fruitful and construction
-            of the capital city, KRYPTOS, begins. However, humans are not alone in this
-            new frontier. From the shadows lurk the admins of this world -- the CRYPTIDS.
+          <p className="flex flex-row  mb-7 justify-start md:px-44 sm:px-10 text-white text-justify leading-10 font-normal">
+          HUMANITY must expand. In our search for new riches, a GATEWAY is uncovered. The first pioneers 
+          dub a sector NOS ATOMOS as most fruitful and construction of the capital city, KRYPTOS, begins. 
+          However, humans are not alone in this new frontier. From the shadows lurk the original inhabitants 
+          of this world -- the CRYPTIDS.
 
           </p>
           <h2 role="heading" className="element md:text-4xl text-2xl mb-6 text-center font-bold mt-20 leading-10 text-white">
             The CRyptids
           </h2>
-          <p className="flex flex-row  mb-7 justify-start px-44 text-white text-justify leading-9 font-normal">
+          <p className="flex flex-row  mb-7 justify-start md:px-44 sm:px-10 text-white text-justify leading-9 font-normal">
             Part science-fiction, part fantasy, CRYPTIDS is an art-based NFT project of 8,888 randomly generated creatures
             with hundreds of unique attributes.
             <br></br>
@@ -41,7 +41,7 @@ export default function MyApp() {
           </h2>
           <div className="items-start flex-start justify-center">
             <div>
-              <div className=" flex flex-row flex-start mb-10 px-44 text-justify ">
+              <div className=" flex flex-row flex-start mb-10 md:px-44 sm:px-10 text-justify ">
                 <div className="element mr-10 text-2xl text-white ">
                   01
                 </div>
@@ -75,7 +75,7 @@ export default function MyApp() {
 
           <div className="items-start flex-start justify-center">
             <div>
-              <div className=" flex flex-row flex-start mb-10 px-44 text-justify ">
+              <div className=" flex flex-row flex-start mb-10 md:px-44 sm:px-10 text-justify ">
                 <div className="element mr-10 text-2xl text-white ">
                   02
                 </div>
@@ -114,7 +114,7 @@ export default function MyApp() {
      
           <div className="items-start flex-start justify-center">
             <div>
-              <div className=" flex flex-row flex-start mb-10 px-44 text-justify ">
+              <div className=" flex flex-row flex-start mb-10 md:px-44 sm:px-10 text-justify ">
                 <div className="element mr-10 text-2xl text-white ">
                   03
                 </div>
@@ -132,7 +132,7 @@ export default function MyApp() {
           </div>
           <div className="items-start flex-start justify-center">
             <div>
-              <div className=" flex flex-row flex-start mb-10 px-44 text-justify ">
+              <div className=" flex flex-row flex-start mb-10 md:px-44 sm:px-10 text-justify ">
                 <div className="element mr-10 text-2xl text-white ">
                   04
                 </div>

@@ -22,10 +22,10 @@ const Hero = () => {
 
   useEffect(() => {
     async function fetchData() {
-    setMaxMintAmount(await getMaxMintAmount());
-    setNftPrice(await getNftPrice());
-    setIsSaleActive(await getStage());
-    await updateTotalSupply();
+      setMaxMintAmount(await getMaxMintAmount());
+      setNftPrice(await getNftPrice());
+      setIsSaleActive(await getStage());
+      await updateTotalSupply();
     }
     fetchData();
   }, []);
@@ -51,36 +51,37 @@ const Hero = () => {
     const { status } = await mintNFT(count);
     setStatus(status);
 
-    // We minted a new emoji face, so we need to update the total supply
+    // We minted a new Cryptid, so we need to update the total supply
     updateTotalSupply();
   };
 
-  
+
   return (
-    <main id="main" className="h-screen py-8 bg-pattern">
+    <main id="main" className="h-screen py-8  bg-pattern">
       <div className="container max-w-6xl mx-auto flex flex-col items-center pt-4">
         <div className="flex flex-col items-center">
-          <div className="flex"><Image
-            src="/images/BlankCryptid6.png"
-            width="300"
-            height="300"
-            alt="emoji faces gif"
-            className="rounded-md"
-          />
-          <Image
-            src="/images/BlankCryptid.png"
-            width="300"
-            height="300"
-            alt="emoji faces gif"
-            className="rounded-md"
-          />
-          <Image
-            src="/images/BlankCryptid2.png"
-            width="300"
-            height="300"
-            alt="emoji faces gif"
-            className="rounded-md"
-          />
+          <div className="flex pb-2">
+            <Image
+              src="/images/BlankCryptid6.png"
+              width="300"
+              height="300"
+              alt="Blank Cryptid 1"
+              className="rounded-md"
+            />
+            <Image
+              src="/images/BlankCryptid.png"
+              width="350"
+              height="350"
+              alt="Blank Cryptid 2"
+              className="rounded-md"
+            />
+            <Image
+              src="/images/BlankCryptid2.png"
+              width="300"
+              height="300"
+              alt="Blank Cryptid 3"
+              className="rounded-md"
+            />
           </div>
 
           {isSaleActive > 0 ? (
@@ -92,7 +93,7 @@ const Hero = () => {
               </p>
 
               <div className="flex items-center mt-6 text-3xl font-bold text-gray-200">
-                
+
 
                 <button
                   className="flex items-center justify-center w-12 h-12 bg-white rounded-md hover:bg-gray-200 text-center"
@@ -143,14 +144,14 @@ const Hero = () => {
               </h4>
 
               {/* Mint Button */}
-              {!status || status.toString().includes("Something") || JSON.stringify(status).includes("transaction") ? 
-              <button
-                className="mt-6 py-2 px-4 text-center text-white uppercase bg-[#222222] border-b-4 border-orange-700 rounded  hover:border-orange-400"
-                onClick={mintCryptid}
-              >
-                Mint Cryptid
-              </button>
-              : null}     
+              {!status || status.toString().includes("Something") || JSON.stringify(status).includes("transaction") ?
+                <button
+                  className="mt-6 py-2 px-4 text-center text-white uppercase bg-[#222222] border-b-4 border-orange-700 rounded  hover:border-orange-400"
+                  onClick={mintCryptid}
+                >
+                  Mint Cryptid
+                </button>
+                : null}
             </>
           ) : (
             <p className="text-white text-2xl mt-8">

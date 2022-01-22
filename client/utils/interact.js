@@ -21,7 +21,7 @@ export const connectWallet = async () => {
     } catch (err) {
       return {
         address: "",
-        status: "😞" + err.message,
+        status: "😞 Error: " + err.message,
       };
     }
   } else {
@@ -58,13 +58,13 @@ export const getCurrentWalletConnected = async () => {
       } else {
         return {
           address: "",
-          status: "😞 Please connect wallet",
+          status: "🦊 Please connect wallet",
         };
       }
     } catch (err) {
       return {
         address: "",
-        status: "😞" + err.message,
+        status: "😞 Error: " + err.message,
       };
     }
   } else {

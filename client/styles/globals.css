@@ -35,7 +35,7 @@ html {
 .bg-pattern {
   
   background-image: url(/SandBackground-01.svg);
-  background-attachment: fixed;
+  background-attachment: local;
   background-size: cover;
 }
 
@@ -83,9 +83,7 @@ body {
 }
 
 
-.walletButton:hover{
-  font: bold
-}
+
 
 
 
@@ -109,4 +107,14 @@ a.alert:hover {
 /* selected link */
 a.alert:active {
   color: black;
+}
+
+#synopsis{
+  margin-top: -80px;
+  padding-top: 80px;
+}
+
+#faq{
+  margin-top: -80px;
+  padding-top: 80px;
 }
