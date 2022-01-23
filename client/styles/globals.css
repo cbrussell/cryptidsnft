@@ -40,6 +40,11 @@ html {
   background-repeat: no-repeat;
 
 
+  width: 100%;
+
+  margin: 0px;
+  padding: 0px;
+  overflow-x: hidden;
 }
 
 
@@ -47,9 +52,13 @@ html {
   
   background-image: url(/body-bottom-swirl.svg);
   background-attachment: local;
-  background-size: inherit;
   background-repeat: no-repeat;
   background-size: 100%;
+  overflow-x: hidden;
+  width: 100%;
+
+  margin: 0px;
+  padding: 0px;
 
 
 }
