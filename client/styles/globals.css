@@ -38,11 +38,11 @@ html {
   background-position: bottom;
   background-size: 100%;
   background-repeat: no-repeat;
-
+  margin: 0;
 
   width: 100%;
 
-  margin: 0px;
+
   padding: 0px;
   overflow-x: hidden;
 }
@@ -140,15 +140,9 @@ a.alert:active {
   color: black;
 }
 
-#synopsis{
-  margin-top: -100px;
-  padding-top: 100px;
-}
 
-#faq{
-  margin-top: -20px;
-  padding-top: 20px;
-}
+
+
 
 
 
