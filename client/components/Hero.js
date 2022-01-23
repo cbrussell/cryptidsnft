@@ -163,7 +163,7 @@ const Hero = () => {
           {/* Status */}
 
           {status && (
-            <div className="flex items-center justify-center px-4 py-4 mt-8 font-semibold selection:bg-cryptid-3 text-white bg-cryptid-2 rounded-md ">
+            <div className="flex items-center  border-2 border-cryptid-6 justify-center px-4 py-4 mt-8 font-semibold selection:bg-cryptid-3 text-white bg-cryptid-2 rounded-md ">
               {status}
             </div>
           )}

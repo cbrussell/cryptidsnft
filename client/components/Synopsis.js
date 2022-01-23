@@ -15,6 +15,12 @@ export default function MyApp() {
             dub a sector NOS ATOMOS as most fruitful and construction of the capital city, KRYPTOS, begins.
             However, humans are not alone in this new frontier. From the shadows lurk the original inhabitants
             of this world -- the CRYPTIDS.
+            <br></br>
+            <br></br>
+
+            CRYPTIDS choose their appearance by looking into our faded memories. To one, a wolf; a fox to 
+            another. To some, a form enitrely unknown. Only through deeper exploration into Nos Atomos can we discover their 
+            true nature. 
 
           </p>
           <h2 role="heading" className="element md:text-4xl text-2xl mb-6 text-center font-bold mt-20 leading-10 text-white">
@@ -27,8 +33,6 @@ export default function MyApp() {
             <br></br>
 
             Join our adventures to Nos Atomos and discover the true nature, powers, and intentions of CRYPTIDS.
-
-
 
 
           </p>

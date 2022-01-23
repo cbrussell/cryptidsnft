@@ -32,7 +32,7 @@ export const connectWallet = async () => {
           <p>
             {" "}
             🦊{" "}
-            <a target="_blank" href="https://metamask.io/download.html">
+            <a target="_blank" href="https://metamask.io/download.html" class="alert">
               You must install Metamask, a virtual Ethereum wallet, in your
               browser.
             </a>
