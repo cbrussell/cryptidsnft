@@ -90,14 +90,12 @@ html {
   outline: solid #f00 1px !important;
 } */
 
-body { 
+html, body { 
   font-family: 'Exo';
   font-weight: 300;
   letter-spacing: 0.05em;
-
   background-image: url(/SandBackground-01.svg);
-
-  background-attachment:fixed;
+  background-attachment: fixed;
   background-size: cover;
 
 }
