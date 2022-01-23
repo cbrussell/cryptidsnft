@@ -84,7 +84,13 @@ html {
   }
 }
 
-body { 
+/* * {
+  background: #000 !important;
+  color: #0f0 !important;
+  outline: solid #f00 1px !important;
+} */
+
+html, body { 
   font-family: 'Exo';
   font-weight: 300;
   letter-spacing: 0.05em;
@@ -97,7 +103,7 @@ body {
   height: 100%;
   margin: 0px;
   padding: 0px;
-  overflow-x: hidden; 
+  overflow-x: hidden;
 }
 
 .exo-font {

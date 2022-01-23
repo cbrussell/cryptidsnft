@@ -2078,11 +2078,41 @@
                 "weight": 1,
                 "colors": [
                     {
-                        "color": "red",
+                        "color": "black",
                         "weight": 1,
                         "traits": [
                             {
-                                "trait": "fur_bushy_red",
+                                "trait": "fur_bushy_black",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "blue",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "fur_bushy_blue",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "brown",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "fur_bushy_brown",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "gray",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "fur_bushy_gray",
                                 "weight": 1
                             }
                         ]
@@ -2096,6 +2126,142 @@
                                 "weight": 1
                             }
                         ]
+                    },
+                    {
+                        "color": "purple",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "fur_bushy_purple",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "red",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "fur_bushy_red",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "white",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "fur_bushy_white",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "yellow",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "fur_bushy_yellow",
+                                "weight": 1
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "category": "wooly",
+                "weight": 1,
+                "colors": [
+                    {
+                        "color": "black",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "fur_wooly_black",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "blue",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "fur_wooly_blue",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "brown",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "fur_wooly_brown",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "gray",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "fur_wooly_gray",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "orange",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "fur_wooly_orange",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "purple",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "fur_wooly_purple",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "red",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "fur_wooly_red",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "white",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "fur_wooly_white",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "yellow",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "fur_wooly_yellow",
+                                "weight": 1
+                            }
+                        ]
                     }
                 ]
             },
@@ -2104,11 +2270,41 @@
                 "weight": 1,
                 "colors": [
                     {
-                        "color": "red",
+                        "color": "black",
                         "weight": 1,
                         "traits": [
                             {
-                                "trait": "fur_silky_red",
+                                "trait": "fur_silky_black",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "blue",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "fur_silky_blue",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "brown",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "fur_silky_brown",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "gray",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "fur_silky_gray",
                                 "weight": 1
                             }
                         ]
@@ -2122,6 +2318,46 @@
                                 "weight": 1
                             }
                         ]
+                    },
+                    {
+                        "color": "purple",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "fur_silky_purple",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "red",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "fur_silky_red",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "white",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "fur_silky_white",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "yellow",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "fur_silky_yellow",
+                                "weight": 1
+                            }
+                        ]
                     }
                 ]
             },
@@ -2129,6 +2365,66 @@
                 "category": "windy",
                 "weight": 1,
                 "colors": [
+                    {
+                        "color": "black",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "fur_windy_black",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "blue",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "fur_windy_blue",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "brown",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "fur_windy_brown",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "gray",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "fur_windy_gray",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "orange",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "fur_windy_orange",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "purple",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "fur_windy_purple",
+                                "weight": 1
+                            }
+                        ]
+                    },
                     {
                         "color": "red",
                         "weight": 1,
@@ -2140,11 +2436,21 @@
                         ]
                     },
                     {
-                        "color": "orange",
+                        "color": "white",
                         "weight": 1,
                         "traits": [
                             {
-                                "trait": "fur_windy_orange",
+                                "trait": "fur_windy_white",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "yellow",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "fur_windy_yellow",
                                 "weight": 1
                             }
                         ]
@@ -3178,6 +3484,76 @@
                                 "weight": 1
                             }
                         ]
+                    },
+                    {
+                        "color": "purple",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "ears_prick_purple",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "black",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "ears_prick_black",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "brown",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "ears_prick_brown",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "yellow",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "ears_prick_yellow",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "blue",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "ears_prick_blue",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "white",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "ears_prick_white",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "gray",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "ears_prick_gray",
+                                "weight": 1
+                            }
+                        ]
                     }
                 ]
             },
@@ -3319,14 +3695,44 @@
         "categories": [
             {
                 "category": "bear",
-                "weight": 0.8,
+                "weight": 1,
                 "colors": [
                     {
-                        "color": "red",
+                        "color": "black",
                         "weight": 1,
                         "traits": [
                             {
-                                "trait": "headbase_bear_red",
+                                "trait": "headbase_bear_black",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "blue",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "headbase_bear_blue",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "brown",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "headbase_bear_brown",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "gray",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "headbase_bear_gray",
                                 "weight": 1
                             }
                         ]
@@ -3340,6 +3746,46 @@
                                 "weight": 1
                             }
                         ]
+                    },
+                    {
+                        "color": "purple",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "headbase_bear_purple",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "red",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "headbase_bear_red",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "white",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "headbase_bear_white",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "yellow",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "headbase_bear_yellow",
+                                "weight": 1
+                            }
+                        ]
                     }
                 ]
             },
@@ -3348,11 +3794,41 @@
                 "weight": 1,
                 "colors": [
                     {
-                        "color": "red",
+                        "color": "black",
                         "weight": 1,
                         "traits": [
                             {
-                                "trait": "headbase_eagle_red",
+                                "trait": "headbase_eagle_black",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "blue",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "headbase_eagle_blue",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "brown",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "headbase_eagle_brown",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "gray",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "headbase_eagle_gray",
                                 "weight": 1
                             }
                         ]
@@ -3366,19 +3842,89 @@
                                 "weight": 1
                             }
                         ]
-                    }
-                ]
-            },
-            {
-                "category": "horse",
-                "weight": 0.8,
-                "colors": [
+                    },
+                    {
+                        "color": "purple",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "headbase_eagle_purple",
+                                "weight": 1
+                            }
+                        ]
+                    },
                     {
                         "color": "red",
                         "weight": 1,
                         "traits": [
                             {
-                                "trait": "headbase_horse_red",
+                                "trait": "headbase_eagle_red",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "white",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "headbase_eagle_white",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "yellow",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "headbase_eagle_yellow",
+                                "weight": 1
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "category": "horse",
+                "weight": 1,
+                "colors": [
+                    {
+                        "color": "black",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "headbase_horse_black",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "blue",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "headbase_horse_blue",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "brown",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "headbase_horse_brown",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "gray",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "headbase_horse_gray",
                                 "weight": 1
                             }
                         ]
@@ -3392,6 +3938,46 @@
                                 "weight": 1
                             }
                         ]
+                    },
+                    {
+                        "color": "purple",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "headbase_horse_purple",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "red",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "headbase_horse_red",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "white",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "headbase_horse_white",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "yellow",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "headbase_horse_yellow",
+                                "weight": 1
+                            }
+                        ]
                     }
                 ]
             },
@@ -3400,11 +3986,41 @@
                 "weight": 1,
                 "colors": [
                     {
-                        "color": "red",
+                        "color": "black",
                         "weight": 1,
                         "traits": [
                             {
-                                "trait": "headbase_lion_red",
+                                "trait": "headbase_lion_black",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "blue",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "headbase_lion_blue",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "brown",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "headbase_lion_brown",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "gray",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "headbase_lion_gray",
                                 "weight": 1
                             }
                         ]
@@ -3418,6 +4034,46 @@
                                 "weight": 1
                             }
                         ]
+                    },
+                    {
+                        "color": "purple",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "headbase_lion_purple",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "red",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "headbase_lion_red",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "white",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "headbase_lion_white",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "yellow",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "headbase_lion_yellow",
+                                "weight": 1
+                            }
+                        ]
                     }
                 ]
             },
@@ -3425,6 +4081,66 @@
                 "category": "wolf",
                 "weight": 1,
                 "colors": [
+                    {
+                        "color": "black",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "headbase_wolf_black",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "blue",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "headbase_wolf_blue",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "brown",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "headbase_wolf_brown",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "gray",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "headbase_wolf_gray",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "orange",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "headbase_wolf_orange",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "purple",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "headbase_wolf_purple",
+                                "weight": 1
+                            }
+                        ]
+                    },
                     {
                         "color": "red",
                         "weight": 1,
@@ -3436,11 +4152,21 @@
                         ]
                     },
                     {
-                        "color": "orange",
+                        "color": "white",
                         "weight": 1,
                         "traits": [
                             {
-                                "trait": "headbase_wolf_orange",
+                                "trait": "headbase_wolf_white",
+                                "weight": 1
+                            }
+                        ]
+                    },
+                    {
+                        "color": "yellow",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "headbase_wolf_yellow",
                                 "weight": 1
                             }
                         ]
@@ -3797,7 +4523,7 @@
                         "traits": [
                             {
                                 "trait": "mouth_horse_teeth",
-                                "weight": 0.5
+                                "weight": 0.7
                             },
                             {
                                 "trait": "mouth_horse_empty",
@@ -3821,7 +4547,7 @@
                             },
                             {
                                 "trait": "mouth_lion_teeth",
-                                "weight": 0.5
+                                "weight": 0.6
                             }
                         ]
                     }
