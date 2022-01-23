@@ -36,7 +36,7 @@ html {
   
   background-image:url(/body-top-swirl.svg);
   background-position: bottom;
-
+  background-size: 100%;
   background-repeat: no-repeat;
 
 
@@ -49,6 +49,7 @@ html {
   background-attachment: local;
   background-size: inherit;
   background-repeat: no-repeat;
+  background-size: 100%;
 
 
 }
