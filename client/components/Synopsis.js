@@ -11,15 +11,15 @@ export default function MyApp() {
             SynOpsis
           </h2>
           <p className="flex flex-row justify-start lg:px-44 md:px-14 sm:px-10 text-white text-justify leading-9 font-normal">
-            HUMANITY must expand. In our search for new riches, a GATEWAY is uncovered. The first pioneers
+            HUMANITY must expand. In our search for new riches, a GATEWAY is uncovered. The first wave of PIONEERS
             dub a sector NOS ATOMOS as most fruitful and construction of the capital city, KRYPTOS, begins.
             However, humans are not alone in this new frontier. From the shadows lurk the original inhabitants
             of this world -- the CRYPTIDS.
             <br></br>
             <br></br>
 
-            CRYPTIDS choose their appearance by looking into our faded memories. To one, a wolf; a fox to 
-            another. To some, a form enitrely unknown. Only through deeper exploration into Nos Atomos can we discover their 
+            CRYPTIDS choose their appearance by looking into the faded memories of our past. To one, a wolf; a fox to 
+            another. To some, a form enitrely unknown. Only through deeper exploration into NOS ATOMOS can we discover their 
             true nature. 
 
           </p>
@@ -32,7 +32,7 @@ export default function MyApp() {
             <br></br>
             <br></br>
 
-            Join our adventures to Nos Atomos and discover the true nature, powers, and intentions of CRYPTIDS.
+            Join our adventures to NOS ATOMOS and discover the true nature, powers, and intentions of CRYPTIDS.
 
 
           </p>

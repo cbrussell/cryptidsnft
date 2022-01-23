@@ -39,21 +39,19 @@ def get_dna(trait_manifest: TraitManifest, color_manifest: ColorManifest, backgr
         data = {}
 
         color = color_manifest.get()
+        
         data["base_color"] = color
 
-        tail, tailtype, tailcolor, tail_frames = get_trait(trait_manifest, "1_tail")
-        data.update(tail)
-
-        leftbackleg, backanimalleg, leftbackleg_color, leftbackleg_frames = get_trait(trait_manifest, "2_leftbackleg")
+        leftbackleg, backanimalleg, leftbackleg_color, leftbackleg_frames = get_trait_color(trait_manifest, "2_leftbackleg", color)
         data.update(leftbackleg)
 
-        leftfrontleg, frontanimalleg, leftfrontleg_color, leftfrontleg_frames  = get_trait(trait_manifest, "3_leftfrontleg")
+        leftfrontleg, frontanimalleg, leftfrontleg_color, leftfrontleg_frames  = get_trait_color(trait_manifest, "3_leftfrontleg", color)
         data.update(leftfrontleg)
 
         back, backtype, backcolor, back_frames = get_trait(trait_manifest, "4_back")
         data.update(back)
 
-        torsobase, torsotype, torsobase_color, torsobase_frames = get_trait(trait_manifest, "5a_torsobase")
+        torsobase, torsotype, torsobase_color, torsobase_frames = get_trait_color(trait_manifest, "5a_torsobase", color)
         data.update(torsobase)
 
         # torso accent needs to relate to torso base, input type
@@ -66,7 +64,7 @@ def get_dna(trait_manifest: TraitManifest, color_manifest: ColorManifest, backgr
         fur, fur_frames = get_trait(trait_manifest, "7_fur")[0:4:3]
         data.update(fur) 
 
-        headbase, animal, animalcolor, headbase_frames = get_trait(trait_manifest, "11a_headbase")
+        headbase, animal, animalcolor, headbase_frames = get_trait_color(trait_manifest, "11a_headbase", color)
         data.update(headbase)
 
         headaccent, headaccent_frames = get_trait_category(trait_manifest, "11b_headaccent", animal)[0:4:3]
@@ -84,7 +82,7 @@ def get_dna(trait_manifest: TraitManifest, color_manifest: ColorManifest, backgr
             neckpattern_frames = []
             neckshadow_frames = []
         else:
-            neckbase, neckbase_frames = get_trait(trait_manifest, "6a_neckbase")[0:4:3]
+            neckbase, neckbase_frames = get_trait_color(trait_manifest, "6a_neckbase", color)[0:4:3]
             data.update(neckbase)
 
             if torsoaccent:
@@ -106,10 +104,10 @@ def get_dna(trait_manifest: TraitManifest, color_manifest: ColorManifest, backgr
                 neckshadow, neckshadow_frames = get_trait_category(trait_manifest, "6d_neckshadow", animal)[0:4:3]
                 data.update(neckshadow)
 
-        rightbackleg, rightbackleg_frames = get_trait_category(trait_manifest, "8_rightbackleg", backanimalleg)[0:4:3]
+        rightbackleg, rightbackleg_frames = get_trait_category_color(trait_manifest, "8_rightbackleg", backanimalleg, color)[0:4:3]
         data.update(rightbackleg)
 
-        rightfrontleg, rightfrontleg_frames = get_trait_category(trait_manifest, "9_rightfrontleg", frontanimalleg)[0:4:3]
+        rightfrontleg, rightfrontleg_frames = get_trait_category_color(trait_manifest, "9_rightfrontleg", frontanimalleg, color)[0:4:3]
         data.update(rightfrontleg)
 
         ears, ears_frames = get_trait(trait_manifest, "10_ears")[0:4:3]
