@@ -119,8 +119,8 @@ export const mintNFT = async (mintAmount) => {
       success: false,
       status: (
         <p>
-          🦊 Connect to Metamask using{" "}
-          <span className="px-2 text-purple-600">Connect Wallet</span> button.
+          🦊 Connect to Metamask using the{" "}
+          <p style="color:blue;" >Connect Wallet</p> button.
         </p>
       ),
     };

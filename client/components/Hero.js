@@ -96,7 +96,7 @@ const Hero = () => {
 
 
                 <button
-                  className="flex items-center justify-center w-12 h-12 bg-white rounded-md hover:bg-orange-200 text-center"
+                  className="flex items-center justify-center w-12 h-12 bg-white rounded-md hover:bg-gray-200 text-center"
                   onClick={decrementCount}
                 >
                   <svg
@@ -118,7 +118,7 @@ const Hero = () => {
                 <h2 className="mx-8">{count}</h2>
 
                 <button
-                  className="flex items-center justify-center w-12 h-12 bg-white rounded-md text-black hover:bg-orange-200 text-center"
+                  className="flex items-center justify-center w-12 h-12 bg-white rounded-md text-black hover:bg-gray-200 text-center"
                   onClick={incrementCount}
                 >
                   <svg
@@ -156,14 +156,14 @@ const Hero = () => {
           ) : (
             <p className="text-white text-2xl mt-8">
               {" "}
-              🦊 Sale is not active yet!
+              Sale is not active yet!
             </p>
           )}
 
           {/* Status */}
 
           {status && (
-            <div className="flex items-center  border-2 border-cryptid-6 justify-center px-4 py-4 mt-8 font-semibold selection:bg-cryptid-3 text-white bg-cryptid-2 rounded-md ">
+            <div className="flex items-center  justify-center px-4 py-4 mt-8 font-semibold selection:bg-cryptid-3 text-white bg-cryptid-2 rounded-md ">
               {status}
             </div>
           )}
