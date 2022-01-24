@@ -59,7 +59,7 @@ const Header = () => {
           <div className="flex justify-around">
             {/* Logo */}
             <Link href="#">
-              <a className="text-4xl font-thin w-auto md:w-40 lg:w-80">
+              <a className="text-4xl font-thin w-auto md:w-40 lg:w-80 pt-1 md:pt-0">
                 <span className="element tracking-widest bg-clip-text bg-gradient-to-br text-black">
                   cRyptids
                 </span>
@@ -70,7 +70,7 @@ const Header = () => {
           {/* Synopsis, Docs, FAQ, Links */}
 
           <nav aria-label="Main Menu">
-            <ul className="flex justify-around items-center space-x-10" >
+            <ul className="flex justify-around items-center space-x-10 pt-1 md:pt-0" >
 
               <li className="text-black text-semibold exo-font hover:text-orange-900">
                 <Link href="#synopsis">
@@ -152,7 +152,7 @@ const Header = () => {
 
           {/* Wallet */}
           <nav aria-label="Wallet Button">
-            <ul className="items-center space-x-6 text-center w-auto md:w-40 lg:w-80" >
+            <ul className="items-center space-x-6 text-center w-auto md:w-40 lg:w-80 pt-1 md:pt-0" >
               
                 <li className="px-8 py-2 font-extrabold text-black border inline-block exo-font border-black rounded-lg cursor-pointer mt-2 md:mt-0" onClick={connectWalletPressed}>
                   <a

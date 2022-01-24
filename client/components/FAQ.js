@@ -9,7 +9,7 @@ export default function MyApp() {
 
   return (
     <div id="faq">
-      <div className=" flex flex-col items-center justify-center sm:px-0 px-6 z-20 pb-32 bg-faq md:pt-30 sm:pt-5 ">
+      <div className=" flex flex-col items-center justify-center sm:px-0 px-6 z-20 pb-32 bg-faq md:pt-5 sm:pt-5 ">
         <div className="py-20 md:py-30 lg:py-32 ">
           <h1
             role="heading"
