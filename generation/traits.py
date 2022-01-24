@@ -143,6 +143,7 @@ def get_trait_color(manifest: TraitManifest, attribute: str, base_color: str) ->
         colors = category["colors"]
 
         # get chosen color
+     
         color = random.choices(population = [x for x in colors if x["color"] == base_color], weights = [x["weight"] for x in colors if x["color"] == base_color], k=1)[0]
         traits = color["traits"]
 

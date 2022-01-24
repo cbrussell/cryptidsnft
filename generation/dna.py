@@ -110,7 +110,7 @@ def get_dna(trait_manifest: TraitManifest, color_manifest: ColorManifest, backgr
         rightfrontleg, rightfrontleg_frames = get_trait_category_color(trait_manifest, "9_rightfrontleg", frontanimalleg, color)[0:4:3]
         data.update(rightfrontleg)
 
-        ears, ears_frames = get_trait(trait_manifest, "10_ears")[0:4:3]
+        ears, ears_frames = get_trait_color(trait_manifest, "10_ears", color)[0:4:3]
         data.update(ears)
 
         horns, hornstype, hornscolor, horns_frames = get_trait(trait_manifest, "13_horns")
@@ -119,7 +119,7 @@ def get_dna(trait_manifest: TraitManifest, color_manifest: ColorManifest, backgr
         background, background_frame = background_manifest.get()
         data["background"] = background
 
-        tail, tail_frames = get_trait(trait_manifest, "1_tail")[0:4:3]
+        tail, tail_frames = get_trait_color(trait_manifest, "1_tail", color)[0:4:3]
         data.update(tail)
 
         eyes, eyes_frames = get_trait(trait_manifest, "14_eyes")[0:4:3]
