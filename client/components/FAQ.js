@@ -23,7 +23,7 @@ export default function MyApp() {
             <div className="flex items-center justify-between">
               <div>
                 <h2 className="font-bold uppercase text-lg leading-none cursor-pointer text-gray-800" >
-                  WL?
+                  Will there be a whitelist?
                 </h2>
               </div>
               <button
@@ -89,7 +89,7 @@ export default function MyApp() {
             <div className="flex items-center justify-between">
               <div>
                 <h2 className="font-bold  uppercase text-lg leading-none text-gray-800 cursor-pointer">
-                  WEN?
+                  Which network will CRYPTIDS be available and when?
                 </h2>
               </div>
               <button
