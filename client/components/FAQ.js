@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Head from "next/head";
 export default function MyApp() {
-   
+
   const [faq1, setFaq1] = useState(false);
   const [faq2, setFaq2] = useState(false);
   const [faq3, setFaq3] = useState(false);
@@ -23,7 +23,7 @@ export default function MyApp() {
             <div className="flex items-center justify-between">
               <div>
                 <h2 className="font-bold uppercase text-lg leading-none cursor-pointer text-gray-800" >
-                  What are Cryptids?
+                  Will be there a whitelist?
                 </h2>
               </div>
               <button
@@ -74,29 +74,26 @@ export default function MyApp() {
               <ul className="">
                 <li>
                   <p className="text-lg leading-normal text-gray-600 mt-4 text-justify">
-                  Cryptids are the first known inhabitants of the Metaverse. Only recently proven to exist and even more recently began to be understood. 
-                  Cryptids choose their appearance by looking into our faded memories. To one, a wolf; a fox to another. To some, a form enitrely unknown.  
-                   
-                  <br></br>
-                  <br></br>
-            
-                  Only through deeper exploration into Nos Atomos can we discover the true nature of CRYPTIDS...
+                    All Pioneers to NOS ATOMOS will be whitelisted and have the opportunity for presale
+                    minting. Once the available allotment of Pioneer badges are distributed, whitelist will only be 
+                    possible through contests, community events, and lore/art contributions.  
+      
                   </p>
                 </li>
               </ul>
             )}
           </div>
           <div className="bg-white shadow rounded p-8 mt-8 cursor-pointer" onClick={() => {
-                  setFaq2(!faq2);
-                }}>
+            setFaq2(!faq2);
+          }}>
             <div className="flex items-center justify-between">
               <div>
                 <h2 className="font-bold  uppercase text-lg leading-none text-gray-800 cursor-pointer">
-                  Who are the Pioneers?
+                  Which network will CRYPTIDS be available and when?
                 </h2>
               </div>
               <button
-                
+
                 data-menu
                 className="focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2 ring-offset-white cursor-pointer"
               >
@@ -143,17 +140,15 @@ export default function MyApp() {
               <ul>
                 <li>
                   <p className="text-lg leading-normal text-gray-600 mt-4 text-justify">
-                    {`The Pioneers represent the first wave explorers to Nos Atomos. Escaping the unfavorable
-                    conditions of Terra, they've bought a one-way ticket with hopes to find a better
-                    future in the Metaverse.`}
+                    Arbitrum, Q2 2022.
                   </p>
                 </li>
               </ul>
             )}
           </div>
           <div className="bg-white shadow rounded p-8 mt-8 cursor-pointer" onClick={() => {
-                  setFaq3(!faq3);
-                }}>
+            setFaq3(!faq3);
+          }}>
             <div className="flex items-center justify-between">
               <div>
                 <h2 className="font-bold  uppercase text-lg leading-none text-gray-800">
@@ -161,9 +156,9 @@ export default function MyApp() {
                 </h2>
               </div>
               <button
-                
+
                 data-menu
-                className="focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2 ring-offset-white cursor-pointer"
+                className="focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2 ring-offset-white"
               >
                 {faq3 ? (
                   <svg
@@ -208,9 +203,9 @@ export default function MyApp() {
               <ul>
                 <li>
                   <p className="text-lg leading-normal text-gray-600 mt-4 text-justify">
-                    The Metanauts are a private scientific entity, capable of entering and exiting the
-                    Metaverse at yearly cycles. Original a clandestine entity, the Metanauts now share their lands
-                    with the Pioneers, despite their best attempts to guard their discovery.
+                    The Metanauts are the four Team Members developing CRYPTIDS. 
+                    Nosolo (art), Crussell (dev), Sentella (social media), and Grove (lore writer). 
+                    
                   </p>
                 </li>
               </ul>
@@ -220,11 +215,11 @@ export default function MyApp() {
             <div className="flex items-center justify-between">
               <div>
                 <h2 className="font-bold  uppercase text-lg leading-none text-gray-800">
-                  Where is Nos Atomos?
+                  What is the total supply and mint cost?
                 </h2>
               </div>
               <button
-                
+
                 data-menu
                 className="focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2 ring-offset-white cursor-pointer"
               >
@@ -236,7 +231,7 @@ export default function MyApp() {
                     height="6"
                     viewBox="0 0 10 6"
                     fill="none"
-                    
+
                     xmlns="http://www.w3.org/2000/svg"
                   >
                     <path
@@ -268,18 +263,17 @@ export default function MyApp() {
                 )}
               </button>
             </div>
-              {faq4 && (
-                <ul>
-                  <li>
-                    <p className="text-lg leading-normal text-gray-600 mt-4 text-justify">
-                      Nos Atomos is the first settled Metaversal Zone, chosen by the Metanauts due to its abundant resources and 
-                      proximity to the Kármán Gate. Intially thought be uninhabited, the Pioneers have discovered evidence 
-                      of prior civilizations.
-                    </p>
-                  </li>
-                </ul>
-              )}
+            {faq4 && (
+              <ul>
+                <li>
+                  <p className="text-lg leading-normal text-gray-600 mt-4 text-justify">
+                    8,888 total supply, 0.08 ETH
+                  </p>
+                </li>
+              </ul>
+            )}
           </div>
+          
         </div>
       </div>
     </div>

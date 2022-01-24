@@ -15,18 +15,14 @@ export default function MyApp() {
             dub a sector NOS ATOMOS as most fruitful and construction of the capital city, KRYPTOS, begins.
             However, humans are not alone in this new frontier. From the shadows lurk the original inhabitants
             of this world -- the CRYPTIDS.
-            <br></br>
-            <br></br>
-
-            CRYPTIDS choose their appearance by looking into the faded memories of our past. To one, a wolf; a fox to 
-            another. To some, a form enitrely unknown. Only through deeper exploration into NOS ATOMOS can we discover their 
-            true nature. 
+            
 
           </p>
           <h2 role="heading" className="element md:text-4xl text-2xl mb-6 text-center font-bold mt-20 leading-10 text-white">
             The CRyptids
           </h2>
           <p className="flex flex-row justify-start lg:px-44 md:px-14 sm:px-10 text-white text-justify leading-9 font-normal">
+    
             Part science-fiction, part fantasy, CRYPTIDS is an art-based NFT project of 8,888 randomly
             generated creatures with hundreds of unique attributes.
             <br></br>
