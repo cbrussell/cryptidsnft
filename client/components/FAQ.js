@@ -74,8 +74,8 @@ export default function MyApp() {
               <ul className="">
                 <li>
                   <p className="text-lg leading-normal text-gray-600 mt-4 text-justify">
-                    All Pioneers are whitelisted and will have the opportunity for presale
-                    minting. Once the available allotment of Pioneer badges are distributed, whitelist will only be 
+                    All Pioneers will have the opportunity to claim their FIRST WAVE badge (whitelist).
+                    Once the available allotment of Pioneers roles are distributed, whitelist will only be 
                     possible through contests, community events, and lore/art contributions.  
       
                   </p>
@@ -140,7 +140,7 @@ export default function MyApp() {
               <ul>
                 <li>
                   <p className="text-lg leading-normal text-gray-600 mt-4 text-justify">
-                    Arbitrum, Q2 2022.
+                    Arbitrum, May 2022.
                   </p>
                 </li>
               </ul>
