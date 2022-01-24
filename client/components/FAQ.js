@@ -23,7 +23,7 @@ export default function MyApp() {
             <div className="flex items-center justify-between">
               <div>
                 <h2 className="font-bold uppercase text-lg leading-none cursor-pointer text-gray-800" >
-                  Will be there a whitelist?
+                  Will there be a whitelist?
                 </h2>
               </div>
               <button
