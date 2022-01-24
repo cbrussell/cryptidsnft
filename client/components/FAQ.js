@@ -74,7 +74,7 @@ export default function MyApp() {
               <ul className="">
                 <li>
                   <p className="text-lg leading-normal text-gray-600 mt-4 text-justify">
-                    All Pioneers are whitelisted and have the opportunity for presale
+                    All Pioneers are whitelisted and will have the opportunity for presale
                     minting. Once the available allotment of Pioneer badges are distributed, whitelist will only be 
                     possible through contests, community events, and lore/art contributions.  
       
