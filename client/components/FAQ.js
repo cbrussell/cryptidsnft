@@ -74,9 +74,9 @@ export default function MyApp() {
               <ul className="">
                 <li>
                   <p className="text-lg leading-normal text-gray-600 mt-4 text-justify">
-                    All Pioneers will have the opportunity to claim their FIRST WAVE badge (whitelist).
-                    Once the available allotment of Pioneers roles are distributed, whitelist will only be 
-                    possible through contests, community events, and lore/art contributions.  
+                    All Pioneers will have the opportunity to claim their FIRST WAVE badge (💫 = whitelisted).
+                    Once the available allotment of Pioneers roles are distributed, new discord members 
+                    will be SETTLERS and whitelist will only be available for contest winners and lore/art contributors.  
       
                   </p>
                 </li>
