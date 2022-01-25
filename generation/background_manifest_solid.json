@@ -39,5 +39,13 @@
     {
         "color": "tan_egg_light",
         "weight": 1
+    },
+    {
+        "color": "rose",
+        "weight": 1
+    },
+    {
+        "color": "turq",
+        "weight": 1
     }
 ]

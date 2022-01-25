@@ -76,13 +76,19 @@ incompatible_list = [
 
 
     { "1_tail": "tail_kitsune_orange","background":     "black"},
+    { "1_tail": "tail_kitsune_brown","background":     "black"},
+    { "1_tail": "tail_kitsune_purple","background":     "black"},
+    { "1_tail": "tail_kitsune_white","background":     "black"},
     { "1_tail": "tail_lion_red", "background":          "black"},
+    { "1_tail": "tail_lion_yellow", "background":          "black"},
     { "1_tail": "tail_kitsune_red","background":        "black"},
     { "1_tail": "tail_lion_orange", "background":       "black"},
     { "1_tail": "tail_scorpion_orange", "background":    "black"},
     { "1_tail": "tail_scorpion_red", "background":       "black"},
+    { "1_tail": "tail_scorpion_white", "background":       "black"},
 
     { "1_tail": "tail_kitsune_orange","background":     "navy"},
+    { "1_tail": "tail_kitsune_brown","background":     "navy"},
     { "1_tail": "tail_lion_red", "background":          "navy"},
     { "1_tail": "tail_kitsune_red","background":        "navy"},
     { "1_tail": "tail_lion_orange", "background":       "navy"},
@@ -164,6 +170,39 @@ incompatible_list = [
 
 
     { "background": "forest", "base_color": "red" },
-    {  "background": "sky", "4_back": "back_featherwings_purple" }
+    {  "background": "sky", "4_back": "back_featherwings_purple" },
      
+    # yellow base and tan egg dark bg
+    { "base_color": "yellow", "background": "tan_egg_dark"},
+     
+    # white base and tan egg dark bg
+    { "base_color": "white", "background": "tan_egg_light"},
+    { "base_color": "white", "background": "tan_egg_dark"},
+
+    # purple base on purp2 bg and varsity
+    { "base_color": "purple","background": "purp2"},
+    { "base_color": "purple","background": "varsity"},
+
+    # blue base on varisty/navy
+    { "base_color": "blue", "background": "varsity"},
+    { "base_color": "blue", "background": "navy"},
+
+    # yellow base on apricot bg
+    {"base_color": "yellow", "background": "apricot"},
+
+    #black silky fur on black bg
+    {"7_fur": "fur_silky_black","background": "black"},
+    {"7_fur": "fur_silky_black", "background": "navy"},
+    {"7_fur": "fur_bushy_black","background": "black"},
+    {"7_fur": "fur_bushy_black", "background": "navy"},
+    {"7_fur": "fur_windy_black","background": "black"},
+    {"7_fur": "fur_windy_black", "background": "navy"},
+    
+    # no black on black/navy
+    {"base_color": "black", "background": "navy"},
+    {"base_color": "black", "background": "black"},
+
+    # purple fur on purp2 bg
+    { "7_fur": "fur_bushy_purple","background": "purp2"}
+    
 ]  
