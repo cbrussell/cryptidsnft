@@ -267,7 +267,7 @@ export default function MyApp() {
               <ul>
                 <li>
                   <p className="text-lg leading-normal text-gray-600 mt-4 text-justify">
-                    TBD
+                    TBD Mint Size, 0.08 ETH
                   </p>
                 </li>
               </ul>
