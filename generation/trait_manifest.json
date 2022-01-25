@@ -1452,6 +1452,178 @@
         ]
     },
     {
+        "attribute": "2a_leftbackleg_shadow_medium",
+        "rarity": 1,
+        "categories": [
+            {
+                "category": "deer",
+                "weight": 1,
+                "colors": [
+                    {
+                        "color": "black",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "leftbackleg_deer_medium",
+                                "weight": 1
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "category": "eagle",
+                "weight": 1,
+                "colors": [
+                    {
+                        "color": "black",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "leftbackleg_eagle_medium",
+                                "weight": 1
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "category": "horse",
+                "weight": 1,
+                "colors": [
+                    {
+                        "color": "black",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "leftbackleg_horse_medium",
+                                "weight": 1
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "category": "lion",
+                "weight": 1,
+                "colors": [
+                    {
+                        "color": "black",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "leftbackleg_lion_medium",
+                                "weight": 1
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "category": "wolf",
+                "weight": 1,
+                "colors": [
+                    {
+                        "color": "black",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "leftbackleg_wolf_medium",
+                                "weight": 1
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "attribute": "2b_leftbackleg_shadow_shaggy",
+        "rarity": 1,
+        "categories": [
+            {
+                "category": "deer",
+                "weight": 1,
+                "colors": [
+                    {
+                        "color": "black",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "leftbackleg_deer_shaggy",
+                                "weight": 1
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "category": "eagle",
+                "weight": 1,
+                "colors": [
+                    {
+                        "color": "black",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "leftbackleg_eagle_shaggy",
+                                "weight": 1
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "category": "horse",
+                "weight": 1,
+                "colors": [
+                    {
+                        "color": "black",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "leftbackleg_horse_shaggy",
+                                "weight": 1
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "category": "lion",
+                "weight": 1,
+                "colors": [
+                    {
+                        "color": "black",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "leftbackleg_lion_shaggy",
+                                "weight": 1
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "category": "wolf",
+                "weight": 1,
+                "colors": [
+                    {
+                        "color": "black",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "leftbackleg_wolf_shaggy",
+                                "weight": 1
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
         "attribute": "3_leftfrontleg",
         "rarity": 1,
         "categories": [

@@ -56,6 +56,10 @@ def combine_attributes(frames: Frames, prefix: str):
             leftbackleg = Image.open(frames.leftbackleg_frames[n])
             frame.paste(leftbackleg, box=(30, 70), mask=leftbackleg)
 
+        if frames.leftbacklegshadow_frames:
+            leftbacklegshadow = Image.open(frames.leftbacklegshadow_frames[n])
+            frame.paste(leftbacklegshadow, box=(30, 70), mask=leftbacklegshadow)
+
         if frames.leftfrontleg_frames[n]:
             leftfrontleg = Image.open(frames.leftfrontleg_frames[n])
             frame.paste(leftfrontleg, box=(30, 70), mask=leftfrontleg)

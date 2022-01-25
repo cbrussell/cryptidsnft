@@ -11,6 +11,7 @@ class Frames:
     leftfrontleg_frames: list
     back_frames: list
     torsobase_frames: list
+    leftbacklegshadow_frames: list
     torsoaccent_frames: list
     torsopattern_frames: list
     fur_frames: list
@@ -53,6 +54,13 @@ def get_dna(trait_manifest: TraitManifest, color_manifest: ColorManifest, backgr
 
         torsobase, torsotype, torsobase_color, torsobase_frames = get_trait_color(trait_manifest, "5a_torsobase", color)
         data.update(torsobase)
+
+        if torsotype == 'medium':
+            leftbacklegshadow, leftbacklegshadow_frames = get_trait_category(trait_manifest, "2a_leftbackleg_shadow_medium", backanimalleg)[0:4:3]
+            data.update(leftbacklegshadow)
+        else:
+            leftbacklegshadow, leftbacklegshadow_frames = get_trait_category(trait_manifest, "2b_leftbackleg_shadow_shaggy", backanimalleg)[0:4:3]
+            data.update(leftbacklegshadow)
 
         # torso accent needs to relate to torso base, input type
         torsoaccent, torsoaccent_category, torsoaccent_color, torsoaccent_frames = get_trait_category(trait_manifest, "5b_torsoaccent", torsotype)
@@ -137,6 +145,7 @@ def get_dna(trait_manifest: TraitManifest, color_manifest: ColorManifest, backgr
                     , leftfrontleg_frames
                     , back_frames
                     , torsobase_frames
+                    , leftbacklegshadow_frames
                     , torsoaccent_frames
                     , torsopattern_frames
                     , fur_frames
