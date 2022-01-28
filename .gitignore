@@ -7,3 +7,6 @@ generation/RENDERS/
 test_archive/**
 assets/*
 __pycache__/
+.tmp.driveupload/
+~/.Trash/
+.Trash/*
