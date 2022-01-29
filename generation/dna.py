@@ -4,6 +4,8 @@ from dataclasses import dataclass
 from typing import Union
 from traits import TraitManifest, ColorManifest, BackgroundManifest, get_trait, get_trait_category, get_trait_category_color, get_trait_color, get_trait_color_avoid_category
 from incompatible import incompatible_list
+from traits import chance
+
 @dataclass
 class Frames:
 
@@ -118,6 +120,7 @@ def get_dna(trait_manifest: TraitManifest, color_manifest: ColorManifest, backgr
         rightfrontleg, rightfrontleg_frames = get_trait_category_color(trait_manifest, "9_rightfrontleg", frontanimalleg, color)[0:4:3]
         data.update(rightfrontleg)
 
+        
         ears, ears_frames = get_trait_color(trait_manifest, "10_ears", color)[0:4:3]
         data.update(ears)
 

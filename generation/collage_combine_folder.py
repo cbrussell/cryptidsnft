@@ -2,7 +2,7 @@ import os
 from PIL import Image
 import fnmatch
 from pathlib import Path
-from matplotlib import image 
+from matplotlib import image, scale 
 from prime_factor import gridSize
 
 
@@ -37,13 +37,17 @@ def main():
             frame.paste(still, box=(height * x, height * y))
             print(f"Pasted frame #{frame_count}! Only {still_count - frame_count} more frames left to go!")
             frame_count += 1
-     
 
-    frame = frame.resize((8000, 8000))
+    # ***************     scale      ***************     
+
+    basewidth = 10000
+    resize_scale = float(basewidth)/float(width*grid[0])
+    frame = frame.resize((basewidth, int(float(height*grid[1]) * resize_scale)))
+
+    # ***************     scale      ***************
 
     print("Saving collage...")
-    frame.save(f"{dir_path}/output/collage_still/full_collage_{grid[0]}_x_{grid[1]}.png", format="png") 
-        
+    frame.save(f"{dir_path}/output/collage_still/full_collage_{grid[0]}_x_{grid[1]}.png", format="png")  
     print(f'Completed Collage!')
 
 if __name__ == "__main__":
