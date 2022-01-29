@@ -9,9 +9,9 @@ from time import sleep
 from background_2d_generator import get_2d_gradient
 
 def combine_attributes(frames: Frames, prefix: str):
-    R = np.random.randint(0, 256)
-    G = np.random.randint(0, 256)
-    B = np.random.randint(0, 256)
+    # R = np.random.randint(0, 256)
+    # G = np.random.randint(0, 256)
+    # B = np.random.randint(0, 256)
 
     # R1 = np.random.randint(0, 256)
     # G1 = np.random.randint(0, 256)
@@ -29,7 +29,7 @@ def combine_attributes(frames: Frames, prefix: str):
     # for (n, background) in enumerate(frames.background_frames):
     # print("Generating frames...")
 
-    for n in range(0, 1): #0,72
+    for n in range(0, 72): #0,72
 
         # use this is background color
         # frame = Image.open(background) # background of data

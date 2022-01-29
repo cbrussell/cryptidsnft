@@ -8,5 +8,6 @@ test_archive/**
 assets/*
 __pycache__/
 .tmp.driveupload/
+.tmp.drivedownload/
 ~/.Trash/
 .Trash/*

@@ -6,6 +6,7 @@ export default function MyApp() {
   const [faq2, setFaq2] = useState(false);
   const [faq3, setFaq3] = useState(false);
   const [faq4, setFaq4] = useState(false);
+  const [faq5, setFaq5] = useState(false);
 
   return (
     <div id="faq">
@@ -215,7 +216,7 @@ export default function MyApp() {
             <div className="flex items-center justify-between">
               <div>
                 <h2 className="font-bold  uppercase text-lg leading-none text-gray-800">
-                  What is the total supply and mint cost?
+                  What is the mint price and collection size?
                 </h2>
               </div>
               <button
@@ -273,6 +274,70 @@ export default function MyApp() {
               </ul>
             )}
           </div>
+
+          <div className="bg-white shadow rounded p-8 mt-8 cursor-pointer" onClick={() => setFaq5(!faq5)}>
+            <div className="flex items-center justify-between">
+              <div>
+                <h2 className="font-bold  uppercase text-lg leading-none text-gray-800">
+                  Which marketplace will CRYPTIDS be listed on?
+                </h2>
+              </div>
+              <button
+
+                data-menu
+                className="focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2 ring-offset-white cursor-pointer"
+              >
+                {faq5 ? (
+                  <svg
+                    role="button"
+                    aria-label="close dropdown"
+                    width="10"
+                    height="6"
+                    viewBox="0 0 10 6"
+                    fill="none"
+
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M1 5L5 1L9 5"
+                      stroke="#4B5563"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                ) : (
+                  <svg
+                    width="10"
+                    role="button"
+                    aria-label="open dropdown"
+                    height="6"
+                    viewBox="0 0 10 6"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M1 1L5 5L9 1"
+                      stroke="#4B5563"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                )}
+              </button>
+            </div>
+            {faq5 && (
+              <ul>
+                <li>
+                  <p className="text-lg leading-normal text-gray-600 mt-4 text-justify">
+                    TBD
+                  </p>
+                </li>
+              </ul>
+            )}
+          </div>
+
           
         </div>
       </div>
