@@ -45,7 +45,7 @@ def combine_attributes(frames: Frames, prefix: str):
 
         # frame = Image.open(frames.background_frame[0]) # use chosen background from DNA
 
-        frame = Image.new('RGB', (1100, 1100), (255, 255, 255)) # black bg
+        frame = Image.new('RGB', (1180, 1180), (255, 255, 255)) # black bg
 
         if frames.tail_frames:
             print(frames.tail_frames[n])
@@ -63,6 +63,10 @@ def combine_attributes(frames: Frames, prefix: str):
         if frames.leftfrontleg_frames[n]:
             leftfrontleg = Image.open(frames.leftfrontleg_frames[n])
             frame.paste(leftfrontleg, box=(20, 70), mask=leftfrontleg)
+
+        if frames.leftfrontlegshadow_frames[n]:
+            leftfrontlegshadow = Image.open(frames.leftfrontlegshadow_frames[n])
+            frame.paste(leftfrontlegshadow, box=(20, 70), mask=leftfrontlegshadow)
 
         if frames.back_frames:
             back = Image.open(frames.back_frames[n])

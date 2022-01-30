@@ -18,7 +18,7 @@ def main():
 
     start_time = datetime.now()
     procs = 10
-    n = 200 # collection size
+    n = 330 # collection size
     increment = int(n / procs)
     jobs = []
     start = 1
