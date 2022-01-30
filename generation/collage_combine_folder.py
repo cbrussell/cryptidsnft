@@ -40,7 +40,7 @@ def main():
 
     # ***************     scale      ***************     
 
-    basewidth = 10000
+    basewidth = 5000
     resize_scale = float(basewidth)/float(width*grid[0])
     frame = frame.resize((basewidth, int(float(height*grid[1]) * resize_scale)))
 
