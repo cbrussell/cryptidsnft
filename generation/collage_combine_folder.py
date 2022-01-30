@@ -45,9 +45,9 @@ def main():
             text = f"{frame_count}"
             font = ImageFont.truetype("Arial Black", 70)
             textwidth, textheight = drawn.textsize(text, font)
-            margin = 5
+         
             
-            drawn.text((height * x + 10, height * y), text, font=font, fill="black") 
+            drawn.text((height * x + 30, height * y + 10), text, font=font, fill="black") 
     
             #####
 

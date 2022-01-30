@@ -17,8 +17,8 @@ def main():
     os.makedirs(f"{dir_path}/output/bg", exist_ok=True)
 
     start_time = datetime.now()
-    procs = 10
-    n = 330 # collection size
+    procs = 25
+    n = 625 # collection size
     increment = int(n / procs)
     jobs = []
     start = 1
