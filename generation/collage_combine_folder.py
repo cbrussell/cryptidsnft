@@ -1,5 +1,5 @@
 import os
-from PIL import Image
+from PIL import Image, ImageFont, ImageDraw
 import fnmatch
 from pathlib import Path
 from matplotlib import image, scale 
@@ -35,6 +35,23 @@ def main():
         for y in range(grid[1]):
             still = Image.open(f"{dir_path}/output/stills/{frame_count}.png")
             frame.paste(still, box=(height * x, height * y))
+
+                    # watermark settings
+            # find texts with "find {/System,}/Library/Fonts -name *ttf"
+            ######
+    
+            Width, Height = frame.size 
+            drawn = ImageDraw.Draw(frame) 
+            text = f"{frame_count}"
+            font = ImageFont.truetype("Arial Black", 70)
+            textwidth, textheight = drawn.textsize(text, font)
+            margin = 5
+            
+            drawn.text((height * x + 10, height * y), text, font=font) 
+    
+            #####
+
+
             print(f"Pasted frame #{frame_count}! Only {still_count - frame_count} more frames left to go!")
             frame_count += 1
 
