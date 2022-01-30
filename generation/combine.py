@@ -43,9 +43,9 @@ def combine_attributes(frames: Frames, prefix: str):
         # frame = Image.new('RGB', (1180, 1180), (R, G, B)) # random solid
         
 
-        frame = Image.open(frames.background_frame[0]) # use chosen background from DNA
+        # frame = Image.open(frames.background_frame[0]) # use chosen background from DNA
 
-        # frame = Image.new('RGB', (1100, 1100), (0, 0, 0)) # black bg
+        frame = Image.new('RGB', (1100, 1100), (255, 255, 255)) # black bg
 
         if frames.tail_frames:
             print(frames.tail_frames[n])

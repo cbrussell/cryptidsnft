@@ -31,8 +31,8 @@ def main():
     frame = Image.new('RGB', (width*grid[0], height*grid[1]))# random solid
 
     frame_count = 1
-    for x in range(grid[0]):
-        for y in range(grid[1]):
+    for y in range(grid[1]):
+        for x in range(grid[0]):
             still = Image.open(f"{dir_path}/output/stills/{frame_count}.png")
             frame.paste(still, box=(height * x, height * y))
 
@@ -47,7 +47,7 @@ def main():
             textwidth, textheight = drawn.textsize(text, font)
             margin = 5
             
-            drawn.text((height * x + 10, height * y), text, font=font) 
+            drawn.text((height * x + 10, height * y), text, font=font, fill="black") 
     
             #####
 

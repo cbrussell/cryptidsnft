@@ -1,32 +1,17 @@
 [
-    {
-        "color": "apricot",
-        "weight": 1
-    },
+   
     {
         "color": "navy",
         "weight": 1
     },
-    {
-        "color": "purp2",
-        "weight": 1
-    },
-    {
-        "color": "sky",
-        "weight": 1
-    },
-    {
-        "color": "skyish",
-        "weight": 1
-    },
+ 
+    
+ 
     {
         "color": "varsity",
         "weight": 1
     },
-    {
-        "color": "sand2",
-        "weight": 1
-    },
+ 
     {
         "color": "black",
         "weight": 1
@@ -40,12 +25,45 @@
         "color": "tan_egg_light",
         "weight": 1
     },
+
     {
-        "color": "rose",
+        "color": "turq",
         "weight": 1
     },
     {
-        "color": "turq",
+        "color": "80",
+        "weight": 1
+    },
+    {
+        "color": "89",
+        "weight": 1
+    },
+    {
+        "color": "118",
+        "weight": 1
+    },
+    {
+        "color": "125",
+        "weight": 1
+    },
+    {
+        "color": "207",
+        "weight": 1
+    },
+    {
+        "color": "392",
+        "weight": 1
+    },
+    {
+        "color": "556",
+        "weight": 1
+    },
+    {
+        "color": "745",
+        "weight": 1
+    },
+    {
+        "color": "967",
         "weight": 1
     }
 ]
