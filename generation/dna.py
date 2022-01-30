@@ -17,6 +17,7 @@ class Frames:
     torsoaccent_frames: list
     torsopattern_frames: list
     fur_frames: list
+    leftfrontlegshadow_frames: list
     headbase_frames: list
     headaccent_frames: list
     headpattern_frames: list
@@ -48,6 +49,8 @@ def get_dna(trait_manifest: TraitManifest, color_manifest: ColorManifest, backgr
         leftbackleg, backanimalleg, leftbackleg_color, leftbackleg_frames = get_trait_color(trait_manifest, "2_leftbackleg", color)
         data.update(leftbackleg)
 
+        
+
         leftfrontleg, frontanimalleg, leftfrontleg_color, leftfrontleg_frames  = get_trait_color(trait_manifest, "3_leftfrontleg", color)
         data.update(leftfrontleg)
 
@@ -71,7 +74,31 @@ def get_dna(trait_manifest: TraitManifest, color_manifest: ColorManifest, backgr
         torsopattern, torsopattern_category, torsopattern_color, torsopattern_frames = get_trait_category(trait_manifest, "5c_torsopattern", torsotype)
         data.update(torsopattern)
 
-        fur, fur_frames = get_trait(trait_manifest, "7_fur")[0:4:3]
+        fur, fur_type, fur_color, fur_frames = get_trait(trait_manifest, "7_fur")
+
+        if fur:
+
+            if fur_type == 'bushy':
+                leftfrontlegshadow, leftfrontlegshadow_frames = get_trait_category(trait_manifest, "3a_leftfrontleg_shadow_bushy", frontanimalleg)[0:4:3]
+                data.update(leftfrontlegshadow)
+
+            if fur_type == 'silky':
+                leftfrontlegshadow, leftfrontlegshadow_frames = get_trait_category(trait_manifest, "3c_leftfrontleg_shadow_silky", frontanimalleg)[0:4:3]
+                data.update(leftfrontlegshadow)
+
+            if fur_type == 'windy':
+                leftfrontlegshadow, leftfrontlegshadow_frames = get_trait_category(trait_manifest, "3d_leftfrontleg_shadow_windy", frontanimalleg)[0:4:3]
+                data.update(leftfrontlegshadow)
+
+            if fur_type == 'wooly':
+                leftfrontlegshadow, leftfrontlegshadow_frames = get_trait_category(trait_manifest, "3e_leftfrontleg_shadow_wooly", frontanimalleg)[0:4:3]
+                data.update(leftfrontlegshadow)
+
+        else:
+
+            leftfrontlegshadow, leftfrontlegshadow_frames = get_trait_category(trait_manifest, "3b_leftfrontleg_shadow_neck", frontanimalleg)[0:4:3]
+            data.update(leftfrontlegshadow)
+
         data.update(fur) 
 
         headbase, animal, animalcolor, headbase_frames = get_trait_color(trait_manifest, "11a_headbase", color)
@@ -152,6 +179,7 @@ def get_dna(trait_manifest: TraitManifest, color_manifest: ColorManifest, backgr
                     , torsoaccent_frames
                     , torsopattern_frames
                     , fur_frames
+                    , leftfrontlegshadow_frames
                     , headbase_frames
                     , headaccent_frames
                     , headpattern_frames
