@@ -4,9 +4,10 @@
         "color": "navy",
         "weight": 1
     },
- 
-    
- 
+    {
+        "color": "super_tan",
+        "weight": 1
+    },
     {
         "color": "varsity",
         "weight": 1
@@ -18,16 +19,23 @@
     },
 
     {
-        "color": "tan_egg_dark",
-        "weight": 1
-    },
-    {
-        "color": "tan_egg_light",
-        "weight": 1
-    },
-
-    {
         "color": "turq",
+        "weight": 1
+    },
+    {
+        "color": "purp2",
+        "weight": 1
+    },
+    {
+        "color": "sky",
+        "weight": 1
+    },
+    {
+        "color": "skyish",
+        "weight": 1
+    },
+    {
+        "color": "rose",
         "weight": 1
     },
     {

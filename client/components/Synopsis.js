@@ -7,10 +7,10 @@ export default function MyApp() {
     <div id="synopsis">
       <div className="flex flex-col items-center justify-center sm:px-0 px-6 z-20   bg-cryptid-5  ">
         <div className="md:pt-30 sm:pt-5">
-          <h2 role="heading" className="element md:text-4xl text-2xl mb-10 text-center font-bold  leading-10 text-white">
+          <h2 role="heading" className="element md:text-4xl selection:bg-cryptid-2 selection:text-gray-800 text-2xl mb-10 text-center font-bold  leading-10 text-white">
             SynOpsis
           </h2>
-          <p className="flex flex-row justify-start lg:px-44 md:px-14 sm:px-10 text-white text-justify leading-9 font-normal">
+          <p className="flex flex-row selection:bg-cryptid-2 selection:text-gray-800 justify-start lg:px-44 md:px-14 sm:px-10 text-white text-justify leading-9 font-normal">
             HUMANITY must expand. In our search for new riches, a GATEWAY is uncovered. The first wave of PIONEERS
             dub a sector NOS ATOMOS as most fruitful and construction of the capital city, KRYPTOS, begins.
             However, humans are not alone in this new frontier. From the shadows lurk the original inhabitants
@@ -18,13 +18,14 @@ export default function MyApp() {
             
 
           </p>
-          <h2 role="heading" className="element md:text-4xl text-2xl mb-6 text-center font-bold mt-20 leading-10 text-white">
+          <h2 role="heading" className="element md:text-4xl selection:bg-cryptid-2 selection:text-gray-800 text-2xl mb-6 text-center font-bold mt-20 leading-10 text-white">
             The CRyptids
           </h2>
-          <p className="flex flex-row justify-start lg:px-44 md:px-14 sm:px-10 text-white text-justify leading-9 font-normal">
+          <p className="flex flex-row justify-start selection:bg-cryptid-2 selection:text-gray-800 lg:px-44 md:px-14 sm:px-10 text-white text-justify leading-9 font-normal">
     
-            Part science-fiction, part fantasy, CRYPTIDS is an art-based NFT project of 8,888 randomly
-            generated creatures with hundreds of unique attributes.
+            Part science-fiction, part fantasy, CRYPTIDS is a generative art project of mythical creatures with hundres of unique attributes. 
+            Created by @no__solo and @chrisrusselljr.
+            
             <br></br>
             <br></br>
 
@@ -32,10 +33,10 @@ export default function MyApp() {
 
 
           </p>
-          <h2 role="heading" className="element md:text-4xl text-2xl mb-6 text-center font-bold mt-20 leading-10 text-white">
+          <h2 role="heading" className="element md:text-4xl selection:bg-cryptid-2 selection:text-gray-800 text-2xl mb-6 text-center font-bold mt-20 leading-10 text-white">
             Our StOry
           </h2>
-          <p className="flex flex-row justify-start lg:px-44 md:px-14 sm:px-10 text-white text-justify leading-9 font-normal pb-10">
+          <p className="flex flex-row justify-start selection:bg-cryptid-2 selection:text-gray-800 lg:px-44 md:px-14 sm:px-10 text-white text-justify leading-9 font-normal pb-10">
 
 
             The idea of this project is the fantastical brain-child of four entrepreneurial siblings who pooled
