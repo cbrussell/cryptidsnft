@@ -2541,7 +2541,7 @@
     },
     {
         "attribute": "4_back",
-        "rarity": 0.75,
+        "rarity": 0.6,
         "categories": [
             {
                 "category": "featherwings",
@@ -3322,6 +3322,22 @@
                 ]
             },
             {
+                "category": "eagle",
+                "weight": 1,
+                "colors": [
+                    {
+                        "color": "black",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "neckshadow_eagle_black",
+                                "weight": 1
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
                 "category": "horse",
                 "weight": 1,
                 "colors": [
@@ -3373,7 +3389,7 @@
     },
     {
         "attribute": "7_fur",
-        "rarity": 0.65,
+        "rarity": 0.55,
         "categories": [
             {
                 "category": "bushy",
@@ -3753,6 +3769,414 @@
                         "traits": [
                             {
                                 "trait": "fur_windy_yellow",
+                                "weight": 1
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "attribute": "7a_fur_shadow_silky",
+        "rarity": 1,
+        "categories": [
+            {
+                "category": "bear",
+                "weight": 1,
+                "colors": [
+                    {
+                        "color": "black",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "furshadow_bear_silky",
+                                "weight": 1
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "category": "eagle",
+                "weight": 1,
+                "colors": [
+                    {
+                        "color": "black",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "furshadow_eagle_silky",
+                                "weight": 1
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "category": "horse",
+                "weight": 1,
+                "colors": [
+                    {
+                        "color": "black",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "furshadow_horse_silky",
+                                "weight": 1
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "category": "horse",
+                "weight": 1,
+                "colors": [
+                    {
+                        "color": "black",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "furshadow_horse_silky",
+                                "weight": 1
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "category": "lion",
+                "weight": 1,
+                "colors": [
+                    {
+                        "color": "black",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "furshadow_lion_silky",
+                                "weight": 1
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "category": "wolf",
+                "weight": 1,
+                "colors": [
+                    {
+                        "color": "black",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "furshadow_wolf_silky",
+                                "weight": 1
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "attribute": "7b_fur_shadow_bushy",
+        "rarity": 1,
+        "categories": [
+            {
+                "category": "bear",
+                "weight": 1,
+                "colors": [
+                    {
+                        "color": "black",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "furshadow_bear_bushy",
+                                "weight": 1
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "category": "eagle",
+                "weight": 1,
+                "colors": [
+                    {
+                        "color": "black",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "furshadow_eagle_bushy",
+                                "weight": 1
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "category": "horse",
+                "weight": 1,
+                "colors": [
+                    {
+                        "color": "black",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "furshadow_horse_bushy",
+                                "weight": 1
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "category": "horse",
+                "weight": 1,
+                "colors": [
+                    {
+                        "color": "black",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "furshadow_horse_bushy",
+                                "weight": 1
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "category": "lion",
+                "weight": 1,
+                "colors": [
+                    {
+                        "color": "black",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "furshadow_lion_bushy",
+                                "weight": 1
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "category": "wolf",
+                "weight": 1,
+                "colors": [
+                    {
+                        "color": "black",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "furshadow_wolf_bushy",
+                                "weight": 1
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "attribute": "7c_fur_shadow_windy",
+        "rarity": 1,
+        "categories": [
+            {
+                "category": "bear",
+                "weight": 1,
+                "colors": [
+                    {
+                        "color": "black",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "furshadow_bear_windy",
+                                "weight": 1
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "category": "eagle",
+                "weight": 1,
+                "colors": [
+                    {
+                        "color": "black",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "furshadow_eagle_windy",
+                                "weight": 1
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "category": "horse",
+                "weight": 1,
+                "colors": [
+                    {
+                        "color": "black",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "furshadow_horse_windy",
+                                "weight": 1
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "category": "horse",
+                "weight": 1,
+                "colors": [
+                    {
+                        "color": "black",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "furshadow_horse_windy",
+                                "weight": 1
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "category": "lion",
+                "weight": 1,
+                "colors": [
+                    {
+                        "color": "black",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "furshadow_lion_windy",
+                                "weight": 1
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "category": "wolf",
+                "weight": 1,
+                "colors": [
+                    {
+                        "color": "black",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "furshadow_wolf_windy",
+                                "weight": 1
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "attribute": "7d_fur_shadow_wooly",
+        "rarity": 1,
+        "categories": [
+            {
+                "category": "bear",
+                "weight": 1,
+                "colors": [
+                    {
+                        "color": "black",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "furshadow_bear_wooly",
+                                "weight": 1
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "category": "eagle",
+                "weight": 1,
+                "colors": [
+                    {
+                        "color": "black",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "furshadow_eagle_wooly",
+                                "weight": 1
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "category": "horse",
+                "weight": 1,
+                "colors": [
+                    {
+                        "color": "black",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "furshadow_horse_wooly",
+                                "weight": 1
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "category": "horse",
+                "weight": 1,
+                "colors": [
+                    {
+                        "color": "black",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "furshadow_horse_wooly",
+                                "weight": 1
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "category": "lion",
+                "weight": 1,
+                "colors": [
+                    {
+                        "color": "black",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "furshadow_lion_wooly",
+                                "weight": 1
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "category": "wolf",
+                "weight": 1,
+                "colors": [
+                    {
+                        "color": "black",
+                        "weight": 1,
+                        "traits": [
+                            {
+                                "trait": "furshadow_wolf_wooly",
                                 "weight": 1
                             }
                         ]
@@ -6295,7 +6719,7 @@
     },
     {
         "attribute": "13_horns",
-        "rarity": 0.6,
+        "rarity": 0.5,
         "categories": [
             {
                 "category": "ram",

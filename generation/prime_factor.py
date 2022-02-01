@@ -5,9 +5,14 @@ def gridSize(n):
     grid = []
     a = math.sqrt(n)
 
-    while n % a != 0:
+    while True:
+        
         print("Trying again, not integer..")
-        a = math.floor(a) -1
+        a = math.floor(a)
+        n % a != 0
+        if n % a != 0:
+            a -= 1
+        else: break
     b = n/a
 
     grid.append(int(b))

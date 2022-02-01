@@ -19,6 +19,7 @@ class Frames:
     fur_frames: list
     leftfrontlegshadow_frames: list
     headbase_frames: list
+    furshadow_frames: list
     headaccent_frames: list
     headpattern_frames: list
     mouth_frames: list
@@ -75,6 +76,7 @@ def get_dna(trait_manifest: TraitManifest, color_manifest: ColorManifest, backgr
         data.update(torsopattern)
 
         fur, fur_type, fur_color, fur_frames = get_trait(trait_manifest, "7_fur")
+        data.update(fur) 
 
         if fur:
 
@@ -99,10 +101,29 @@ def get_dna(trait_manifest: TraitManifest, color_manifest: ColorManifest, backgr
             leftfrontlegshadow, leftfrontlegshadow_frames = get_trait_category(trait_manifest, "3b_leftfrontleg_shadow_neck", frontanimalleg)[0:4:3]
             data.update(leftfrontlegshadow)
 
-        data.update(fur) 
-
         headbase, animal, animalcolor, headbase_frames = get_trait_color(trait_manifest, "11a_headbase", color)
         data.update(headbase)
+
+        if fur:
+
+            if fur_type == 'bushy':
+                furshadow, furshadow_frames = get_trait_category(trait_manifest, "7b_fur_shadow_bushy", animal)[0:4:3]
+                data.update(furshadow)
+
+            if fur_type == 'silky':
+                furshadow, furshadow_frames = get_trait_category(trait_manifest, "7a_fur_shadow_silky", animal)[0:4:3]
+                data.update(furshadow)
+
+            if fur_type == 'windy':
+                furshadow, furshadow_frames = get_trait_category(trait_manifest, "7c_fur_shadow_windy", animal)[0:4:3]
+                data.update(furshadow)
+
+            if fur_type == 'wooly':
+                furshadow, furshadow_frames = get_trait_category(trait_manifest, "7d_fur_shadow_wooly", animal)[0:4:3]
+                data.update(furshadow)
+        else:
+            
+            furshadow_frames = []
 
         headaccent, headaccent_frames = get_trait_category(trait_manifest, "11b_headaccent", animal)[0:4:3]
         data.update(headaccent)
@@ -135,11 +156,11 @@ def get_dna(trait_manifest: TraitManifest, color_manifest: ColorManifest, backgr
                 neckpattern_frames = []
 
             # no neckshadow on eagle
-            if animal == 'eagle':
-                neckshadow_frames = []
-            else:
-                neckshadow, neckshadow_frames = get_trait_category(trait_manifest, "6d_neckshadow", animal)[0:4:3]
-                data.update(neckshadow)
+            # if animal == 'eagle':
+                # neckshadow_frames = []
+            # else:
+            neckshadow, neckshadow_frames = get_trait_category(trait_manifest, "6d_neckshadow", animal)[0:4:3]
+            data.update(neckshadow)
 
         rightbackleg, rightbackleg_frames = get_trait_category_color(trait_manifest, "8_rightbackleg", backanimalleg, color)[0:4:3]
         data.update(rightbackleg)
@@ -181,6 +202,7 @@ def get_dna(trait_manifest: TraitManifest, color_manifest: ColorManifest, backgr
                     , fur_frames
                     , leftfrontlegshadow_frames
                     , headbase_frames
+                    , furshadow_frames
                     , headaccent_frames
                     , headpattern_frames
                     , mouth_frames
