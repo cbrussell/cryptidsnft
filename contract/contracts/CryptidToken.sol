@@ -13,9 +13,10 @@ contract CryptidToken is ERC721, Pausable, Ownable, ERC721Burnable{
     using Strings for uint256;
     using SafeMath for uint256;
     using Counters for Counters.Counter;
+    using MerkleProof for bytes32[];
 
     Counters.Counter private _tokenIdCounter;
-
+    
     bytes32 public merkleRoot;
     string public provenanceHash;
     string public baseURI = "";
@@ -24,33 +25,29 @@ contract CryptidToken is ERC721, Pausable, Ownable, ERC721Burnable{
     uint8 public maxMintPerTx;     
     bool public tokenURIFrozen = false;
     bool public provenanceHashFrozen = false;
-    address public withdrawDest1 = 0x1953bc1fF76f5e61cD775A4482bd85BAc56aD1Eb;
-    address public withdrawDest2 = 0x12B58f5331a6DC897932AA7FB5101667ACdf03e2;
+    address public withdrawDest1 = 0x1953bc1fF76f5e61cD775A4482bd85BAc56aD1Eb; // trust
+    address public withdrawDest2 = 0x12B58f5331a6DC897932AA7FB5101667ACdf03e2; // founder 1
+    address public withdrawDest3 = 0x1953bc1fF76f5e61cD775A4482bd85BAc56aD1Eb; // founder 2
+    address public withdrawDest4 = 0x12B58f5331a6DC897932AA7FB5101667ACdf03e2; // founder 3
+    address public withdrawDest5 = 0x12B58f5331a6DC897932AA7FB5101667ACdf03e2; // founder 4
     
     // ~ Sale stages ~
-    // stage 0: Init 
-    // stage 1: Free Mints
-    // stage 2: Whitelist
-    // stage 3: Team Mint 
-    // stage 4: Public Sale
+    // stage 0: Airdrops
+    // stage 1: Whitelist
+    // stage 2: Team Mint 
+    // stage 3: Public Sale
 
-    // Free mint (stage=1)
-    mapping(address => uint8) public freeUsers;
-    mapping(address => uint8) public freeMintCount;
+    uint256 public salePrice = 0.1 ether;  
 
-    // Whitelist mint (stage=2)
-    mapping(address => bool) public whitelistUsers;
+    // Whitelist mint (stage=1)
     uint256 public whitelistSupply;                       
-    uint256 public whitelistPrice = 0.08 ether;
-    uint8 public whitelistMintMax = 2;                  
-    mapping(address => uint8) public whitelistMintCount;
-
-    // Team Mint (stage=3)
+    mapping(address => bool) public blacklist;              
+    
+    // Team Mint (stage=2)
     uint256 public teamMintSupply;                          
     uint256 public teamMintCount;
 
-    // Public Sale (stage=4)
-    uint256 public salePrice = 0.08 ether;
+    // Public Sale (stage=3)
     uint256 public totalSaleSupply;         
 
     constructor(
@@ -72,24 +69,19 @@ contract CryptidToken is ERC721, Pausable, Ownable, ERC721Burnable{
     }
 
     //Public mint function
-    function mint(uint8 _mintAmount) public payable whenNotPaused {
-        require(stage > 0, "Minting not initiated. Currenly on stage 0 (init).");
+    function mint(uint8 _mintAmount, bytes32[] memory proof) public payable whenNotPaused {
+        require(stage > 0, "Minting not initiated. Currenly on stage 0.");
         require(_mintAmount > 0, "Mint amount must be greater than 0.");
         require(_mintAmount <= maxMintPerTx, "Exceeds max allowed amount per transaction.");
         if (stage == 1) {
-        // Free Mint
-            require(freeUsers[msg.sender] > 0, "Minter not awarded free mints.");
-            require(_mintAmount + freeMintCount[msg.sender] <= freeUsers[msg.sender], "Transaction exceeds remaining free mints.");
-            freeMintCount[msg.sender] += _mintAmount;
-    }   else if (stage == 2) {
         // Whitelist
-            
-            require(msg.value >= whitelistPrice.mul(_mintAmount), "Not enough ether sent.");
-            require(whitelistUsers[msg.sender], "Address not on whitelist.");
+            require(proof.verify(merkleRoot, keccak256(abi.encodePacked(msg.sender))), "Address not whitelisted.");
+            require(_mintAmount < 2, "Mint amount must be 1.");
+            require(msg.value >= salePrice.mul(_mintAmount), "Not enough ether sent.");
             require(totalSupply() + _mintAmount <= whitelistSupply, "Transaction exceeds whitelist supply.");
-            require(_mintAmount + whitelistMintCount[msg.sender] <= whitelistMintMax, "Transaction exceeds max allowed whitelist mints.");      
-            whitelistMintCount[msg.sender] += _mintAmount;
-    }   else if (stage == 3) {
+            require(blacklist[msg.sender] == false, "This whitelisted address was already used for their mint.");    
+            blacklist[msg.sender] = true;
+    }   else if (stage == 2) {
         // Team Sale
             require(owner() == msg.sender, "Only Owner can mint at this stage");
             require(_mintAmount + teamMintCount <= teamMintSupply, "Transaction exceeds total team-sale supply");      
@@ -116,7 +108,7 @@ contract CryptidToken is ERC721, Pausable, Ownable, ERC721Burnable{
 
     function airdropCryptid(uint8 _mintAmount, address _to) public onlyOwner {
         require(provenanceHashFrozen == true, "Provenance hash must be frozen before minting can start.");
-        require(stage < 2, "Past free mint sale.");
+        require(stage < 1, "Past airdrop phase.");
         require(_mintAmount <= maxMintPerTx, "Exceeds max allowed amount per transaction");
         require(_mintAmount > 0, "Airdrop amount must be greater than 0");
         require(totalSupply()+ _mintAmount <= whitelistSupply, "Mint amount will exceed whitelist supply.");
@@ -126,27 +118,8 @@ contract CryptidToken is ERC721, Pausable, Ownable, ERC721Burnable{
         }
     }
 
-    function setfreeUsers(address[] memory _users, uint8[] memory _mints) public onlyOwner {
-        require(stage < 2, "Whitelist sale is concluded.");
-        for(uint256 i=0;i<_users.length;i++)
-        freeUsers[_users[i]] = _mints[i];
-    }
-
-    function setWhitelistUsers(address[] memory _users) public onlyOwner {
-        require(stage < 3, "Whitelist is concluded.");
-        for(uint256 i=0;i<_users.length;i++)
-        whitelistUsers[_users[i]] = true;
-    }
-
-    function removeFreetUser(address _user) public onlyOwner {
-        require(stage < 2, "Free mint sale is concluded.");
-        require(freeUsers[_user] > 0, "User not awarded free mint.");
-        freeUsers[_user] = 0;
-    }
-
-    function removeWhitelistUser(address _user) public onlyOwner {
-        require(whitelistUsers[_user], "User not on whitelist list.");
-        whitelistUsers[_user] = false;
+    function setMerkleRoot(bytes32 _merkleRoot) public onlyOwner {
+        merkleRoot = _merkleRoot;
     }
 
     function setBaseURI(string memory _newBaseURI) public onlyOwner {
@@ -180,10 +153,6 @@ contract CryptidToken is ERC721, Pausable, Ownable, ERC721Burnable{
         baseExtension = _newBaseExtension;
     }
 
-    function setWhitelistPrice(uint256 _newWhitelistPrice) public onlyOwner {
-        require(stage < 3, "Whitelist is concluded.");
-        whitelistPrice = _newWhitelistPrice;
-    }
 
     function setPublicSalePrice(uint256 _newSalePrice) public onlyOwner {
         salePrice = _newSalePrice;
@@ -198,9 +167,12 @@ contract CryptidToken is ERC721, Pausable, Ownable, ERC721Burnable{
         provenanceHash = _provenanceHash;
     }
 
-    function setWithdrawAddress(address _dest1, address _dest2) public onlyOwner {
+    function setWithdrawAddress(address _dest1, address _dest2, address _dest3, address _dest4, address _dest5) public onlyOwner {
         withdrawDest1 = _dest1;
         withdrawDest2 = _dest2;
+        withdrawDest3 = _dest3;
+        withdrawDest4 = _dest4;
+        withdrawDest5 = _dest5;
     }
 
     function freezeProvenanceHash() public onlyOwner {
@@ -211,10 +183,16 @@ contract CryptidToken is ERC721, Pausable, Ownable, ERC721Burnable{
 
     function withdraw() public payable onlyOwner {
         require(address(this).balance > 0, "Contract balance is 0.");
-        (bool hs, ) = payable(withdrawDest1).call{value: address(this).balance.mul(50).div(100)}("");
-        require(hs, "withdrawl 1 failed");
-        (bool os, ) = payable(withdrawDest2).call{value: address(this).balance}("");
-        require(os, "withdrawl 2 failed");
+        (bool ms, ) = payable(withdrawDest1).call{value: address(this).balance.mul(700).div(1000)}(""); 
+        require(ms, "withdrawl 1 failed");
+        (bool ns, ) = payable(withdrawDest2).call{value: address(this).balance.mul(105).div(1000)}(""); 
+        require(ns, "withdrawl 2 failed");
+        (bool cr, ) = payable(withdrawDest3).call{value: address(this).balance.mul(105).div(1000)}(""); 
+        require(cr, "withdrawl 3 failed");
+        (bool sn, ) = payable(withdrawDest4).call{value: address(this).balance.mul(45).div(1000)}("");
+        require(sn, "withdrawl 4 failed");
+        (bool gr, ) = payable(withdrawDest5).call{value: address(this).balance}("");
+        require(gr, "withdrawl 5 failed");
     }
 
     // Public view functions
@@ -235,7 +213,6 @@ contract CryptidToken is ERC721, Pausable, Ownable, ERC721Burnable{
     function tokenURI(uint256 tokenId) public view virtual override returns (string memory) {
         require(_exists(tokenId), "ERC721Metadata: URI query for nonexistent token");
         return string(abi.encodePacked(baseURI, tokenId.toString(), baseExtension));
-            
     }
 
     function getTokensLeft() public view returns (uint256) {
