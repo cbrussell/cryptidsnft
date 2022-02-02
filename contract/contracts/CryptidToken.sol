@@ -33,16 +33,14 @@ contract CryptidToken is ERC721, Pausable, Ownable, ERC721Burnable{
     address public withdrawDest5 = 0x12B58f5331a6DC897932AA7FB5101667ACdf03e2; // founder 4
     
     // ~ Sale stages ~
-    // stage 0: Airdrops
+    // stage 0: Airdrops for Trivia/Contest Winners
     // stage 1: Whitelist
     // stage 2: Team Mint 
     // stage 3: Public Sale
 
-    uint256 public salePrice = 0.1 ether;  
-
     // Whitelist mint (stage=1)
     uint256 public whitelistSupply;                       
-    mapping(address => bool) public blacklist;              
+    mapping(address => bool) public claimed;              
     
     // Team Mint (stage=2)
     uint256 public teamMintSupply;                          
@@ -50,6 +48,7 @@ contract CryptidToken is ERC721, Pausable, Ownable, ERC721Burnable{
 
     // Public Sale (stage=3)
     uint256 public totalSaleSupply;         
+    uint256 public salePrice = 0.1 ether;  
 
     constructor(
         string memory _name,
@@ -77,11 +76,11 @@ contract CryptidToken is ERC721, Pausable, Ownable, ERC721Burnable{
         if (stage == 1) {
         // Whitelist
             require(proof.verify(merkleRoot, keccak256(abi.encodePacked(msg.sender))), "Address not whitelisted.");
+            require(claimed[msg.sender] == false, "Whitelist mint already claimed."); 
             require(_mintAmount < 2, "Mint amount must be 1.");
             require(msg.value >= salePrice.mul(_mintAmount), "Not enough ether sent.");
             require(totalSupply() + _mintAmount <= whitelistSupply, "Transaction exceeds whitelist supply.");
-            require(blacklist[msg.sender] == false, "This whitelisted address was already used for their mint.");    
-            blacklist[msg.sender] = true;
+            claimed[msg.sender] = true;
     }   else if (stage == 2) {
         // Team Sale
             require(owner() == msg.sender, "Only Owner can mint at this stage");
@@ -136,6 +135,7 @@ contract CryptidToken is ERC721, Pausable, Ownable, ERC721Burnable{
 
     function nextStage() public onlyOwner {
         require(provenanceHashFrozen == true, "Provenance hash must be frozen before minting can start.");
+        require(merkleRoot[0] != 0, "Merkle root must be set beefore whitelist minting can begin");
         require(stage < 4, "No stages after public sale");
         stage++;
     }
@@ -164,6 +164,7 @@ contract CryptidToken is ERC721, Pausable, Ownable, ERC721Burnable{
     }
 
     function setProvenanceHash(string memory _provenanceHash) public onlyOwner {
+        require(bytes(_provenanceHash).length > 0, "Provenance hash cannot be empty string.");
         require(!provenanceHashFrozen, "Provenance hash is frozen.");
         provenanceHash = _provenanceHash;
     }

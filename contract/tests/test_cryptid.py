@@ -60,77 +60,6 @@ def _verifyApprovalEvent(txn_receipt, owner, approved, tokenID):
     assert(event['owner'] == owner)
     assert(event['approved'] == approved)
 
-# ensure whitelist works
-def test_whitelist_add(token):
-    owner = accounts[0]
-    user = accounts[1]
-    mints = 5
-    mints_before = token.whitelistUsers(user)
-    token.setWhitelistUsers([user], [mints], {'from': owner})
-    mints_after = token.whitelistUsers(user)
-    assert(mints_after == mints_before + mints)
-
-# set whitelist after whitelist sale
-def test_whitelist_after_sale(token):
-    owner = accounts[0]
-    user = accounts[1]
-    mints = 5
-    _setFreezeProvenance(token)
-    _nextStage(token)
-    _nextStage(token)
-    with brownie.reverts("Whitelist sale is concluded."):
-        token.setWhitelistUsers([user], [mints], {'from': owner})
-
-# remove whitelist user
-def test_remove_whitelist_mints(token):
-    owner = accounts[0]
-    user = accounts[1]
-    mints = 5
-    mints_before = token.whitelistUsers(user)
-    token.setWhitelistUsers([user], [mints], {'from': owner})
-    mints_after = token.whitelistUsers(user)
-    assert(mints_after == mints + mints_before)
-    token.removeWhitelistUser(user, {'from': owner})
-    mints_after_removal = token.whitelistUsers(user)
-    assert(mints_after_removal == 0)
-
-
-# remove whitelist after whitelist sale
-def test_remove_whitelist_after_whitelist_sale(token):
-    owner = accounts[0]
-    user = accounts[1]
-    _whitelistUser(token)
-    _setFreezeProvenance(token)
-    _nextStage(token)
-    _nextStage(token)
-    with brownie.reverts("Whitelist sale is concluded."):
-        token.removeWhitelistUser(user, {'from': owner})
-        
-def test_remove_whitelist_after_finished_minting(token):
-    owner = accounts[0]
-    user = accounts[1]
-    mints = 5
-    token.setWhitelistUsers([user], [mints], {'from': owner})
-    _setFreezeProvenance(token)
-    _nextStage(token)
-    balance_before = token.balanceOf(user)
-    token.mint(mints, {'from': user})
-    balance_after = token.balanceOf(user)
-    assert(balance_after == balance_before + mints)
-    token.removeWhitelistUser(user, {'from': owner})
-    assert(token.whitelistUsers(user) == 0)
-
-def test_user_not_on_whitelist(token):
-    owner = accounts[0]
-    user = accounts[1]
-    second_user = accounts[2]
-    mints = 5
-    token.setWhitelistUsers([user], [mints], {'from': owner})
-    _setFreezeProvenance(token)
-    _nextStage(token)
-    with brownie.reverts("User is not on whitelist."):
-        token.removeWhitelistUser(second_user, {'from': owner})
-
 # provenance has is frozen
 def test_freeze_provenance(token):
     owner = accounts[0]
@@ -149,7 +78,7 @@ def test_account_balance():
     accounts[0].transfer(accounts[1], "10 ether", gas_price=0)
     assert balance - "10 ether" == accounts[0].balance()
 
-# check no minting allowed after deployment as non-wner
+# check no minting allowed after deployment as non-owner
 def test_mint_after_deploy_non_owner(token):
     user = accounts[1]
     with brownie.reverts("Minting not initiated. Currenly on stage 0 (init)."):
@@ -259,7 +188,6 @@ def test_airdrop_at_presale(token):
     user = accounts[1]
     tokens = 5
     _setFreezeProvenance(token)
-    _nextStage(token)
     _nextStage(token)
     with brownie.reverts("Past whitelist sale."):
         token.airdropCryptid(tokens, user, {'from': owner})
