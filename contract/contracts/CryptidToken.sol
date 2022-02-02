@@ -25,6 +25,7 @@ contract CryptidToken is ERC721, Pausable, Ownable, ERC721Burnable{
     uint8 public maxMintPerTx;     
     bool public tokenURIFrozen = false;
     bool public provenanceHashFrozen = false;
+
     address public withdrawDest1 = 0x1953bc1fF76f5e61cD775A4482bd85BAc56aD1Eb; // trust
     address public withdrawDest2 = 0x12B58f5331a6DC897932AA7FB5101667ACdf03e2; // founder 1
     address public withdrawDest3 = 0x1953bc1fF76f5e61cD775A4482bd85BAc56aD1Eb; // founder 2
@@ -183,7 +184,7 @@ contract CryptidToken is ERC721, Pausable, Ownable, ERC721Burnable{
 
     function withdraw() public payable onlyOwner {
         require(address(this).balance > 0, "Contract balance is 0.");
-        (bool ms, ) = payable(withdrawDest1).call{value: address(this).balance.mul(700).div(1000)}(""); 
+        (bool ms, ) = payable(withdrawDest1).call{value: address(this).balance.mul(700).div(1000)}("");
         require(ms, "withdrawl 1 failed");
         (bool ns, ) = payable(withdrawDest2).call{value: address(this).balance.mul(105).div(1000)}(""); 
         require(ns, "withdrawl 2 failed");
