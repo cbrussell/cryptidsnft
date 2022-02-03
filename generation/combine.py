@@ -9,9 +9,9 @@ from time import sleep
 from background_2d_generator import get_2d_gradient
 
 def combine_attributes(frames: Frames, prefix: str):
-    R = np.random.randint(0, 256)
-    G = np.random.randint(0, 256)
-    B = np.random.randint(0, 256)
+    # R = np.random.randint(0, 256)
+    # G = np.random.randint(0, 256)
+    # B = np.random.randint(0, 256)
 
     # R1 = np.random.randint(0, 256)
     # G1 = np.random.randint(0, 256)
@@ -40,10 +40,10 @@ def combine_attributes(frames: Frames, prefix: str):
         # 4 way gradient
         # frame = Image.fromarray(np.uint8(array))
 
-        frame = Image.new('RGB', (1180, 1180), (R, G, B)) # random solid
+        # frame = Image.new('RGB', (1180, 1180), (R, G, B)) # random solid
         
 
-        # frame = Image.open(frames.background_frame[0]) # use chosen background from DNA
+        frame = Image.open(frames.background_frame[0]) # use chosen background from DNA
 
         # frame = Image.new('RGB', (1180, 1180), (255, 245, 225)) # black bg
 
@@ -167,13 +167,13 @@ def combine_attributes(frames: Frames, prefix: str):
         frame.save(f"{dir_path}/output/raw/{prefix}/{prefix}_{n:03}.png", format="png") 
 
         if n == 0:
-            time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            # time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
             frame.save(f"{dir_path}/output/stills/{prefix}.png")
 
 
             # frame = Image.fromarray(np.uint8(array)).rotate(270).save(f"{dir_path}/output/bg/{prefix}_bg_{time}_{R1}_{G1}_{B1}_{R}_{G}_{B}.png", "PNG")
            
-            frame = Image.new('RGB', (1180, 1180), (R, G, B)).save(f"{dir_path}/output/bg/{prefix}_bg_{time}_{R}_{G}_{B}.png", "PNG")
+            # frame = Image.new('RGB', (1180, 1180), (R, G, B)).save(f"{dir_path}/output/bg/{prefix}_bg_{time}_{R}_{G}_{B}.png", "PNG")
            
             # frame = Image.fromarray(np.uint8(array)).save(f"{dir_path}/output/bg/{prefix}_bg_{time}_{R1}_{G1}_{B1}_{R}_{G}_{B}.png", "PNG")
 

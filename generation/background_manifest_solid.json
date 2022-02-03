@@ -23,22 +23,6 @@
         "weight": 1
     },
     {
-        "color": "purp2",
-        "weight": 1
-    },
-    {
-        "color": "sky",
-        "weight": 1
-    },
-    {
-        "color": "skyish",
-        "weight": 1
-    },
-    {
-        "color": "rose",
-        "weight": 1
-    },
-    {
         "color": "80",
         "weight": 1
     },
@@ -72,6 +56,18 @@
     },
     {
         "color": "967",
+        "weight": 1
+    },
+    {
+        "color": "293",
+        "weight": 1
+    },
+    {
+        "color": "391",
+        "weight": 1
+    },
+    {
+        "color": "409",
         "weight": 1
     }
 ]
