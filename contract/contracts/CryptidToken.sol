@@ -48,7 +48,7 @@ contract CryptidToken is ERC721, Pausable, Ownable, ERC721Burnable{
 
     // Public Sale (stage=3)
     uint256 public totalSaleSupply;         
-    uint256 public salePrice = 0.1 ether;  
+    uint256 public salePrice = 0.10 ether;  
 
     constructor(
         string memory _name,
@@ -78,7 +78,7 @@ contract CryptidToken is ERC721, Pausable, Ownable, ERC721Burnable{
             require(proof.verify(merkleRoot, keccak256(abi.encodePacked(msg.sender))), "Address not whitelisted.");
             require(claimed[msg.sender] == false, "Whitelist mint already claimed."); 
             require(_mintAmount < 2, "Mint amount must be 1.");
-            require(msg.value >= salePrice.mul(_mintAmount), "Not enough ether sent.");
+            require(msg.value == salePrice.mul(_mintAmount), "Invalid funds provided.");
             require(totalSupply() + _mintAmount <= whitelistSupply, "Transaction exceeds whitelist supply.");
             claimed[msg.sender] = true;
     }   else if (stage == 2) {
@@ -88,7 +88,7 @@ contract CryptidToken is ERC721, Pausable, Ownable, ERC721Burnable{
             teamMintCount += _mintAmount;
     }   else {
         // Public Sale
-            require(msg.value >= salePrice.mul(_mintAmount), "Not enough ether sent");
+            require(msg.value == salePrice.mul(_mintAmount), "Invalid funds provided.");
             require(totalSupply()  + _mintAmount <= totalSaleSupply, "Transaction exceeds total sale supply");
         }
         for (uint256 i = 1; i <= _mintAmount; i++) {
@@ -104,6 +104,10 @@ contract CryptidToken is ERC721, Pausable, Ownable, ERC721Burnable{
 
     function unpause() public onlyOwner {
         _unpause();
+    }
+
+    function overrideClaim(address _wlAddress) public onlyOwner{
+        claimed[_wlAddress] = true;
     }
 
     function airdropCryptid(uint8 _mintAmount, address _to) public onlyOwner {
