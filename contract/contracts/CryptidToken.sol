@@ -8,7 +8,7 @@ import '@openzeppelin/contracts/utils/math/SafeMath.sol';
 import '@openzeppelin/contracts/utils/Counters.sol';
 import '@openzeppelin/contracts/security/Pausable.sol';
 import '@openzeppelin/contracts/token/ERC721/extensions/ERC721Burnable.sol';
-import @openzeppelin/contracts/utils/cryptography/MerkleProof.sol';
+import '@openzeppelin/contracts/utils/cryptography/MerkleProof.sol';
 
 contract CryptidToken is ERC721, Pausable, Ownable, ReentrancyGuard, ERC721Burnable{ 
     using Strings for uint256;
@@ -51,7 +51,7 @@ contract CryptidToken is ERC721, Pausable, Ownable, ReentrancyGuard, ERC721Burna
 
     // Public Sale (stage=3)
     uint256 public totalSaleSupply;         
-    uint256 public salePrice = 0.10 ether;  
+    uint256 public salePrice = 0.1 ether;  
 
     constructor(
         string memory _name,
@@ -86,7 +86,7 @@ contract CryptidToken is ERC721, Pausable, Ownable, ReentrancyGuard, ERC721Burna
         _;
     }
 
-    // Stage 1 - Airdrops
+    // Stage 1 - Airdrops 
     function airdropCryptid(uint8 _mintAmount, address _to) public onlyOwner {
         require(stage < 3, "Past airdrop phase.");
         require(_mintAmount > 0, "Airdrop amount must be greater than 0");
@@ -132,7 +132,6 @@ contract CryptidToken is ERC721, Pausable, Ownable, ReentrancyGuard, ERC721Burna
             _tokenIdCounter.increment();
         }
     }
-
 
     // Stage 4 - Public Mint
     function publicMint(
