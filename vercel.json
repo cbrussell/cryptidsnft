@@ -1,0 +1,9 @@
+{
+  "routes": [
+    {
+      "src": "/client/public/fonts/(.*)",
+      "headers": { "cache-control": "s-maxage=604800" },
+      "dest": "/fonts/$1"
+    }
+  ]
+}

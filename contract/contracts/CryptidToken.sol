@@ -68,11 +68,15 @@ contract CryptidToken is ERC721, Pausable, Ownable, ERC721Burnable{
         _tokenIdCounter.increment();
     }
 
+   
+
+
     //Public mint function
     function mint(uint8 _mintAmount, bytes32[] memory proof) public payable whenNotPaused {
         require(stage > 0, "Minting not initiated. Currenly on stage 0.");
         require(_mintAmount > 0, "Mint amount must be greater than 0.");
         require(_mintAmount <= maxMintPerTx, "Exceeds max allowed amount per transaction.");
+        require(msg.sender == tx.origin, "No minting to contracts.");
         if (stage == 1) {
         // Whitelist
             require(proof.verify(merkleRoot, keccak256(abi.encodePacked(msg.sender))), "Address not whitelisted.");
@@ -92,7 +96,7 @@ contract CryptidToken is ERC721, Pausable, Ownable, ERC721Burnable{
             require(totalSupply()  + _mintAmount <= totalSaleSupply, "Transaction exceeds total sale supply");
         }
         for (uint256 i = 1; i <= _mintAmount; i++) {
-            _safeMint(msg.sender, _tokenIdCounter.current());
+            _mint(msg.sender, _tokenIdCounter.current());
             _tokenIdCounter.increment();
         }
     }
@@ -117,7 +121,7 @@ contract CryptidToken is ERC721, Pausable, Ownable, ERC721Burnable{
         require(_mintAmount > 0, "Airdrop amount must be greater than 0");
         require(totalSupply()+ _mintAmount <= whitelistSupply, "Mint amount will exceed whitelist supply.");
         for (uint256 i = 1; i <= _mintAmount; i++) {
-            _safeMint(_to, _tokenIdCounter.current());
+            _mint(_to, _tokenIdCounter.current());
             _tokenIdCounter.increment();
         }
     }

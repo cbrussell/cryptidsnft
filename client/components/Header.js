@@ -51,7 +51,7 @@ const Header = () => {
         <title>Cryptids</title>
         <meta name="description" content="Part storybook fantasy, part science-fiction. Cryptids is a generative NFT art project of 11,111 unique mythical creatures."/>
         <link rel="icon" href="/favicon.svg" />
-
+      
       </Head>
 
       <header className=" inset-x-5 top-0 z-10 h-32 md:h-20 min-w-full justify-center space-x-6 text-white  backdrop-filter ">
