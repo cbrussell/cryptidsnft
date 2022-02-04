@@ -3,13 +3,14 @@ pragma solidity ^0.8.10;
 
 import '@openzeppelin/contracts/token/ERC721/ERC721.sol';
 import '@openzeppelin/contracts/access/Ownable.sol';
+import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 import '@openzeppelin/contracts/utils/math/SafeMath.sol';
 import '@openzeppelin/contracts/utils/Counters.sol';
 import '@openzeppelin/contracts/security/Pausable.sol';
 import '@openzeppelin/contracts/token/ERC721/extensions/ERC721Burnable.sol';
 import "@openzeppelin/contracts/utils/cryptography/MerkleProof.sol";
 
-contract CryptidToken is ERC721, Pausable, Ownable, ERC721Burnable{ 
+contract CryptidToken is ERC721, Pausable, Ownable, ReentrancyGuard, ERC721Burnable{ 
     using Strings for uint256;
     using SafeMath for uint256;
     using Counters for Counters.Counter;
@@ -18,6 +19,7 @@ contract CryptidToken is ERC721, Pausable, Ownable, ERC721Burnable{
     Counters.Counter private _tokenIdCounter;
     
     bytes32 public merkleRoot;
+
     string public provenanceHash;
     string public baseURI = "";
     string public baseExtension = ".json";
@@ -33,10 +35,11 @@ contract CryptidToken is ERC721, Pausable, Ownable, ERC721Burnable{
     address public withdrawDest5 = 0x12B58f5331a6DC897932AA7FB5101667ACdf03e2; // founder 4
     
     // ~ Sale stages ~
-    // stage 0: Airdrops for Trivia/Contest Winners
-    // stage 1: Whitelist
-    // stage 2: Team Mint 
-    // stage 3: Public Sale
+    // stage 0: Init
+    // stage 1: Airdrops for Trivia/Contest Winners
+    // stage 2: Whitelist
+    // stage 3: Team Mint 
+    // stage 4: Public Sale
 
     // Whitelist mint (stage=1)
     uint256 public whitelistSupply;                       
@@ -68,33 +71,85 @@ contract CryptidToken is ERC721, Pausable, Ownable, ERC721Burnable{
         _tokenIdCounter.increment();
     }
 
-   
+    modifier isValidMerkleProof(bytes32[] calldata _proof, bytes32 _root) {
+        require(MerkleProof.verify(_proof, _root, keccak256(abi.encodePacked(msg.sender))), "Address not in whitelist.");
+        _;
+    }
 
+    modifier isCorrectPayment(uint256 _price, uint256 _numberOfTokens) {
+        require(_price * _numberOfTokens == msg.value, "Incorrect ETH value sent.");
+        _;
+    }
 
-    //Public mint function
-    function mint(uint8 _mintAmount, bytes32[] memory proof) public payable whenNotPaused {
-        require(stage > 0, "Minting not initiated. Currenly on stage 0.");
-        require(_mintAmount > 0, "Mint amount must be greater than 0.");
-        require(_mintAmount <= maxMintPerTx, "Exceeds max allowed amount per transaction.");
-        require(msg.sender == tx.origin, "No minting to contracts.");
-        if (stage == 1) {
-        // Whitelist
-            require(proof.verify(merkleRoot, keccak256(abi.encodePacked(msg.sender))), "Address not whitelisted.");
-            require(claimed[msg.sender] == false, "Whitelist mint already claimed."); 
-            require(_mintAmount < 2, "Mint amount must be 1.");
-            require(msg.value == salePrice.mul(_mintAmount), "Invalid funds provided.");
-            require(totalSupply() + _mintAmount <= whitelistSupply, "Transaction exceeds whitelist supply.");
-            claimed[msg.sender] = true;
-    }   else if (stage == 2) {
-        // Team Sale
-            require(owner() == msg.sender, "Only Owner can mint at this stage");
-            require(_mintAmount + teamMintCount <= teamMintSupply, "Transaction exceeds total team-sale supply");      
-            teamMintCount += _mintAmount;
-    }   else {
-        // Public Sale
-            require(msg.value == salePrice.mul(_mintAmount), "Invalid funds provided.");
-            require(totalSupply()  + _mintAmount <= totalSaleSupply, "Transaction exceeds total sale supply");
+    modifier callerIsUser() {
+        require(tx.origin == msg.sender, "The caller is another contract.");
+        _;
+    }
+
+    // Stage 1 - Airdrops
+    function airdropCryptid(uint8 _mintAmount, address _to) public onlyOwner {
+        require(stage < 3, "Past airdrop phase.");
+        require(_mintAmount > 0, "Airdrop amount must be greater than 0");
+        require(totalSupply() + _mintAmount <= whitelistSupply, "Mint amount will exceed whitelist supply.");
+        for (uint256 i = 1; i <= _mintAmount; i++) {
+            _mint(_to, _tokenIdCounter.current());
+            _tokenIdCounter.increment();
         }
+    }
+
+    // Stage 2 - Whitelist Mint
+    function whitelistMint(
+        bytes32[] calldata _merkleProof
+    ) 
+        public 
+        payable 
+        isValidMerkleProof(_merkleProof, merkleRoot) 
+        isCorrectPayment(salePrice, 1) 
+        callerIsUser
+        nonReentrant 
+        whenNotPaused 
+    {
+        require(stage == 2, "Whitelist minting not initiated.");
+        require(claimed[msg.sender] == false, "Whitelist mint already claimed."); 
+        require(totalSupply() + 1 <= whitelistSupply, "Mint amount will exceed whitelist supply.");
+        claimed[msg.sender] = true;
+        _mint(msg.sender, _tokenIdCounter.current());
+        _tokenIdCounter.increment();
+    }
+
+    // Stage 3 - Team Mint
+    function teamMint(
+        uint8 _mintAmount
+    ) 
+        external 
+        onlyOwner 
+    {
+        require(stage == 3, "Team sale not initiated.");
+        require(_mintAmount + teamMintCount <= teamMintSupply, "Transaction exceeds total team-sale supply");      
+        teamMintCount += _mintAmount;
+        for (uint256 i = 1; i <= _mintAmount; i++) {
+            _mint(msg.sender, _tokenIdCounter.current());
+            _tokenIdCounter.increment();
+        }
+    }
+
+
+    // Stage 4 - Public Mint
+    function publicMint(
+        uint8 _mintAmount
+    ) 
+        public 
+        payable 
+        isCorrectPayment(salePrice, _mintAmount) 
+        callerIsUser
+        nonReentrant 
+        whenNotPaused  
+    {
+        require(stage == 4, "Public mint not initiaited.");
+        require(totalSupply()  + _mintAmount <= totalSaleSupply, "Transaction exceeds total sale supply");
+        require(_mintAmount > 0, "Mint amount must be greater than 0.");
+        require(_mintAmount <= maxMintPerTx, "Exceeds max allowed mints per transaction.");  
+
         for (uint256 i = 1; i <= _mintAmount; i++) {
             _mint(msg.sender, _tokenIdCounter.current());
             _tokenIdCounter.increment();
@@ -110,20 +165,9 @@ contract CryptidToken is ERC721, Pausable, Ownable, ERC721Burnable{
         _unpause();
     }
 
+    // to be used in case of manual override
     function overrideClaim(address _wlAddress) public onlyOwner{
         claimed[_wlAddress] = true;
-    }
-
-    function airdropCryptid(uint8 _mintAmount, address _to) public onlyOwner {
-        require(provenanceHashFrozen == true, "Provenance hash must be frozen before minting can start.");
-        require(stage < 1, "Past airdrop phase.");
-        require(_mintAmount <= maxMintPerTx, "Exceeds max allowed amount per transaction");
-        require(_mintAmount > 0, "Airdrop amount must be greater than 0");
-        require(totalSupply()+ _mintAmount <= whitelistSupply, "Mint amount will exceed whitelist supply.");
-        for (uint256 i = 1; i <= _mintAmount; i++) {
-            _mint(_to, _tokenIdCounter.current());
-            _tokenIdCounter.increment();
-        }
     }
 
     function setMerkleRoot(bytes32 _merkleRoot) public onlyOwner {
@@ -148,12 +192,6 @@ contract CryptidToken is ERC721, Pausable, Ownable, ERC721Burnable{
         stage++;
     }
 
-    function prevStage() public onlyOwner {
-        require(provenanceHashFrozen == true, "Provenance hash must be frozen before minting can start.");
-        require(stage > 0, "No stages before init");
-        stage--;
-    }
-    
     function setTeamMintSupply(uint256 _newTeamMintSupply) public onlyOwner {
         teamMintSupply = _newTeamMintSupply;
     }
@@ -161,7 +199,6 @@ contract CryptidToken is ERC721, Pausable, Ownable, ERC721Burnable{
     function setBaseExtension(string memory _newBaseExtension) public onlyOwner {
         baseExtension = _newBaseExtension;
     }
-
 
     function setPublicSalePrice(uint256 _newSalePrice) public onlyOwner {
         salePrice = _newSalePrice;
@@ -177,18 +214,18 @@ contract CryptidToken is ERC721, Pausable, Ownable, ERC721Burnable{
         provenanceHash = _provenanceHash;
     }
 
+    function freezeProvenanceHash() public onlyOwner {
+        require(bytes(provenanceHash).length > 0, "Provenance hash cannot be empty.");
+        require(!provenanceHashFrozen, "Provenance hash is already frozen.");
+        provenanceHashFrozen = true;
+    }
+
     function setWithdrawAddress(address _dest1, address _dest2, address _dest3, address _dest4, address _dest5) public onlyOwner {
         withdrawDest1 = _dest1;
         withdrawDest2 = _dest2;
         withdrawDest3 = _dest3;
         withdrawDest4 = _dest4;
         withdrawDest5 = _dest5;
-    }
-
-    function freezeProvenanceHash() public onlyOwner {
-        require(bytes(provenanceHash).length > 0, "Provenance hash cannot be empty.");
-        require(!provenanceHashFrozen, "Provenance hash is already frozen.");
-        provenanceHashFrozen = true;
     }
 
     function withdraw() public payable onlyOwner {
