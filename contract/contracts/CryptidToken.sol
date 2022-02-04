@@ -87,7 +87,13 @@ contract CryptidToken is ERC721, Pausable, Ownable, ReentrancyGuard, ERC721Burna
     }
 
     // Stage 1 - Airdrops 
-    function airdropCryptid(uint8 _mintAmount, address _to) public onlyOwner {
+    function airdropCryptid(
+        uint8 _mintAmount, 
+        address _to
+    ) 
+        public 
+        onlyOwner 
+    {
         require(stage < 3, "Past airdrop phase.");
         require(_mintAmount > 0, "Airdrop amount must be greater than 0");
         require(totalSupply() + _mintAmount <= whitelistSupply, "Mint amount will exceed whitelist supply.");
