@@ -52,6 +52,49 @@ const Header = () => {
         <meta name="description" content="Part storybook fantasy, part science-fiction. Cryptids is a generative NFT art project of 11,111 unique mythical creatures."/>
         <link rel="icon" href="/favicon.svg" />
       
+        <link
+        rel="preload"
+        href="/fonts/Exo-Italic.woff2"
+        as="font"
+        crossOrigin=""
+        type="font/woff2"
+      />
+      <link
+        rel="preload"
+        href="/fonts/Exo-Italic.woff"
+        as="font"
+        crossOrigin=""
+        type="font/woff"
+      />
+      <link
+        rel="preload"
+        href="/fonts/Exo-Regular.woff"
+        as="font"
+        crossOrigin=""
+        type="font/woff"
+      />
+      <link
+        rel="preload"
+        href="/fonts/Exo-Regular.woff2"
+        as="font"
+        crossOrigin=""
+        type="font/woff2"
+      />
+      <link
+        rel="preload"
+        href="/fonts/YkarRegular.woff2"
+        as="font"
+        crossOrigin=""
+        type="font/woff2"
+      />
+      <link
+        rel="preload"
+        href="/fonts/YkarRegular.woff"
+        as="font"
+        crossOrigin=""
+        type="font/woff"
+      />
+
       </Head>
 
       <header className=" inset-x-5 top-0 z-10 h-32 md:h-20 min-w-full justify-center space-x-6 text-white  backdrop-filter ">
