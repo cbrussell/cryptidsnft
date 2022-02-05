@@ -216,7 +216,7 @@ export default function MyApp() {
                   <p className="text-lg leading-normal text-gray-600 mt-4 text-justify">
                     Collection Size: 11,111 <br></br>
                     Whitelist: 9,500 (CLOSED) <br></br>
-                    Public Sale: 1,000 + Unused WL Mints <br></br>
+                    Public Supply: 1,000<br></br>
                     Team Supply: 400 <br></br>
                     Trust/Marketing: 211 <br></br>
                     <br></br>
