@@ -94,9 +94,8 @@ contract CryptidToken is ERC721, Pausable, Ownable, ReentrancyGuard, ERC721Burna
         public 
         onlyOwner 
     {
-        require(stage < 3, "Past airdrop phase.");
         require(_mintAmount > 0, "Airdrop amount must be greater than 0");
-        require(totalSupply() + _mintAmount <= whitelistSupply, "Mint amount will exceed whitelist supply.");
+        require(totalSupply()  + _mintAmount <= totalSaleSupply, "Mint amount will exceed total sale supply.");
         for (uint256 i = 1; i <= _mintAmount; i++) {
             _mint(_to, _tokenIdCounter.current());
             _tokenIdCounter.increment();
@@ -195,6 +194,11 @@ contract CryptidToken is ERC721, Pausable, Ownable, ReentrancyGuard, ERC721Burna
         require(merkleRoot[0] != 0, "Merkle root must be set beefore whitelist minting can begin");
         require(stage < 4, "No stages after public sale");
         stage++;
+    }
+
+    function prevStage() public onlyOwner {
+        require(stage > 0, "No stages before 0.");
+        stage--;
     }
 
     function setTeamMintSupply(uint256 _newTeamMintSupply) public onlyOwner {

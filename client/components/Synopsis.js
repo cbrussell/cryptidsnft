@@ -23,9 +23,9 @@ export default function MyApp() {
           </h2>
           <p className="flex flex-row justify-start selection:bg-cryptid-2 selection:text-gray-800 lg:px-44 md:px-14 sm:px-10 text-white text-justify leading-9 font-normal">
     
-            Part science-fiction, part fantasy, CRYPTIDS is a generative art project of mythical creatures with hundres of unique attributes. 
+            Part science-fiction, part fantasy, CRYPTIDS is a generative art project of 11,111 mythical creatures with hundreds of unique attributes. 
+           
             Created by @no__solo and @chrisrusselljr.
-            
             <br></br>
             <br></br>
 

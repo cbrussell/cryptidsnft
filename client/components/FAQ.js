@@ -24,7 +24,7 @@ export default function MyApp() {
             <div className="flex items-center justify-between">
               <div>
                 <h2 className="font-bold uppercase text-lg leading-none cursor-pointer text-gray-800" >
-                  Will there be a whitelist?
+                  How can I get on the whitelist?
                 </h2>
               </div>
               <button
@@ -75,9 +75,12 @@ export default function MyApp() {
               <ul className="">
                 <li>
                   <p className="text-lg leading-normal text-gray-600 mt-4 text-justify">
-                    All Pioneers will have the opportunity to claim their FIRST WAVE badge (💫 = whitelisted).
-                    Once the available allotment of Pioneers roles are distributed, new discord members 
-                    will be SETTLERS and whitelist will only be available for contest winners and lore/art contributors.  
+                  The whitelist is closed. 
+                  <br></br>
+                  <br></br>
+                  Our Pioneer Role was limited to new Discord Members who joined between November 30th 2021 and January 25th 2022.
+                  All Pioneers are eligible to sign up for our Whitelist and reserve ONE (1) CRYPTID from our Whitelist Supply.
+                  We appreciate our early supporters and aim to make this project's release accessible, low-stress, and distributed. 
       
                   </p>
                 </li>
@@ -141,82 +144,25 @@ export default function MyApp() {
               <ul>
                 <li>
                   <p className="text-lg leading-normal text-gray-600 mt-4 text-justify">
-                    Arbitrum, May 2022.
+                    CRYPTIDS will be launching on the Arbitrum Network. 
+                    <br></br>
+                    <br></br>
+                    The whitelist sale will run for 24 hours beginning 
+                    Friday, March 25th 2022, 8:00 AM PST/11:00 AM EST. 
+                    <br></br>
+                    <br></br>The Public sale will beginning
+                    Saturday March 26th 2022, 1:00 PM PST/4:00 PM EST.
                   </p>
                 </li>
               </ul>
             )}
           </div>
-          <div className="bg-white shadow rounded p-8 mt-8 cursor-pointer" onClick={() => {
-            setFaq3(!faq3);
-          }}>
-            <div className="flex items-center justify-between">
-              <div>
-                <h2 className="font-bold  uppercase text-lg leading-none text-gray-800">
-                  Who are the Metanauts?
-                </h2>
-              </div>
-              <button
-
-                data-menu
-                className="focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2 ring-offset-white"
-              >
-                {faq3 ? (
-                  <svg
-                    role="button"
-                    aria-label="close dropdown"
-                    width="10"
-                    height="6"
-                    viewBox="0 0 10 6"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M1 5L5 1L9 5"
-                      stroke="#4B5563"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                ) : (
-                  <svg
-                    width="10"
-                    role="button"
-                    aria-label="open dropdown"
-                    height="6"
-                    viewBox="0 0 10 6"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      d="M1 1L5 5L9 1"
-                      stroke="#4B5563"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                )}
-              </button>
-            </div>
-            {faq3 && (
-              <ul>
-                <li>
-                  <p className="text-lg leading-normal text-gray-600 mt-4 text-justify">
-                    The Metanauts are the four Team Members developing CRYPTIDS. 
-                    Nosolo (art), Crussell (dev), Sentella (social media), and Grove (lore). 
-                    
-                  </p>
-                </li>
-              </ul>
-            )}
-          </div>
+          
           <div className="bg-white shadow rounded p-8 mt-8 cursor-pointer" onClick={() => setFaq4(!faq4)}>
             <div className="flex items-center justify-between">
               <div>
                 <h2 className="font-bold  uppercase text-lg leading-none text-gray-800">
-                  What is the mint price and collection size?
+                  What is the collection size and mint price ?
                 </h2>
               </div>
               <button
@@ -268,7 +214,14 @@ export default function MyApp() {
               <ul>
                 <li>
                   <p className="text-lg leading-normal text-gray-600 mt-4 text-justify">
-                    TBD
+                    Collection Size: 11,111 <br></br>
+                    Whitelist: 9,500 (CLOSED) <br></br>
+                    Public Sale: 1,000 + Unused WL Mints <br></br>
+                    Team Supply: 400 <br></br>
+                    Trust/Marketing: 211 <br></br>
+                    <br></br>
+                    Mint Price: 0.10 ETH
+
                   </p>
                 </li>
               </ul>
@@ -331,7 +284,7 @@ export default function MyApp() {
               <ul>
                 <li>
                   <p className="text-lg leading-normal text-gray-600 mt-4 text-justify">
-                    TBD
+                    To be announced at a later date...💫
                   </p>
                 </li>
               </ul>
