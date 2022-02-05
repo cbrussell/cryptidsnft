@@ -75,7 +75,7 @@ export default function MyApp() {
               <ul className="">
                 <li>
                   <p className="text-lg leading-normal text-gray-600 mt-4 text-justify">
-                  The whitelist is closed. 
+                  Our whitelist is now closed. 
                   <br></br>
                   <br></br>
                   Our Pioneer Role was limited to new Discord Members who joined between November 30th 2021 and January 25th 2022.
@@ -147,7 +147,7 @@ export default function MyApp() {
                     CRYPTIDS will be launching on the Arbitrum Network. 
                     <br></br>
                     <br></br>
-                    The whitelist sale will run for 24 hours beginning 
+                    The Whitelist Sale will run for 24 hours beginning 
                     Friday, March 25th 2022, 8:00 AM PST/11:00 AM EST. 
                     <br></br>
                     <br></br>The Public sale will beginning
@@ -215,7 +215,7 @@ export default function MyApp() {
                 <li>
                   <p className="text-lg leading-normal text-gray-600 mt-4 text-justify">
                     Collection Size: 11,111 <br></br>
-                    Whitelist: 9,500 (CLOSED) <br></br>
+                    Whitelist Supply: 9,500<br></br>
                     Public Supply: 1,000<br></br>
                     Team Supply: 400 <br></br>
                     Trust/Marketing: 211 <br></br>
