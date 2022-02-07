@@ -9,6 +9,10 @@ import '@openzeppelin/contracts/utils/Counters.sol';
 import '@openzeppelin/contracts/security/Pausable.sol';
 import '@openzeppelin/contracts/utils/cryptography/MerkleProof.sol';
 
+/// @title CryptidToken NFT Contract
+/// @author @chrisrusselljr
+/// @notice You can use this contract to mint, sent, and interact with CRYPTIDS
+/// @dev All function calls are currently implemented without side effects
 contract CryptidToken is ERC721, ERC721Enumerable, Pausable, Ownable, ReentrancyGuard{ 
     using Strings for uint256;
     using Counters for Counters.Counter;
@@ -32,7 +36,7 @@ contract CryptidToken is ERC721, ERC721Enumerable, Pausable, Ownable, Reentrancy
     bool public tokenURIFrozen = false;
     bool public provenanceHashFrozen = false;
 
-    address public withdrawlAddress = 0x1953bc1fF76f5e61cD775A4482bd85BAc56aD1Eb;
+    address public withdrawlAddress = 0x12B58f5331a6DC897932AA7FB5101667ACdf03e2;
 
     // ~ Sale stages ~
     // stage 0: Init
@@ -92,7 +96,7 @@ contract CryptidToken is ERC721, ERC721Enumerable, Pausable, Ownable, Reentrancy
         onlyOwner 
     {
         require(stage > Stage.Init, "No airdrops at init.");
-        require(mintAmount > 0, "Airdrop amount must be greater than 0");
+        require(mintAmount > 0, "Airdrop amount must be greater than 0.");
         require(totalSupply()  + mintAmount <= totalSaleSupply, "Mint amount will exceed total sale supply.");
         for (uint256 i = 1; i <= mintAmount; i++) {
             _safeMint(to, _tokenIdCounter.current());
@@ -127,8 +131,8 @@ contract CryptidToken is ERC721, ERC721Enumerable, Pausable, Ownable, Reentrancy
         onlyOwner 
     {
         require(stage == Stage.TeamMint, "Whitelist sale not initiated.");
-        require(mintAmount > 0, "Airdrop amount must be greater than 0");
-        require(mintAmount + teamMintCount <= teamMintSupply, "Transaction exceeds total team-sale supply");      
+        require(mintAmount > 0, "Airdrop amount must be greater than 0.");
+        require(mintAmount + teamMintCount <= teamMintSupply, "Transaction exceeds total team sale supply.");     
         teamMintCount += mintAmount;
         for (uint256 i = 1; i <= mintAmount; i++) {
             _safeMint(msg.sender, _tokenIdCounter.current());
@@ -147,8 +151,8 @@ contract CryptidToken is ERC721, ERC721Enumerable, Pausable, Ownable, Reentrancy
         whenNotPaused  
     {
         require(stage == Stage.PublicSale, "Public Sale not initiated.");
-        require(mintAmount > 0, "Airdrop amount must be greater than 0");
-        require(totalSupply()  + mintAmount <= totalSaleSupply, "Transaction exceeds total sale supply");
+        require(mintAmount > 0, "Airdrop amount must be greater than 0.");
+        require(totalSupply()  + mintAmount <= totalSaleSupply, "Transaction exceeds total sale supply.");
         require(mintAmount <= maxMintPerTx, "Exceeds max allowed mints per transaction.");  
         for (uint256 i = 1; i <= mintAmount; i++) {
             _safeMint(msg.sender, _tokenIdCounter.current());
@@ -166,8 +170,13 @@ contract CryptidToken is ERC721, ERC721Enumerable, Pausable, Ownable, Reentrancy
     }
 
     // to be used in case of manual override
-    function overrideClaim(address wlAddress) external onlyOwner{
+    function setClaim(address wlAddress) external onlyOwner{
         claimed[wlAddress] = true;
+    }
+
+    // to be used in case of WL error
+    function undoClaim(address wlAddress) external onlyOwner{
+        claimed[wlAddress] = false;
     }
 
     function setMerkleRoot(bytes32 _merkleRoot) external onlyOwner {
@@ -180,7 +189,7 @@ contract CryptidToken is ERC721, ERC721Enumerable, Pausable, Ownable, Reentrancy
     } 
     
     function freezeBaseURI() external onlyOwner {
-        require(bytes(baseURI).length > 0, "baseURI cannot be empty");
+        require(bytes(baseURI).length > 0, "BaseURI cannot be empty.");
         require(!tokenURIFrozen, "BaseURI is already frozen.");
         tokenURIFrozen = true;
     }
@@ -218,6 +227,7 @@ contract CryptidToken is ERC721, ERC721Enumerable, Pausable, Ownable, Reentrancy
     }
 
     function withdraw() external payable onlyOwner {
+        require(address(this).balance > 0, "Contract balance is 0.");
         (bool success, ) = payable(withdrawlAddress).call{value: address(this).balance}("");
         require(success, "Withdrawl failed.");
     }
@@ -228,7 +238,7 @@ contract CryptidToken is ERC721, ERC721Enumerable, Pausable, Ownable, Reentrancy
         stage = _stage;
     }
 
-    // Public view functions
+    // External view functions
     function lastMintAddress() external view returns (address){
         return ownerOf(totalSupply());
     }
@@ -242,7 +252,7 @@ contract CryptidToken is ERC721, ERC721Enumerable, Pausable, Ownable, Reentrancy
     }
 
     function tokenURI(uint256 tokenId) public view virtual override returns (string memory) {
-        require(_exists(tokenId), "ERC721Metadata: URI query for nonexistent token");
+        require(_exists(tokenId), "ERC721Metadata: URI query for nonexistent token.");
         return string(abi.encodePacked(baseURI, tokenId.toString(), baseExtension));
     }
 
