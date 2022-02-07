@@ -2,56 +2,58 @@
 pragma solidity ^0.8.10;
 
 import '@openzeppelin/contracts/token/ERC721/ERC721.sol';
+import '@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol';
 import '@openzeppelin/contracts/access/Ownable.sol';
 import '@openzeppelin/contracts/security/ReentrancyGuard.sol';
-import '@openzeppelin/contracts/utils/math/SafeMath.sol';
 import '@openzeppelin/contracts/utils/Counters.sol';
 import '@openzeppelin/contracts/security/Pausable.sol';
-import '@openzeppelin/contracts/token/ERC721/extensions/ERC721Burnable.sol';
 import '@openzeppelin/contracts/utils/cryptography/MerkleProof.sol';
 
-contract CryptidToken is ERC721, Pausable, Ownable, ReentrancyGuard, ERC721Burnable{ 
+contract CryptidToken is ERC721, ERC721Enumerable, Pausable, Ownable, ReentrancyGuard{ 
     using Strings for uint256;
-    using SafeMath for uint256;
     using Counters for Counters.Counter;
     using MerkleProof for bytes32[];
+
+    enum Stage {
+        Init,
+        Airdrops,
+        Whitelist,
+        TeamMint,
+        PublicSale
+    }
 
     Counters.Counter private _tokenIdCounter;
     
     bytes32 public merkleRoot;
-
     string public provenanceHash;
     string public baseURI = "";
     string public baseExtension = ".json";
-    uint8 private stage = 0;
     uint8 public maxMintPerTx;     
     bool public tokenURIFrozen = false;
     bool public provenanceHashFrozen = false;
 
-    address public withdrawDest1 = 0x1953bc1fF76f5e61cD775A4482bd85BAc56aD1Eb; // trust
-    address public withdrawDest2 = 0x12B58f5331a6DC897932AA7FB5101667ACdf03e2; // founder 1
-    address public withdrawDest3 = 0x1953bc1fF76f5e61cD775A4482bd85BAc56aD1Eb; // founder 2
-    address public withdrawDest4 = 0x12B58f5331a6DC897932AA7FB5101667ACdf03e2; // founder 3
-    address public withdrawDest5 = 0x12B58f5331a6DC897932AA7FB5101667ACdf03e2; // founder 4
-    
+    address public withdrawlAddress = 0x1953bc1fF76f5e61cD775A4482bd85BAc56aD1Eb;
+
     // ~ Sale stages ~
     // stage 0: Init
-    // stage 1: Airdrops for Trivia/Contest Winners
+    // stage 1: Airdrops
     // stage 2: Whitelist
     // stage 3: Team Mint 
     // stage 4: Public Sale
 
-    // Whitelist mint (stage=1)
+    // Whitelist mint (stage=2)
     uint256 public whitelistSupply;                       
     mapping(address => bool) public claimed;              
     
-    // Team Mint (stage=2)
+    // Team Mint (stage=3)
     uint256 public teamMintSupply;                          
     uint256 public teamMintCount;
 
-    // Public Sale (stage=3)
+    // Public Sale (stage=4)
     uint256 public totalSaleSupply;         
     uint256 public salePrice = 0.1 ether;  
+
+    Stage public stage;
 
     constructor(
         string memory _name,
@@ -71,198 +73,171 @@ contract CryptidToken is ERC721, Pausable, Ownable, ReentrancyGuard, ERC721Burna
         _tokenIdCounter.increment();
     }
 
-    modifier isValidMerkleProof(bytes32[] calldata _proof, bytes32 _root) {
-        require(MerkleProof.verify(_proof, _root, keccak256(abi.encodePacked(msg.sender))), "Address not in whitelist.");
+    modifier isValidMerkleProof(bytes32[] calldata proof, bytes32 root) {
+        require(proof.verify(root, keccak256(abi.encodePacked(msg.sender))), "Address not in whitelist.");
         _;
     }
 
-    modifier isCorrectPayment(uint256 _price, uint256 _numberOfTokens) {
-        require(_price * _numberOfTokens == msg.value, "Incorrect ETH value sent.");
+    modifier isCorrectPayment(uint256 price, uint256 numberOfTokens) {
+        require(price * numberOfTokens == msg.value, "Incorrect ETH value sent.");
         _;
     }
-
-    modifier callerIsUser() {
-        require(tx.origin == msg.sender, "The caller is another contract.");
-        _;
-    }
-
-    // Stage 1 - Airdrops 
+    
+    // Stage 1 - Airdrops
     function airdropCryptid(
-        uint8 _mintAmount, 
-        address _to
+        uint8 mintAmount, 
+        address to
     ) 
-        public 
+        external
         onlyOwner 
     {
-        require(_mintAmount > 0, "Airdrop amount must be greater than 0");
-        require(totalSupply()  + _mintAmount <= totalSaleSupply, "Mint amount will exceed total sale supply.");
-        for (uint256 i = 1; i <= _mintAmount; i++) {
-            _mint(_to, _tokenIdCounter.current());
+        require(stage > Stage.Init, "No airdrops at init.");
+        require(mintAmount > 0, "Airdrop amount must be greater than 0");
+        require(totalSupply()  + mintAmount <= totalSaleSupply, "Mint amount will exceed total sale supply.");
+        for (uint256 i = 1; i <= mintAmount; i++) {
+            _safeMint(to, _tokenIdCounter.current());
             _tokenIdCounter.increment();
         }
     }
 
-    // Stage 2 - Whitelist Mint
+    // Stage 2 - Whitelist Sale
     function whitelistMint(
-        bytes32[] calldata _merkleProof
+        bytes32[] calldata merkleProof
     ) 
-        public 
+        external
         payable 
-        isValidMerkleProof(_merkleProof, merkleRoot) 
+        isValidMerkleProof(merkleProof, merkleRoot) 
         isCorrectPayment(salePrice, 1) 
-        callerIsUser
         nonReentrant 
         whenNotPaused 
     {
-        require(stage == 2, "Whitelist minting not initiated.");
+        require(stage == Stage.Whitelist, "Whitelist sale not initiated.");
         require(claimed[msg.sender] == false, "Whitelist mint already claimed."); 
         require(totalSupply() + 1 <= whitelistSupply, "Mint amount will exceed whitelist supply.");
         claimed[msg.sender] = true;
-        _mint(msg.sender, _tokenIdCounter.current());
+        _safeMint(msg.sender, _tokenIdCounter.current());
         _tokenIdCounter.increment();
     }
 
     // Stage 3 - Team Mint
     function teamMint(
-        uint8 _mintAmount
+        uint8 mintAmount
     ) 
         external 
         onlyOwner 
     {
-        require(stage == 3, "Team sale not initiated.");
-        require(_mintAmount + teamMintCount <= teamMintSupply, "Transaction exceeds total team-sale supply");      
-        teamMintCount += _mintAmount;
-        for (uint256 i = 1; i <= _mintAmount; i++) {
-            _mint(msg.sender, _tokenIdCounter.current());
+        require(stage == Stage.TeamMint, "Whitelist sale not initiated.");
+        require(mintAmount > 0, "Airdrop amount must be greater than 0");
+        require(mintAmount + teamMintCount <= teamMintSupply, "Transaction exceeds total team-sale supply");      
+        teamMintCount += mintAmount;
+        for (uint256 i = 1; i <= mintAmount; i++) {
+            _safeMint(msg.sender, _tokenIdCounter.current());
             _tokenIdCounter.increment();
         }
     }
 
     // Stage 4 - Public Mint
     function publicMint(
-        uint8 _mintAmount
+        uint8 mintAmount
     ) 
-        public 
+        external
         payable 
-        isCorrectPayment(salePrice, _mintAmount) 
-        callerIsUser
+        isCorrectPayment(salePrice, mintAmount) 
         nonReentrant 
         whenNotPaused  
     {
-        require(stage == 4, "Public mint not initiaited.");
-        require(totalSupply()  + _mintAmount <= totalSaleSupply, "Transaction exceeds total sale supply");
-        require(_mintAmount > 0, "Mint amount must be greater than 0.");
-        require(_mintAmount <= maxMintPerTx, "Exceeds max allowed mints per transaction.");  
-
-        for (uint256 i = 1; i <= _mintAmount; i++) {
-            _mint(msg.sender, _tokenIdCounter.current());
+        require(stage == Stage.PublicSale, "Public Sale not initiated.");
+        require(mintAmount > 0, "Airdrop amount must be greater than 0");
+        require(totalSupply()  + mintAmount <= totalSaleSupply, "Transaction exceeds total sale supply");
+        require(mintAmount <= maxMintPerTx, "Exceeds max allowed mints per transaction.");  
+        for (uint256 i = 1; i <= mintAmount; i++) {
+            _safeMint(msg.sender, _tokenIdCounter.current());
             _tokenIdCounter.increment();
         }
     }
 
     //Owner functions
-    function pause() public onlyOwner {
+    function pause() external onlyOwner {
         _pause();
     }
 
-    function unpause() public onlyOwner {
+    function unpause() external onlyOwner {
         _unpause();
     }
 
     // to be used in case of manual override
-    function overrideClaim(address _wlAddress) public onlyOwner{
-        claimed[_wlAddress] = true;
+    function overrideClaim(address wlAddress) external onlyOwner{
+        claimed[wlAddress] = true;
     }
 
-    function setMerkleRoot(bytes32 _merkleRoot) public onlyOwner {
+    function setMerkleRoot(bytes32 _merkleRoot) external onlyOwner {
         merkleRoot = _merkleRoot;
     }
 
-    function setBaseURI(string memory _newBaseURI) public onlyOwner {
+    function setBaseURI(string memory _newBaseURI) external onlyOwner {
         require(!tokenURIFrozen, "BaseURI is frozen.");
         baseURI = _newBaseURI;
     } 
     
-    function freezeBaseURI() public onlyOwner {
+    function freezeBaseURI() external onlyOwner {
         require(bytes(baseURI).length > 0, "baseURI cannot be empty");
         require(!tokenURIFrozen, "BaseURI is already frozen.");
         tokenURIFrozen = true;
     }
 
-    function nextStage() public onlyOwner {
-        require(provenanceHashFrozen == true, "Provenance hash must be frozen before minting can start.");
-        require(merkleRoot[0] != 0, "Merkle root must be set beefore whitelist minting can begin");
-        require(stage < 4, "No stages after public sale");
-        stage++;
-    }
-
-    function prevStage() public onlyOwner {
-        require(stage > 0, "No stages before 0.");
-        stage--;
-    }
-
-    function setTeamMintSupply(uint256 _newTeamMintSupply) public onlyOwner {
+    function setTeamMintSupply(uint256 _newTeamMintSupply) external onlyOwner {
         teamMintSupply = _newTeamMintSupply;
     }
 
-    function setBaseExtension(string memory _newBaseExtension) public onlyOwner {
+    function setBaseExtension(string memory _newBaseExtension) external onlyOwner {
         baseExtension = _newBaseExtension;
     }
 
-    function setPublicSalePrice(uint256 _newSalePrice) public onlyOwner {
+    function setPublicSalePrice(uint256 _newSalePrice) external onlyOwner {
         salePrice = _newSalePrice;
     }
 
-    function setMaxMintPerTx(uint8 _newmaxMintPerTx) public onlyOwner {
+    function setMaxMintPerTx(uint8 _newmaxMintPerTx) external onlyOwner {
         maxMintPerTx = _newmaxMintPerTx;
     }
 
-    function setProvenanceHash(string memory _provenanceHash) public onlyOwner {
+    function setProvenanceHash(string memory _provenanceHash) external onlyOwner {
         require(bytes(_provenanceHash).length > 0, "Provenance hash cannot be empty string.");
         require(!provenanceHashFrozen, "Provenance hash is frozen.");
         provenanceHash = _provenanceHash;
     }
 
-    function freezeProvenanceHash() public onlyOwner {
+    function freezeProvenanceHash() external onlyOwner {
         require(bytes(provenanceHash).length > 0, "Provenance hash cannot be empty.");
         require(!provenanceHashFrozen, "Provenance hash is already frozen.");
         provenanceHashFrozen = true;
     }
 
-    function setWithdrawAddress(address _dest1, address _dest2, address _dest3, address _dest4, address _dest5) public onlyOwner {
-        withdrawDest1 = _dest1;
-        withdrawDest2 = _dest2;
-        withdrawDest3 = _dest3;
-        withdrawDest4 = _dest4;
-        withdrawDest5 = _dest5;
+    function setWithdrawlAddress(address _withdrawlAddress) external onlyOwner {
+        withdrawlAddress = _withdrawlAddress;
     }
 
-    function withdraw() public payable onlyOwner {
-        require(address(this).balance > 0, "Contract balance is 0.");
-        (bool ms, ) = payable(withdrawDest1).call{value: address(this).balance.mul(700).div(1000)}("");
-        require(ms, "withdrawl 1 failed");
-        (bool ns, ) = payable(withdrawDest2).call{value: address(this).balance.mul(105).div(1000)}(""); 
-        require(ns, "withdrawl 2 failed");
-        (bool cr, ) = payable(withdrawDest3).call{value: address(this).balance.mul(105).div(1000)}(""); 
-        require(cr, "withdrawl 3 failed");
-        (bool sn, ) = payable(withdrawDest4).call{value: address(this).balance.mul(45).div(1000)}("");
-        require(sn, "withdrawl 4 failed");
-        (bool gr, ) = payable(withdrawDest5).call{value: address(this).balance}("");
-        require(gr, "withdrawl 5 failed");
+    function withdraw() external payable onlyOwner {
+        (bool success, ) = payable(withdrawlAddress).call{value: address(this).balance}("");
+        require(success, "Withdrawl failed.");
+    }
+
+    function setStage(Stage _stage) external onlyOwner {
+        require(provenanceHashFrozen == true, "Provenance hash must be frozen before minting can start.");
+        require(merkleRoot != 0, "Merkle root must be set beefore minting can start.");
+        stage = _stage;
     }
 
     // Public view functions
-    function lastMintAddress() public view returns (address){
-        require(totalSupply() > 0, "No cryptid exists yet.");
+    function lastMintAddress() external view returns (address){
         return ownerOf(totalSupply());
     }
 
-    function lastMintID() public view returns (uint256){
-        require(totalSupply() > 0, "No cryptid exists yet.");
+    function lastMintID() external view returns (uint256){
         return(totalSupply());
     }
 
-    function totalSupply() public view returns (uint256) {
+    function totalSupply() public view override returns (uint256) {
         return _tokenIdCounter.current() - 1;
     }
 
@@ -271,16 +246,27 @@ contract CryptidToken is ERC721, Pausable, Ownable, ReentrancyGuard, ERC721Burna
         return string(abi.encodePacked(baseURI, tokenId.toString(), baseExtension));
     }
 
-    function getTokensLeft() public view returns (uint256) {
+    function getTokensLeft() external view returns (uint256) {
         return totalSaleSupply - totalSupply();
     }
     
-    function getStage() public view returns (uint8) {
-        return stage;
+    function walletOfOwner(address owner) external view returns (uint256[] memory) {
+        uint256 ownerTokenCount = balanceOf(owner);
+        uint256[] memory tokensIds = new uint256[](ownerTokenCount);
+        for (uint256 i; i < ownerTokenCount; i++) {
+            tokensIds[i] = tokenOfOwnerByIndex(owner, i);
+        }
+        return tokensIds;
+    }
+    
+    function _beforeTokenTransfer(address from, address to, uint256 tokenId) internal whenNotPaused override(ERC721, ERC721Enumerable) {
+        super._beforeTokenTransfer(from, to, tokenId);
     }
 
-    function _beforeTokenTransfer(address from, address to, uint256 tokenId) internal whenNotPaused override(ERC721) {
-        super._beforeTokenTransfer(from, to, tokenId);
+    // The following functions are overrides required by Solidity.
+
+    function supportsInterface(bytes4 interfaceId) public view override(ERC721, ERC721Enumerable) returns (bool) {
+        return super.supportsInterface(interfaceId);
     }
 
 }
