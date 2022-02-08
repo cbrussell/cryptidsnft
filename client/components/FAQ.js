@@ -78,7 +78,7 @@ export default function MyApp() {
                   Our whitelist is now closed. 
                   <br></br>
                   <br></br>
-                  Our Pioneer Role was limited to new Discord Members who joined between November 30th 2021 and January 25th 2022.
+                  The Pioneer Role was limited to new Discord Members who joined between November 30th 2021 and January 25th 2022.
                   All Pioneers are eligible to sign up for our Whitelist and reserve ONE (1) CRYPTID from our Whitelist Supply.
                   We appreciate our early supporters and aim to make this project&apos;s release accessible, low-stress, and distributed. 
       
