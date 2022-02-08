@@ -96,7 +96,6 @@ contract CryptidToken is ERC721, ERC721Enumerable, Pausable, Ownable, Reentrancy
         onlyOwner 
     {
         require(stage > Stage.Init, "No airdrops at init.");
-        require(mintAmount > 0, "Airdrop amount must be greater than 0.");
         require(totalSupply()  + mintAmount <= totalSaleSupply, "Mint amount will exceed total sale supply.");
         for (uint256 i = 1; i <= mintAmount; i++) {
             _safeMint(to, _tokenIdCounter.current());
@@ -131,7 +130,6 @@ contract CryptidToken is ERC721, ERC721Enumerable, Pausable, Ownable, Reentrancy
         onlyOwner 
     {
         require(stage == Stage.TeamMint, "Whitelist sale not initiated.");
-        require(mintAmount > 0, "Airdrop amount must be greater than 0.");
         require(mintAmount + teamMintCount <= teamMintSupply, "Transaction exceeds total team sale supply.");     
         teamMintCount += mintAmount;
         for (uint256 i = 1; i <= mintAmount; i++) {
@@ -151,7 +149,6 @@ contract CryptidToken is ERC721, ERC721Enumerable, Pausable, Ownable, Reentrancy
         whenNotPaused  
     {
         require(stage == Stage.PublicSale, "Public Sale not initiated.");
-        require(mintAmount > 0, "Airdrop amount must be greater than 0.");
         require(totalSupply()  + mintAmount <= totalSaleSupply, "Transaction exceeds total sale supply.");
         require(mintAmount <= maxMintPerTx, "Exceeds max allowed mints per transaction.");  
         for (uint256 i = 1; i <= mintAmount; i++) {
@@ -245,10 +242,6 @@ contract CryptidToken is ERC721, ERC721Enumerable, Pausable, Ownable, Reentrancy
 
     function lastMintID() external view returns (uint256){
         return(totalSupply());
-    }
-
-    function totalSupply() public view override returns (uint256) {
-        return _tokenIdCounter.current() - 1;
     }
 
     function tokenURI(uint256 tokenId) public view virtual override returns (string memory) {
