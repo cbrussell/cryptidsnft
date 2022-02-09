@@ -20,7 +20,7 @@ contract CryptidToken is ERC721, ERC721Enumerable, Pausable, Ownable, Reentrancy
 
     enum Stage {
         Init,
-        Airdrops,
+        Airdrop,
         Whitelist,
         TeamMint,
         PublicSale
@@ -40,7 +40,7 @@ contract CryptidToken is ERC721, ERC721Enumerable, Pausable, Ownable, Reentrancy
 
     // ~ Sale stages ~
     // stage 0: Init
-    // stage 1: Airdrops
+    // stage 1: Airdrop
     // stage 2: Whitelist
     // stage 3: Team Mint 
     // stage 4: Public Sale
@@ -87,7 +87,7 @@ contract CryptidToken is ERC721, ERC721Enumerable, Pausable, Ownable, Reentrancy
         _;
     }
     
-    // Stage 1 - Airdrops
+    // Stage 1 - Airdrop
     function airdropCryptid(
         uint8 mintAmount, 
         address to
@@ -214,7 +214,7 @@ contract CryptidToken is ERC721, ERC721Enumerable, Pausable, Ownable, Reentrancy
     }
 
     function freezeProvenanceHash() external onlyOwner {
-        require(bytes(provenanceHash).length > 0, "Provenance hash cannot be empty.");
+        require(bytes(provenanceHash).length > 0, "Provenance hash cannot be empty string.");
         require(!provenanceHashFrozen, "Provenance hash is already frozen.");
         provenanceHashFrozen = true;
     }

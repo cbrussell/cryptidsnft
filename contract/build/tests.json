@@ -1,10 +1,10 @@
 {
   "contracts": {
-    "CryptidToken": "40e5a3fce09f950a9cb7f63a2ec0b9f7914471b8",
+    "CryptidToken": "bc0c1ed43eceb1879cfbea48539d7ba2783e2fb9",
     "NonreceiverContract": "73df0a6f5d0123eb2b2db0faf62b602aa77c123a",
     "OpenZeppelin/openzeppelin-contracts@4.4.1/Counters": "1ce946f6a4eaa185320328620ccf999b9e86db7c",
     "OpenZeppelin/openzeppelin-contracts@4.4.1/ERC721": "f1489d4c38c27378f4844e9838ad9185ef5c6a92",
-    "OpenZeppelin/openzeppelin-contracts@4.4.1/SafeMath": "1ce946f6a4eaa185320328620ccf999b9e86db7c",
+    "OpenZeppelin/openzeppelin-contracts@4.4.1/MerkleProof": "1ce946f6a4eaa185320328620ccf999b9e86db7c",
     "OpenZeppelin/openzeppelin-contracts@4.4.1/Strings": "1ce946f6a4eaa185320328620ccf999b9e86db7c",
     "ReceiverContract": "3c6650de6245781f7d8aca76ecf8b3d8d95bf080",
     "TestContract": "c54e72ecfeaf7f7c1b4f6b0c985fe41f9bc3efe7"
@@ -16,15 +16,231 @@
         "CryptidToken",
         "OpenZeppelin/openzeppelin-contracts@4.4.1/Counters",
         "OpenZeppelin/openzeppelin-contracts@4.4.1/ERC721",
-        "OpenZeppelin/openzeppelin-contracts@4.4.1/SafeMath",
-        "OpenZeppelin/openzeppelin-contracts@4.4.1/Strings",
-        "ReceiverContract",
-        "TestContract"
+        "OpenZeppelin/openzeppelin-contracts@4.4.1/MerkleProof",
+        "OpenZeppelin/openzeppelin-contracts@4.4.1/Strings"
       ],
-      "results": "FFFFFF..............F..F.....FFFF.FFF...FF..F..FFFFFFF.FFFFFFF.FFFFFFF.",
-      "sha1": "07348f9242c8664f5458074a2383dec10c8e9377",
-      "txhash": []
+      "results": ".....",
+      "sha1": "736af95156d64bfed70df1ee2f885ed58ae5aef1",
+      "txhash": [
+        "5344b90dc59659bf724c1b27628d4b65d8e2488f",
+        "5a3073e504b37a94c255da8f614e9592b7a55225",
+        "78583d55620202731a5183f0c661f9a2faf65313",
+        "85c249d226b619ee4b389e0020d7f288891a0f1b",
+        "d12c5ad4c2a08b6b88532cd286371bd7966ff5ac",
+        "d6f5bbb623ede2786bf1c0d65ed01dd8eec9fe16",
+        "da3a3735ac0d3552ad6c390d454765d4017bf009",
+        "db7b4c9a18015bd2b7b254e1d5fd33cef05eeec6",
+        "e737566b7f2be6ff574c15985d5bf8bffb32086c"
+      ]
     }
   },
-  "tx": {}
+  "tx": {
+    "5344b90dc59659bf724c1b27628d4b65d8e2488f": {
+      "CryptidToken": {
+        "0": [
+          [],
+          [],
+          []
+        ],
+        "10": [
+          [],
+          [],
+          []
+        ],
+        "16": [
+          [
+            55,
+            56,
+            57
+          ],
+          [],
+          [
+            165,
+            166
+          ]
+        ],
+        "3": [
+          [],
+          [],
+          []
+        ]
+      }
+    },
+    "5a3073e504b37a94c255da8f614e9592b7a55225": {},
+    "78583d55620202731a5183f0c661f9a2faf65313": {
+      "CryptidToken": {
+        "0": [
+          [],
+          [],
+          []
+        ],
+        "10": [
+          [],
+          [],
+          []
+        ],
+        "16": [
+          [
+            55,
+            56
+          ],
+          [
+            166
+          ],
+          [
+            165
+          ]
+        ],
+        "3": [
+          [],
+          [],
+          []
+        ]
+      }
+    },
+    "85c249d226b619ee4b389e0020d7f288891a0f1b": {
+      "CryptidToken": {
+        "0": [
+          [],
+          [],
+          []
+        ],
+        "10": [
+          [],
+          [],
+          []
+        ],
+        "16": [
+          [
+            13,
+            14,
+            15
+          ],
+          [],
+          [
+            154,
+            155
+          ]
+        ],
+        "3": [
+          [],
+          [],
+          []
+        ]
+      }
+    },
+    "d12c5ad4c2a08b6b88532cd286371bd7966ff5ac": {
+      "CryptidToken": {
+        "16": [
+          [],
+          [],
+          []
+        ],
+        "3": [
+          [],
+          [],
+          []
+        ]
+      }
+    },
+    "d6f5bbb623ede2786bf1c0d65ed01dd8eec9fe16": {
+      "CryptidToken": {
+        "0": [
+          [],
+          [],
+          []
+        ],
+        "10": [
+          [],
+          [],
+          []
+        ],
+        "16": [
+          [
+            13
+          ],
+          [
+            154
+          ],
+          []
+        ],
+        "3": [
+          [],
+          [],
+          []
+        ]
+      }
+    },
+    "da3a3735ac0d3552ad6c390d454765d4017bf009": {
+      "CryptidToken": {
+        "16": [
+          [],
+          [],
+          []
+        ]
+      }
+    },
+    "db7b4c9a18015bd2b7b254e1d5fd33cef05eeec6": {
+      "CryptidToken": {
+        "0": [
+          [],
+          [],
+          []
+        ],
+        "10": [
+          [],
+          [],
+          []
+        ],
+        "16": [
+          [
+            13,
+            14,
+            15
+          ],
+          [],
+          [
+            154,
+            155
+          ]
+        ],
+        "3": [
+          [],
+          [],
+          []
+        ]
+      }
+    },
+    "e737566b7f2be6ff574c15985d5bf8bffb32086c": {
+      "CryptidToken": {
+        "0": [
+          [],
+          [],
+          []
+        ],
+        "10": [
+          [],
+          [],
+          []
+        ],
+        "16": [
+          [
+            13,
+            14
+          ],
+          [
+            155
+          ],
+          [
+            154
+          ]
+        ],
+        "3": [
+          [],
+          [],
+          []
+        ]
+      }
+    }
+  }
 }
