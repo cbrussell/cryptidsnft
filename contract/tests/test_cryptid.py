@@ -20,17 +20,23 @@ def _setFreezeProvenance(token):
     token.setProvenanceHash(provenance, {'from': owner})
     token.freezeProvenanceHash({'from': owner})
 
+# helper function - set and freeze provenance hash
+def _setMerkleRoot(token):
+    merkleRoot = '0x59fdebd0e32185e8eb2ae7f61b86a2607293976650e5b669ea06e5f0dcdebec1'
+    owner = accounts[0]
+    token.setMerkleRoot(merkleRoot, {'from': owner})
+
 def _initStage(token):
     owner = accounts[0]
     token.setStage({'from': owner,'value': 0})
 
 def _airdropStage(token):
     owner = accounts[0]
-    token.setStage({'from': owner,'value': 1})
+    token.setStage(1, {'from': owner})
 
 def _whitelistStage(token):
     owner = accounts[0]
-    token.setStage({'from': owner,'value': 2})
+    token.setStage(2, {'from': owner})
 
 def _teamMintStage(token):
     owner = accounts[0]
@@ -111,51 +117,242 @@ def test_set_provenance(token):
     token.setProvenanceHash(new_provenance, {'from': owner})
     set_provenance = token.provenanceHash()
     assert(set_provenance == new_provenance)
+   
+#set after frozen
+def test_set_already_frozen_hash(token):
+    owner = accounts[0]
+    new_provenance = "test provenance hash"
+    token.setProvenanceHash(new_provenance, {'from': owner})
+    token.freezeProvenanceHash({'from':owner})
+    second_provenance = "second provenance hash"
+    with brownie.reverts("Provenance hash is frozen."):
+        token.setProvenanceHash(second_provenance, {'from':owner})
 
-    # with brownie.reverts("Provenance hash cannot be empty string."):
-    #     token.freezeProvenanceHash({'from':owner})
+#set after frozen
+def test_freeze_empty_provenance(token):
+    owner = accounts[0]
+    with brownie.reverts("Provenance hash is not set."):
+        token.freezeProvenanceHash({'from':owner})
 
-# # initial provenance is unfrozen
-# def test_freeze_provenance(token):
-#     assert(token.provenanceHashFrozen() == False)
+#set after frozen
+def test_freeze_empty_provenance_two(token):
+    owner = accounts[0]
+    new_provenance = ""
+    with brownie.reverts("Provenance hash cannot be empty string."):
+        token.setProvenanceHash(new_provenance, {'from':owner})
 
-# # assert balances in account 0 and 1
-# def test_account_balance():
-#     balance = accounts[0].balance()
-#     accounts[0].transfer(accounts[1], "10 ether", gas_price=0)
-#     assert balance - "10 ether" == accounts[0].balance()
+
+# assert only owner can airdrop      
+def test_airdrop_at_init(token):
+    owner = accounts[0]
+    user = accounts[1]
+    with brownie.reverts("No airdrops at init."):
+        token.airdropCryptid(1, user, {'from': owner})
+
+# assert only owner can airdrop      
+def test_airdrop_as_user(token):
+    owner = accounts[0]
+    user = accounts[1]
+    with brownie.reverts("Ownable: caller is not the owner"):
+        token.airdropCryptid(1, user, {'from': user})
+
+# assert only owner can airdrop      
+def test_airdrop_as_user(token):
+    owner = accounts[0]
+    user = accounts[1]
+    with brownie.reverts("Ownable: caller is not the owner"):
+        token.airdropCryptid(1, user, {'from': user})
+
+# airdrop token 
+def test_airdrop(token):
+    owner = accounts[0]
+    user = accounts[1]
+    tokens = 5
+    old_user_balance = token.balanceOf(user)
+    _setFreezeProvenance(token)
+    _setMerkleRoot(token)
+    _airdropStage(token)
+    token.airdropCryptid(tokens, user, {'from': owner})
+    new_user_balance = token.balanceOf(user)
+    assert(new_user_balance == old_user_balance + tokens)
+
+# move from stage 0 to 1 without provenance frozen
+def test_move_to_stage_1_before_provenance(token):
+    owner = accounts[0]
+    with brownie.reverts("Provenance hash must be frozen before minting can start."):
+        token.setStage(1, {'from': owner})
+
+# move from stage 0 to 1 without provenance frozen
+def test_move_to_stage_1_before_merkle(token):
+    owner = accounts[0]
+    _setFreezeProvenance(token)
+    with brownie.reverts("Merkle root must be set beefore minting can start."):
+        token.setStage(1, {'from': owner})
+
+def test_move_to_stage_1_after_provenance(token):
+    owner = accounts[0]
+    stage_before = token.stage()
+    _setFreezeProvenance(token)
+    _setMerkleRoot(token)
+    _airdropStage(token)
+    token.setStage(1, {'from': owner})
+    stage_after = token.stage()
+    assert(stage_after == stage_before + 1)
+
+def test_airdrop_to_contract(token):
+    owner = accounts[0]
+    user = accounts[1]
+    tokens = 2
+    _setFreezeProvenance(token)
+    _setMerkleRoot(token)
+    _airdropStage(token)
+    test = accounts[0].deploy(TestContract).address
+    # test_address = test.address()
+    with brownie.reverts("ERC721: transfer to non ERC721Receiver implementer"):
+        token.airdropCryptid(tokens, test, {'from': owner})
+
+# airdrop too many token 
+def test_airdrop_too_many(token):
+    owner = accounts[0]
+    user = accounts[1]
+    maxTx = token.totalSaleSupply()
+    tokens = maxTx + 1
+    _setFreezeProvenance(token)
+    _setMerkleRoot(token)
+    _airdropStage(token)
+    with brownie.reverts("Mint amount will exceed total sale supply."):
+        token.airdropCryptid(tokens, user, {'from': owner})
+
+
+
+def test_airdrop_to_zero(token):
+    owner = accounts[0]
+    user = "0x0000000000000000000000000000000000000000"
+    tokens = 2
+    _setFreezeProvenance(token)
+    _setMerkleRoot(token)
+    _airdropStage(token)
+    with brownie.reverts("ERC721: mint to the zero address"):
+        token.airdropCryptid(tokens, user, {'from': owner})
+
+# initial provenance is unfrozen
+def test_freeze_provenance(token):
+    assert(token.provenanceHashFrozen() == False)
+
+# assert balances in account 0 and 1
+def test_account_balance():
+    balance = accounts[0].balance()
+    accounts[0].transfer(accounts[1], "10 ether", gas_price=0)
+    assert balance - "10 ether" == accounts[0].balance()
 
 # # check no minting allowed after deployment as non-owner
 # def test_mint_after_deploy_non_owner(token):
 #     user = accounts[1]
 #     with brownie.reverts("Minting not initiated. Currenly on stage 0 (init)."):
-#         token.mint(1, {'from': user})
+#         token.whitelistMint(1, {'from': user})
 
-# # assert only owner can airdrop      
-# def test_airdrop_as_non_owner(token):
-#     user = accounts[1]
-#     with brownie.reverts("Ownable: caller is not the owner"):
-#         token.airdropCryptid(1, user, {'from': user})
+# mint as owner after deploy
+def test_wl_before_wl(token):
+    owner = accounts[0]
+    user = accounts[1]
+    proof = ["0xd58ec672f132365ae3f63a025bdb2b21ab3682bb1e599e56c7c542dd42b5699e","0x9cefd68b762d62f3cbf277fc0c90031add3b2365bcb6d9335e56ab84ba3cf0e1","0x29abd47fcc3f75d7585a8471d4057d5b5dabcbc6e87cd65a567a5c0626243539"]
+    with brownie.reverts("Whitelist sale not initiated."):
+        token.whitelistMint(proof, {'from': owner,'value': "1 ether"})
 
-# # mint as owner after deploy
-# def test_mint_after_deploy_owner(token):
-#     owner = accounts[0]
-#     with brownie.reverts("Minting not initiated. Currenly on stage 0 (init)."):
-#         token.mint(1, {'from': owner})
+# mint as owner after deploy
+def test_address_not_in_wl(token):
+    owner = accounts[0]
+    user = accounts[1]
+    proof = ["0xd58ec672f132365ae3f63a025bdb2b21ab3682bb1e599e56c7c542dd42b5699e","0x9cefd68b762d62f3cbf277fc0c90031add3b2365bcb6d9335e56ab84ba3cf0e1","0x29abd47fcc3f75d7585a8471d4057d5b5dabcbc6e87cd65a567a5c0626243539"]
+    _setFreezeProvenance(token)
+    _setMerkleRoot(token)
+    _whitelistStage(token)
+    with brownie.reverts("Address not in whitelist."):
+        token.whitelistMint(proof, {'from': owner,'value': "0.1 ether"})
 
-# # move from stage 0 to 1 without provenance frozen
-# def test_move_to_stage_1_before_provenance(token):
-#     owner = accounts[0]
-#     with brownie.reverts("Provenance hash must be frozen before minting can start."):
-#         token.nextStage({'from': owner})
+# mint as owner after deploy
+def test_wl_wrong_payment(token):
+    owner = accounts[0]
+    user = accounts[1]
+    proof = ["0xd58ec672f132365ae3f63a025bdb2b21ab3682bb1e599e56c7c542dd42b5699e","0x9cefd68b762d62f3cbf277fc0c90031add3b2365bcb6d9335e56ab84ba3cf0e1","0x29abd47fcc3f75d7585a8471d4057d5b5dabcbc6e87cd65a567a5c0626243539"]
+    _setFreezeProvenance(token)
+    _setMerkleRoot(token)
+    _whitelistStage(token)
+    with brownie.reverts("Incorrect ETH value sent."):
+        token.whitelistMint(proof, {'from': user, 'value': "1 ether"})
 
-# def test_move_to_stage_1_after_provenance(token):
-#     owner = accounts[0]
-#     _setFreezeProvenance(token)
-#     stage_before = token.getStage()
-#     token.nextStage({'from': owner})
-#     stage_after = token.getStage()
-#     assert(stage_after == stage_before + 1)
+# whitelist mint
+def test_whitelist_mint(token):
+    owner = accounts[0]
+    user = accounts[1]
+    proof = ["0xd58ec672f132365ae3f63a025bdb2b21ab3682bb1e599e56c7c542dd42b5699e","0x9cefd68b762d62f3cbf277fc0c90031add3b2365bcb6d9335e56ab84ba3cf0e1","0x29abd47fcc3f75d7585a8471d4057d5b5dabcbc6e87cd65a567a5c0626243539"]
+    _setFreezeProvenance(token)
+    _setMerkleRoot(token)
+    _whitelistStage(token)
+    balance_before = token.balanceOf(user)
+    token.whitelistMint(proof, {'from': user, 'value': "0.1 ether"})
+    balance_after = token.balanceOf(user)
+    assert(balance_after == balance_before + 1)
+    bool = token.claimed(user)
+    assert(bool == True)
+    with brownie.reverts("Whitelist mint already claimed."):
+        token.whitelistMint(proof, {'from': user, 'value': "0.1 ether"})
+
+def test_whitelist_mint_double(token):
+    owner = accounts[0]
+    user = accounts[1]
+    proof = ["0xd58ec672f132365ae3f63a025bdb2b21ab3682bb1e599e56c7c542dd42b5699e","0x9cefd68b762d62f3cbf277fc0c90031add3b2365bcb6d9335e56ab84ba3cf0e1","0x29abd47fcc3f75d7585a8471d4057d5b5dabcbc6e87cd65a567a5c0626243539"]
+    _setFreezeProvenance(token)
+    _setMerkleRoot(token)
+    _whitelistStage(token)
+    token.whitelistMint(proof, {'from': user, 'value': "0.1 ether"})
+    with brownie.reverts("Whitelist mint already claimed."):
+        token.whitelistMint(proof, {'from': user, 'value': "0.1 ether"})
+
+# double whitelist mint
+def test_whitelist_mint_three(token):
+    owner = accounts[0]
+    user = accounts[1]
+    proof = ["0xd58ec672f132365ae3f63a025bdb2b21ab3682bb1e599e56c7c542dd42b5699e","0x9cefd68b762d62f3cbf277fc0c90031add3b2365bcb6d9335e56ab84ba3cf0e1","0x29abd47fcc3f75d7585a8471d4057d5b5dabcbc6e87cd65a567a5c0626243539"]
+    _setFreezeProvenance(token)
+    _setMerkleRoot(token)
+    _whitelistStage(token)
+    balance_before = token.balanceOf(user)
+    token.whitelistMint(proof, {'from': user, 'value': "0.1 ether"})
+    balance_after = token.balanceOf(user)
+    assert(balance_after == balance_before + 1)
+
+# wl before merkle
+def test_whitelist_merkle_error(token):
+    owner = accounts[0]
+    user = accounts[1]
+    proof = ["0xd58ec672f132365ae3f63a025bdb2b21ab3682bb1e599e56c7c542dd42b5699e","0x9cefd68b762d62f3cbf277fc0c90031add3b2365bcb6d9335e56ab84ba3cf0e1","0x29abd47fcc3f75d7585a8471d4057d5b5dabcbc6e87cd65a567a5c0626243539"]
+    _setFreezeProvenance(token)
+    _setMerkleRoot(token)
+    _whitelistStage(token)
+    with brownie.reverts("Address not in whitelist."):
+        token.whitelistMint(proof, {'from': owner, 'value': "0.1 ether"})
+
+# wl before merkle
+def test_whitelist_merkle_error(token):
+    owner = accounts[0]
+    user = accounts[1]
+    proof = ["0xd58ec672f132365ae3f63a025bdb2b21ab3682bb1e599e56c7c542dd42b5699e","0x9cefd68b762d62f3cbf277fc0c90031add3b2365bcb6d9335e56ab84ba3cf0e1","0x29abd47fcc3f75d7585a8471d4057d5b5dabcbc6e87cd65a567a5c0626243539"]
+    _setFreezeProvenance(token)
+    _setMerkleRoot(token)
+    with brownie.reverts("Whitelist sale not initiated."):
+        token.whitelistMint(proof, {'from': user, 'value': "0.1 ether"})
+
+# ownerOf assert
+def test_owner_of(token):
+    owner = accounts[0]
+    user = accounts[1]
+    proof = ["0xd58ec672f132365ae3f63a025bdb2b21ab3682bb1e599e56c7c542dd42b5699e","0x9cefd68b762d62f3cbf277fc0c90031add3b2365bcb6d9335e56ab84ba3cf0e1","0x29abd47fcc3f75d7585a8471d4057d5b5dabcbc6e87cd65a567a5c0626243539"]
+    _setFreezeProvenance(token)
+    _setMerkleRoot(token)
+    _whitelistStage(token)
+    token.whitelistMint(proof, {'from': user, 'value': "0.1 ether"})
+    assert(user == token.ownerOf(1))
 
 # # no stages after 4
 # def test_only_four_stages(token):
@@ -171,51 +368,6 @@ def test_set_provenance(token):
 
 # # airdrop before provenance is set
 
-# def test_airdrop_before_provinence_set(token):
-#     owner = accounts[0]
-#     user = accounts[1]
-#     tokens = 5
-#     with brownie.reverts("Provenance hash must be frozen before minting can start."):
-#         token.airdropCryptid(tokens, user, {'from': owner})
-
-# # airdrop token 
-# def test_airdrop(token):
-#     owner = accounts[0]
-#     user = accounts[1]
-#     tokens = 5
-#     old_user_balance = token.balanceOf(user)
-#     _setFreezeProvenance(token)
-#     token.airdropCryptid(tokens, user, {'from': owner})
-#     new_user_balance = token.balanceOf(user)
-#     assert(new_user_balance == old_user_balance + tokens)
-
-# # airdrop too many token 
-# def test_airdrop_too_many(token):
-#     owner = accounts[0]
-#     user = accounts[1]
-#     maxTx = token.maxMintPerTx()
-#     tokens = maxTx + 1
-#     _setFreezeProvenance(token)
-#     with brownie.reverts("Exceeds max allowed amount per transaction"):
-#         token.airdropCryptid(tokens, user, {'from': owner})
-
-# def test_airdrop_to_contract(token):
-#     owner = accounts[0]
-#     user = accounts[1]
-#     tokens = 2
-#     _setFreezeProvenance(token)
-#     test = accounts[0].deploy(TestContract).address
-#     # test_address = test.address()
-#     with brownie.reverts("ERC721: transfer to non ERC721Receiver implementer"):
-#         token.airdropCryptid(tokens, test, {'from': owner})
-
-# def test_airdrop_to_zero(token):
-#     owner = accounts[0]
-#     user = "0x0000000000000000000000000000000000000000"
-#     tokens = 2
-#     _setFreezeProvenance(token)
-#     with brownie.reverts("ERC721: mint to the zero address"):
-#         token.airdropCryptid(tokens, user, {'from': owner})
 
 # # airdrop at whitelist
 # def test_airdrop_at_whitelist(token):
@@ -305,29 +457,7 @@ def test_set_provenance(token):
 #         token.mint(mints, {'from': user})
 
 
-# # whitelist mint
-# def test_whitelist_mint(token):
-#     owner = accounts[0]
-#     user = accounts[1]
-#     mints = 5
-#     token.setWhitelistUsers([user], [mints], {'from': owner})
-#     _setFreezeProvenance(token)
-#     _nextStage(token)
-#     balance_before = token.balanceOf(user)
-#     token.mint(mints, {'from': user})
-#     balance_after = token.balanceOf(user)
-#     assert(balance_after == balance_before + mints)
 
-# # ownerOf assert
-# def test_owner_of(token):
-#     owner = accounts[0]
-#     user = accounts[1]
-#     mints = 1
-#     token.setWhitelistUsers([user], [mints], {'from': owner})
-#     _setFreezeProvenance(token)
-#     _nextStage(token)
-#     token.mint(mints, {'from': user})
-#     assert(user == token.ownerOf(1))
 
 # # ownerOf assert
 # def test_owner_of_nonexistent_token(token):
@@ -385,19 +515,19 @@ def test_set_provenance(token):
 #     assert(token.totalSupply() == mint + mint)
 #     assert(token.presaleMintCount(user_2) == mint)
 
-# def test_ERC615(token):
-#     # ERC721
-#     assert(True == token.supportsInterface("0x80ac58cd"))
-#     # ERC165 itself
-#     assert(True == token.supportsInterface("0x01ffc9a7"))
-#     # ERC721 Metadata 
-#     assert(True == token.supportsInterface("0x5b5e139f"))
+def test_ERC615(token):
+    # ERC721
+    assert(True == token.supportsInterface("0x80ac58cd"))
+    # ERC165 itself
+    assert(True == token.supportsInterface("0x01ffc9a7"))
+    # ERC721 Metadata 
+    assert(True == token.supportsInterface("0x5b5e139f"))
 
-# def test_name_symbol(token):
-#     name = token.name()
-#     symbol = token.symbol()
-#     assert(len(name) > 0)
-#     assert(len(symbol) > 0)
+def test_name_symbol(token):
+    name = token.name()
+    symbol = token.symbol()
+    assert(len(name) > 0)
+    assert(len(symbol) > 0)
 
 # # test team mint
 # def test_team_mint(token):
@@ -564,20 +694,6 @@ def test_set_provenance(token):
 #     token.mint(1, {'from': user, 'value': "0.06 ether"})
 #     txn_receipt = token.burn(tokens, {"from": user})
 #     _verifyTransferEvent(txn_receipt, user, "0x"+40*"0", tokens)
-
-# # Burn a token when not owner, willr evert
-# def test_burn_as_not_owner(token):
-#     owner = accounts[0]
-#     user = accounts[1]
-#     tokens = 1
-#     _setFreezeProvenance(token)
-#     _nextStage(token)
-#     _nextStage(token)
-#     _nextStage(token)
-#     _nextStage(token)
-#     token.mint(1, {'from': user, 'value': "0.06 ether"})
-#     with brownie.reverts('ERC721Burnable: caller is not owner nor approved'):
-#         token.burn(tokens, {"from": owner})
 
 # # Test a valid transfer, initiated by the current owner of the token
 # def test_transfer_from(token):

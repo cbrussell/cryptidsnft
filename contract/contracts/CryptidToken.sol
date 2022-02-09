@@ -78,6 +78,7 @@ contract CryptidToken is ERC721, ERC721Enumerable, Pausable, Ownable, Reentrancy
     }
 
     modifier isValidMerkleProof(bytes32[] calldata proof, bytes32 root) {
+        require(stage == Stage.Whitelist, "Whitelist sale not initiated.");
         require(proof.verify(root, keccak256(abi.encodePacked(msg.sender))), "Address not in whitelist.");
         _;
     }
@@ -114,9 +115,8 @@ contract CryptidToken is ERC721, ERC721Enumerable, Pausable, Ownable, Reentrancy
         nonReentrant 
         whenNotPaused 
     {
-        require(stage == Stage.Whitelist, "Whitelist sale not initiated.");
+        
         require(claimed[msg.sender] == false, "Whitelist mint already claimed."); 
-        require(totalSupply() + 1 <= whitelistSupply, "Mint amount will exceed whitelist supply.");
         claimed[msg.sender] = true;
         _safeMint(msg.sender, _tokenIdCounter.current());
         _tokenIdCounter.increment();
@@ -129,7 +129,7 @@ contract CryptidToken is ERC721, ERC721Enumerable, Pausable, Ownable, Reentrancy
         external 
         onlyOwner 
     {
-        require(stage == Stage.TeamMint, "Whitelist sale not initiated.");
+        require(stage == Stage.TeamMint, "Team mint not initiated.");
         require(mintAmount + teamMintCount <= teamMintSupply, "Transaction exceeds total team sale supply.");     
         teamMintCount += mintAmount;
         for (uint256 i = 1; i <= mintAmount; i++) {
@@ -214,7 +214,7 @@ contract CryptidToken is ERC721, ERC721Enumerable, Pausable, Ownable, Reentrancy
     }
 
     function freezeProvenanceHash() external onlyOwner {
-        require(bytes(provenanceHash).length > 0, "Provenance hash cannot be empty string.");
+        require(bytes(provenanceHash).length > 0, "Provenance hash is not set.");
         require(!provenanceHashFrozen, "Provenance hash is already frozen.");
         provenanceHashFrozen = true;
     }
