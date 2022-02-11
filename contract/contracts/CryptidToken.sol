@@ -129,7 +129,7 @@ contract CryptidToken is ERC721, ERC721Enumerable, Pausable, Ownable, Reentrancy
 
     // Stage 4 - Public Mint
     function publicMint(
-        uint8 mintAmount
+        uint256 mintAmount
     ) 
         external
         payable 
