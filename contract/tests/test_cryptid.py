@@ -1,7 +1,8 @@
 import pytest
 import brownie 
 import hexbytes;
-from brownie import CryptidToken, TestContract, ReceiverContract, NonreceiverContract, accounts, exceptions;
+from brownie import CryptidToken, TestContract, ReceiverContract, NonreceiverContract, accounts, exceptions
+from sqlalchemy import true;
 
 # deploy CryptidToken
 @pytest.fixture(scope="module", autouse=True)
@@ -40,11 +41,18 @@ def _whitelistStage(token):
 
 def _teamMintStage(token):
     owner = accounts[0]
-    token.setStage({'from': owner,'value': 3})
+    token.setStage(3, {'from': owner})
+
+def _mint(token):
+    owner = accounts[0]
+    _setFreezeProvenance(token)
+    _setMerkleRoot(token)
+    _airdropStage(token)
+    token.airdropCryptid(1, owner, {'from': owner})
 
 def _publicSaleStage(token):
     owner = accounts[0]
-    token.setStage({'from': owner,'value': 4})
+    token.setStage(4, {'from': owner})
 
 def _verifyTransferEvent(txn_receipt, _from, to, tokenID):
     event = txn_receipt.events['Transfer']
@@ -59,15 +67,6 @@ def _verifyApprovalForAllEvent(txn_receipt, owner, operator, approved):
     assert(event['operator'] == operator)
     assert(event['approved'] == approved)
 
-# def _mint(token, tokenID, owner):
-#     owner = accounts[0]
-#     tokenID = 1
-#     _setFreezeProvenance(token)
-#     _nextStage(token)
-#     _nextStage(token)
-#     _nextStage(token)
-#     _nextStage(token)
-#     token.mint(tokenID, {'from': owner, 'value': "0.06 ether"})
 
 # Verify that an Approval event has been logged
 def _verifyApprovalEvent(txn_receipt, owner, approved, tokenID):
@@ -245,19 +244,85 @@ def test_account_balance():
     accounts[0].transfer(accounts[1], "10 ether", gas_price=0)
     assert balance - "10 ether" == accounts[0].balance()
 
-# # check no minting allowed after deployment as non-owner
-# def test_mint_after_deploy_non_owner(token):
-#     user = accounts[1]
-#     with brownie.reverts("Minting not initiated. Currenly on stage 0 (init)."):
-#         token.whitelistMint(1, {'from': user})
-
 # mint as owner after deploy
 def test_wl_before_wl(token):
     owner = accounts[0]
     user = accounts[1]
     proof = ["0xd58ec672f132365ae3f63a025bdb2b21ab3682bb1e599e56c7c542dd42b5699e","0x9cefd68b762d62f3cbf277fc0c90031add3b2365bcb6d9335e56ab84ba3cf0e1","0x29abd47fcc3f75d7585a8471d4057d5b5dabcbc6e87cd65a567a5c0626243539"]
     with brownie.reverts("Whitelist sale not initiated."):
-        token.whitelistMint(proof, {'from': owner,'value': "1 ether"})
+        token.whitelistMint(proof, {'from': owner,'value': "0.10 ether"})
+
+# team mint
+
+def test_team_mints(token):
+    owner = accounts[0]
+    user = accounts[1]
+    _setFreezeProvenance(token)
+    _setMerkleRoot(token)
+    with brownie.reverts("Team mint not initiated."):
+        token.teamMint(5, {'from': owner})
+    _teamMintStage(token)
+    mint = 5
+    balance_before = token.balanceOf(owner)
+    token.teamMint(mint, {'from': owner})
+    balance_after = token.balanceOf(owner)
+    assert(balance_after == balance_before + mint)
+    with brownie.reverts("Ownable: caller is not the owner"):
+        token.teamMint(mint, {'from': user})
+    token.teamMint(mint, {'from': owner})
+    with brownie.reverts("Transaction exceeds total team sale supply."):
+        token.teamMint(mint, {'from': owner})
+    assert(token.teamMintCount() == 10)
+
+def test_whitelist_mints_attempt_four(token):
+    owner = accounts[0]
+    user = accounts[1]
+    _setFreezeProvenance(token)
+    _setMerkleRoot(token)
+    proof = ["0xd58ec672f132365ae3f63a025bdb2b21ab3682bb1e599e56c7c542dd42b5699e","0x9cefd68b762d62f3cbf277fc0c90031add3b2365bcb6d9335e56ab84ba3cf0e1","0x29abd47fcc3f75d7585a8471d4057d5b5dabcbc6e87cd65a567a5c0626243539"]
+    with brownie.reverts("Whitelist sale not initiated."):
+        token.whitelistMint(proof, {'from': owner, 'value': '0.10 ether'})
+    _whitelistStage(token)
+    mint = 1
+    balance_before = token.balanceOf(user)
+    with brownie.reverts("Address not in whitelist."):
+        token.whitelistMint(proof, {'from': owner, 'value': '0.10 ether'})
+    token.whitelistMint(proof, {'from': user, 'value': '0.1 ether'}) 
+    balance_after = token.balanceOf(user)
+    assert(balance_after == balance_before + mint)
+    assert(token.totalSupply() == mint)
+    assert(token.claimed(user) == True)
+
+def test_public_mints_two(token):
+    owner = accounts[0]
+    user = accounts[1]
+    _setFreezeProvenance(token)
+    with brownie.reverts('Merkle root must be set beefore minting can start.'):
+        _publicSaleStage(token)
+    _setMerkleRoot(token)
+    with brownie.reverts("Public Sale not initiated."):
+        token.publicMint(5, {'from': owner, 'value': '0.50 ether'})
+    _publicSaleStage(token)
+    mint = 5
+    balance_before = token.balanceOf(owner)
+    with brownie.reverts("Incorrect ETH value sent."):
+        token.publicMint(mint, {'from': owner, 'value': '0.4 ether'})
+    token.publicMint(5, {'from': owner, 'value': '0.5 ether'}) 
+    balance_after = token.balanceOf(owner)
+    assert(balance_after == balance_before + mint)
+    with brownie.reverts("Exceeds max allowed mints per transaction."):
+        token.publicMint(6, {'from': owner, 'value': '0.6 ether'}) 
+    token.publicMint(5, {'from': owner, 'value': '0.5 ether'}) 
+    token.publicMint(5, {'from': owner, 'value': '0.5 ether'}) 
+    token.publicMint(5, {'from': owner, 'value': '0.5 ether'}) 
+    token.publicMint(5, {'from': owner, 'value': '0.5 ether'}) 
+    token.publicMint(5, {'from': owner, 'value': '0.5 ether'})
+    with brownie.reverts("Transaction exceeds total sale supply."):
+        token.publicMint(5, {'from': owner, 'value': '0.5 ether'}) 
+    assert(token.totalSupply() == 30)
+    assert(token.totalSaleSupply() == token.totalSupply())
+
+
 
 # mint as owner after deploy
 def test_address_not_in_wl(token):
@@ -321,9 +386,10 @@ def test_whitelist_mint_three(token):
     token.whitelistMint(proof, {'from': user, 'value': "0.1 ether"})
     balance_after = token.balanceOf(user)
     assert(balance_after == balance_before + 1)
+    assert(token.claimed(user) == True)
 
 # wl before merkle
-def test_whitelist_merkle_error(token):
+def test_whitelist_merkle_error_three(token):
     owner = accounts[0]
     user = accounts[1]
     proof = ["0xd58ec672f132365ae3f63a025bdb2b21ab3682bb1e599e56c7c542dd42b5699e","0x9cefd68b762d62f3cbf277fc0c90031add3b2365bcb6d9335e56ab84ba3cf0e1","0x29abd47fcc3f75d7585a8471d4057d5b5dabcbc6e87cd65a567a5c0626243539"]
@@ -332,6 +398,15 @@ def test_whitelist_merkle_error(token):
     _whitelistStage(token)
     with brownie.reverts("Address not in whitelist."):
         token.whitelistMint(proof, {'from': owner, 'value': "0.1 ether"})
+
+# wl before merkle
+def test_whitelist_mint_before_merkle(token):
+    owner = accounts[0]
+    user = accounts[1]
+    proof = ["0xe58ec672f132365ae3f63a025bdb2b21ab3682bb1e599e56c7c542dd42b5699e","0x9cefd68b762d62f3cbf277fc0c90031add3b2365bcb6d9335e56ab84ba3cf0e1","0x29abd47fcc3f75d7585a8471d4057d5b5dabcbc6e87cd65a567a5c0626243539"]
+    _setFreezeProvenance(token)
+    with brownie.reverts('Merkle root must be set beefore minting can start.'):
+        _whitelistStage(token)
 
 # wl before merkle
 def test_whitelist_merkle_error(token):
@@ -353,6 +428,246 @@ def test_owner_of(token):
     _whitelistStage(token)
     token.whitelistMint(proof, {'from': user, 'value': "0.1 ether"})
     assert(user == token.ownerOf(1))
+    token.pause({'from':owner})
+    with brownie.reverts('Pausable: paused'):
+        token.whitelistMint(proof, {'from': user, 'value': "0.1 ether"})
+
+# ownerOf assert
+def test_owner_of_public(token):
+    owner = accounts[0]
+    user = accounts[1]
+    proof = ["0xd58ec672f132365ae3f63a025bdb2b21ab3682bb1e599e56c7c542dd42b5699e","0x9cefd68b762d62f3cbf277fc0c90031add3b2365bcb6d9335e56ab84ba3cf0e1","0x29abd47fcc3f75d7585a8471d4057d5b5dabcbc6e87cd65a567a5c0626243539"]
+    _setFreezeProvenance(token)
+    _setMerkleRoot(token)
+    _publicSaleStage(token)
+    token.publicMint(1, {'from': user, 'value': "0.1 ether"})
+    assert(user == token.ownerOf(1))
+    token.pause({'from':owner})
+    with brownie.reverts('Pausable: paused'):
+        token.publicMint(1, {'from': user, 'value': "0.1 ether"})
+
+
+# mint a token to a receiver contract
+def test_public_sale_to_contract(token):
+    owner = accounts[0]
+    _setFreezeProvenance(token)
+    _setMerkleRoot(token)
+    _publicSaleStage(token)
+    tokens = 1
+    test = accounts[0].deploy(ReceiverContract).address
+    accounts[0].transfer(test, "10 ether", gas_price=0)
+    txn_receipt = token.publicMint(tokens, {'from': test, 'value': "0.1 ether"})
+    assert(test == token.ownerOf(tokens))
+    event = txn_receipt.events['Transfer']
+    assert(event['tokenId'] == tokens)
+    assert(event['from'] == "0x"+"0"*40)
+    assert(event['to'] == test)
+    token.pause({'from':owner})
+    with brownie.reverts('Pausable: paused'):
+        token.publicMint(tokens, {'from': test, 'value': "0.1 ether"})
+    token.unpause({'from':owner})
+    token.publicMint(tokens, {'from': test, 'value': "0.1 ether"})
+    assert(test == token.ownerOf(2))
+
+
+# test mint at stage 0
+def test_mint_at_init(token):
+    owner = accounts[0]
+    _setFreezeProvenance(token)
+    _setMerkleRoot(token)
+    user = accounts[1]
+    proof = ["0xd58ec672f132365ae3f63a025bdb2b21ab3682bb1e599e56c7c542dd42b5699e","0x9cefd68b762d62f3cbf277fc0c90031add3b2365bcb6d9335e56ab84ba3cf0e1","0x29abd47fcc3f75d7585a8471d4057d5b5dabcbc6e87cd65a567a5c0626243539"]
+    with brownie.reverts('Incorrect ETH value sent.'):
+        token.whitelistMint(proof, {'from': user, 'value': '0.09 ether'})
+    with brownie.reverts("Whitelist sale not initiated."):
+        token.whitelistMint(proof, {'from': user, 'value': '0.10 ether'})
+    _whitelistStage(token)
+    token.whitelistMint(proof, {'from': user, 'value': "0.1 ether"})
+    with brownie.reverts("Whitelist mint already claimed."):
+        token.whitelistMint(proof, {'from': user, 'value': "0.1 ether"})
+    with brownie.reverts("Address not in whitelist."):
+        token.whitelistMint(proof, {'from': owner, 'value': "0.1 ether"})
+    token.undoClaim(user, {'from': owner})
+    token.whitelistMint(proof, {'from': user, 'value': "0.1 ether"})
+
+
+
+def test_mint_four_person(token):
+    user_1 = accounts[1]
+    user_2 = accounts[2]
+    user_3 = accounts[3]
+    user_4 = accounts[4]
+    _setFreezeProvenance(token)
+    _setMerkleRoot(token)
+    _publicSaleStage(token)
+    txn_1 = token.publicMint(1, {'from': user_1, 'value': "0.1 ether"})
+    txn_2 = token.publicMint(1, {'from': user_2, 'value': "0.1 ether"})
+    txn_3 = token.publicMint(1, {'from': user_3, 'value': "0.1 ether"})
+    txn_4 = token.publicMint(1, {'from': user_4, 'value': "0.1 ether"})
+    assert(user_1 == token.ownerOf(1))
+    assert(user_2 == token.ownerOf(2))
+    assert(user_3 == token.ownerOf(3))
+    assert(user_4 == token.ownerOf(4))
+
+    event = txn_1.events['Transfer']
+    assert(event['tokenId'] == 1)
+    assert(event['from'] == "0x"+"0"*40)
+    assert(event['to'] == user_1)
+
+    event = txn_2.events['Transfer']
+    assert(event['tokenId'] == 2)
+    assert(event['from'] == "0x"+"0"*40)
+    assert(event['to'] == user_2)
+
+    event = txn_3.events['Transfer']
+    assert(event['tokenId'] == 3)
+    assert(event['from'] == "0x"+"0"*40)
+    assert(event['to'] == user_3)
+
+    event = txn_4.events['Transfer']
+    assert(event['tokenId'] == 4)
+    assert(event['from'] == "0x"+"0"*40)
+    assert(event['to'] == user_4)   
+
+def test_whitelist_mint_asserts(token):
+    owner = accounts[0]
+    tokenID = 1
+    _setFreezeProvenance(token)
+    _setMerkleRoot(token)
+    user = accounts[1]
+    proof = ["0xd58ec672f132365ae3f63a025bdb2b21ab3682bb1e599e56c7c542dd42b5699e","0x9cefd68b762d62f3cbf277fc0c90031add3b2365bcb6d9335e56ab84ba3cf0e1","0x29abd47fcc3f75d7585a8471d4057d5b5dabcbc6e87cd65a567a5c0626243539"]
+    _whitelistStage(token)
+
+    oldBalance = token.balanceOf(user)
+    txn_receipt = token.whitelistMint(proof, {"from": user, 'value': '0.1 ether'})
+    newBalance = token.balanceOf(user)
+    assert(newBalance == oldBalance + 1)
+    assert(user == token.ownerOf(tokenID))
+
+    # Verify that minting has created an event
+    event = txn_receipt.events['Transfer']
+    assert(event['tokenId'] == tokenID)
+    assert(event['from'] == "0x"+"0"*40)
+    assert(event['to'] == user)
+
+def test_whitelist_mint_asserts_public(token):
+    owner = accounts[0]
+    tokenID = 1
+    _setFreezeProvenance(token)
+    _setMerkleRoot(token)
+    user = accounts[1]
+    proof = ["0xd58ec672f132365ae3f63a025bdb2b21ab3682bb1e599e56c7c542dd42b5699e","0x9cefd68b762d62f3cbf277fc0c90031add3b2365bcb6d9335e56ab84ba3cf0e1","0x29abd47fcc3f75d7585a8471d4057d5b5dabcbc6e87cd65a567a5c0626243539"]
+    _publicSaleStage(token)
+
+    oldBalance = token.balanceOf(user)
+    txn_receipt = token.publicMint(1, {"from": user, 'value': '0.1 ether'})
+    newBalance = token.balanceOf(user)
+    assert(newBalance == oldBalance + 1)
+    assert(user == token.ownerOf(tokenID))
+
+    # Verify that minting has created an event
+    event = txn_receipt.events['Transfer']
+    assert(event['tokenId'] == tokenID)
+    assert(event['from'] == "0x"+"0"*40)
+    assert(event['to'] == user)
+
+
+
+
+
+
+
+# mint as zero address during public sale - will revert
+def test_public_sale_to_non_erc_contract(token):
+    owner = accounts[0]
+    _setFreezeProvenance(token)
+    _setMerkleRoot(token)
+    _publicSaleStage(token)
+    tokens = 5
+    test = accounts[0].deploy(TestContract).address
+    accounts[0].transfer(test, "10 ether", gas_price=0)
+    with brownie.reverts("ERC721: transfer to non ERC721Receiver implementer"):
+        token.publicMint(tokens, {'from': test, 'value': "0.5 ether"})
+
+
+
+# airdrop at whitelist
+def test_airdrop_at_whitelist(token):
+    owner = accounts[0]
+    user = accounts[1]
+    tokens = 5
+    old_user_balance = token.balanceOf(user)
+    _setFreezeProvenance(token)
+    _setMerkleRoot(token)
+    _publicSaleStage(token)
+    token.publicMint(tokens, {'from': user, 'value':'0.5 ether'})
+    new_user_balance = token.balanceOf(user)
+    assert(new_user_balance == old_user_balance + tokens)
+
+
+# ownerOf assert
+def test_owner_of_nonexistent_token(token):
+    user = accounts[1]
+    with brownie.reverts("ERC721: owner query for nonexistent token"):
+        token.ownerOf(1)
+
+# airdrop at whitelist
+def test_public_mints(token):
+    owner = accounts[0]
+    user = accounts[1]
+    tokens = 6
+    _setFreezeProvenance(token)
+    _setMerkleRoot(token)
+    _publicSaleStage(token)
+    old_user_balance = token.balanceOf(user)
+    with brownie.reverts("Exceeds max allowed mints per transaction."):
+        token.publicMint(tokens, {'from': user, 'value':'0.6 ether'})
+    tokens_five = 5
+    token.publicMint(tokens_five, {'from': user, 'value':'0.5 ether'})
+    new_user_balance = token.balanceOf(user)
+    assert(new_user_balance == old_user_balance + tokens_five)
+    token.publicMint(tokens_five, {'from': user, 'value':'0.5 ether'})
+    token.publicMint(0, {'from': user, 'value':'0.0 ether'})
+    token.publicMint(tokens_five, {'from': user, 'value':'0.5 ether'})
+    token.publicMint(tokens_five, {'from': user, 'value':'0.5 ether'})
+    token.publicMint(tokens_five, {'from': user, 'value':'0.5 ether'})
+    with brownie.reverts("Incorrect ETH value sent."):
+        token.publicMint(tokens_five, {'from': user, 'value':'0.6 ether'})
+    token.publicMint(tokens_five, {'from': user, 'value':'0.5 ether'})
+    with brownie.reverts("Transaction exceeds total sale supply."):
+        token.publicMint(tokens_five, {'from': user, 'value':'0.5 ether'})
+
+
+
+def test_set_frozen_base_uri(token):
+    owner = accounts[0]
+    user = accounts[1]
+    with brownie.reverts("BaseURI cannot be empty."):
+        token.freezeBaseURI({'from': owner})
+    baseUri = "http://testuri.io/"
+    token.setBaseURI(baseUri, {'from': owner})
+    assert(token.baseURI() == baseUri)
+    with brownie.reverts("Ownable: caller is not the owner"):
+        token.setBaseURI(baseUri, {'from': user})
+    token.freezeBaseURI({'from': owner})
+    assert(token.tokenURIFrozen() == True)
+    with brownie.reverts("BaseURI is already frozen."):
+        token.freezeBaseURI({'from': owner})
+    with brownie.reverts("BaseURI is frozen."):
+        token.setBaseURI(baseUri, {'from': owner})
+
+
+# Inquire the balance for the zero address - this should raise an exception
+def test_balanceOfZeroAddress(token):
+    with brownie.reverts('ERC721: balance query for the zero address'):
+        balance = token.balanceOf("0x"+"0"*40)
+
+# Inquire the balance for a non-zero address 
+def test_balance_of_non_zero_address(token):
+    balance = token.balanceOf("0x1"+"0"*39)
+    assert(0 == balance);   
+
+
 
 # # no stages after 4
 # def test_only_four_stages(token):
@@ -369,17 +684,7 @@ def test_owner_of(token):
 # # airdrop before provenance is set
 
 
-# # airdrop at whitelist
-# def test_airdrop_at_whitelist(token):
-#     owner = accounts[0]
-#     user = accounts[1]
-#     tokens = 5
-#     old_user_balance = token.balanceOf(user)
-#     _setFreezeProvenance(token)
-#     _nextStage(token)
-#     token.airdropCryptid(tokens, user, {'from': owner})
-#     new_user_balance = token.balanceOf(user)
-#     assert(new_user_balance == old_user_balance + tokens)
+
 
 # # airdrop at  presale
 # def test_airdrop_at_presale(token):
@@ -459,11 +764,7 @@ def test_owner_of(token):
 
 
 
-# # ownerOf assert
-# def test_owner_of_nonexistent_token(token):
-#     user = accounts[1]
-#     with brownie.reverts("ERC721: owner query for nonexistent token"):
-#         token.ownerOf(1)
+
 
 
 # #set presale user but sale is concluded
@@ -529,158 +830,16 @@ def test_name_symbol(token):
     assert(len(name) > 0)
     assert(len(symbol) > 0)
 
-# # test team mint
-# def test_team_mint(token):
-#     owner = accounts[0]
-#     user = accounts[1]
-#     _setFreezeProvenance(token)
-#     _nextStage(token)
-#     _nextStage(token)
-#     _nextStage(token)
-#     mint = 5
-#     balance_before = token.balanceOf(owner)
-#     token.mint(mint, {'from': owner})
-#     balance_after = token.balanceOf(owner)
-#     assert(balance_after == balance_before + mint)
-#     with brownie.reverts("Only Owner can mint at this stage"):
-#         token.mint(mint, {'from': user})
-#     token.mint(mint, {'from': owner})
-#     with brownie.reverts("Transaction exceeds total team-sale supply"):
-#         token.mint(mint, {'from': owner})
-#     assert(token.teamMintCount() == 10)
-
-# def test_public_sale(token):
-#     user = accounts[1]
-#     mint = 5
-#     _setFreezeProvenance(token)
-#     with brownie.reverts("Minting not initiated. Currenly on stage 0 (init)."):
-#         token.mint(mint, {'from': user, 'value': "0.3 ether"})
-#     _nextStage(token)
-#     with brownie.reverts("Mint amount must be greater than 0"):
-#         token.mint(0, {'from': user, 'value': "0.3 ether"})
-#     with brownie.reverts("Exceeds max allowed amount per transaction"):
-#         token.mint(mint + 1, {'from': user, 'value': "0.3 ether"})
-#     _nextStage(token)
-#     _nextStage(token)
-#     _nextStage(token)
-#     balance_before = token.balanceOf(user)
-#     token.mint(mint, {'from': user, 'value': "0.3 ether"})
-#     balance_after = token.balanceOf(user)
-#     assert(balance_after == balance_before + mint)
-#     token.mint(mint, {'from': user, 'value': "0.3 ether"})
-#     token.mint(mint, {'from': user, 'value': "0.3 ether"})
-#     token.mint(mint, {'from': user, 'value': "0.3 ether"})
-#     token.mint(mint, {'from': user, 'value': "0.3 ether"})
-#     token.mint(mint, {'from': user, 'value': "0.3 ether"})
-#     with brownie.reverts("Transaction exceeds total sale supply"):
-#         token.mint(mint, {'from': user, 'value': "0.3 ether"})
-#     with brownie.reverts("Not enough ether sent"):
-#         token.mint(mint, {'from': user, 'value': "0.2 ether"})
-
-# # mint as zero address during public sale - will revert
-# def test_public_sale_to_non_erc_contract(token):
-#     owner = accounts[0]
-#     _setFreezeProvenance(token)
-#     _nextStage(token)
-#     _nextStage(token)
-#     _nextStage(token)
-#     _nextStage(token)
-#     tokens = 5
-#     test = accounts[0].deploy(TestContract).address
-#     accounts[0].transfer(test, "10 ether", gas_price=0)
-#     with brownie.reverts("ERC721: transfer to non ERC721Receiver implementer"):
-#         token.mint(tokens, {'from': test, 'value': "0.3 ether"})
-
-# def test_set_frozen_base_uri(token):
-#     owner = accounts[0]
-#     user = accounts[1]
-#     with brownie.reverts("baseURI cannot be empty"):
-#         token.freezeBaseURI({'from': owner})
-#     baseUri = "http://testuri.io/"
-#     token.setBaseURI(baseUri, {'from': owner})
-#     assert(token.baseURI() == baseUri)
-#     with brownie.reverts("Ownable: caller is not the owner"):
-#         token.setBaseURI(baseUri, {'from': user})
-#     token.freezeBaseURI({'from': owner})
-#     assert(token.tokenURIFrozen() == True)
-#     with brownie.reverts("BaseURI is already frozen."):
-#         token.freezeBaseURI({'from': owner})
-#     with brownie.reverts("BaseURI is frozen."):
-#         token.setBaseURI(baseUri, {'from': owner})
 
 
 
 
-# # mint a token to a receiver contract
-# def test_public_sale_to_contract(token):
-#     owner = accounts[0]
-#     _setFreezeProvenance(token)
-#     _nextStage(token)
-#     _nextStage(token)
-#     _nextStage(token)
-#     _nextStage(token)
-#     tokens = 1
-#     test = accounts[0].deploy(ReceiverContract).address
-#     accounts[0].transfer(test, "10 ether", gas_price=0)
-#     txn_receipt = token.mint(tokens, {'from': test, 'value': "0.3 ether"})
-#     assert(test == token.ownerOf(tokens))
-#     event = txn_receipt.events['Transfer']
-#     assert(event['tokenId'] == tokens)
-#     assert(event['from'] == "0x"+"0"*40)
-#     assert(event['to'] == test)
-#     token.pause({'from':owner})
-#     with brownie.reverts('Pausable: paused'):
-#         token.mint(tokens, {'from': test, 'value': "0.3 ether"})
 
 
-# def test_mint_four_person(token):
-#     user_1 = accounts[1]
-#     user_2 = accounts[2]
-#     user_3 = accounts[3]
-#     user_4 = accounts[4]
-#     _setFreezeProvenance(token)
-#     _nextStage(token)
-#     _nextStage(token)
-#     _nextStage(token)
-#     _nextStage(token)
-#     txn_1 = token.mint(1, {'from': user_1, 'value': "0.06 ether"})
-#     txn_2 = token.mint(1, {'from': user_2, 'value': "0.06 ether"})
-#     txn_3 = token.mint(1, {'from': user_3, 'value': "0.06 ether"})
-#     txn_4 = token.mint(1, {'from': user_4, 'value': "0.06 ether"})
-#     assert(user_1 == token.ownerOf(1))
-#     assert(user_2 == token.ownerOf(2))
-#     assert(user_3 == token.ownerOf(3))
-#     assert(user_4 == token.ownerOf(4))
 
-#     event = txn_1.events['Transfer']
-#     assert(event['tokenId'] == 1)
-#     assert(event['from'] == "0x"+"0"*40)
-#     assert(event['to'] == user_1)
 
-#     event = txn_2.events['Transfer']
-#     assert(event['tokenId'] == 2)
-#     assert(event['from'] == "0x"+"0"*40)
-#     assert(event['to'] == user_2)
+     
 
-#     event = txn_3.events['Transfer']
-#     assert(event['tokenId'] == 3)
-#     assert(event['from'] == "0x"+"0"*40)
-#     assert(event['to'] == user_3)
-
-#     event = txn_4.events['Transfer']
-#     assert(event['tokenId'] == 4)
-#     assert(event['from'] == "0x"+"0"*40)
-#     assert(event['to'] == user_4)        
-
-# # Inquire the balance for the zero address - this should raise an exception
-# def test_balanceOfZeroAddress(token):
-#     with brownie.reverts('ERC721: balance query for the zero address'):
-#         balance = token.balanceOf("0x"+"0"*40)
-
-# # Inquire the balance for a non-zero address 
-# def test_balance_of_non_zero_address(token):
-#     balance = token.balanceOf("0x1"+"0"*39)
-#     assert(0 == balance);   
 
 # # Burn a token
 # def test_burn(token):
@@ -1010,7 +1169,7 @@ def test_name_symbol(token):
 #     token.setApprovalForAll(bob, False, {"from": me})
 #     # check owner of NFT
 #     assert(alice == token.ownerOf(tokenID))
-#     # Check balances
+#     # Check balancesf
 #     newBalanceMe = token.balanceOf(me)
 #     newBalanceAlice = token.balanceOf(alice)
 #     assert (newBalanceMe + 1 == oldBalanceMe)
@@ -1026,31 +1185,23 @@ def test_name_symbol(token):
 #     _mint(token, tokenID, me)
 #     assert(token.lastMintAddress() == me)
 
-# def test_last_mint_id(token):
-#     me = accounts[0]
-#     tokenID = 1
-#     with brownie.reverts("No cryptid exists yet."):
-#             token.lastMintID()
-#     _mint(token, tokenID, me)
-#     assert(token.lastMintID() == tokenID)
+def test_last_mint_id(token):
+    me = accounts[0]
+    tokenID = 1
+    _setFreezeProvenance(token)
+    _setMerkleRoot(token)
+    _publicSaleStage(token)
+    token.publicMint(tokenID, {'from': me, 'value':'0.1 ether'})
+    assert(token.lastMintID() == tokenID)
 
-# def test_set_presale_price(token):
-#     me = accounts[0]
-#     alice = accounts[1]
-#     bob = accounts[2]
-#     tokenID = 1
-#     presale_price = 50000000000000000
-#     token.setPresalePrice(presale_price)
-#     assert(token.presalePrice() == presale_price)
 
-# def test_token_uri(token):
-#     owner = accounts[0]
-#     tokenID = 1
-#     _mint(token, tokenID, owner)
-#     with brownie.reverts("ERC721Metadata: URI query for nonexistent token"):
-#         token.tokenURI(2)
-#     token.setBaseURI("http://baseuri.com/", {'from': owner})
-#     assert(token.tokenURI(1) == "http://baseuri.com/1.json")
+def test_token_uri(token):
+    owner = accounts[0]
+    _mint(token)
+    with brownie.reverts('ERC721Metadata: URI query for nonexistent token.'):
+        token.tokenURI(2)
+    token.setBaseURI("http://baseuri.com/", {'from': owner})
+    assert(token.tokenURI(1) == "http://baseuri.com/1.json")
 
 # def test_withdraw(token):
 #     owner = accounts[0]
@@ -1082,11 +1233,13 @@ def test_name_symbol(token):
 #     with brownie.reverts("withdrawl 2 failed"):
 #         token.withdraw({'from':owner})
 
-# def test_transfer_ownership(token):
-#     owner = accounts[0]
-#     chris = accounts[1]
-#     steph = accounts[2]
-#     with brownie.reverts("Ownable: caller is not the owner"):
-#         token.transferOwnership(chris, {'from':steph})
-#     token.transferOwnership(chris, {'from':owner})
-#     assert(token.owner() == chris)
+def test_transfer_ownership(token):
+    owner = accounts[0]
+    chris = accounts[1]
+    steph = accounts[2]
+    with brownie.reverts("Ownable: caller is not the owner"):
+        token.transferOwnership(chris, {'from':steph})
+    token.transferOwnership(chris, {'from':owner})
+    assert(token.owner() == chris)
+    with brownie.reverts("Ownable: new owner is the zero address"):
+        token.transferOwnership(("0x"+"0"*40), {'from':chris})

@@ -77,17 +77,6 @@ contract CryptidToken is ERC721, ERC721Enumerable, Pausable, Ownable, Reentrancy
         _tokenIdCounter.increment();
     }
 
-    modifier isValidMerkleProof(bytes32[] calldata proof, bytes32 root) {
-        require(stage == Stage.Whitelist, "Whitelist sale not initiated.");
-        require(proof.verify(root, keccak256(abi.encodePacked(msg.sender))), "Address not in whitelist.");
-        _;
-    }
-
-    modifier isCorrectPayment(uint256 price, uint256 numberOfTokens) {
-        require(price * numberOfTokens == msg.value, "Incorrect ETH value sent.");
-        _;
-    }
-    
     // Stage 1 - Airdrop
     function airdropCryptid(
         uint8 mintAmount, 
@@ -110,12 +99,12 @@ contract CryptidToken is ERC721, ERC721Enumerable, Pausable, Ownable, Reentrancy
     ) 
         external
         payable 
-        isValidMerkleProof(merkleProof, merkleRoot) 
-        isCorrectPayment(salePrice, 1) 
         nonReentrant 
         whenNotPaused 
     {
-        
+        require(salePrice == msg.value, "Incorrect ETH value sent.");
+        require(stage == Stage.Whitelist, "Whitelist sale not initiated.");
+        require(merkleProof.verify(merkleRoot, keccak256(abi.encodePacked(msg.sender))), "Address not in whitelist.");
         require(claimed[msg.sender] == false, "Whitelist mint already claimed."); 
         claimed[msg.sender] = true;
         _safeMint(msg.sender, _tokenIdCounter.current());
@@ -144,10 +133,10 @@ contract CryptidToken is ERC721, ERC721Enumerable, Pausable, Ownable, Reentrancy
     ) 
         external
         payable 
-        isCorrectPayment(salePrice, mintAmount) 
         nonReentrant 
         whenNotPaused  
     {
+        require(salePrice * mintAmount == msg.value, "Incorrect ETH value sent.");
         require(stage == Stage.PublicSale, "Public Sale not initiated.");
         require(totalSupply()  + mintAmount <= totalSaleSupply, "Transaction exceeds total sale supply.");
         require(mintAmount <= maxMintPerTx, "Exceeds max allowed mints per transaction.");  
@@ -191,20 +180,8 @@ contract CryptidToken is ERC721, ERC721Enumerable, Pausable, Ownable, Reentrancy
         tokenURIFrozen = true;
     }
 
-    function setTeamMintSupply(uint256 _newTeamMintSupply) external onlyOwner {
-        teamMintSupply = _newTeamMintSupply;
-    }
-
     function setBaseExtension(string memory _newBaseExtension) external onlyOwner {
         baseExtension = _newBaseExtension;
-    }
-
-    function setPublicSalePrice(uint256 _newSalePrice) external onlyOwner {
-        salePrice = _newSalePrice;
-    }
-
-    function setMaxMintPerTx(uint8 _newmaxMintPerTx) external onlyOwner {
-        maxMintPerTx = _newmaxMintPerTx;
     }
 
     function setProvenanceHash(string memory _provenanceHash) external onlyOwner {
