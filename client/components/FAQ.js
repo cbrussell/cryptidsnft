@@ -284,7 +284,7 @@ export default function MyApp() {
               <ul>
                 <li>
                   <p className="text-lg leading-normal text-gray-600 mt-4 text-justify">
-                    To be announced at a later date...💫
+                    Trove by Treasure
                   </p>
                 </li>
               </ul>

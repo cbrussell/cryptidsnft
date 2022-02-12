@@ -1,7 +1,7 @@
 const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
 const web3 = createAlchemyWeb3(process.env.NEXT_PUBLIC_API_URL);
-const contract = require(`../../contract/build/deployments/4/0xA3131D7E499a84f4d52DEf7Df9AF74454c611605.json`);
-const contractAddress = "0xA3131D7E499a84f4d52DEf7Df9AF74454c611605";
+const contract = require(`../../contract/build/deployments/4/0x2F8C0A3da39910Ff83072F330000C93588885Dc5.json`);
+const contractAddress = "0x2F8C0A3da39910Ff83072F330000C93588885Dc5";
 
 const nftContract = new web3.eth.Contract(contract.abi, contractAddress);
 
@@ -106,7 +106,7 @@ export const getNftPrice = async () => {
 };
 
 export const getStage = async () => {
-  const result = await nftContract.methods. getStage().call();
+  const result = await nftContract.methods.stage().call();
   return result;
 };
 
