@@ -9,6 +9,7 @@ from sqlalchemy import true;
 def token():
     return accounts[0].deploy(CryptidToken, "Cryptids", "CRYPTID", "", 10, 10, 30, 5)
 
+
 # revert to deployed state after each test
 @pytest.fixture(autouse=True)
 def isolation(fn_isolation):
@@ -23,7 +24,7 @@ def _setFreezeProvenance(token):
 
 # helper function - set and freeze provenance hash
 def _setMerkleRoot(token):
-    merkleRoot = '0x59fdebd0e32185e8eb2ae7f61b86a2607293976650e5b669ea06e5f0dcdebec1'
+    merkleRoot = '0x4196ced928ba4e060068ca9da2c0002ecef3f59d97ca02e0174df477bb60a3a7'
     owner = accounts[0]
     token.setMerkleRoot(merkleRoot, {'from': owner})
 
@@ -44,7 +45,7 @@ def _mint(token):
     _setFreezeProvenance(token)
     _setMerkleRoot(token)
     _whitelistStage(token)
-    proof = ["0x33560271ea4ed1cb8a138801d47678e3894cd778efa9e9ede13b045b43d629c8","0x9cefd68b762d62f3cbf277fc0c90031add3b2365bcb6d9335e56ab84ba3cf0e1","0x29abd47fcc3f75d7585a8471d4057d5b5dabcbc6e87cd65a567a5c0626243539"]
+    proof = ["0x33560271ea4ed1cb8a138801d47678e3894cd778efa9e9ede13b045b43d629c8","0x9cefd68b762d62f3cbf277fc0c90031add3b2365bcb6d9335e56ab84ba3cf0e1","0x930f5668a4e5af398528616d4afe4b128860a6b5c8a6e3d3ac7598f86db33e3b","0x01f557f5923ebd689504fe96c9a0578f2fd4f9592903b0eddb96f569002d5f79"]
     token.whitelistMint(proof, {'from': owner, 'value': '0.10 ether'})
 
 def _publicSaleStage(token):
@@ -208,6 +209,14 @@ def test_airdrop_to_contract(token):
     # test_address = test.address()
     with brownie.reverts("ERC721: transfer to non ERC721Receiver implementer"):
         token.airdropCryptid(tokens, test, {'from': owner})
+    test = accounts[0].deploy(ReceiverContract).address
+    old_owner_balance = token.balanceOf(test)
+    accounts[0].transfer(test, "10 ether", gas_price=0)
+
+    token.airdropCryptid(5, test, {'from': owner})
+    assert(token.balanceOf(test) == 5)
+    new_owner_balance = token.balanceOf(test)
+    assert(new_owner_balance == old_owner_balance + 5)
 
 # airdrop too many token 
 def test_airdrop_too_many(token):
@@ -247,7 +256,7 @@ def test_account_balance():
 def test_wl_before_wl(token):
     owner = accounts[0]
     user = accounts[1]
-    proof = ["0xd58ec672f132365ae3f63a025bdb2b21ab3682bb1e599e56c7c542dd42b5699e","0x9cefd68b762d62f3cbf277fc0c90031add3b2365bcb6d9335e56ab84ba3cf0e1","0x29abd47fcc3f75d7585a8471d4057d5b5dabcbc6e87cd65a567a5c0626243539"]
+    proof = ["0xd58ec672f132365ae3f63a025bdb2b21ab3682bb1e599e56c7c542dd42b5699e","0x9cefd68b762d62f3cbf277fc0c90031add3b2365bcb6d9335e56ab84ba3cf0e1","0x930f5668a4e5af398528616d4afe4b128860a6b5c8a6e3d3ac7598f86db33e3b","0x01f557f5923ebd689504fe96c9a0578f2fd4f9592903b0eddb96f569002d5f79"]
     with brownie.reverts("Whitelist sale not initiated."):
         token.whitelistMint(proof, {'from': owner,'value': "0.10 ether"})
 
@@ -287,14 +296,14 @@ def test_whitelist_mints_attempt_four(token):
     user = accounts[1]
     _setFreezeProvenance(token)
     _setMerkleRoot(token)
-    proof = ["0xd58ec672f132365ae3f63a025bdb2b21ab3682bb1e599e56c7c542dd42b5699e","0x9cefd68b762d62f3cbf277fc0c90031add3b2365bcb6d9335e56ab84ba3cf0e1","0x29abd47fcc3f75d7585a8471d4057d5b5dabcbc6e87cd65a567a5c0626243539"]
+    proof = ["0xd58ec672f132365ae3f63a025bdb2b21ab3682bb1e599e56c7c542dd42b5699e","0x9cefd68b762d62f3cbf277fc0c90031add3b2365bcb6d9335e56ab84ba3cf0e1","0x930f5668a4e5af398528616d4afe4b128860a6b5c8a6e3d3ac7598f86db33e3b","0x01f557f5923ebd689504fe96c9a0578f2fd4f9592903b0eddb96f569002d5f79"]
     with brownie.reverts("Whitelist sale not initiated."):
         token.whitelistMint(proof, {'from': owner, 'value': '0.10 ether'})
     _whitelistStage(token)
     mint = 1
     balance_before = token.balanceOf(user)
     with brownie.reverts("Address not in whitelist."):
-        token.whitelistMint(proof, {'from': owner, 'value': '0.10 ether'})
+        token.whitelistMint(proof, {'from': owner, 'value': '0.1 ether'})
     token.whitelistMint(proof, {'from': user, 'value': '0.1 ether'}) 
     balance_after = token.balanceOf(user)
     assert(balance_after == balance_before + mint)
@@ -340,7 +349,7 @@ def test_public__two_mints_two(token):
 def test_address_not_in_wl(token):
     owner = accounts[0]
     user = accounts[1]
-    proof = ["0xd58ec672f132365ae3f63a025bdb2b21ab3682bb1e599e56c7c542dd42b5699e","0x9cefd68b762d62f3cbf277fc0c90031add3b2365bcb6d9335e56ab84ba3cf0e1","0x29abd47fcc3f75d7585a8471d4057d5b5dabcbc6e87cd65a567a5c0626243539"]
+    proof = ["0xd58ec672f132365ae3f63a025bdb2b21ab3682bb1e599e56c7c542dd42b5699e","0x9cefd68b762d62f3cbf277fc0c90031add3b2365bcb6d9335e56ab84ba3cf0e1","0x930f5668a4e5af398528616d4afe4b128860a6b5c8a6e3d3ac7598f86db33e3b","0x01f557f5923ebd689504fe96c9a0578f2fd4f9592903b0eddb96f569002d5f79"]
     _setFreezeProvenance(token)
     _setMerkleRoot(token)
     _whitelistStage(token)
@@ -351,7 +360,7 @@ def test_address_not_in_wl(token):
 def test_wl_wrong_payment(token):
     owner = accounts[0]
     user = accounts[1]
-    proof = ["0xd58ec672f132365ae3f63a025bdb2b21ab3682bb1e599e56c7c542dd42b5699e","0x9cefd68b762d62f3cbf277fc0c90031add3b2365bcb6d9335e56ab84ba3cf0e1","0x29abd47fcc3f75d7585a8471d4057d5b5dabcbc6e87cd65a567a5c0626243539"]
+    proof = ["0xd58ec672f132365ae3f63a025bdb2b21ab3682bb1e599e56c7c542dd42b5699e","0x9cefd68b762d62f3cbf277fc0c90031add3b2365bcb6d9335e56ab84ba3cf0e1","0x930f5668a4e5af398528616d4afe4b128860a6b5c8a6e3d3ac7598f86db33e3b","0x01f557f5923ebd689504fe96c9a0578f2fd4f9592903b0eddb96f569002d5f79"]
     _setFreezeProvenance(token)
     _setMerkleRoot(token)
     _whitelistStage(token)
@@ -362,7 +371,7 @@ def test_wl_wrong_payment(token):
 def test_whitelist_mint(token):
     owner = accounts[0]
     user = accounts[1]
-    proof = ["0xd58ec672f132365ae3f63a025bdb2b21ab3682bb1e599e56c7c542dd42b5699e","0x9cefd68b762d62f3cbf277fc0c90031add3b2365bcb6d9335e56ab84ba3cf0e1","0x29abd47fcc3f75d7585a8471d4057d5b5dabcbc6e87cd65a567a5c0626243539"]
+    proof = ["0xd58ec672f132365ae3f63a025bdb2b21ab3682bb1e599e56c7c542dd42b5699e","0x9cefd68b762d62f3cbf277fc0c90031add3b2365bcb6d9335e56ab84ba3cf0e1","0x930f5668a4e5af398528616d4afe4b128860a6b5c8a6e3d3ac7598f86db33e3b","0x01f557f5923ebd689504fe96c9a0578f2fd4f9592903b0eddb96f569002d5f79"]
     _setFreezeProvenance(token)
     _setMerkleRoot(token)
     _whitelistStage(token)
@@ -378,7 +387,7 @@ def test_whitelist_mint(token):
 def test_whitelist_mint_double(token):
     owner = accounts[0]
     user = accounts[1]
-    proof = ["0xd58ec672f132365ae3f63a025bdb2b21ab3682bb1e599e56c7c542dd42b5699e","0x9cefd68b762d62f3cbf277fc0c90031add3b2365bcb6d9335e56ab84ba3cf0e1","0x29abd47fcc3f75d7585a8471d4057d5b5dabcbc6e87cd65a567a5c0626243539"]
+    proof = ["0xd58ec672f132365ae3f63a025bdb2b21ab3682bb1e599e56c7c542dd42b5699e","0x9cefd68b762d62f3cbf277fc0c90031add3b2365bcb6d9335e56ab84ba3cf0e1","0x930f5668a4e5af398528616d4afe4b128860a6b5c8a6e3d3ac7598f86db33e3b","0x01f557f5923ebd689504fe96c9a0578f2fd4f9592903b0eddb96f569002d5f79"]
     _setFreezeProvenance(token)
     _setMerkleRoot(token)
     _whitelistStage(token)
@@ -390,7 +399,7 @@ def test_whitelist_mint_double(token):
 def test_whitelist_mint_three(token):
     owner = accounts[0]
     user = accounts[1]
-    proof = ["0xd58ec672f132365ae3f63a025bdb2b21ab3682bb1e599e56c7c542dd42b5699e","0x9cefd68b762d62f3cbf277fc0c90031add3b2365bcb6d9335e56ab84ba3cf0e1","0x29abd47fcc3f75d7585a8471d4057d5b5dabcbc6e87cd65a567a5c0626243539"]
+    proof = ["0xd58ec672f132365ae3f63a025bdb2b21ab3682bb1e599e56c7c542dd42b5699e","0x9cefd68b762d62f3cbf277fc0c90031add3b2365bcb6d9335e56ab84ba3cf0e1","0x930f5668a4e5af398528616d4afe4b128860a6b5c8a6e3d3ac7598f86db33e3b","0x01f557f5923ebd689504fe96c9a0578f2fd4f9592903b0eddb96f569002d5f79"]
     _setFreezeProvenance(token)
     _setMerkleRoot(token)
     _whitelistStage(token)
@@ -425,7 +434,7 @@ def test_public_mint_three(token):
 def test_whitelist_merkle_error_three(token):
     owner = accounts[0]
     user = accounts[1]
-    proof = ["0xd58ec672f132365ae3f63a025bdb2b21ab3682bb1e599e56c7c542dd42b5699e","0x9cefd68b762d62f3cbf277fc0c90031add3b2365bcb6d9335e56ab84ba3cf0e1","0x29abd47fcc3f75d7585a8471d4057d5b5dabcbc6e87cd65a567a5c0626243539"]
+    proof = ["0xd58ec672f132365ae3f63a025bdb2b21ab3682bb1e599e56c7c542dd42b5699e","0x9cefd68b762d62f3cbf277fc0c90031add3b2365bcb6d9335e56ab84ba3cf0e1","0x930f5668a4e5af398528616d4afe4b128860a6b5c8a6e3d3ac7598f86db33e3b","0x01f557f5923ebd689504fe96c9a0578f2fd4f9592903b0eddb96f569002d5f79"]
     _setFreezeProvenance(token)
     _setMerkleRoot(token)
     _whitelistStage(token)
@@ -445,7 +454,7 @@ def test_whitelist_mint_before_merkle(token):
 def test_whitelist_merkle_error(token):
     owner = accounts[0]
     user = accounts[1]
-    proof = ["0xd58ec672f132365ae3f63a025bdb2b21ab3682bb1e599e56c7c542dd42b5699e","0x9cefd68b762d62f3cbf277fc0c90031add3b2365bcb6d9335e56ab84ba3cf0e1","0x29abd47fcc3f75d7585a8471d4057d5b5dabcbc6e87cd65a567a5c0626243539"]
+    proof = ["0xd58ec672f132365ae3f63a025bdb2b21ab3682bb1e599e56c7c542dd42b5699e","0x9cefd68b762d62f3cbf277fc0c90031add3b2365bcb6d9335e56ab84ba3cf0e1","0x930f5668a4e5af398528616d4afe4b128860a6b5c8a6e3d3ac7598f86db33e3b","0x01f557f5923ebd689504fe96c9a0578f2fd4f9592903b0eddb96f569002d5f79"]
     _setFreezeProvenance(token)
     _setMerkleRoot(token)
     with brownie.reverts("Whitelist sale not initiated."):
@@ -455,7 +464,7 @@ def test_whitelist_merkle_error(token):
 def test_owner_of(token):
     owner = accounts[0]
     user = accounts[1]
-    proof = ["0xd58ec672f132365ae3f63a025bdb2b21ab3682bb1e599e56c7c542dd42b5699e","0x9cefd68b762d62f3cbf277fc0c90031add3b2365bcb6d9335e56ab84ba3cf0e1","0x29abd47fcc3f75d7585a8471d4057d5b5dabcbc6e87cd65a567a5c0626243539"]
+    proof = ["0xd58ec672f132365ae3f63a025bdb2b21ab3682bb1e599e56c7c542dd42b5699e","0x9cefd68b762d62f3cbf277fc0c90031add3b2365bcb6d9335e56ab84ba3cf0e1","0x930f5668a4e5af398528616d4afe4b128860a6b5c8a6e3d3ac7598f86db33e3b","0x01f557f5923ebd689504fe96c9a0578f2fd4f9592903b0eddb96f569002d5f79"]
     _setFreezeProvenance(token)
     _setMerkleRoot(token)
     _whitelistStage(token)
@@ -469,7 +478,7 @@ def test_owner_of(token):
 def test_owner_two_of_public(token):
     owner = accounts[0]
     user = accounts[1]
-    proof = ["0xd58ec672f132365ae3f63a025bdb2b21ab3682bb1e599e56c7c542dd42b5699e","0x9cefd68b762d62f3cbf277fc0c90031add3b2365bcb6d9335e56ab84ba3cf0e1","0x29abd47fcc3f75d7585a8471d4057d5b5dabcbc6e87cd65a567a5c0626243539"]
+    proof = ["0xd58ec672f132365ae3f63a025bdb2b21ab3682bb1e599e56c7c542dd42b5699e","0x9cefd68b762d62f3cbf277fc0c90031add3b2365bcb6d9335e56ab84ba3cf0e1","0x930f5668a4e5af398528616d4afe4b128860a6b5c8a6e3d3ac7598f86db33e3b","0x01f557f5923ebd689504fe96c9a0578f2fd4f9592903b0eddb96f569002d5f79"]
     _setFreezeProvenance(token)
     _setMerkleRoot(token)
     _publicSaleStage(token)
@@ -509,7 +518,7 @@ def test_mint_at_init(token):
     _setFreezeProvenance(token)
     _setMerkleRoot(token)
     user = accounts[1]
-    proof = ["0xd58ec672f132365ae3f63a025bdb2b21ab3682bb1e599e56c7c542dd42b5699e","0x9cefd68b762d62f3cbf277fc0c90031add3b2365bcb6d9335e56ab84ba3cf0e1","0x29abd47fcc3f75d7585a8471d4057d5b5dabcbc6e87cd65a567a5c0626243539"]
+    proof = ["0xd58ec672f132365ae3f63a025bdb2b21ab3682bb1e599e56c7c542dd42b5699e","0x9cefd68b762d62f3cbf277fc0c90031add3b2365bcb6d9335e56ab84ba3cf0e1","0x930f5668a4e5af398528616d4afe4b128860a6b5c8a6e3d3ac7598f86db33e3b","0x01f557f5923ebd689504fe96c9a0578f2fd4f9592903b0eddb96f569002d5f79"]
     with brownie.reverts('Incorrect ETH value sent.'):
         token.whitelistMint(proof, {'from': user, 'value': '0.09 ether'})
     with brownie.reverts("Whitelist sale not initiated."):
@@ -566,7 +575,7 @@ def test_whitelist_mint_asserts(token):
     _setFreezeProvenance(token)
     _setMerkleRoot(token)
     user = accounts[1]
-    proof = ["0xd58ec672f132365ae3f63a025bdb2b21ab3682bb1e599e56c7c542dd42b5699e","0x9cefd68b762d62f3cbf277fc0c90031add3b2365bcb6d9335e56ab84ba3cf0e1","0x29abd47fcc3f75d7585a8471d4057d5b5dabcbc6e87cd65a567a5c0626243539"]
+    proof = ["0xd58ec672f132365ae3f63a025bdb2b21ab3682bb1e599e56c7c542dd42b5699e","0x9cefd68b762d62f3cbf277fc0c90031add3b2365bcb6d9335e56ab84ba3cf0e1","0x930f5668a4e5af398528616d4afe4b128860a6b5c8a6e3d3ac7598f86db33e3b","0x01f557f5923ebd689504fe96c9a0578f2fd4f9592903b0eddb96f569002d5f79"]
     
     _whitelistStage(token)
 
@@ -1166,6 +1175,7 @@ def test_public_mint_bad_receiver(token):
     with brownie.reverts("ERC721: transfer to non ERC721Receiver implementer"):
         token.publicMint(tokenID, {"from": test, 'value': '0.5 ether'})
 
+
 def test_public_mint_good_receiver(token): 
     owner = accounts[0]
     user = accounts[1]
@@ -1182,7 +1192,6 @@ def test_public_mint_good_receiver(token):
     assert(token.balanceOf(test) == 5)
     new_owner_balance = token.balanceOf(test)
     assert(new_owner_balance == old_owner_balance + 5)
-
 
 def test_public_too_many(token): 
     owner = accounts[0]
@@ -1202,5 +1211,10 @@ def test_public_too_many(token):
     with brownie.reverts("Transaction exceeds total sale supply."):
         token.publicMint(tokenID, {"from": owner, 'value': '0.5 ether'})
     assert(token.totalSupply() == 30)
+
+def test_base_extension(token):
+    new_base_extension = 'new base'
+    token.setBaseExtension(new_base_extension)
+    assert(token.baseExtension() == new_base_extension)
 
     
