@@ -3,20 +3,44 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { useStatus } from "../context/statusContext";
 import { connectWallet, getCurrentWalletConnected } from "../utils/interact";
+import {
+  useEthers,
+  shortenAddress,
+  ChainId,
+  getChainName,
+} from "@usedapp/core";
 require('typeface-exo')
 
 const Header = () => {
 
+  const {
+    activateBrowserWallet,
+    account,
+    activate,
+    chainId: currentChainId,
+  } = useEthers();
+
   const { setStatus } = useStatus();
 
   const [walletAddress, setWalletAddress] = useState("");
+  const [chainId, setChainId] = useState("");
 
   const connectWalletPressed = async () => {
     const walletResponse = await connectWallet();
     setWalletAddress(walletResponse.address);
     setStatus(walletResponse.status);
+    setChainId(walletResponse.chainId);
+
   };
 
+  // const switchToRinkeby = async () => {
+  //   if (window.ethereum) {
+  //       await window.ethereum.request({
+  //         method: "wallet_switchEthereumChain",
+  //         params: [{ chainId: "0x4" }],
+  //       });
+  //   }
+  // };
 
 
   useEffect(() => {
@@ -25,13 +49,14 @@ const Header = () => {
       setWalletAddress(walletResponse.address);
       setStatus(walletResponse.status);
       addWalletListener();
+      // console.log(walletResponse.chainId)
     }
     fetchData();
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const addWalletListener = () => {
     if (window.ethereum) {
-      window.ethereum.on("accountsChanged", async (accounts) => {
+      window.ethereum.on("accountsChanged", function (accounts) {
         if (accounts.length > 0) {
           setWalletAddress(accounts[0]);
           setStatus("");
@@ -39,63 +64,32 @@ const Header = () => {
           setWalletAddress("");
           setStatus("🦊 Connect to Metamask using Connect Wallet button.");
         }
-      });
+      },
+      
+      
+      // window.ethereum.on("networkChanged", function (networkId) {
+      //   const rinkebyChainId = '0x4'
+      //   let chainId = window.ethereum.request({ method: 'eth_chainId'})
+        
+      //   if (networkId == rinkebyChainId) {
+      //     // setWalletAddress(accounts[0]);
+      //     setStatus("");
+      //   } else {
+      //     // setWalletAddress(accounts[0]);
+      //     setStatus("😞 Error: You are not connected to the Rinkeby Testnet!")
+      //   }
+      // }
+      
+      
+      // )
+      );
     }
   };
+
 
   return (
 
     <>
-      <Head>
-
-        <title>Cryptids</title>
-        <meta name="description" content="Part storybook fantasy, part science-fiction. Cryptids is a generative NFT art project of 11,111 unique mythical creatures. Created by @no__solo an @chrisusselljr."/>
-        <link rel="icon" href="/favicon.svg" />
-      
-        <link
-        rel="preload"
-        href="/fonts/Exo-Italic.woff2"
-        as="font"
-        crossOrigin=""
-        type="font/woff2"
-      />
-      <link
-        rel="preload"
-        href="/fonts/Exo-Italic.woff"
-        as="font"
-        crossOrigin=""
-        type="font/woff"
-      />
-      <link
-        rel="preload"
-        href="/fonts/Exo-Regular.woff"
-        as="font"
-        crossOrigin=""
-        type="font/woff"
-      />
-      <link
-        rel="preload"
-        href="/fonts/Exo-Regular.woff2"
-        as="font"
-        crossOrigin=""
-        type="font/woff2"
-      />
-      <link
-        rel="preload"
-        href="/fonts/YkarRegular.woff2"
-        as="font"
-        crossOrigin=""
-        type="font/woff2"
-      />
-      <link
-        rel="preload"
-        href="/fonts/YkarRegular.woff"
-        as="font"
-        crossOrigin=""
-        type="font/woff"
-      />
-
-      </Head>
 
       <header className=" inset-x-5 top-0 z-10 h-32 md:h-20 min-w-full justify-center space-x-6 text-white  backdrop-filter ">
         <div className="md:flex items-center container justify-around  mx-auto max-w-7xl  h-full">
@@ -197,15 +191,22 @@ const Header = () => {
           <nav aria-label="Wallet Button">
             <ul className="items-center space-x-6 text-center w-auto md:w-40 lg:w-80 pt-1 md:pt-0" >
               
-                <li className="px-8 py-2 font-extrabold text-black border inline-block exo-font border-black rounded-lg cursor-pointer mt-2 md:mt-0" onClick={connectWalletPressed}>
-                  <a
+                {/* <li className="px-8 py-2 font-extrabold text-black border inline-block exo-font border-black rounded-lg cursor-pointer mt-2 md:mt-0" onClick={connectWalletPressed}> */}
+                  {/* <a */}
 
-                    id="walletButton"
+                    {/* id="walletButton" */}
+                  {/* > */}
 
 
 
+<div>
+      {!account && <button onClick={activateBrowserWallet}> Connect </button>}
+      {account && <p>Account: {account}</p>}
+    </div>
 
-                  >
+
+
+{/* 
                     {walletAddress.length > 0 ? (
                       "Connected: " +
                       String(walletAddress).substring(0, 6) +
@@ -215,7 +216,7 @@ const Header = () => {
                       <span>Connect Wallet</span>
                     )}
                   </a>
-                </li>
+                </li> */}
               
             </ul>
           </nav>

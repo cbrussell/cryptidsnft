@@ -11,6 +11,5 @@ def main():
     provenance = '13ecf85915c0c913cf660cc6250a126d09e4bf6cab0ed016719056ca5b40544c'
     transaction = cryptids.setProvenanceHash(provenance, {"from": dev})
     print(f'Provenance hash set at: {transaction}')
-    provenancehash = cryptids.provenanceHash()
     print(f'Provenance hash set to: {provenance}')
 

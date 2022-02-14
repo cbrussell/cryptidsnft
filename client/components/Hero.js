@@ -1,6 +1,13 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { useStatus } from "../context/statusContext";
+import useSWR from 'swr'
+import {
+  useEthers,
+  shortenAddress,
+  ChainId,
+  getChainName,
+} from "@usedapp/core";
 
 import {
   getMaxMintAmount,
@@ -8,27 +15,49 @@ import {
   getNftPrice,
   mintNFT,
   getStage,
+  checkIfClaimed,
 } from "../utils/interact";
 
 
 const Hero = () => {
+  const { account } = useEthers();
   const { status, setStatus } = useStatus();
 
   const [count, setCount] = useState(1);
   const [maxMintAmount, setMaxMintAmount] = useState(0);
   const [totalSupply, setTotalSupply] = useState(0);
   const [nftPrice, setNftPrice] = useState("0.10");
-  const [isSaleActive, setIsSaleActive] = useState(0);
+  const [stage, setStage] = useState(0);
+  const [claimed, setClaimed] = useState(false);
+  
+  
+  const [correctNetwork, setCorrectNetwork] = useState(false)
+  const fetcher = (url) => fetch(url).then((res) => res.json());
 
   useEffect(() => {
     async function fetchData() {
+      if (stage == 2 ) {
+        setClaimed(await checkIfClaimed());
+      }
       setMaxMintAmount(await getMaxMintAmount());
       setNftPrice(await getNftPrice());
-      setIsSaleActive(await getStage());
+      setStage(await getStage());
       await updateTotalSupply();
     }
     fetchData();
   }, []);
+
+
+  useEffect(() => {
+    async function fetchData() {
+      if (stage == 2 ) {
+        setClaimed(await checkIfClaimed());
+      }
+    }
+    fetchData();
+  }, [account]);
+
+
 
   const updateTotalSupply = async () => {
     const mintedCount = await getTotalSupply();
@@ -40,6 +69,7 @@ const Hero = () => {
       setCount(count + 1);
     }
   };
+
 
   const decrementCount = () => {
     if (count > 1) {
@@ -54,6 +84,68 @@ const Hero = () => {
     // We minted a new Cryptid, so we need to update the total supply
     updateTotalSupply();
   };
+
+
+  // useEffect(() => {
+  //   async function fetchData() {
+  //   if (stage == 2 ) {
+  //     setClaimed(await checkIfClaimed());
+  //     return;
+  //   }
+  //   setClaimed(await checkIfClaimed());
+    
+  // }
+  // fetchData();
+    
+    // async function checkIfClaimed() {
+    //   sampleNFT.methods.claimed(window.ethereum.selectedAddress).call({ from: window.ethereum.selectedAddress }).then((result) => {
+    //     setAlreadyClaimed(result);
+    //     console.log(result);
+    //   }).catch((err) => {
+    //     setAlreadyClaimed(false);
+    //   });
+    // }
+    // checkIfClaimed();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
+
+
+  let whitelistProof = [];
+
+  let whitelistValid = false;
+
+  const whitelistRes = useSWR(stage == 2 && window.ethereum.selectedAddress ? `/api/whitelistProof?address=${window.ethereum.selectedAddress}` : null, {
+    fetcher, revalidateIfStale: false, revalidateOnFocus: false, revalidateOnReconnect: false });
+  if (!whitelistRes.error && whitelistRes.data) {
+    const { proof, valid } = whitelistRes.data;
+    whitelistProof = proof;
+    whitelistValid = valid;
+    // console.log(whitelistProof);
+  }
+
+
+  // useEffect(() => {
+  //   if (stage == 2 || !whitelistValid) {
+  //     setWhitelistClaimable(NOT_CLAIMABLE);
+  //     return;
+  //   } else if (alreadyClaimed) {
+  //     setWhitelistClaimable(ALREADY_CLAIMED);
+  //     return;
+  //   }
+  //   async function validateClaim() {
+  //     const amount = '0.10';
+  //     const amountToWei = web3.utils.toWei(amount, 'ether');
+  //     sampleNFT.methods.whitelistMint(whitelistProof).call({ from: account, value: amountToWei }).then(() => {
+  //       setWhitelistClaimable(CLAIMABLE);
+  //     }).catch((err) => {
+  //       if (err.toString().includes('claimed')) { setWhitelistClaimable(ALREADY_CLAIMED)}
+  //       else { setWhitelistClaimable(NOT_CLAIMABLE) }
+  //     });
+  //   }
+  //   validateClaim();
+  // // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [whitelistProof])
+
 
 
   return (
@@ -84,7 +176,7 @@ const Hero = () => {
             />
           </div>
 
-          {isSaleActive > 2 ? (
+          {stage > 1 && !claimed ? (
             <>
               {/* Minted NFT Ratio */}
               <p className=" bg-gray-100 rounded-md text-gray-800 font-bold text-lg my-4 py-1 px-3">
@@ -144,14 +236,15 @@ const Hero = () => {
               </h4>
 
               {/* Mint Button */}
-              {!status || status.toString().includes("Something") || JSON.stringify(status).includes("transaction") ?
+              {/* {!status || status.toString().includes("Something") || JSON.stringify(status).includes("transaction") ? */}
                 <button
-                  className="mt-6 py-2 px-4 text-center text-white uppercase bg-[#222222] border-b-4 border-orange-700 rounded  hover:border-orange-400"
+                  disabled={status}
+                  className="mt-6 py-2 px-4 text-center text-white uppercase bg-[#222222] border-b-4 border-orange-700 rounded  hover:border-orange-400 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none"
                   onClick={mintCryptid}
                 >
                   Mint Cryptid
                 </button>
-                : null}
+                
             </>
           ) : (
             <p className="text-white text-2xl mt-8">

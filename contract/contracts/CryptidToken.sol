@@ -11,7 +11,7 @@ import '@openzeppelin/contracts/utils/cryptography/MerkleProof.sol';
 
 /// @title CryptidToken NFT Contract
 /// @author @chrisrusselljr
-/// @notice You can use this contract to mint, sent, and interact with CRYPTIDS
+/// @notice You can use this contract to mint, send, and interact with CRYPTIDS
 /// @dev All function calls are currently implemented without side effects
 contract CryptidToken is ERC721, ERC721Enumerable, Pausable, Ownable, ReentrancyGuard{ 
     using Strings for uint256;
@@ -102,8 +102,8 @@ contract CryptidToken is ERC721, ERC721Enumerable, Pausable, Ownable, Reentrancy
         nonReentrant 
         whenNotPaused 
     {
-        require(salePrice == msg.value, "Incorrect ETH value sent.");
         require(stage == Stage.Whitelist, "Whitelist sale not initiated.");
+        require(salePrice == msg.value, "Incorrect ETH value sent.");
         require(merkleProof.verify(merkleRoot, keccak256(abi.encodePacked(msg.sender))), "Address not in whitelist.");
         require(claimed[msg.sender] == false, "Whitelist mint already claimed."); 
         claimed[msg.sender] = true;
@@ -136,8 +136,8 @@ contract CryptidToken is ERC721, ERC721Enumerable, Pausable, Ownable, Reentrancy
         nonReentrant 
         whenNotPaused  
     {
-        require(salePrice * mintAmount == msg.value, "Incorrect ETH value sent.");
         require(stage == Stage.PublicSale, "Public Sale not initiated.");
+        require(salePrice * mintAmount == msg.value, "Incorrect ETH value sent.");
         require(totalSupply()  + mintAmount <= totalSaleSupply, "Transaction exceeds total sale supply.");
         require(mintAmount <= maxMintPerTx, "Exceeds max allowed mints per transaction.");  
         for (uint256 i = 1; i <= mintAmount; i++) {
