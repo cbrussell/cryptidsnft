@@ -84,39 +84,16 @@ const Header = () => {
   // }, [address]);
 
 
-  if (!account) setStatus("🦊 Connect to Metamask using Connect Wallet button");
-
   useEffect(() => {
-    // async function fetchData() {
-      // const walletResponse = await getCurrentWalletConnected();
-      // setWalletAddress(walletResponse.address);
-      // setStatus(walletResponse.status);
-      // addWalletListener();
-      // console.log(walletResponse.chainId)
-      console.log(account)
       if (!account) {
-        setStatus("🦊 Connect to Metamask using Connect Wallet button.")
+        setStatus("🦊 Connect to Metamask using the Connect Wallet button.")
       } else {
         setStatus("")
       }
-      // )
-      // }
-    },
-  
-      
-    
- 
-    
-  
-   [account]); // eslint-disable-line react-hooks/exhaustive-deps
+
+    }, [account]); // eslint-disable-line react-hooks/exhaustive-deps
 
 
-  const addWalletListener = () => {
-    if (!account) {
-      setStatus("🦊 Connect to Metamask using Connect Wallet button. test")
-    }
-  }
-    
     // status: (
     //   <p>
     //     😞 Error: You are not connected to the Rinkeby Testnet! Click {" "}
@@ -159,7 +136,7 @@ const Header = () => {
   return (
 
     <>
-{currentChainId &&
+{/* {currentChainId &&
           currentChainId !== ChainId.Rinkeby  && (
             <div className="bg-cryptid-6">
               <div className="max-w-7xl mx-auto py-3 px-3 sm:px-6 lg:px-8">
@@ -192,7 +169,7 @@ const Header = () => {
                 </div>
               </div>
             </div>
-          )}
+          )} */}
       <header className=" inset-x-5 top-0 z-10 h-32 md:h-20 min-w-full justify-center space-x-6 text-white  backdrop-filter ">
         <div className="md:flex items-center container justify-around  mx-auto max-w-7xl  h-full">
           <div className="flex justify-around">
