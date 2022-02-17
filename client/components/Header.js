@@ -161,11 +161,11 @@ const Header = () => {
     <>
 {currentChainId &&
           currentChainId !== ChainId.Rinkeby  && (
-            <div className="bg-yellow-600">
+            <div className="bg-cryptid-6">
               <div className="max-w-7xl mx-auto py-3 px-3 sm:px-6 lg:px-8">
                 <div className="flex sm:items-center lg:justify-between flex-col space-y-2 sm:space-y-0 sm:flex-row">
                   <div className="flex-1 flex items-center">
-                    <span className="flex p-2 rounded-lg bg-yellow-800">
+                    <span className="flex p-2 rounded-lg bg-cryptid-3">
                       <SpeakerphoneIcon
                         className="h-6 w-6 text-white"
                         aria-hidden="true"
@@ -175,7 +175,7 @@ const Header = () => {
                       <span className="lg:hidden">
                         Please switch to Rinkeby.
                       </span>
-                      <span className="hidden lg:block">
+                      <span className="hidden lg:block exo-font">
                         You are currently on the {getChainName(currentChainId)}{" "}
                         Network. Please switch to Rinkeby.
                       </span>
@@ -184,7 +184,7 @@ const Header = () => {
                   <div className="flex-shrink-0 w-full sm:mt-0 sm:w-auto">
                     <button
                       onClick={switchToArbitrum}
-                      className="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-yellow-600 bg-white hover:bg-yellow-50"
+                      className="w-full flex items-center justify-center exo-font px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-yellow-600 bg-white hover:bg-yellow-50"
                     >
                       Switch Networks
                     </button>
@@ -292,13 +292,13 @@ const Header = () => {
           {/* Wallet */}
           <nav aria-label="Wallet Button">
             <ul className="items-center space-x-6 text-center w-auto md:w-40 lg:w-80 pt-1 md:pt-0" >
-              
-                {/* <li className="px-8 py-2 font-extrabold text-black border inline-block exo-font border-black rounded-lg cursor-pointer mt-2 md:mt-0" onClick={connectWalletPressed}> */}
-                  {/* <a */}
+{/*               
+                <li className="px-8 py-2 font-extrabold text-black border inline-block exo-font border-black rounded-lg cursor-pointer mt-2 md:mt-0" onClick={connectWalletPressed}>
+                  <a
 
-                    {/* id="walletButton" */}
-                  {/* > */}
-
+                    id="walletButton"
+                  />
+</li>  */}
 
 
 <div>
