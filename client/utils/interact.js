@@ -1,11 +1,19 @@
-
 const { createAlchemyWeb3 } = require("@alch/alchemy-web3");
 const web3 = createAlchemyWeb3(process.env.NEXT_PUBLIC_API_URL);
 const contract = require(`../../contract/build/deployments/4/0x2F8C0A3da39910Ff83072F330000C93588885Dc5.json`);
-const contractAddress = "0x2F8C0A3da39910Ff83072F330000C93588885Dc5";
+const address = "0x2F8C0A3da39910Ff83072F330000C93588885Dc5";
 
 
-const nftContract = new web3.eth.Contract(contract.abi, contractAddress);
+// import {
+//   useEthers,
+//   shortenAddress,
+//   ChainId,
+//   getChainName,
+// } from "@usedapp/core";
+// const { account } = useEthers();
+
+
+const nftContract = new web3.eth.Contract(contract.abi, address);
 // const { account } = useEthers();
 // const switchToRinkeby = async () => {
 //   if (window.ethereum) {
@@ -36,6 +44,8 @@ const nftContract = new web3.eth.Contract(contract.abi, contractAddress);
 //     ,chainId: chainId
 //   };
 // }
+
+
               
 export const connectWallet = async () => {
   if (window.ethereum) {
@@ -84,17 +94,17 @@ export const connectWallet = async () => {
 export const getCurrentWalletConnected = async () => {
   if (window.ethereum) {
 
-    // let chainId = await window.ethereum.request({ method: 'eth_chainId'})
-    // console.log('Connected to chain:' + chainId)
+    let chainId = await window.ethereum.request({ method: 'eth_chainId'})
+    console.log('Connected to chain:' + chainId)
 
-    // const rinkebyChainId = '0x4'
+    const rinkebyChainId = '0x4'
 
-    // if (chainId !== rinkebyChainId) {
-    //   return {
-    //     address: "",
-    //     status: "😞 Error: You are not connected to the Rinkeby Testnet!"
-    //   };
-    // }
+    if (chainId !== rinkebyChainId) {
+      return {
+        address: "",
+        status: "😞 Error: You are not connected to the Rinkeby Testnet!"
+      };
+    }
     
     try {
       const addressArray = await window.ethereum.request({
@@ -161,14 +171,7 @@ export const getStage = async () => {
   return result;
 };
 
-export const checkIfClaimed = async () => {
-  if (window.ethereum) {
-  const result = await nftContract.methods.claimed(window.ethereum.selectedAddress).call();
-  return result;
-  } 
-  return false;
-  
-};
+
 
 
 // export const mintWhitelist = async (account, proof) => {

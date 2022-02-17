@@ -2,13 +2,7 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { useStatus } from "../context/statusContext";
 import useSWR from 'swr'
-import {
-  useEthers,
-  shortenAddress,
-  ChainId,
-  getChainName,
-} from "@usedapp/core";
-
+import { ChainId, useEthers } from "@usedapp/core";
 import {
   getMaxMintAmount,
   getTotalSupply,
@@ -18,9 +12,12 @@ import {
   checkIfClaimed,
 } from "../utils/interact";
 
-
+// const contract = require(`../../contract/build/deployments/4/0x2F8C0A3da39910Ff83072F330000C93588885Dc5.json`);
 const Hero = () => {
-  const { account } = useEthers();
+  // const contract = require(`../../contract/build/deployments/4/0x2F8C0A3da39910Ff83072F330000C93588885Dc5.json`);
+  // const nftContract = new web3.eth.Contract(contract.abi, process.env.NFT_ADDRESS);
+  const {account, chainId: currentChainId} = useEthers();
+
   const { status, setStatus } = useStatus();
 
   const [count, setCount] = useState(1);
@@ -36,9 +33,9 @@ const Hero = () => {
 
   useEffect(() => {
     async function fetchData() {
-      if (stage == 2 ) {
-        setClaimed(await checkIfClaimed());
-      }
+      // if (stage == 2 ) {
+      // setClaimed(await checkIfClaimed());
+      // }
       setMaxMintAmount(await getMaxMintAmount());
       setNftPrice(await getNftPrice());
       setStage(await getStage());
@@ -48,14 +45,14 @@ const Hero = () => {
   }, []);
 
 
-  useEffect(() => {
-    async function fetchData() {
-      if (stage == 2 ) {
-        setClaimed(await checkIfClaimed());
-      }
-    }
-    fetchData();
-  }, [account]);
+  // useEffect(() => {
+  //   async function fetchData() {
+  //     if (stage == 2 ) {
+  //       setClaimed(await checkIfClaimed());
+  //     }
+  //   }
+  //   fetchData();
+  // }, [account]);
 
 
 
@@ -69,6 +66,16 @@ const Hero = () => {
       setCount(count + 1);
     }
   };
+
+  // const checkIfClaimed = async () => {
+  
+  //   if (account) {
+  //   const result = await nftContract.methods.claimed(account).call();
+  //   return result;
+  //   } 
+  //   return false;
+    
+  // };
 
 
   const decrementCount = () => {
@@ -238,7 +245,8 @@ const Hero = () => {
               {/* Mint Button */}
               {/* {!status || status.toString().includes("Something") || JSON.stringify(status).includes("transaction") ? */}
                 <button
-                  disabled={status}
+                  disabled={!currentChainId ||
+                    currentChainId !== ChainId.Rinkeby || status || !account}
                   className="mt-6 py-2 px-4 text-center text-white uppercase bg-[#222222] border-b-4 border-orange-700 rounded  hover:border-orange-400 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none"
                   onClick={mintCryptid}
                 >

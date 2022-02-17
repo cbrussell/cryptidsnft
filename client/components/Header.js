@@ -1,37 +1,72 @@
 import Head from "next/head";
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import {
+  MenuIcon,
+  XIcon,
+  SpeakerphoneIcon,
+  ExclamationIcon,
+} from "@heroicons/react/outline";
 import { useStatus } from "../context/statusContext";
 import { connectWallet, getCurrentWalletConnected } from "../utils/interact";
-import {
-  useEthers,
-  shortenAddress,
-  ChainId,
-  getChainName,
-} from "@usedapp/core";
+import { useEthers, shortenAddress, getChainName, ChainId } from "@usedapp/core";
 require('typeface-exo')
 
 const Header = () => {
 
-  const {
-    activateBrowserWallet,
-    account,
-    activate,
-    chainId: currentChainId,
-  } = useEthers();
-
+  const {activateBrowserWallet, account, chainId: currentChainId} = useEthers();
+  console.log(account);
+  console.log(getChainName(currentChainId));
+  
   const { setStatus } = useStatus();
 
   const [walletAddress, setWalletAddress] = useState("");
   const [chainId, setChainId] = useState("");
 
-  const connectWalletPressed = async () => {
-    const walletResponse = await connectWallet();
-    setWalletAddress(walletResponse.address);
-    setStatus(walletResponse.status);
-    setChainId(walletResponse.chainId);
-
+  const switchToArbitrum = async () => {
+    if (window.ethereum) {
+      try {
+        await window.ethereum.request({
+          method: "wallet_switchEthereumChain",
+          params: [{ chainId: "0x4" }],
+        });
+      } catch (switchError) {
+        if (switchError.code === 4902) {
+          try {
+            await window.ethereum.request({
+              method: "wallet_addEthereumChain",
+              params: [
+                {
+                  chainId: "0x4",
+                  rpcUrls: ["https://arb1.arbitrum.io/rpc"],
+                  chainName: "Arbitrum One",
+                  blockExplorerUrls: ["https://arbiscan.io"],
+                  nativeCurrency: {
+                    name: "AETH",
+                    symbol: "AETH",
+                    decimals: 18,
+                  },
+                },
+              ],
+            });
+          } catch (addError) {
+            toast.error("Something went wrong while switching networks.");
+          }
+        }
+      }
+    }
   };
+
+  const onClose = () => setIsOpenWalletModal(false);
+  const [isOpenWalletModal, setIsOpenWalletModal] = useState(false);
+  
+  // const connectWalletPressed = async () => {
+  //   const walletResponse = await connectWallet();
+  //   setWalletAddress(walletResponse.address);
+  //   setStatus(walletResponse.status);
+  //   setChainId(walletResponse.chainId);
+
+  // };
 
   // const switchToRinkeby = async () => {
   //   if (window.ethereum) {
@@ -43,28 +78,62 @@ const Header = () => {
   // };
 
 
+  // useEffect(() => {
+  //   // Close dialog on sidebar click
+  //   setMobileMenuOpen(false);
+  // }, [address]);
+
+
+  if (!account) setStatus("🦊 Connect to Metamask using Connect Wallet button");
+
   useEffect(() => {
-    async function fetchData() {
-      const walletResponse = await getCurrentWalletConnected();
-      setWalletAddress(walletResponse.address);
-      setStatus(walletResponse.status);
-      addWalletListener();
+    // async function fetchData() {
+      // const walletResponse = await getCurrentWalletConnected();
+      // setWalletAddress(walletResponse.address);
+      // setStatus(walletResponse.status);
+      // addWalletListener();
       // console.log(walletResponse.chainId)
-    }
-    fetchData();
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+      console.log(account)
+      if (!account) {
+        setStatus("🦊 Connect to Metamask using Connect Wallet button.")
+      } else {
+        setStatus("")
+      }
+      // )
+      // }
+    },
+  
+      
+    
+ 
+    
+  
+   [account]); // eslint-disable-line react-hooks/exhaustive-deps
+
 
   const addWalletListener = () => {
-    if (window.ethereum) {
-      window.ethereum.on("accountsChanged", function (accounts) {
-        if (accounts.length > 0) {
-          setWalletAddress(accounts[0]);
-          setStatus("");
-        } else {
-          setWalletAddress("");
-          setStatus("🦊 Connect to Metamask using Connect Wallet button.");
-        }
-      },
+    if (!account) {
+      setStatus("🦊 Connect to Metamask using Connect Wallet button. test")
+    }
+  }
+    
+    // status: (
+    //   <p>
+    //     😞 Error: You are not connected to the Rinkeby Testnet! Click {" "}
+
+    //     <button onclick={switchToRinkeby}>here</button> to Connect.
+
+    //   </p>
+    // )
+    //   window.ethereum.on("accountsChanged", function (accounts) {
+    //     if (accounts.length > 0) {
+    //       setWalletAddress(accounts[0]);
+    //       setStatus("");
+    //     } else {
+    //       setWalletAddress("");
+    //       setStatus("🦊 Connect to Metamask using Connect Wallet button.");
+    //     }
+    //   },
       
       
       // window.ethereum.on("networkChanged", function (networkId) {
@@ -82,15 +151,48 @@ const Header = () => {
       
       
       // )
-      );
-    }
-  };
+  //     );
+  //   }
+  // };
 
 
   return (
 
     <>
-
+{currentChainId &&
+          currentChainId !== ChainId.Rinkeby  && (
+            <div className="bg-yellow-600">
+              <div className="max-w-7xl mx-auto py-3 px-3 sm:px-6 lg:px-8">
+                <div className="flex sm:items-center lg:justify-between flex-col space-y-2 sm:space-y-0 sm:flex-row">
+                  <div className="flex-1 flex items-center">
+                    <span className="flex p-2 rounded-lg bg-yellow-800">
+                      <SpeakerphoneIcon
+                        className="h-6 w-6 text-white"
+                        aria-hidden="true"
+                      />
+                    </span>
+                    <p className="ml-3 font-medium text-white truncate">
+                      <span className="lg:hidden">
+                        Please switch to Rinkeby.
+                      </span>
+                      <span className="hidden lg:block">
+                        You are currently on the {getChainName(currentChainId)}{" "}
+                        Network. Please switch to Rinkeby.
+                      </span>
+                    </p>
+                  </div>
+                  <div className="flex-shrink-0 w-full sm:mt-0 sm:w-auto">
+                    <button
+                      onClick={switchToArbitrum}
+                      className="w-full flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-yellow-600 bg-white hover:bg-yellow-50"
+                    >
+                      Switch Networks
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
       <header className=" inset-x-5 top-0 z-10 h-32 md:h-20 min-w-full justify-center space-x-6 text-white  backdrop-filter ">
         <div className="md:flex items-center container justify-around  mx-auto max-w-7xl  h-full">
           <div className="flex justify-around">
@@ -200,8 +302,8 @@ const Header = () => {
 
 
 <div>
-      {!account && <button onClick={activateBrowserWallet}> Connect </button>}
-      {account && <p>Account: {account}</p>}
+      {!account && <button onClick={() => {activateBrowserWallet(); onClose();}}> Connect </button>}
+      {account &&  "Connected: " + String(account).substring(0, 6) + "..." + String(account).substring(38)}
     </div>
 
 
