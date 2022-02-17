@@ -183,7 +183,7 @@ const Hero = () => {
             />
           </div>
 
-          {stage > 1 && !claimed ? (
+          {stage > 2 && !claimed ? (
             <>
               {/* Minted NFT Ratio */}
               <p className=" bg-gray-100 rounded-md text-gray-800 font-bold text-lg my-4 py-1 px-3">
