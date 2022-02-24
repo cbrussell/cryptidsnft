@@ -121,7 +121,7 @@ const Hero = () => {
 
   let whitelistValid = false;
 
-  const whitelistRes = useSWR(stage == 2 && window.ethereum.selectedAddress ? `/api/whitelistProof?address=${window.ethereum.selectedAddress}` : null, {
+  const whitelistRes = useSWR(stage == 2 && account ? `/api/whitelistProof?address=${account}` : null, {
     fetcher, revalidateIfStale: false, revalidateOnFocus: false, revalidateOnReconnect: false });
   if (!whitelistRes.error && whitelistRes.data) {
     const { proof, valid } = whitelistRes.data;
@@ -156,7 +156,7 @@ const Hero = () => {
 
 
   return (
-    <main id="main" className="h-screen py-10 md:py-8  bg-pattern ">
+    <main id="main" className="h-screen py-10 md:py-4  bg-pattern ">
       <div className="container max-w-6xl mx-auto flex flex-col items-center pt-4">
         <div className="flex flex-col items-center">
           <div className="flex pb-2">
@@ -195,12 +195,13 @@ const Hero = () => {
 
 
                 <button
-                  className="flex items-center justify-center w-12 h-12 bg-white rounded-md hover:bg-gray-200 text-center"
+                  className="flex items-center justify-center w-12 h-12 bg-white rounded-md hover:bg-gray-200 text-center disabled:bg-slate-50"
                   onClick={decrementCount}
+                 
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="w-6 h-6 text-[#d35c5c]"
+                    className="w-6 h-6 text-[#d35c5c] "
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -217,8 +218,10 @@ const Hero = () => {
                 <h2 className="mx-8">{count}</h2>
 
                 <button
-                  className="flex items-center justify-center w-12 h-12 bg-white rounded-md text-black hover:bg-gray-200 text-center"
+                  className="flex items-center justify-center w-12 h-12 bg-white rounded-md text-black hover:bg-gray-200 text-center "
+                 
                   onClick={incrementCount}
+                  
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"

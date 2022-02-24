@@ -91,62 +91,62 @@ export const connectWallet = async () => {
 
 
 
-export const getCurrentWalletConnected = async () => {
-  if (window.ethereum) {
+// export const getCurrentWalletConnected = async () => {
+//   if (window.ethereum) {
 
-    let chainId = await window.ethereum.request({ method: 'eth_chainId'})
-    console.log('Connected to chain:' + chainId)
+//     let chainId = await window.ethereum.request({ method: 'eth_chainId'})
+//     console.log('Connected to chain:' + chainId)
 
-    const rinkebyChainId = '0x4'
+//     const rinkebyChainId = '0x4'
 
-    if (chainId !== rinkebyChainId) {
-      return {
-        address: "",
-        status: "😞 Error: You are not connected to the Rinkeby Testnet!"
-      };
-    }
+//     if (chainId !== rinkebyChainId) {
+//       return {
+//         address: "",
+//         status: "😞 Error: You are not connected to the Rinkeby Testnet!"
+//       };
+//     }
     
-    try {
-      const addressArray = await window.ethereum.request({
-        method: "eth_accounts",
-      });
+//     try {
+//       const addressArray = await window.ethereum.request({
+//         method: "eth_accounts",
+//       });
 
-      if (addressArray.length > 0) {
-        return {
-          address: addressArray[0],
-          status: "",
-        };
-      } else {
-        return {
-          address: "",
-          status: "🦊 Please connect wallet",
-        };
-      }
-    } catch (err) {
-      return {
-        address: "",
-        status: "😞 Error: " + err.message,
-      };
-    }
-  } else {
-    return {
-      address: "",
-      status: (
-        <span>
-          <p>
-            {" "}
-            🦊{" "}
+//       if (addressArray.length > 0) {
+//         return {
+//           address: addressArray[0],
+//           status: "",
+//         };
+//       } else {
+//         return {
+//           address: "",
+//           status: "🦊 Please connect wallet",
+//         };
+//       }
+//     } catch (err) {
+//       return {
+//         address: "",
+//         status: "😞 Error: " + err.message,
+//       };
+//     }
+//   } else {
+//     return {
+//       address: "",
+//       status: (
+//         <span>
+//           <p>
+//             {" "}
+//             🦊{" "}
             
-            <a target="_blank" href="https://metamask.io/download.html" class="alert">
-              You must install Metamask, a virtual Ethereum wallet, in your
-              browser.
-            </a>
-          </p>
-        </span>
-      ),
-    };
-  }
-};
+//             <a target="_blank" href="https://metamask.io/download.html" class="alert">
+//               You must install Metamask, a virtual Ethereum wallet, in your
+//               browser.
+//             </a>
+//           </p>
+//         </span>
+//       ),
+//     };
+//   }
+// };
 
 // Contract Methods
 
@@ -202,17 +202,17 @@ export const mintNFT = async (mintAmount) => {
   const result = await nftContract.methods.salePrice().call();
   const resultEther = web3.utils.fromWei(result, "ether");
 
-  if (!window.ethereum.selectedAddress) {
-    return {
-      success: false,
-      status: (
-        <p>
-          🦊 Connect to Metamask using the{" "}
-          <p style="color:blue;" >Connect Wallet</p> button.
-        </p>
-      ),
-    };
-  }
+  // if (!window.ethereum.selectedAddress) {
+  //   return {
+  //     success: false,
+  //     status: (
+  //       <p>
+  //         🦊 Connect to Metamask using the{" "}
+  //         <p style="color:blue;" >Connect Wallet</p> button.
+  //       </p>
+  //     ),
+  //   };
+  // }
 
   //set up your Ethereum transaction
   const transactionParameters = {
