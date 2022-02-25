@@ -28,8 +28,6 @@ const walletconnect = new WalletConnectConnector({
 });
 
 
-
-
 const Header = () => {
 
   const { activateBrowserWallet, account, activate, chainId: currentChainId } = useEthers();
@@ -112,7 +110,7 @@ const Header = () => {
                   </span>
                   <p className="ml-3 font-medium text-white truncate">
                     <span className="lg:hidden">
-                      Please switch to ArbitrumRinkeby.
+                      Please switch to Rinkeby.
                     </span>
                     <span className="hidden lg:block exo-font">
                       You are currently on the {getChainName(currentChainId)}{" "}
@@ -343,14 +341,14 @@ const Header = () => {
                 <div className="grid grid-cols-1 divide-y-[1px] sm:divide-y-0 sm:grid-cols-2">
           <div className="flex justify-center px-4 py-3">
             <button
-              className="flex items-center justify-center flex-col hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md"
+              className="flex items-center justify-center flex-col shover:bg-gray-100 dark:hover:bg-gray-700 rounded-md"
               onClick={() => {
                 activateBrowserWallet();
                 onClose();
               }}
             >
-              <p className="md:text-xl sm:text-lg mb-2">MetaMask</p>
-              <p className="text-gray-400 font-bold sm:text-sm text-xs mb-8">
+              <p className="md:text-xl sm:text-lg mb-2 ">MetaMask</p>
+              <p className="text-gray-400  sm:text-sm text-xs mb-8 font-exo">
                 Connect to your MetaMask Wallet
               </p>
               <Image
@@ -376,7 +374,7 @@ const Header = () => {
               
             >
               <p className="md:text-xl sm:text-lg mb-2">WalletConnect</p>
-              <p className="text-gray-400 font-bold sm:text-sm text-xs mb-8">
+              <p className="text-gray-400  sm:text-sm text-xs mb-8">
                 Scan with WalletConnect to connect
               </p>
               <Image
@@ -401,7 +399,7 @@ const Header = () => {
               }}
             >
               <p className="md:text-xl sm:text-lg mb-2">Coinbase Wallet</p>
-              <p className="text-gray-400 font-bold sm:text-sm text-xs mb-8">
+              <p className="text-gray-400  sm:text-sm text-xs mb-8">
                 Scan with Coinbase Wallet to connect
               </p>
               <Image

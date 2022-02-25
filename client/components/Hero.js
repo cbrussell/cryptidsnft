@@ -16,18 +16,16 @@ import {
 const Hero = () => {
   // const contract = require(`../../contract/build/deployments/4/0x2F8C0A3da39910Ff83072F330000C93588885Dc5.json`);
   // const nftContract = new web3.eth.Contract(contract.abi, process.env.NFT_ADDRESS);
-  const {account, chainId: currentChainId} = useEthers();
-
+  const { account, chainId: currentChainId } = useEthers();
   const { status, setStatus } = useStatus();
-
   const [count, setCount] = useState(1);
   const [maxMintAmount, setMaxMintAmount] = useState(0);
   const [totalSupply, setTotalSupply] = useState(0);
   const [nftPrice, setNftPrice] = useState("0.10");
   const [stage, setStage] = useState(0);
   const [claimed, setClaimed] = useState(false);
-  
-  
+
+
   const [correctNetwork, setCorrectNetwork] = useState(false)
   const fetcher = (url) => fetch(url).then((res) => res.json());
 
@@ -68,13 +66,13 @@ const Hero = () => {
   };
 
   // const checkIfClaimed = async () => {
-  
+
   //   if (account) {
   //   const result = await nftContract.methods.claimed(account).call();
   //   return result;
   //   } 
   //   return false;
-    
+
   // };
 
 
@@ -92,6 +90,45 @@ const Hero = () => {
     updateTotalSupply();
   };
 
+  const calculateTimeLeft = () => {
+    let year = new Date().getFullYear();
+    const difference = +new Date('March 25 2022 16:00:00') - +new Date();
+    let timeLeft = {};
+
+    if (difference > 0) {
+      timeLeft = {
+        days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+        hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+        minutes: Math.floor((difference / 1000 / 60) % 60),
+        seconds: Math.floor((difference / 1000) % 60),
+      };
+    }
+
+    return timeLeft;
+  };
+
+  const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
+  const [year] = useState(new Date().getFullYear());
+
+  useEffect(() => {
+    setTimeout(() => {
+      setTimeLeft(calculateTimeLeft());
+    }, 1000);
+  });
+
+  const timerComponents = [];
+
+  Object.keys(timeLeft).forEach((interval) => {
+    if (!timeLeft[interval]) {
+      return;
+    }
+
+    timerComponents.push(
+      <span>
+        {timeLeft[interval]} {interval}{" "}
+      </span>
+    );
+  })
 
   // useEffect(() => {
   //   async function fetchData() {
@@ -100,19 +137,19 @@ const Hero = () => {
   //     return;
   //   }
   //   setClaimed(await checkIfClaimed());
-    
+
   // }
   // fetchData();
-    
-    // async function checkIfClaimed() {
-    //   sampleNFT.methods.claimed(window.ethereum.selectedAddress).call({ from: window.ethereum.selectedAddress }).then((result) => {
-    //     setAlreadyClaimed(result);
-    //     console.log(result);
-    //   }).catch((err) => {
-    //     setAlreadyClaimed(false);
-    //   });
-    // }
-    // checkIfClaimed();
+
+  // async function checkIfClaimed() {
+  //   sampleNFT.methods.claimed(window.ethereum.selectedAddress).call({ from: window.ethereum.selectedAddress }).then((result) => {
+  //     setAlreadyClaimed(result);
+  //     console.log(result);
+  //   }).catch((err) => {
+  //     setAlreadyClaimed(false);
+  //   });
+  // }
+  // checkIfClaimed();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   // }, []);
 
@@ -122,9 +159,11 @@ const Hero = () => {
   let whitelistValid = false;
 
   const whitelistRes = useSWR(stage == 2 && account ? `/api/whitelistProof?address=${account}` : null, {
-    fetcher, revalidateIfStale: false, revalidateOnFocus: false, revalidateOnReconnect: false });
+    fetcher, revalidateIfStale: false, revalidateOnFocus: false, revalidateOnReconnect: false
+  });
   if (!whitelistRes.error && whitelistRes.data) {
     const { proof, valid } = whitelistRes.data;
+    console.log(proof)
     whitelistProof = proof;
     whitelistValid = valid;
     // console.log(whitelistProof);
@@ -182,8 +221,9 @@ const Hero = () => {
               className="rounded-md"
             />
           </div>
+          
 
-          {stage > 2 && !claimed ? (
+          {stage > 1 && !claimed ? (
             <>
               {/* Minted NFT Ratio */}
               <p className=" bg-gray-100 rounded-md text-gray-800 font-bold text-lg my-4 py-1 px-3">
@@ -197,7 +237,7 @@ const Hero = () => {
                 <button
                   className="flex items-center justify-center w-12 h-12 bg-white rounded-md hover:bg-gray-200 text-center disabled:bg-slate-50"
                   onClick={decrementCount}
-                 
+
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -219,9 +259,9 @@ const Hero = () => {
 
                 <button
                   className="flex items-center justify-center w-12 h-12 bg-white rounded-md text-black hover:bg-gray-200 text-center "
-                 
+
                   onClick={incrementCount}
-                  
+
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -247,20 +287,22 @@ const Hero = () => {
 
               {/* Mint Button */}
               {/* {!status || status.toString().includes("Something") || JSON.stringify(status).includes("transaction") ? */}
-                <button
-                  disabled={!currentChainId ||
-                    currentChainId !== ChainId.Rinkeby || status || !account}
-                  className="mt-6 py-2 px-4 text-center text-white uppercase bg-[#222222] border-b-4 border-orange-700 rounded  hover:border-orange-400 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none"
-                  onClick={mintCryptid}
-                >
-                  Mint Cryptid
-                </button>
-                
+              <button
+                disabled={!currentChainId ||
+                  currentChainId !== ChainId.Rinkeby || status || !account}
+                className="mt-6 py-2 px-4 text-center text-white uppercase bg-[#222222] border-b-4 border-orange-700 rounded  hover:border-orange-400 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none"
+                onClick={mintCryptid}
+              >
+                Mint Cryptid
+              </button>
+
             </>
           ) : (
-            <p className="text-white text-2xl mt-8">
-              {" "}
-              Sale is not active yet!
+            <p className="text-white text-2xl mt-8 text-center">
+              {/* Whitelist Sale Begins in {" "} <br></br> */}
+              
+            {timerComponents.length ?<span>Whitelist Sale will begin in... <br></br> {timerComponents}</span>  : <span>Whitelist Sale will be starting soon...</span>}
+          
             </p>
           )}
 
