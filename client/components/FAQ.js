@@ -217,7 +217,7 @@ export default function MyApp() {
                     Collection Size: 11,111 <br></br>
                     Whitelist Supply: 9,500<br></br>
                     Public Supply: 1,000<br></br>
-                    Team Supply: 400 <br></br>
+                    Team Supply: 400 (50/founder) <br></br>
                     Trust/Marketing: 211 <br></br>
                     <br></br>
                     Mint Price: 0.10 ETH

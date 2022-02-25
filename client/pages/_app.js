@@ -1,6 +1,5 @@
 import "../styles/globals.css";
 import { StatusProvider } from "../context/statusContext";
-
 import { ChainId, DAppProvider } from "@usedapp/core";
 
 // const config = {
@@ -15,7 +14,7 @@ import { ChainId, DAppProvider } from "@usedapp/core";
 const config = {
   readOnlyChainId: ChainId.Rinkeby,
   readOnlyUrls: {
-    [ChainId.Rinkeby]: 'https://rinkeby.infura.io/v3/b0d18bbb81f54079b165803b666e2957'
+    [ChainId.Rinkeby]: `https://rinkeby.infura.io/v3/${process.env.NEXT_PUBLIC_INFURA_ID}`
   }
 }
 
@@ -27,6 +26,8 @@ function MyApp({ Component, pageProps }) {
         <Component {...pageProps} />
       </StatusProvider>
       </DAppProvider>
+      
+      
   );
 }
 

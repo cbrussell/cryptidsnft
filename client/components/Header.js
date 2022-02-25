@@ -1,45 +1,50 @@
 import Head from "next/head";
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState, useEffect, Fragment } from "react";
 import { SpeakerphoneIcon } from "@heroicons/react/outline";
 import { useStatus } from "../context/statusContext";
-
+import { Dialog, Transition } from '@headlessui/react'
+import Image from "next/image";
+import { formatEther } from '@ethersproject/units'
 import MetaMaskSvg from "../public/images/metamask.svg";
 import WalletConnectSvg from "../public/images/walletconnect.svg";
 import Coinbase from "../public/images/coinbase.png";
-
-import { useEthers, shortenAddress, getChainName, ChainId, chainName } from "@usedapp/core";
+import { useEthers, shortenAddress, getChainName, ChainId, chainName, useEtherBalance, useTokenBalance} from "@usedapp/core";
 import { WalletLinkConnector } from "@web3-react/walletlink-connector";
 import { WalletConnectConnector } from "@web3-react/walletconnect-connector";
-
 require('typeface-exo')
 
 const walletLink = new WalletLinkConnector({
-  url: `https://arb-mainnet.g.alchemy.com/v2/${process.env.NEXT_PUBLIC_ALCHEMY_KEY}`,
-  appName: "Treasure Marketplace",
-  appLogoUrl: "https://marketplace.treasure.lol/favicon-32x32.png",
-  supportedChainIds: [ChainId.Arbitrum, ChainId.ArbitrumRinkeby],
+  url: `https://rinkeby.infura.io/v3/${process.env.NEXT_PUBLIC_INFURA_ID}`,
+  appName: "Cryptids Minting dApp",
+  supportedChainIds: [ChainId.Rinkeby]
 });
 
 const walletconnect = new WalletConnectConnector({
   rpc: {
-    [ChainId.Arbitrum]: `https://arb-mainnet.g.alchemy.com/v2/${process.env.NEXT_PUBLIC_ALCHEMY_KEY}`,
-    [ChainId.ArbitrumRinkeby]:
-      "https://arb-rinkeby.g.alchemy.com/v2/PDUCdHLoNrdDJwgVvCNPTx7MrHuQ0uBg",
+    [ChainId.Rinkeby]: `https://rinkeby.infura.io/v3/${process.env.NEXT_PUBLIC_INFURA_ID}`,
   },
   qrcode: true,
 });
 
+
+
+
 const Header = () => {
 
-  const { activateBrowserWallet, account, chainId: currentChainId } = useEthers();
+  const { activateBrowserWallet, account, activate, chainId: currentChainId } = useEthers();
+  const etherBalance = useEtherBalance(account);
   console.log(account);
   console.log(getChainName(currentChainId));
 
   const { setStatus } = useStatus();
 
   const [walletAddress, setWalletAddress] = useState("");
-  const [chainId, setChainId] = useState("");
+  // const [chainId, setChainId] = useState("");
+  // const chainId = useChainId();
+
+
+
 
   const switchToArbitrum = async () => {
     if (window.ethereum) {
@@ -56,19 +61,19 @@ const Header = () => {
               params: [
                 {
                   chainId: "0x4",
-                  rpcUrls: ["https://arb1.arbitrum.io/rpc"],
-                  chainName: "Arbitrum One",
-                  blockExplorerUrls: ["https://arbiscan.io"],
+                  rpcUrls: ["https://rinkey.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161"],
+                  chainName: "Rinkeby",
+                  blockExplorerUrls: ["https://rinkey.etherscan.io"],
                   nativeCurrency: {
-                    name: "AETH",
-                    symbol: "AETH",
+                    name: "ETH",
+                    symbol: "ETH",
                     decimals: 18,
                   },
                 },
               ],
             });
           } catch (addError) {
-            toast.error("Something went wrong while switching networks.");
+            console.log("Something went wrong while switching networks.");
           }
         }
       }
@@ -76,79 +81,18 @@ const Header = () => {
   };
 
   const onClose = () => setIsOpenWalletModal(false);
+
   const [isOpenWalletModal, setIsOpenWalletModal] = useState(false);
-
-  // const connectWalletPressed = async () => {
-  //   const walletResponse = await connectWallet();
-  //   setWalletAddress(walletResponse.address);
-  //   setStatus(walletResponse.status);
-  //   setChainId(walletResponse.chainId);
-
-  // };
-
-  // const switchToRinkeby = async () => {
-  //   if (window.ethereum) {
-  //       await window.ethereum.request({
-  //         method: "wallet_switchEthereumChain",
-  //         params: [{ chainId: "0x4" }],
-  //       });
-  //   }
-  // };
-
-
-  // useEffect(() => {
-  //   // Close dialog on sidebar click
-  //   setMobileMenuOpen(false);
-  // }, [address]);
-
 
   useEffect(() => {
     if (!account) {
-      setStatus("🦊 Connect to Metamask using the Connect Wallet button.")
+      setStatus("🦊 Connect to Metamask using the Connect Wallet button.") 
     } else {
       setStatus("")
     }
 
   }, [account]); // eslint-disable-line react-hooks/exhaustive-deps
 
-
-  // status: (
-  //   <p>
-  //     😞 Error: You are not connected to the Rinkeby Testnet! Click {" "}
-
-  //     <button onclick={switchToRinkeby}>here</button> to Connect.
-
-  //   </p>
-  // )
-  //   window.ethereum.on("accountsChanged", function (accounts) {
-  //     if (accounts.length > 0) {
-  //       setWalletAddress(accounts[0]);
-  //       setStatus("");
-  //     } else {
-  //       setWalletAddress("");
-  //       setStatus("🦊 Connect to Metamask using Connect Wallet button.");
-  //     }
-  //   },
-
-
-  // window.ethereum.on("networkChanged", function (networkId) {
-  //   const rinkebyChainId = '0x4'
-  //   let chainId = window.ethereum.request({ method: 'eth_chainId'})
-
-  //   if (networkId == rinkebyChainId) {
-  //     // setWalletAddress(accounts[0]);
-  //     setStatus("");
-  //   } else {
-  //     // setWalletAddress(accounts[0]);
-  //     setStatus("😞 Error: You are not connected to the Rinkeby Testnet!")
-  //   }
-  // }
-
-
-  // )
-  //     );
-  //   }
-  // };
 
 
   return (
@@ -168,7 +112,7 @@ const Header = () => {
                   </span>
                   <p className="ml-3 font-medium text-white truncate">
                     <span className="lg:hidden">
-                      Please switch to Rinkeby.
+                      Please switch to ArbitrumRinkeby.
                     </span>
                     <span className="hidden lg:block exo-font">
                       You are currently on the {getChainName(currentChainId)}{" "}
@@ -223,8 +167,6 @@ const Header = () => {
                   <a>docs</a>
                 </a>
               </li>
-
-
 
               {/* <li>
                 <a href="https://cryptids.gitbook.io/" target="_blank" rel="noreferrer">
@@ -285,8 +227,8 @@ const Header = () => {
           </nav>
 
           {/* Wallet */}
-          <nav aria-label="Wallet Button">
-            <ul className="items-center space-x-6 text-center w-auto md:w-40 lg:w-80 pt-1 md:pt-0 " >
+          {/* <nav aria-label="Wallet Button">
+            <ul className="md:pt-0 " >
 
               <div>
                 {!account && <button
@@ -306,9 +248,179 @@ const Header = () => {
                   </li>}
               </div>
             </ul>
-          </nav>
+          </nav> */}
+
+
+          {account ? (
+            <div className="py-1 w-auto items-center rounded-lg dark:bg-cryptid-6 mt-2 md:mt-0  p-0.5   exo-font font-bold select-none pointer-events-auto mx-2 sm:flex">
+              <div className="px-2 sm:px-3 py-1 sm:py-2 flex items-center justify-center  md:text-center">
+                <span className="text-white block exo-font sm:text-base text-lg ">
+
+                  {etherBalance && <p>{Intl.NumberFormat().format(parseFloat(formatEther(etherBalance)))}</p>}
+
+
+                </span>{" "}
+                <span className="text-white ml-2  exo-font flex items-center justify-center sm:text-base text-lg  md:text-center ">
+                  ETH
+                </span>
+              </div>
+              <div className="flex items-center px-2 sm:px-3  justify-center  md:text-center py-2 rounded-lg dark:bg-cryptid-5  text-white text-semibold exo-font sm:text-base text-lg">
+                {shortenAddress(account)}
+              </div>
+            </div>
+          ) : (
+            <button
+              className="mx-2   px-3 py-2 sm:px-4  flex items-center justify-center  text-center  exo-font sm:py-2 border rounded text-semibold  font-bold text-white   dark:bg-gray-800  dark:hover:bg-gray-700 focus:outline-none  focus:ring-offset-2 focus:ring-gray-700"
+              onClick={() => setIsOpenWalletModal(true)}
+            >
+              Connect Wallet
+            </button>
+          )}
+
+
         </div>
+
+        <Transition show={isOpenWalletModal} as={Fragment}>
+          <Dialog
+            as="div"
+            className="fixed inset-0 z-10 overflow-y-auto"
+            open={isOpenWalletModal}
+            onClose={() => setIsOpenWalletModal(false)}>
+            <div className="min-h-screen px-4 text-center">
+              <Transition.Child
+                as={Fragment}
+                enter="ease-out duration-300"
+                enterFrom="opacity-0"
+                enterTo="opacity-100"
+                leave="ease-in duration-200"
+                leaveFrom="opacity-100"
+                leaveTo="opacity-0"
+              >
+                <Dialog.Overlay className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
+              </Transition.Child>
+              {/* This element is to trick the browser into centering the modal contents. */}
+              <span
+                className="inline-block h-screen align-middle"
+                aria-hidden="true"
+              >
+                &#8203;
+              </span>
+              <Transition.Child
+                as={Fragment}
+                enter="ease-out duration-300"
+                enterFrom="opacity-0 scale-95"
+                enterTo="opacity-100 scale-100"
+                leave="ease-in duration-200"
+                leaveFrom="opacity-100 scale-100"
+                leaveTo="opacity-0 scale-95"
+              >
+                <div className="inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
+                 
+                  {/* <Dialog.Title
+                    as="h3"
+                    className="text-lg font-medium leading-6 text-gray-900"
+                  >
+                    Payment successful
+                  </Dialog.Title>
+                  <div className="mt-2">
+                    <p className="text-sm text-gray-500">
+                      Your payment has been successfully submitted. We’ve sent you
+                      an email with all of the details of your order.
+                    </p>
+                  </div>
+                 
+                  <div className="mt-4">
+                    <button
+                      type="button"
+                      className="inline-flex justify-center px-4 py-2 text-sm font-medium text-blue-900 bg-blue-100 border border-transparent rounded-md hover:bg-blue-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500"
+                      onClick={onClose}
+                    >
+                      Got it, thanks!
+                    </button>
+
+                  </div>
+                </div> */}
+                <div className="grid grid-cols-1 divide-y-[1px] sm:divide-y-0 sm:grid-cols-2">
+          <div className="flex justify-center px-4 py-3">
+            <button
+              className="flex items-center justify-center flex-col hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md"
+              onClick={() => {
+                activateBrowserWallet();
+                onClose();
+              }}
+            >
+              <p className="md:text-xl sm:text-lg mb-2">MetaMask</p>
+              <p className="text-gray-400 font-bold sm:text-sm text-xs mb-8">
+                Connect to your MetaMask Wallet
+              </p>
+              <Image
+                src={MetaMaskSvg.src}
+                alt="MetaMask"
+                height={48}
+                width={48}
+              />
+            </button>
+          </div>
+          <div className="flex justify-center px-4 py-3">
+            <button
+              className="flex items-center justify-center flex-col hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md"
+              onClick={async () => {
+                try {
+                  await activate(walletconnect);
+                } catch (err) {
+                  setStatus("😞 Error: " + err.message);
+                } finally {
+                  onClose();
+                }
+              }}
+              
+            >
+              <p className="md:text-xl sm:text-lg mb-2">WalletConnect</p>
+              <p className="text-gray-400 font-bold sm:text-sm text-xs mb-8">
+                Scan with WalletConnect to connect
+              </p>
+              <Image
+                src={WalletConnectSvg.src}
+                alt="WalletConnect"
+                height={48}
+                width={48}
+              />
+            </button>
+          </div>
+          <div className="sm:col-span-2 sm:mt-2 flex justify-center px-4 py-3">
+            <button
+              className="flex items-center justify-center flex-col hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md"
+              onClick={async () => {
+                try {
+                  await activate(walletLink);
+                } catch (err) {
+                  setStatus("😞 Error: " + err.message);
+                } finally {
+                  
+                }
+              }}
+            >
+              <p className="md:text-xl sm:text-lg mb-2">Coinbase Wallet</p>
+              <p className="text-gray-400 font-bold sm:text-sm text-xs mb-8">
+                Scan with Coinbase Wallet to connect
+              </p>
+              <Image
+                src={Coinbase.src}
+                alt="Coinbase Wallet"
+                height={48}
+                width={48}
+              />
+            </button>
+          </div>
+        </div>
+        </div>
+              </Transition.Child>
+            </div>
+          </Dialog>
+        </Transition>
+
       </header>
+
     </>
   )
 };
