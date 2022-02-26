@@ -12,15 +12,15 @@
     "absolutePath": "contracts/TestContract.sol",
     "exportedSymbols": {
       "TestContract": [
-        853
+        879
       ]
     },
-    "id": 854,
+    "id": 880,
     "license": "MIT",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 848,
+        "id": 874,
         "literals": [
           "solidity",
           "^",
@@ -37,9 +37,9 @@
         "contractDependencies": [],
         "contractKind": "contract",
         "fullyImplemented": true,
-        "id": 853,
+        "id": 879,
         "linearizedBaseContracts": [
-          853
+          879
         ],
         "name": "TestContract",
         "nameLocation": "95:12:19",
@@ -47,12 +47,12 @@
         "nodes": [
           {
             "body": {
-              "id": 851,
+              "id": 877,
               "nodeType": "Block",
               "src": "142:51:19",
               "statements": []
             },
-            "id": 852,
+            "id": 878,
             "implemented": true,
             "kind": "receive",
             "modifiers": [],
@@ -60,25 +60,25 @@
             "nameLocation": "-1:-1:-1",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 849,
+              "id": 875,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "122:2:19"
             },
             "returnParameters": {
-              "id": 850,
+              "id": 876,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "142:0:19"
             },
-            "scope": 853,
+            "scope": 879,
             "src": "115:78:19",
             "stateMutability": "payable",
             "virtual": false,
             "visibility": "external"
           }
         ],
-        "scope": 854,
+        "scope": 880,
         "src": "86:110:19",
         "usedErrors": []
       }

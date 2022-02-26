@@ -6,16 +6,20 @@ import { ChainId, useEthers } from "@usedapp/core";
 import {
   getMaxMintAmount,
   getTotalSupply,
-  getNftPrice,
+  getSalePrice,
   mintNFT,
   getStage,
+  getOwner,
+  whitelistMint,
   checkIfClaimed,
-} from "../utils/interact";
+} from "../pages/utils/interact"
 
 // const contract = require(`../../contract/build/deployments/4/0x2F8C0A3da39910Ff83072F330000C93588885Dc5.json`);
 const Hero = () => {
+
   // const contract = require(`../../contract/build/deployments/4/0x2F8C0A3da39910Ff83072F330000C93588885Dc5.json`);
   // const nftContract = new web3.eth.Contract(contract.abi, process.env.NFT_ADDRESS);
+
   const { account, chainId: currentChainId } = useEthers();
   const { status, setStatus } = useStatus();
   const [count, setCount] = useState(1);
@@ -23,34 +27,51 @@ const Hero = () => {
   const [totalSupply, setTotalSupply] = useState(0);
   const [nftPrice, setNftPrice] = useState("0.10");
   const [stage, setStage] = useState(0);
+
   const [claimed, setClaimed] = useState(false);
+  const [whitelistClaimable, setWhitelistClaimable] = useState(false);
+  const [owner, setOwner] = useState("");
 
 
   const [correctNetwork, setCorrectNetwork] = useState(false)
   const fetcher = (url) => fetch(url).then((res) => res.json());
 
+  const maxMintCalculated = getMaxMintAmount();
+
+  const salePriceCalculated = getSalePrice();
+
+  const stageCalculated = getStage();
+
+  const totalSupplyCalculated = getTotalSupply();
+
+  const ownerCalculated = getOwner();
+
   useEffect(() => {
-    async function fetchData() {
-      // if (stage == 2 ) {
-      // setClaimed(await checkIfClaimed());
-      // }
-      setMaxMintAmount(await getMaxMintAmount());
-      setNftPrice(await getNftPrice());
-      setStage(await getStage());
-      await updateTotalSupply();
-    }
-    fetchData();
-  }, []);
+    console.log(maxMintCalculated);
+    if (maxMintCalculated) setMaxMintAmount(maxMintCalculated);
+  }, [maxMintCalculated]);
 
 
-  // useEffect(() => {
-  //   async function fetchData() {
-  //     if (stage == 2 ) {
-  //       setClaimed(await checkIfClaimed());
-  //     }
-  //   }
-  //   fetchData();
-  // }, [account]);
+  useEffect(() => {
+    console.log("sale price is " + salePriceCalculated);
+    if (salePriceCalculated) setNftPrice(salePriceCalculated);
+  }, [salePriceCalculated]);
+
+  useEffect(() => {
+    console.log("stage is " + stageCalculated);
+    if (stageCalculated) setStage(stageCalculated);
+  }, [stageCalculated]);
+
+  useEffect(() => {
+    console.log("total supply is" + totalSupplyCalculated);
+    if (totalSupplyCalculated) setTotalSupply(totalSupplyCalculated);
+  }, [totalSupplyCalculated]);
+
+  useEffect(() => {
+    console.log(ownerCalculated);
+    if (ownerCalculated) setOwner(ownerCalculated);
+  }, [ownerCalculated]);
+
 
 
 
@@ -65,17 +86,6 @@ const Hero = () => {
     }
   };
 
-  // const checkIfClaimed = async () => {
-
-  //   if (account) {
-  //   const result = await nftContract.methods.claimed(account).call();
-  //   return result;
-  //   } 
-  //   return false;
-
-  // };
-
-
   const decrementCount = () => {
     if (count > 1) {
       setCount(count - 1);
@@ -85,11 +95,45 @@ const Hero = () => {
   const mintCryptid = async () => {
     const { status } = await mintNFT(count);
     setStatus(status);
-
     // We minted a new Cryptid, so we need to update the total supply
     updateTotalSupply();
   };
 
+
+
+  // const onMintGift = async () => {
+  //   const { success, status } = await mintGift(account, giftProof);
+  //   console.log(status);
+  //   setGiftMintStatus(success);
+  // };
+
+
+
+  const onMintWhitelist = async () => {
+    const { status } = await whitelistMint(proof);
+    console.log(status)
+  }
+
+
+
+  // const onMintWhitelist = async () => {
+  //   const { success, status } = await mintWhitelist(account, whitelistProof);
+  //   console.log(status);
+  //   setWhitelistMintStatus(success);
+  // };
+
+  const onPublicMint = async () => {
+    const { success, status } = await mintPublic(account, numToMint);
+    console.log(status);
+    setPublicMintStatus(success);
+  };
+
+
+
+
+
+
+  
   const calculateTimeLeft = () => {
     let year = new Date().getFullYear();
     const difference = +new Date('March 25 2022 16:00:00') - +new Date();
@@ -130,58 +174,28 @@ const Hero = () => {
     );
   })
 
-  // useEffect(() => {
-  //   async function fetchData() {
-  //   if (stage == 2 ) {
-  //     setClaimed(await checkIfClaimed());
-  //     return;
-  //   }
-  //   setClaimed(await checkIfClaimed());
-
-  // }
-  // fetchData();
-
-  // async function checkIfClaimed() {
-  //   sampleNFT.methods.claimed(window.ethereum.selectedAddress).call({ from: window.ethereum.selectedAddress }).then((result) => {
-  //     setAlreadyClaimed(result);
-  //     console.log(result);
-  //   }).catch((err) => {
-  //     setAlreadyClaimed(false);
-  //   });
-  // }
-  // checkIfClaimed();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
-
 
   let whitelistProof = [];
-
   let whitelistValid = false;
-
-  const whitelistRes = useSWR(stage == 2 && account ? `/api/whitelistProof?address=${account}` : null, {
+  const whitelistRes = useSWR(stage < 3 && account ? `/api/whitelistProof?address=${account}` : null, {
     fetcher, revalidateIfStale: false, revalidateOnFocus: false, revalidateOnReconnect: false
   });
   if (!whitelistRes.error && whitelistRes.data) {
     const { proof, valid } = whitelistRes.data;
-    console.log(proof)
     whitelistProof = proof;
     whitelistValid = valid;
-    // console.log(whitelistProof);
   }
 
-
+  // While before stage 3, check if user is on WL 
+  
   // useEffect(() => {
-  //   if (stage == 2 || !whitelistValid) {
-  //     setWhitelistClaimable(NOT_CLAIMABLE);
+  //   if (stage > 2 || !whitelistValid) {
+  //     setWhitelistClaimable(false);
+  //     setClaimed(false);
   //     return;
-  //   } else if (alreadyClaimed) {
-  //     setWhitelistClaimable(ALREADY_CLAIMED);
-  //     return;
-  //   }
+  //   } else {
   //   async function validateClaim() {
-  //     const amount = '0.10';
-  //     const amountToWei = web3.utils.toWei(amount, 'ether');
-  //     sampleNFT.methods.whitelistMint(whitelistProof).call({ from: account, value: amountToWei }).then(() => {
+  //     sampleNFT.methods.mintWhitelist(whitelistProof).call({ from: account, value: amountToWei }).then(() => {
   //       setWhitelistClaimable(CLAIMABLE);
   //     }).catch((err) => {
   //       if (err.toString().includes('claimed')) { setWhitelistClaimable(ALREADY_CLAIMED)}
@@ -190,8 +204,7 @@ const Hero = () => {
   //   }
   //   validateClaim();
   // // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [whitelistProof])
-
+  // }}, [whitelistProof])
 
 
   return (
@@ -221,9 +234,9 @@ const Hero = () => {
               className="rounded-md"
             />
           </div>
-          
 
-          {stage > 1 && !claimed ? (
+
+          {stage == 2 ? (
             <>
               {/* Minted NFT Ratio */}
               <p className=" bg-gray-100 rounded-md text-gray-800 font-bold text-lg my-4 py-1 px-3">
@@ -259,9 +272,7 @@ const Hero = () => {
 
                 <button
                   className="flex items-center justify-center w-12 h-12 bg-white rounded-md text-black hover:bg-gray-200 text-center "
-
                   onClick={incrementCount}
-
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -287,11 +298,12 @@ const Hero = () => {
 
               {/* Mint Button */}
               {/* {!status || status.toString().includes("Something") || JSON.stringify(status).includes("transaction") ? */}
+
               <button
                 disabled={!currentChainId ||
                   currentChainId !== ChainId.Rinkeby || status || !account}
                 className="mt-6 py-2 px-4 text-center text-white uppercase bg-[#222222] border-b-4 border-orange-700 rounded  hover:border-orange-400 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none"
-                onClick={mintCryptid}
+                onClick={onMintWhitelist}
               >
                 Mint Cryptid
               </button>
@@ -300,9 +312,9 @@ const Hero = () => {
           ) : (
             <p className="text-white text-2xl mt-8 text-center">
               {/* Whitelist Sale Begins in {" "} <br></br> */}
-              
-            {timerComponents.length ?<span>Whitelist Sale will begin in... <br></br> {timerComponents}</span>  : <span>Whitelist Sale will be starting soon...</span>}
-          
+
+              {timerComponents.length ? <span>Whitelist Sale will begin in... <br></br> {timerComponents}</span> : <span>Whitelist Sale will be starting soon...</span>}
+
             </p>
           )}
 

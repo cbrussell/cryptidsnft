@@ -55,7 +55,7 @@ contract CryptidToken is ERC721, ERC721Enumerable, Pausable, Ownable, Reentrancy
 
     // Public Sale (stage=4)
     uint256 public totalSaleSupply;         
-    uint256 public salePrice = 0.1 ether;  
+    uint256 public salePrice = 0.10 ether;  
 
     Stage public stage;
 
@@ -237,6 +237,13 @@ contract CryptidToken is ERC721, ERC721Enumerable, Pausable, Ownable, Reentrancy
             tokensIds[i] = tokenOfOwnerByIndex(owner, i);
         }
         return tokensIds;
+    }
+
+    function verify(bytes32[] calldata merkleProof) external view returns (bool) {
+        if (merkleProof.verify(merkleRoot, keccak256(abi.encodePacked(msg.sender)))) {
+            return true;
+        }
+        return false;
     }
     
     function _beforeTokenTransfer(address from, address to, uint256 tokenId) internal whenNotPaused override(ERC721, ERC721Enumerable) {
