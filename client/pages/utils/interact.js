@@ -10,27 +10,18 @@ const cryptidTokenNFTInterface = new utils.Interface(cryptidTokenABI);
 
 const nftContract = new Contract(address, cryptidTokenNFTInterface)
 
-
-
-export const whitelistMint = async (proof) => {
-  const amount = '0.10';
-  const amountToWei = utils.parseEther(amount.toString())
-  const { state: whitelistMintState, send: whitelistMintSend } = useContractFunction(nftContract, "whitelistMint", {});
-  await whitelistMintSend(proof, {value: amountToWei});
-  return whitelistMintState;
-};
-
-
 export function getMaxMintAmount() {
-
-  const value =  useCall({ 
+  const {value, error } =  useCall({ 
     contract: nftContract, 
     method: "maxMintPerTx", 
-    args: [],
-  });
-  return value;
+  }) ?? {};
+  if (error) {
+    console.error(error.message)
+    return undefined;
+  } else {
+    return value?.[0]
+  }
 }
-
 
 export function getSalePrice() {
   const {value, error} =  useCall({ 
@@ -38,28 +29,27 @@ export function getSalePrice() {
     method: "salePrice", 
     args: [],
   }) ?? {} ;
-  const weiValue = (value?.[0].toString())/(1000000000000000000)
+  const weiValue = parseInt(value?.[0]).toString()
+  // var weiValue = utils.toBigNumber(value?.[0]);
+  // const weiValue = parseInt((value?.[0]).toString())
 
-  // const etherValue = formatEther(weiValue)
 
+  // const ether = Web3.utils.fromWei(weiValue, 'ether')
 
   if (error) {
     console.error(error.message)
     return undefined;
   } else {
-
     return weiValue;
   }
 }
 
 export function getStage() {
-
   const { value, error } =  useCall({ 
     contract: nftContract, 
     method: "stage", 
     args: [],
   }) ?? {};
-  
   if (error) {
     console.error(error.message)
     return undefined;
@@ -68,15 +58,12 @@ export function getStage() {
   }
 }
 
-
 export function getTotalSupply() {
-
   const { value, error } =  useCall({ 
     contract: nftContract, 
     method: "totalSupply", 
     args: [],
   }) ?? {};
-  
   if (error) {
     console.error(error.message)
     return undefined;
@@ -85,97 +72,27 @@ export function getTotalSupply() {
   }
 }
 
-
 export function getOwner() {
-
-  const value =  useCall({ 
+  const { value, error } =  useCall({ 
     contract: nftContract, 
     method: "owner", 
     args: [],
-  });
-  return value;
+  }) ?? {};
+  if (error) {
+    console.error(error.message)
+    return undefined;
+  } else {
+    return value?.[0]
+  }
 }
 
-// export const getOwner = async (account) => {
-//   if (account) {
-//     const owner = await nftContract.methods.owner().call();
-//     if (account == owner) {
-//       return true;
-//     } else {
-//       return false;
-//     }
-//   }
-// }
-
-
-// export const getTotalSupply = async () => {
-//   const result = await nftContract.methods.totalSupply().call();
-//   return result;
+// export const whitelistMint = async (proof) => {
+//   const amount = '0.10';
+//   const amountToWei = utils.parseEther(amount.toString())
+//   const { state: whitelistMintState, send: whitelistMintSend } = useContractFunction(nftContract, "whitelistMint", {});
+//   await whitelistMintSend(proof, {value: amountToWei});
+//   return whitelistMintState;
 // };
-
-
-// export const getStage = async () => {
-//   const result = await nftContract.methods.stage().call();
-//   return result;
-// };
-
-
-// export function getSalePrice() {
-//   const { value, error } =  
-//     useCall({
-//       contract: nftContract, 
-//       method: "salePrice", 
-//       args: [],
-//      }) ?? {};
-//      console.log("error is " + error)
-
-//      if (error) {
-//        console.error("Error", error.message);
-//        return undefined;
-//      }1
-
-//      return { error, data: value?.[0] };
-//     }
-
-
-
-// export function useTotalSupply() {
-//   const totalSupply = useContractCall({
-//     abi: abiInterface,
-//     address: tokenAddress,
-//     method: "totalSupply",
-//     args: [],
-//   });
-
-//   return totalSupply;
-// }
-
-// export function getMaxMintAmount() {
-//   const result = useCall({
-//     contract: createStakeContrcat(process.env.REACT_APP_STAKE_ADDRESS),
-//     method: "stakingBalances",
-//     args: [address, account],
-//   });
-
-//   return result;
-// }
-
-
-// export const getMaxMintAmount = async () => {
-//   const result = await nftContract.methods.maxMintPerTx().call();
-//   return result;
-// };
-
-
-
-
-
-
-
-
-
-
-
 
 // export const mintWhitelist = async (account, proof) => {
 //   console.log('minting whitelist...');
