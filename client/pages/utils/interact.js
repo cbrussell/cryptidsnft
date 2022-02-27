@@ -1,9 +1,9 @@
-import { Contract, utils, BigNumber, formatEther } from "ethers";
-import { useContractFunction, useContractCall, useCall } from "@usedapp/core"
-import cryptidTokenNFT from "../../../contract/build/deployments/4/0x2F8C0A3da39910Ff83072F330000C93588885Dc5.json";
+import { Contract, utils} from "ethers";
+import { useCall } from "@usedapp/core"
+import cryptidTokenNFT from "../../../contract/build/deployments/4/0x09E9A7e35399433f5dfD33D56c4111B982E2D0f7.json";
 
-const address = "0x2F8C0A3da39910Ff83072F330000C93588885Dc5";
-// const abi = require(`../../../contract/build/deployments/4/0x2F8C0A3da39910Ff83072F330000C93588885Dc5.json`);
+const address = "0x09E9A7e35399433f5dfD33D56c4111B982E2D0f7";
+
 const { abi: cryptidTokenABI } = cryptidTokenNFT;
 
 const cryptidTokenNFTInterface = new utils.Interface(cryptidTokenABI);
@@ -23,26 +23,27 @@ export function getMaxMintAmount() {
   }
 }
 
-export function getSalePrice() {
-  const {value, error} =  useCall({ 
-    contract: nftContract, 
-    method: "salePrice", 
-    args: [],
-  }) ?? {} ;
-  const weiValue = parseInt(value?.[0]).toString()
+// export function getSalePrice() {
+//   const {value, error} =  useCall({ 
+//     contract: nftContract, 
+//     method: "salePrice", 
+//     args: [],
+//   }) ?? {} ;
+//   const weiValue = parseInt(value?.[0]).toString()
+  // console.log(weiValue)
   // var weiValue = utils.toBigNumber(value?.[0]);
   // const weiValue = parseInt((value?.[0]).toString())
 
 
   // const ether = Web3.utils.fromWei(weiValue, 'ether')
 
-  if (error) {
-    console.error(error.message)
-    return undefined;
-  } else {
-    return weiValue;
-  }
-}
+//   if (error) {
+//     console.error(error.message)
+//     return undefined;
+//   } else {
+//     return weiValue;
+//   }
+// }
 
 export function getStage() {
   const { value, error } =  useCall({ 

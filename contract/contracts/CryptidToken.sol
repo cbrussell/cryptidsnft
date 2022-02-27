@@ -55,7 +55,7 @@ contract CryptidToken is ERC721, ERC721Enumerable, Pausable, Ownable, Reentrancy
 
     // Public Sale (stage=4)
     uint256 public totalSaleSupply;         
-    uint256 public salePrice = 0.10 ether;  
+    uint256 public salePrice = 0.01 ether;  
 
     Stage public stage;
 
@@ -198,6 +198,10 @@ contract CryptidToken is ERC721, ERC721Enumerable, Pausable, Ownable, Reentrancy
 
     function setWithdrawlAddress(address _withdrawlAddress) external onlyOwner {
         withdrawlAddress = _withdrawlAddress;
+    }
+
+    function setSalePrice(uint256 _salePrice) external onlyOwner {
+        salePrice = _salePrice;
     }
 
     function withdraw() external payable onlyOwner {

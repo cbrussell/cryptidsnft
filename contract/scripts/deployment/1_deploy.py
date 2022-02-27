@@ -16,11 +16,16 @@ def main():
         "test",     # name
         "test",      # symbol
         "ipfs://QmW4kLda1gmhFKnBU1qJvyCvDm8g9P4GKoiNcEB972Q9rD/",             # base
-        3000,           # presale supply
-        500,            # team supply
-        10000,          # total supply
+        100,           # presale supply
+        100,            # team supply
+        300,          # total supply
         5,              # max mint per tx
         {"from": dev},  # 129729334, 139723666 for arb, add:  "gas_limit": 80000000000, "allow_revert": True
         publish_source=True,
     )
+
+    print(f'Success! Contract deployed at {cryptids}')
+
+    print(f'See transaction here: https://rinkeby.etherscan.io/tx/{cryptids}\n')
+
     return cryptids

@@ -9,7 +9,7 @@ import { formatEther } from '@ethersproject/units'
 import MetaMaskSvg from "../public/images/metamask.svg";
 import WalletConnectSvg from "../public/images/walletconnect.svg";
 import Coinbase from "../public/images/coinbase.png";
-import { useEthers, shortenAddress, getChainName, ChainId, chainName, useEtherBalance, useTokenBalance} from "@usedapp/core";
+import { useEthers, shortenAddress, getChainName, ChainId, chainName, useEtherBalance, useTokenBalance, useLookupAddress} from "@usedapp/core";
 import { WalletLinkConnector } from "@web3-react/walletlink-connector";
 import { WalletConnectConnector } from "@web3-react/walletconnect-connector";
 require('typeface-exo')
@@ -32,17 +32,32 @@ const Header = () => {
 
   const { activateBrowserWallet, account, activate, chainId: currentChainId } = useEthers();
   const etherBalance = useEtherBalance(account);
-  console.log(account);
-  console.log(getChainName(currentChainId));
+  // console.log("Account is " + account)
+
+ 
+  const accountName = useLookupAddress()
+
+  // console.log("Current Account is " + account);
+  console.log("Current Chain is " + getChainName(currentChainId));
+
+
+  useEffect(() => {
+    if (!account) {
+      setStatus("🦊 Connect to Metamask using the Connect Wallet button.") 
+    } else {
+      setStatus("")
+    }
+    
+  }, [account]); // eslint-disable-line react-hooks/exhaustive-deps
+
 
   const { setStatus } = useStatus();
+  // const [etherBalance, setEtherBalance] = useState(0)
 
-  const [walletAddress, setWalletAddress] = useState("");
-  // const [chainId, setChainId] = useState("");
-  // const chainId = useChainId();
-
-
-
+  // useEffect(() => {
+  //   console.log("Ether Balance is  " + etherBalanceCalculated);
+  //   if (etherBalanceCalculated) setEtherBalance(etherBalanceCalculated);
+  // }, [etherBalanceCalculated]);
 
   const switchToArbitrum = async () => {
     if (window.ethereum) {
@@ -71,7 +86,7 @@ const Header = () => {
               ],
             });
           } catch (addError) {
-            console.log("Something went wrong while switching networks.");
+            setStatus("Something went wrong while switching networks.");
           }
         }
       }
@@ -82,13 +97,15 @@ const Header = () => {
 
   const [isOpenWalletModal, setIsOpenWalletModal] = useState(false);
 
+
   useEffect(() => {
     if (!account) {
       setStatus("🦊 Connect to Metamask using the Connect Wallet button.") 
     } else {
       setStatus("")
-    }
 
+    }
+    
   }, [account]); // eslint-disable-line react-hooks/exhaustive-deps
 
 
@@ -263,7 +280,7 @@ const Header = () => {
                 </span>
               </div>
               <div className="flex items-center px-2 sm:px-3  justify-center  md:text-center py-2 rounded-lg dark:bg-cryptid-5  text-white text-semibold exo-font sm:text-base text-lg">
-                {shortenAddress(account)}
+                {accountName ?? shortenAddress(account)}
               </div>
             </div>
           ) : (
