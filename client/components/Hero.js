@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { useStatus } from "../context/statusContext";
 import useSWR from 'swr'
-import { useContractFunction, ChainId, useEthers, useEtherBalance } from "@usedapp/core";
+import { useContractFunction, ChainId, useEthers, useEtherBalance, useContractCall } from "@usedapp/core";
 import {
-  getMaxMintAmount,
-  getTotalSupply,
-  mintNFT,
-  getStage,
-  getOwner,
+  GetMaxMintAmount,
+  GetTotalSupply,
+  GetStage,
+  Verify,
+  GetOwner,
   whitelistMint,
   checkIfClaimed,
 } from "../pages/utils/interact"
@@ -30,33 +30,31 @@ const Hero = () => {
   const [totalSupply, setTotalSupply] = useState(0);
   // const [nftPrice, setNftPrice] = useState(10000000000000000);
 
-  const nftPrice = 100000000000000000
+  const nftPrice = 10000000000000000
 
   const [stage, setStage] = useState(0);
   const [minting, setMinting] = useState(false)
+
   const [claimed, setClaimed] = useState(false);
+
   const [whitelistClaimable, setWhitelistClaimable] = useState(false);
+  const [alreadyClaimed, setAlreadyClaimed] = useState(false);
+
   const [owner, setOwner] = useState("");
 
 
   const fetcher = (url) => fetch(url).then((res) => res.json());
 
-  const maxMintCalculated = getMaxMintAmount();
+  const maxMintCalculated = GetMaxMintAmount();
 
   // const salePriceCalculated = getSalePrice();
 
-  const stageCalculated = getStage();
+  const stageCalculated = GetStage();
 
-  const totalSupplyCalculated = getTotalSupply();
+  const totalSupplyCalculated = GetTotalSupply();
 
-  const ownerCalculated = getOwner();
+  const ownerCalculated = GetOwner();
 
-
-
-
-
-
-  
   const { abi: cryptidTokenABI } = cryptidTokenNFT;
   const cryptidTokenNFTInterface = new utils.Interface(cryptidTokenABI);
 
@@ -111,6 +109,9 @@ const Hero = () => {
     }
   };
 
+
+  // whitelist functions
+
   let whitelistProof = [];
   let whitelistValid = false;
   const whitelistRes = useSWR(stage < 3 && account ? `/api/whitelistProof?address=${account}` : null, {
@@ -120,11 +121,57 @@ const Hero = () => {
     const { proof, valid } = whitelistRes.data;
     // console.log(proof)
     whitelistProof = proof;
-    whitelistValid = valid;
+    whitelistValid = true;
   }
 
+  // console.log(whitelistProof);
+  // const bool = Verify(account, whitelistProof);
+  // console.log("Bool is " + bool);
 
-  const { state: whitelistMintState, send: sendWhitelistMint } = useContractFunction(contract, 'whitelistMint', {})
+
+
+  // useEffect(() => {
+  //   console.log("Is claimeable? " + whitelistClaimable)
+  //   if (whitelistClaimable) setWhitelistClaimable(whitelistValid);;
+  // }, []);
+
+
+
+
+
+
+  // While before stage 3, check if user is on WL 
+
+  // useEffect(() => {
+  //   if (stage > 2 || !whitelistValid) {
+  //     setWhitelistClaimable(false);
+  //     setClaimed(false);
+  //     return;
+  //   } else {
+  //   // setWhitelistClaimable(true)
+    
+
+  //   const bool = Verify(whitelistProof);
+  // // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }}, [whitelistProof])
+
+
+
+
+  
+
+
+  // const handleMint = async (id: number) => {
+  //   await sendClaim(id)
+  // }
+
+  // const { state, send } = useContractFunction(contract, 'mint', {
+  //   transactionName: 'Mint'
+  // })
+
+  // const spendEther = (ethAmount: string) => {
+  //   send(proof)
+  // }
 
   useEffect(() => {
     if (account && library) {
@@ -133,27 +180,18 @@ const Hero = () => {
     console.log(library);
   }, [account, library])
 
-
-  const price = '0.10';
-  // const amountToWei = utils.parseEther(amount)
-
-  const handleWhitelistMint = async () => {
-    sendWhitelistMint(proof,{ value: amountToWei} )
-  }
-
-
-
   const { state: publicMintState, send: sendPublicMint } = useContractFunction(contract, 'publicMint', { transactionName: 'publicMint' })
+  const { state: whitelistMintState, send: sendWhitelistMint } = useContractFunction(contract, 'whitelistMint', { transactionName: 'whitelistMint' })
+ 
   const etherBalance = useEtherBalance(account)
-  // const amountToWei = utils.parseEther(price) * count
+  const PRICE_PER_MINT = parseEther('0.01');
 
   const handlePublicMint = async () => {
-    const PRICE_PER_MINT = parseEther('0.01');
+    
     const ethTotal = PRICE_PER_MINT.mul(count);
 
     if ( formatEther(etherBalance) < formatEther((nftPrice * count).toString())) {
       console.log("User Ether Balance is " + etherBalance)
-      // console.log("Required amount of Ether to mint is " + Web3.utils.fromWei((nftPrice * count).toString(), 'ether'))
       setStatus('Not enough balance for this purchase')
       return
     }
@@ -164,9 +202,7 @@ const Hero = () => {
     } catch (err) {
       setStatus("😞Error: " + err.message);
     }
-
     if (gas) {
-
     console.log("Total required ETH for transaction is " + ethTotal + "wei");
     sendPublicMint(count, { gasLimit: gas.mul(115).div(100), value: ethTotal} )
     console.log("Gas estimate worked!");
@@ -174,9 +210,7 @@ const Hero = () => {
     } else {
       console.log("Error: Gas estimate DID NOT work.");
       sendPublicMint(count, {value: ethTotal} )
-
     }
-    
   }
 
   // console.log({state})
@@ -187,7 +221,7 @@ const Hero = () => {
     }
     if (whitelistMintState.status === 'PendingSignature' || publicMintState.status === 'PendingSignature') {
       setStatus(
-        <p>{" "}Pending signature<span class="dots"><span>.</span><span>.</span><span>.</span></span>
+        <p>{" "}Pending signature<span className="dots"><span>.</span><span>.</span><span>.</span></span>
         </p>
       )
       setMinting(true);
@@ -195,7 +229,7 @@ const Hero = () => {
     if (whitelistMintState.status === 'Mining' || publicMintState.status === 'Mining') {
       setStatus(
         <p>
-          {" "}The transaction is in progress<span class="dots"><span>.</span><span>.</span><span>.</span></span>
+          {" "}The transaction is in progress<span className="dots"><span>.</span><span>.</span><span>.</span></span>
         </p>
       )
       setMinting(true);
@@ -208,7 +242,7 @@ const Hero = () => {
       setStatus((
         <p>
           {" "}
-          🦊 Check out your transaction on Etherscan: <a target="_blank" href={`https://rinkeby.etherscan.io/tx/` + whitelistMintState.receipt.transactionHash} className="alert">
+          🦊 Check out your transaction on Etherscan: <a target="_blank" rel="noreferrer" href={`https://rinkeby.etherscan.io/tx/` + whitelistMintState.receipt.transactionHash} className="alert">
             {"https://rinkeby.etherscan.io/tx/" + whitelistMintState.receipt.transactionHash}
           </a>
         </p>
@@ -220,7 +254,7 @@ const Hero = () => {
       setStatus((
         <p>
           {" "}
-          🦊 Success! Check out your transaction on Etherscan: <a target="_blank" href={`https://rinkeby.etherscan.io/tx/` + publicMintState.receipt.transactionHash} className="alert">
+          🦊 Success! Check out your transaction on Etherscan: <a target="_blank" rel="noreferrer" href={`https://rinkeby.etherscan.io/tx/` + publicMintState.receipt.transactionHash} className="alert">
             {"https://rinkeby.etherscan.io/tx/" + publicMintState.receipt.transactionHash}
           </a>
         </p>
@@ -290,25 +324,6 @@ const Hero = () => {
 
 
 
-  // While before stage 3, check if user is on WL 
-
-  // useEffect(() => {
-  //   if (stage > 2 || !whitelistValid) {
-  //     setWhitelistClaimable(false);
-  //     setClaimed(false);
-  //     return;
-  //   } else {
-  //   async function validateClaim() {
-  //     sampleNFT.methods.mintWhitelist(whitelistProof).call({ from: account, value: amountToWei }).then(() => {
-  //       setWhitelistClaimable(CLAIMABLE);
-  //     }).catch((err) => {
-  //       if (err.toString().includes('claimed')) { setWhitelistClaimable(ALREADY_CLAIMED)}
-  //       else { setWhitelistClaimable(NOT_CLAIMABLE) }
-  //     });
-  //   }
-  //   validateClaim();
-  // // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }}, [whitelistProof])
 
 
   return (

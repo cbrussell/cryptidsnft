@@ -31,7 +31,70 @@ const walletconnect = new WalletConnectConnector({
 const Header = () => {
 
   const { activateBrowserWallet, account, activate, chainId: currentChainId } = useEthers();
-  const etherBalance = useEtherBalance(account);
+
+  // const [etherBalance, setEtherBalance] = useState(useEtherBalance(account));
+
+  
+  const etherBalance = useEtherBalance(account)
+
+  // console.log(etherBalanceCalculated);
+
+  // useEffect(() => {
+  //   console.log("Current account Ether balance is ", etherBalance);
+  //   if (etherBalanceCalculated) try {
+  //     const balance = useEtherBalance(account);
+  //     const formatted = formatEther(balance);
+  //     console.log(formatted);
+  //     setEtherBalance(formatted);
+  //   } catch(err) {
+  //     console.log('err', err);
+  //     setEtherBalance(0);
+  //   }
+  // }, [etherBalanceCalculated]);
+
+  // console.log(etherBalance);
+
+
+  // useEffect(() => {
+  //   if (!account) {
+  //     return;
+  //   }
+  //     async function checkNFTBalance() {
+  //       useEtherBalance(account).then((result) => {
+  //       setEtherBalance(result);
+  //     }).catch((err) => {
+  //       console.error('err', err);
+  //       setEtherBalance(0);
+  //     });
+  //   }
+  // checkNFTBalance();
+  // }, [account]);
+      
+      
+      
+  //     )
+  //     }
+  //   } catch(err) {
+  //     console.error(err)
+  //   }
+  //   async function checkNFTBalance() {
+  //     sampleNFT.methods.balanceOf(account).call().then((result) => {
+  //       const resultFloat = parseFloat(result, 10);
+  //       setTokenBalance(resultFloat);
+  //     }).catch((err) => {
+  //       console.error('err', err);
+  //       setTokenBalance(0);
+  //     });
+  //   }
+  //   checkNFTBalance();
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [account]);
+  
+  // useEffect(() => {
+  //   console.log("Ether Balance is  " + etherBalanceCalculated);
+  //   if (etherBalanceCalculated) setEtherBalance(etherBalanceCalculated);
+  // }, [etherBalanceCalculated]);
+
   // console.log("Account is " + account)
 
  
@@ -52,12 +115,10 @@ const Header = () => {
 
 
   const { setStatus } = useStatus();
-  // const [etherBalance, setEtherBalance] = useState(0)
 
-  // useEffect(() => {
-  //   console.log("Ether Balance is  " + etherBalanceCalculated);
-  //   if (etherBalanceCalculated) setEtherBalance(etherBalanceCalculated);
-  // }, [etherBalanceCalculated]);
+ 
+
+
 
   const switchToArbitrum = async () => {
     if (window.ethereum) {
@@ -85,7 +146,8 @@ const Header = () => {
                 },
               ],
             });
-          } catch (addError) {
+          } 
+          catch (addError) {
             setStatus("Something went wrong while switching networks.");
           }
         }
@@ -103,7 +165,6 @@ const Header = () => {
       setStatus("🦊 Connect to Metamask using the Connect Wallet button.") 
     } else {
       setStatus("")
-
     }
     
   }, [account]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -271,7 +332,8 @@ const Header = () => {
               <div className="px-2 sm:px-3 py-1 sm:py-2 flex items-center justify-center  md:text-center">
                 <span className="text-white block exo-font sm:text-base text-lg ">
 
-                  {etherBalance && <p>{Intl.NumberFormat().format(parseFloat(formatEther(etherBalance)))}</p>}
+                  {etherBalance && parseFloat(formatEther(etherBalance)).toFixed(3)}
+                  {/* && <p>{Intl.NumberFormat().format(parseFloat(formatEther(etherBalance))) */}
 
 
                 </span>{" "}

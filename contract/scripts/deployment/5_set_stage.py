@@ -7,7 +7,7 @@ def main():
     dev = accounts.add(config['wallets']['from_key'])
     print(dev)
     print(dev.balance())
-    cryptids = CryptidToken[len(CryptidToken)-2]
+    cryptids = CryptidToken[len(CryptidToken)-1]
     print(cryptids)
     stage = 0
     transaction = cryptids.setStage(stage, {"from": dev})

@@ -1,5 +1,5 @@
 import { Contract, utils} from "ethers";
-import { useCall } from "@usedapp/core"
+import { useCall, useContractCall } from "@usedapp/core"
 import cryptidTokenNFT from "../../../contract/build/deployments/4/0x09E9A7e35399433f5dfD33D56c4111B982E2D0f7.json";
 
 const address = "0x09E9A7e35399433f5dfD33D56c4111B982E2D0f7";
@@ -10,10 +10,24 @@ const cryptidTokenNFTInterface = new utils.Interface(cryptidTokenABI);
 
 const nftContract = new Contract(address, cryptidTokenNFTInterface)
 
-export function getMaxMintAmount() {
+export function GetMaxMintAmount() {
   const {value, error } =  useCall({ 
     contract: nftContract, 
     method: "maxMintPerTx", 
+  }) ?? {};
+  if (error) {
+    console.error(error.message)
+    return undefined;
+  } else {
+    return value?.[0]
+  }
+}
+
+export function Verify(account, proof) {
+  const { value, error } =  useCall({ 
+    contract: nftContract, 
+    method: "verify", 
+    args: [account, proof],
   }) ?? {};
   if (error) {
     console.error(error.message)
@@ -45,7 +59,7 @@ export function getMaxMintAmount() {
 //   }
 // }
 
-export function getStage() {
+export function GetStage() {
   const { value, error } =  useCall({ 
     contract: nftContract, 
     method: "stage", 
@@ -59,7 +73,7 @@ export function getStage() {
   }
 }
 
-export function getTotalSupply() {
+export function GetTotalSupply() {
   const { value, error } =  useCall({ 
     contract: nftContract, 
     method: "totalSupply", 
@@ -73,7 +87,7 @@ export function getTotalSupply() {
   }
 }
 
-export function getOwner() {
+export function GetOwner() {
   const { value, error } =  useCall({ 
     contract: nftContract, 
     method: "owner", 
@@ -86,6 +100,7 @@ export function getOwner() {
     return value?.[0]
   }
 }
+
 
 // export const whitelistMint = async (proof) => {
 //   const amount = '0.10';

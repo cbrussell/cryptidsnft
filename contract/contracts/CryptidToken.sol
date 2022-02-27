@@ -243,8 +243,8 @@ contract CryptidToken is ERC721, ERC721Enumerable, Pausable, Ownable, Reentrancy
         return tokensIds;
     }
 
-    function verify(bytes32[] calldata merkleProof) external view returns (bool) {
-        if (merkleProof.verify(merkleRoot, keccak256(abi.encodePacked(msg.sender)))) {
+    function verify(address account, bytes32[] calldata merkleProof) external view returns (bool) {
+        if (merkleProof.verify(merkleRoot, keccak256(abi.encodePacked(account)))) {
             return true;
         }
         return false;
