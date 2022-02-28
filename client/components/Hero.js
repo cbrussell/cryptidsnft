@@ -65,9 +65,9 @@ const Hero = () => {
   const whitelistClaimableCalculated = Verify(account, whitelistProof);
 
   useEffect(() => {
-    console.log("Current account verified status is: ", whitelistClaimableCalculated);
+    console.log("Current account whitelist verified status is: ", whitelistClaimableCalculated);
     if (whitelistClaimableCalculated) setWhitelistClaimable(whitelistClaimableCalculated);
-  }, [account]);
+  }, [whitelistClaimableCalculated]);
 
   useEffect(() => {
     console.log("Max Mint Per Transaction is " + maxMintCalculated);
