@@ -2,28 +2,25 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { useStatus } from "../context/statusContext";
 import useSWR from 'swr'
-import { useContractFunction, ChainId, useEthers, useEtherBalance, useContractCall } from "@usedapp/core";
+import { useContractFunction, ChainId, useEthers, useEtherBalance, shortenAddress} from "@usedapp/core";
 import {
   GetMaxMintAmount,
   GetTotalSupply,
   GetStage,
   Verify,
   GetOwner,
-  whitelistMint,
   GetSalePrice,
   CheckIfClaimed,
 } from "../utils/interact"
 import { parseEther, formatEther } from '@ethersproject/units'
 import { Contract, utils } from 'ethers';
-import cryptidTokenNFT from "../../contract/build/deployments/4/0x4Dab02640555ff4A70Dc677a90D7c8B01bDC1AAa.json";
+import cryptidTokenNFT from "../../contract/build/deployments/4/0xF2dF6f027c2eCb355A219ca1a317c6825A38cAbb.json";
 
 
 const Hero = () => {
-  
-  
+  const address = "0xF2dF6f027c2eCb355A219ca1a317c6825A38cAbb";
   const { account, chainId: currentChainId, library, BigNumber } = useEthers();
   const { status, setStatus } = useStatus();
-
   const [count, setCount] = useState(1);
   const [maxMintAmount, setMaxMintAmount] = useState(0);
   const [totalSupply, setTotalSupply] = useState(0);
@@ -34,21 +31,20 @@ const Hero = () => {
   const [whitelistClaimable, setWhitelistClaimable] = useState(false);
   const [owner, setOwner] = useState("");
 
+
   const fetcher = (url) => fetch(url).then((res) => res.json());
   const maxMintCalculated = GetMaxMintAmount();
   const nftPriceCalculated = GetSalePrice();
   const stageCalculated = GetStage();
   const totalSupplyCalculated = GetTotalSupply();
   const ownerCalculated = GetOwner();
-
-
   const etherBalance = useEtherBalance(account);
   const claimedCalculated = CheckIfClaimed(account);
 
-  const address = "0x4Dab02640555ff4A70Dc677a90D7c8B01bDC1AAa";
   const { abi: cryptidTokenABI } = cryptidTokenNFT;
   const cryptidTokenNFTInterface = new utils.Interface(cryptidTokenABI);
   const [contract, setContract] = useState(new Contract(address, cryptidTokenNFTInterface))
+
 
   let whitelistValid = false;
   let whitelistProof = [];
@@ -88,7 +84,7 @@ const Hero = () => {
     console.log("The Current Stage is " + stageCalculated);
     if (stageCalculated) setStage(stageCalculated);
   }, [stageCalculated]);
-  
+
   useEffect(() => {
     console.log("Current Minted Supply is " + totalSupplyCalculated);
     if (totalSupplyCalculated) setTotalSupply(totalSupplyCalculated);
@@ -118,44 +114,45 @@ const Hero = () => {
     console.log(library);
   }, [account, library])
 
-  const { state: publicMintState, send: sendPublicMint } = useContractFunction(contract, 'publicMint', { transactionName: 'publicMint' })
-  const { state: whitelistMintState, send: sendWhitelistMint } = useContractFunction(contract, 'whitelistMint', { transactionName: 'whitelistMint' })
- 
-  const handlePublicMint = async () => {
+  const { state: publicMintState, send: sendPublicMint } = useContractFunction(contract, 'publicMint', {})
   
+  const handlePublicMint = async () => {
+
     const ethTotal = (nftPrice * count).toString()
 
-    if ( formatEther(etherBalance) < formatEther((nftPrice * count).toString())) {
-      console.log("User Ether Balance is " + myEther)
+    if (formatEther(etherBalance) < formatEther((nftPrice * count).toString())) {
+      console.log("User Ether Balance is " + formatEther(etherBalance))
       setStatus('Error: Not enough ether for this purchase')
       return
     }
     let gas;
     try {
-      gas = await contract.estimateGas.publicMint(count, {value: ethTotal});
+      gas = await contract.estimateGas.publicMint(count, { value: ethTotal });
       console.log("Gas estimate is set to " + gas);
     } catch (err) {
       setStatus("😞Error: " + err.message);
     }
     if (gas) {
-    console.log("Total required ETH for transaction is ", ethTotal, " wei");
-    sendPublicMint(count, { gasLimit: gas.mul(115).div(100), value: ethTotal} )
-    console.log("Gas estimate worked!");
-    
+      console.log("Total required ETH for transaction is ", ethTotal, " wei");
+      sendPublicMint(count, { gasLimit: gas.mul(115).div(100), value: ethTotal })
+      console.log("Gas estimate worked!");
+
     } else {
       console.log("Error: Gas estimate DID NOT work.");
-      sendPublicMint(count, {value: ethTotal} )
+      sendPublicMint(count, { value: ethTotal })
     }
   }
+
+  const { state: whitelistMintState, send: sendWhitelistMint } = useContractFunction(contract, 'whitelistMint', {})
+
 
 
   const handleWhitelistMint = async () => {
 
+    const ethTotal = (nftPrice).toString()
 
-    const ethTotal = (nftPrice * count).toString()
-
-    if ( formatEther(etherBalance) < formatEther((nftPrice * count).toString())) {
-      console.log("User Ether Balance is " + myEther)
+    if (formatEther(etherBalance) < formatEther((nftPrice * count).toString())) {
+      console.log("User Ether Balance is " + formatEther(etherBalance))
       setStatus('Error: Not enough ether for this purchase')
       return
     }
@@ -171,23 +168,28 @@ const Hero = () => {
       setStatus("Error: Whitelist mint is already claimed")
     }
 
+
+
     let gas;
     try {
-      gas = await contract.estimateGas.whitelistMint(proof, {value: ethTotal});
+      gas = await contract.estimateGas.whitelistMint(whitelistProof, { value: ethTotal });
       console.log("Gas estimate is set to " + gas);
     } catch (err) {
       setStatus("😞Error: " + err.message);
     }
     if (gas) {
-    console.log("Total required ETH for transaction is ", ethTotal, " wei");
-    sendPublicMint(count, { gasLimit: gas.mul(115).div(100), value: ethTotal} )
-    console.log("Gas estimate worked!");
-    
+      console.log("Total required ETH for transaction is ", ethTotal, " wei");
+      sendWhitelistMint(whitelistProof, { gasLimit: gas.mul(115).div(100), value: ethTotal })
+      console.log("Gas estimate worked!");
+
     } else {
       console.log("Error: Gas estimate DID NOT work.");
-      sendPublicMint(count, {value: ethTotal} )
+      sendWhitelistMint(whitelistProof, { value: ethTotal })
     }
+    console.log(whitelistMintState.status)
   }
+
+  console.log(whitelistMintState)
 
 
 
@@ -196,21 +198,22 @@ const Hero = () => {
     if (whitelistMintState.status === 'None' || publicMintState.status === 'None') {
       setMinting(false);
     }
-    if (whitelistMintState.status === 'PendingSignature' || publicMintState.status === 'PendingSignature') {
-      setStatus(
-        <p>{" "}<center>Pending signature<span className="dots"><span>.</span><span>.</span><span>.</span></span></center>
-        </p>
-      )
-      setMinting(true);
-    }
     if (whitelistMintState.status === 'Mining' || publicMintState.status === 'Mining') {
       setStatus(
         <p>
-          {" "}<center>Minting Cryptid!</center>The transaction is in progress<span className="dots"><span>.</span><span>.</span><span>.</span></span>
+          {" "}Minting Cryptid! The transaction is in progress<span className="dots"><span>.</span><span>.</span><span>.</span></span>
         </p>
       )
       setMinting(true);
     }
+    if (whitelistMintState.status === 'PendingSignature' || publicMintState.status === 'PendingSignature') {
+      setStatus(
+        <p>{" "}Pending signature<span className="dots"><span>.</span><span>.</span><span>.</span></span>
+        </p>
+      )
+      setMinting(true);
+    }
+    
     if (whitelistMintState.status === 'Exception' || publicMintState.status === 'Exception') {
       setStatus("Error:" + publicMintState.errorMessage)
       setMinting(false);
@@ -225,7 +228,7 @@ const Hero = () => {
         </p>
       ))
       setMinting(false);
-      
+
     }
     if (publicMintState.status === 'Success') {
       setStatus((
@@ -237,28 +240,29 @@ const Hero = () => {
         </p>
       ))
       setMinting(false);
-     
+
     }
     if (whitelistMintState.status === 'Fail' || publicMintState.status === 'Fail') {
       setStatus("There was an error during the transaction")
       setMinting(false);
     }
-  }, [whitelistMintState, publicMintState]) 
+  }, [whitelistMintState.status, publicMintState.status])
 
 
-  const onPublicMint = async () => {
-    const { success, status } = await mintPublic(account, numToMint);
-    console.log(status);
-    setPublicMintStatus(success);
-  };
+  // const onPublicMint = async () => {
+  //   const { success, status } = await mintPublic(account, numToMint);
+  //   console.log(status);
+  //   setPublicMintStatus(success);
+  // };
 
-  const calculateTimeLeft = () => {
-    let year = new Date().getFullYear();
+  // public timers
+
+  const calculateTimeLeftPublic = () => {
     const difference = +new Date('March 25 2022 16:00:00') - +new Date();
-    let timeLeft = {};
+    let timeLeftPublic = {};
 
     if (difference > 0) {
-      timeLeft = {
+      timeLeftPublic = {
         days: Math.floor(difference / (1000 * 60 * 60 * 24)),
         hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
         minutes: Math.floor((difference / 1000 / 60) % 60),
@@ -266,31 +270,74 @@ const Hero = () => {
       };
     }
 
-    return timeLeft;
+    return timeLeftPublic;
   };
 
-  const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
-  const [year] = useState(new Date().getFullYear());
+  const [timeLeftPublic, setTimeLeftPublic] = useState(calculateTimeLeftPublic());
+
 
   useEffect(() => {
     setTimeout(() => {
-      setTimeLeft(calculateTimeLeft());
+      setTimeLeftPublic(calculateTimeLeftPublic());
     }, 1000);
   });
 
-  const timerComponents = [];
+  const timerComponentsPublic = [];
 
-  Object.keys(timeLeft).forEach((interval) => {
-    if (!timeLeft[interval]) {
+  Object.keys(timeLeftPublic).forEach((interval) => {
+    if (!timeLeftPublic[interval]) {
       return;
     }
 
-    timerComponents.push(
+    timerComponentsPublic.push(
       <span>
-        {timeLeft[interval]} {interval}{" "}
+        {timeLeftPublic[interval]} {interval}{" "}
       </span>
     );
   })
+
+
+  // whitelist timer
+  const calculateTimeLeftWhitelist = () => {
+    const difference = +new Date('March 26 2022 10:00:00') - +new Date();
+    let timeLeftWhitelist = {};
+
+    if (difference > 0) {
+      timeLeftWhitelist = {
+        days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+        hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+        minutes: Math.floor((difference / 1000 / 60) % 60),
+        seconds: Math.floor((difference / 1000) % 60),
+      };
+    }
+
+    return timeLeftWhitelist;
+  };
+
+  const [timeLeftWhitelist, setTimeLeftWhitelist] = useState(calculateTimeLeftWhitelist());
+
+
+  useEffect(() => {
+    setTimeout(() => {
+      setTimeLeftWhitelist(calculateTimeLeftWhitelist());
+    }, 1000);
+  });
+
+  const timerComponentsWhitelist = [];
+
+  Object.keys(timeLeftWhitelist).forEach((interval) => {
+    if (!timeLeftWhitelist[interval]) {
+      return;
+    }
+
+    timerComponentsWhitelist.push(
+      <span>
+        {timeLeftWhitelist[interval]} {interval}{" "}
+      </span>
+    );
+  })
+
+
 
 
 
@@ -325,7 +372,121 @@ const Hero = () => {
           </div>
 
 
-          {stage > 5 ? (
+          {stage < 4 && !whitelistClaimable && account ? 
+          (
+            <p className="text-white text-2xl mt-8 text-center">
+              Account: {" "} {shortenAddress(account)} is not whitelisted. <br></br><br></br>
+
+              {timerComponentsPublic.length ? <span>Public Sale will begin in... <br></br> {timerComponentsPublic}</span> : <span>Public Sale will be starting soon...</span>}
+
+            </p>
+          )
+
+          : stage < 2 && whitelistClaimable && account && !claimed ? 
+            (
+              <p className="text-white text-2xl mt-8 text-center">
+                Account: {" "} {shortenAddress(account)} has 1 Whitelist Mint Available <br></br><br></br>
+  
+                {timerComponentsWhitelist.length ? <span>Whitelist Sale will begin in... <br></br> {timerComponentsPublic}</span> : <span>Whitelist Sale will be starting soon...</span>}
+  
+              </p>
+            ) 
+            
+            : stage == 2  && whitelistClaimable && account && !claimed  ? 
+            (
+            <>
+            <p className="text-white text-2xl mt-8 text-center">
+                Account: {" "} {shortenAddress(account)} has 1 Whitelist Mint Available <br></br><br></br>
+                </p>
+              {/* Minted NFT Ratio */}
+              <p className=" bg-gray-100 rounded-md text-gray-800 font-bold text-lg my-4 py-1 px-3">
+                <span className="text-[#d35c5c]">{`${totalSupply}`}</span> /
+                11,111
+              </p>
+
+              <div className="flex items-center mt-6 text-3xl font-bold text-gray-200">
+
+
+                <button
+                  className="flex items-center justify-center w-12 h-12 bg-white rounded-md hover:bg-gray-200 text-center disabled:bg-slate-50"
+                  // onClick={decrementCount}
+
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="w-6 h-6 text-[#d35c5c] "
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M20 12H4"
+                    />
+                  </svg>
+                </button>
+
+                <h2 className="mx-8">{count}</h2>
+
+                <button
+                  className="flex items-center justify-center w-12 h-12 bg-white rounded-md text-black hover:bg-gray-200 text-center "
+                  // onClick={incrementCount}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="w-6 h-6 text-[#d35c5c]"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M12 4v16m8-8H4"
+                    />
+                  </svg>
+                </button>
+              </div>
+
+              <h4 className="mt-2 font-semibold text-center text-white">
+
+                {formatEther((nftPrice * count).toString())} ETH{" "}
+
+                <span className="text-sm text-gray-300"> + GAS</span>
+              </h4>
+
+              {/* Mint Button */}
+              {/* {!status || status.toString().includes("Something") || JSON.stringify(status).includes("transaction") ? */}
+
+              <button
+                disabled={!currentChainId ||
+                  currentChainId !== ChainId.Rinkeby || !account }
+                className="mt-6 py-2 px-4 text-center text-white uppercase bg-[#222222] border-b-4 border-orange-700 rounded  hover:border-orange-400 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none"
+                onClick={handleWhitelistMint}
+              >
+                Mint Cryptid
+              </button>
+
+            </> ) : stage < 4  && whitelistClaimable && account && claimed ? 
+
+
+
+(
+  <p className="text-white text-2xl mt-8 text-center">
+    Account: {" "} {shortenAddress(account)} has claimed their Whitelist Mint. <br></br><br></br>
+
+    {timerComponentsPublic.length ? <span>Public Sale will begin in... <br></br> {timerComponentsPublic}</span> : <span>Public Sale will be starting soon...</span>}
+
+  </p>
+) : 
+
+            
+
+          
+          stage < 3 && !claimed && whitelistClaimable && account ? (
             <>
               {/* Minted NFT Ratio */}
               <p className=" bg-gray-100 rounded-md text-gray-800 font-bold text-lg my-4 py-1 px-3">
@@ -381,7 +542,7 @@ const Hero = () => {
               </div>
 
               <h4 className="mt-2 font-semibold text-center text-white">
-             
+
                 {formatEther((nftPrice * count).toString())} ETH{" "}
 
                 <span className="text-sm text-gray-300"> + GAS</span>
@@ -404,7 +565,7 @@ const Hero = () => {
             <p className="text-white text-2xl mt-8 text-center">
               {/* Whitelist Sale Begins in {" "} <br></br> */}
 
-              {timerComponents.length ? <span>Whitelist Sale will begin in... <br></br> {timerComponents}</span> : <span>Whitelist Sale will be starting soon...</span>}
+              {timerComponentsPublic.length ? <span>Whitelist Sale will begin in... <br></br> {timerComponentsPublic}</span> : <span>Whitelist Sale will be starting soon...</span>}
 
             </p>
           )}
