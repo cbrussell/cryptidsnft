@@ -40,6 +40,8 @@ const Hero = () => {
   const stageCalculated = GetStage();
   const totalSupplyCalculated = GetTotalSupply();
   const ownerCalculated = GetOwner();
+
+
   const etherBalance = useEtherBalance(account);
   const claimedCalculated = CheckIfClaimed(account);
 
@@ -50,12 +52,14 @@ const Hero = () => {
 
   let whitelistValid = false;
   let whitelistProof = [];
-  const whitelistRes = useSWR(stage < 5 && account ? `/api/whitelistProof?address=${account}` : null, {
+  const whitelistRes = useSWR(stage < 3 && account ? `/api/whitelistProof?address=${account}` : null, {
     fetcher, revalidateIfStale: false, revalidateOnFocus: false, revalidateOnReconnect: false
   });
+
   if (!whitelistRes.error && whitelistRes.data) {
     const { proof, valid } = whitelistRes.data;
-    whitelistValid = true;
+    whitelistValid = valid;
+    whitelistProof = proof;
   }
 
   const whitelistClaimableCalculated = Verify(account, whitelistProof);
@@ -123,7 +127,7 @@ const Hero = () => {
 
     if ( formatEther(etherBalance) < formatEther((nftPrice * count).toString())) {
       console.log("User Ether Balance is " + myEther)
-      setStatus('Not enough balance for this purchase')
+      setStatus('Error: Not enough ether for this purchase')
       return
     }
     let gas;
@@ -143,6 +147,48 @@ const Hero = () => {
       sendPublicMint(count, {value: ethTotal} )
     }
   }
+
+
+  const handleWhitelistMint = async () => {
+
+
+    const ethTotal = (nftPrice * count).toString()
+
+    if ( formatEther(etherBalance) < formatEther((nftPrice * count).toString())) {
+      console.log("User Ether Balance is " + myEther)
+      setStatus('Error: Not enough ether for this purchase')
+      return
+    }
+
+    if (!whitelistClaimable) {
+      console.log("Unable to generate valid whitelist proof for account")
+      setStatus("Error: Unable to generate valid whitelist proof for account: ", account)
+      return
+    }
+
+    if (claimed) {
+      console.log("Whitelist is already claimed for account ", account);
+      setStatus("Error: Whitelist mint is already claimed")
+    }
+
+    let gas;
+    try {
+      gas = await contract.estimateGas.whitelistMint(proof, {value: ethTotal});
+      console.log("Gas estimate is set to " + gas);
+    } catch (err) {
+      setStatus("😞Error: " + err.message);
+    }
+    if (gas) {
+    console.log("Total required ETH for transaction is ", ethTotal, " wei");
+    sendPublicMint(count, { gasLimit: gas.mul(115).div(100), value: ethTotal} )
+    console.log("Gas estimate worked!");
+    
+    } else {
+      console.log("Error: Gas estimate DID NOT work.");
+      sendPublicMint(count, {value: ethTotal} )
+    }
+  }
+
 
 
 

@@ -39,7 +39,6 @@ const Header = () => {
   
   // const [etherBalance, setEtherBalance] = useState(useEtherBalance(account));
 
-  
   const etherBalance = useEtherBalance(account)
 
   useEffect(() => {
