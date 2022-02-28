@@ -1,6 +1,6 @@
 import { Contract, utils} from "ethers";
 import { useCall, useContractCall } from "@usedapp/core"
-import cryptidTokenNFT from "../../../contract/build/deployments/4/0x4Dab02640555ff4A70Dc677a90D7c8B01bDC1AAa.json";
+import cryptidTokenNFT from "../../contract/build/deployments/4/0x4Dab02640555ff4A70Dc677a90D7c8B01bDC1AAa.json";
 
 
 const address = "0x4Dab02640555ff4A70Dc677a90D7c8B01bDC1AAa";

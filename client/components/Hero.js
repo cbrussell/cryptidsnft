@@ -12,7 +12,7 @@ import {
   whitelistMint,
   GetSalePrice,
   CheckIfClaimed,
-} from "../pages/utils/interact"
+} from "../utils/interact"
 import { parseEther, formatEther } from '@ethersproject/units'
 import { Contract, utils } from 'ethers';
 import cryptidTokenNFT from "../../contract/build/deployments/4/0x4Dab02640555ff4A70Dc677a90D7c8B01bDC1AAa.json";
