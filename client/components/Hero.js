@@ -52,7 +52,7 @@ const Hero = () => {
 
   let whitelistValid = false;
   let whitelistProof = [];
-  const whitelistRes = useSWR(stage < 3 && account ? `/api/whitelistProof?address=${account}` : null, {
+  const whitelistRes = useSWR(stage < 5 && account ? `/api/whitelistProof?address=${account}` : null, {
     fetcher, revalidateIfStale: false, revalidateOnFocus: false, revalidateOnReconnect: false
   });
 

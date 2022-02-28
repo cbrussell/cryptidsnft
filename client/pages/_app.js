@@ -14,7 +14,8 @@ import { ChainId, DAppProvider } from "@usedapp/core";
 const config = {
   readOnlyChainId: ChainId.Rinkeby,
   readOnlyUrls: {
-    [ChainId.Rinkeby]: `https://rinkeby.infura.io/v3/${process.env.NEXT_PUBLIC_INFURA_ID}`
+    [ChainId.Rinkeby]: `https://eth-rinkeby.alchemyapi.io/v2/${process.env.NEXT_PUBLIC_ALCHEMY_ID}}`
+    // `https://rinkeby.infura.io/v3/${process.env.NEXT_PUBLIC_INFURA_ID}`
   }
 }
 
@@ -26,8 +27,6 @@ function MyApp({ Component, pageProps }) {
         <Component {...pageProps} />
       </StatusProvider>
     </DAppProvider>
-      
-      
   );
 }
 
