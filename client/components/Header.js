@@ -30,12 +30,23 @@ const walletconnect = new WalletConnectConnector({
 
 const Header = () => {
 
+  // const [myAddress, setMyAddress] = useState("0x0");
+  const [myEther, setMyEther] = useState("0");
+
+
   const { activateBrowserWallet, account, activate, chainId: currentChainId } = useEthers();
 
+  
   // const [etherBalance, setEtherBalance] = useState(useEtherBalance(account));
 
   
   const etherBalance = useEtherBalance(account)
+
+  useEffect(() => {
+    if (etherBalance) setMyEther(Number(formatEther(etherBalance)).toFixed(3));
+  }, [etherBalance]);
+
+  
 
   // console.log(etherBalanceCalculated);
 
@@ -98,10 +109,10 @@ const Header = () => {
   // console.log("Account is " + account)
 
  
-  const accountName = useLookupAddress()
+  const accountName = useLookupAddress();
 
   // console.log("Current Account is " + account);
-  console.log("Current Chain is " + getChainName(currentChainId));
+  // console.log("Current Chain is " + getChainName(currentChainId));
 
 
   useEffect(() => {
@@ -168,8 +179,6 @@ const Header = () => {
     }
     
   }, [account]); // eslint-disable-line react-hooks/exhaustive-deps
-
-
 
   return (
 
@@ -332,7 +341,7 @@ const Header = () => {
               <div className="px-2 sm:px-3 py-1 sm:py-2 flex items-center justify-center  md:text-center">
                 <span className="text-white block exo-font sm:text-base text-lg ">
 
-                  {etherBalance && parseFloat(formatEther(etherBalance)).toFixed(3)}
+                  {myEther && myEther}
                   {/* && <p>{Intl.NumberFormat().format(parseFloat(formatEther(etherBalance))) */}
 
 

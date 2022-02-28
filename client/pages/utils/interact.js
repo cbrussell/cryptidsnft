@@ -1,8 +1,9 @@
 import { Contract, utils} from "ethers";
 import { useCall, useContractCall } from "@usedapp/core"
-import cryptidTokenNFT from "../../../contract/build/deployments/4/0x09E9A7e35399433f5dfD33D56c4111B982E2D0f7.json";
+import cryptidTokenNFT from "../../../contract/build/deployments/4/0x4Dab02640555ff4A70Dc677a90D7c8B01bDC1AAa.json";
 
-const address = "0x09E9A7e35399433f5dfD33D56c4111B982E2D0f7";
+
+const address = "0x4Dab02640555ff4A70Dc677a90D7c8B01bDC1AAa";
 
 const { abi: cryptidTokenABI } = cryptidTokenNFT;
 
@@ -37,16 +38,33 @@ export function Verify(account, proof) {
   }
 }
 
-// export function getSalePrice() {
-//   const {value, error} =  useCall({ 
-//     contract: nftContract, 
-//     method: "salePrice", 
-//     args: [],
-//   }) ?? {} ;
-//   const weiValue = parseInt(value?.[0]).toString()
-  // console.log(weiValue)
-  // var weiValue = utils.toBigNumber(value?.[0]);
-  // const weiValue = parseInt((value?.[0]).toString())
+export function CheckIfClaimed(account) {
+  const { value, error } =  useCall({ 
+    contract: nftContract, 
+    method: "claimed", 
+    args: [account],
+  }) ?? {};
+  if (error) {
+    console.error(error.message)
+    return undefined;
+  } else {
+    return  value?.[0] 
+  }
+}
+
+export function GetSalePrice() {
+  const {value, error} =  useCall({ 
+    contract: nftContract, 
+    method: "salePrice", 
+    args: [],
+  }) ?? {};
+  if (error) {
+    console.error(error.message)
+    return undefined;
+  } else {
+    return value?.[0] && (value?.[0]).toString()
+  }
+}
 
 
   // const ether = Web3.utils.fromWei(weiValue, 'ether')

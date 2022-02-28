@@ -26,6 +26,4 @@ def main():
 
     print(f'Success! Contract deployed at {cryptids}')
 
-    print(f'See transaction here: https://rinkeby.etherscan.io/tx/{cryptids}\n')
-
     return cryptids
