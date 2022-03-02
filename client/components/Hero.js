@@ -128,6 +128,7 @@ const Hero = () => {
       setContract(new Contract(address, cryptidTokenNFTInterface, library.getSigner()))
     }
     console.log(library);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [account, library])
 
   const soldOut = totalSaleSupply && totalSupply && totalSaleSupply?.eq(totalSupply);
@@ -284,6 +285,7 @@ const Hero = () => {
       setStatus("There was an error during the transaction")
       setMinting(false);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [whitelistMintState.status, publicMintState.status])
 
 
