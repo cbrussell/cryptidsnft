@@ -36,6 +36,7 @@ const handler = async (req, res) => {
   const hashedAddress = keccak256(address);
   const proof = merkleTree.getHexProof(hashedAddress);
   const root = merkleTree.getHexRoot();
+  console.log("Root is", root);
 
   // just for front-end display convenience
   // proof will be validated in smart contract as well

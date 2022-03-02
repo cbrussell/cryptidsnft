@@ -32,7 +32,7 @@ contract CryptidToken is ERC721, ERC721Enumerable, Pausable, Ownable, Reentrancy
     string public provenanceHash;
     string public baseURI = "";
     string public baseExtension = ".json";
-    uint8 public maxMintPerTx;     
+    uint256 public maxMintPerTx;     
     bool public tokenURIFrozen = false;
     bool public provenanceHashFrozen = false;
 
@@ -66,7 +66,7 @@ contract CryptidToken is ERC721, ERC721Enumerable, Pausable, Ownable, Reentrancy
         uint256 _whitelistSupply,
         uint256 _teamMintSupply,
         uint256 _totalSaleSupply,
-        uint8 _maxMintPerTx
+        uint256 _maxMintPerTx
 
     )   ERC721(_name, _symbol) {
         whitelistSupply = _whitelistSupply;
@@ -202,6 +202,10 @@ contract CryptidToken is ERC721, ERC721Enumerable, Pausable, Ownable, Reentrancy
 
     function setSalePrice(uint256 _salePrice) external onlyOwner {
         salePrice = _salePrice;
+    }
+
+    function setMaxMintPerTx(uint256 _maxMintPerTx) external onlyOwner {
+        maxMintPerTx = _maxMintPerTx;
     }
 
     function withdraw() external payable onlyOwner {

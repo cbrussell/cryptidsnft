@@ -2,10 +2,11 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { useStatus } from "../context/statusContext";
 import useSWR from 'swr'
-import { useContractFunction, ChainId, useEthers, useEtherBalance, shortenAddress} from "@usedapp/core";
+import { useContractFunction, ChainId, useEthers, useEtherBalance, shortenAddress } from "@usedapp/core";
 import {
   GetMaxMintAmount,
   GetTotalSupply,
+  GetTotalSaleSupply,
   GetStage,
   Verify,
   GetOwner,
@@ -24,7 +25,8 @@ const Hero = () => {
   const [count, setCount] = useState(1);
   const [maxMintAmount, setMaxMintAmount] = useState(0);
   const [totalSupply, setTotalSupply] = useState(0);
-  const [nftPrice, setNftPrice] = useState(10000000000000000);
+  const [totalSaleSupply, setTotalSaleSupply] = useState(10000);
+  const [nftPrice, setNftPrice] = useState(100000000000000000);
   const [stage, setStage] = useState(0);
   const [minting, setMinting] = useState(false)
   const [claimed, setClaimed] = useState(false);
@@ -37,9 +39,11 @@ const Hero = () => {
   const nftPriceCalculated = GetSalePrice();
   const stageCalculated = GetStage();
   const totalSupplyCalculated = GetTotalSupply();
+  const totalSaleSupplyCalculated = GetTotalSaleSupply();
   const ownerCalculated = GetOwner();
   const etherBalance = useEtherBalance(account);
-  const claimedCalculated = CheckIfClaimed(account);
+
+  const claimedCalculated  = CheckIfClaimed(account ?? '0x0000000000000000000000000000000000000000');
 
   const { abi: cryptidTokenABI } = cryptidTokenNFT;
   const cryptidTokenNFTInterface = new utils.Interface(cryptidTokenABI);
@@ -58,8 +62,11 @@ const Hero = () => {
     whitelistProof = proof;
   }
 
-  const whitelistClaimableCalculated = Verify(account, whitelistProof);
+ 
+  const whitelistClaimableCalculated = Verify((account ?? '0x0000000000000000000000000000000000000000'), whitelistProof);
 
+  
+  
   useEffect(() => {
     console.log("Current account whitelist verified status is: ", whitelistClaimableCalculated);
     if (whitelistClaimableCalculated) setWhitelistClaimable(whitelistClaimableCalculated);
@@ -91,9 +98,16 @@ const Hero = () => {
   }, [totalSupplyCalculated]);
 
   useEffect(() => {
+    console.log("Total Sale Supply is " + totalSaleSupplyCalculated);
+    if (totalSaleSupplyCalculated) setTotalSaleSupply(totalSaleSupplyCalculated);
+  }, [totalSaleSupplyCalculated]);
+
+  useEffect(() => {
     console.log("The Owner is " + ownerCalculated);
     if (ownerCalculated) setOwner(ownerCalculated);
   }, [ownerCalculated]);
+
+  
 
   const incrementCount = () => {
     if (count < maxMintAmount) {
@@ -114,8 +128,12 @@ const Hero = () => {
     console.log(library);
   }, [account, library])
 
+  const soldOut = totalSaleSupply && totalSupply && totalSaleSupply?.eq(totalSupply);
+
+
+
   const { state: publicMintState, send: sendPublicMint } = useContractFunction(contract, 'publicMint', {})
-  
+
   const handlePublicMint = async () => {
 
     const ethTotal = (nftPrice * count).toString()
@@ -189,7 +207,7 @@ const Hero = () => {
     console.log(whitelistMintState.status)
   }
 
-  console.log(whitelistMintState)
+  // console.log(whitelistMintState)
 
 
 
@@ -198,14 +216,7 @@ const Hero = () => {
     if (whitelistMintState.status === 'None' || publicMintState.status === 'None') {
       setMinting(false);
     }
-    if (whitelistMintState.status === 'Mining' || publicMintState.status === 'Mining') {
-      setStatus(
-        <p>
-          {" "}Minting Cryptid! The transaction is in progress<span className="dots"><span>.</span><span>.</span><span>.</span></span>
-        </p>
-      )
-      setMinting(true);
-    }
+
     if (whitelistMintState.status === 'PendingSignature' || publicMintState.status === 'PendingSignature') {
       setStatus(
         <p>{" "}Pending signature<span className="dots"><span>.</span><span>.</span><span>.</span></span>
@@ -213,8 +224,33 @@ const Hero = () => {
       )
       setMinting(true);
     }
-    
-    if (whitelistMintState.status === 'Exception' || publicMintState.status === 'Exception') {
+    if (whitelistMintState.status === 'Mining') {
+      setStatus((
+        <p>
+          {" "}
+          🦊 Minting Cryptid<span className="dots"><span>.</span><span>.</span><span>.</span></span>Check out your transaction on Etherscan: <a target="_blank" rel="noreferrer" href={`https://rinkeby.etherscan.io/tx/` + whitelistMintState.transaction.hash} className="alert">
+            {"https://rinkeby.etherscan.io/tx/" + whitelistMintState.transaction.hash}
+          </a>
+        </p>
+      ))
+      setMinting(true);
+    }
+    if (publicMintState.status === 'Mining') {
+      setStatus((
+        <p>
+          {" "}
+          🦊 Minting Cryptid<span className="dots"><span>.</span><span>.</span><span>.</span></span>Check out your transaction on Etherscan: <a target="_blank" rel="noreferrer" href={`https://rinkeby.etherscan.io/tx/` + publicMintState.transaction.hash} className="alert">
+            {"https://rinkeby.etherscan.io/tx/" + publicMintState.transaction.hash}
+          </a>
+        </p>
+      ))
+      setMinting(true);
+    }
+    if (whitelistMintState.status === 'Exception') {
+      setStatus("Error:" + whitelistMintState.errorMessage)
+      setMinting(false);
+    }
+    if (publicMintState.status === 'Exception') {
       setStatus("Error:" + publicMintState.errorMessage)
       setMinting(false);
     }
@@ -222,7 +258,7 @@ const Hero = () => {
       setStatus((
         <p>
           {" "}
-          🦊 Check out your transaction on Etherscan: <a target="_blank" rel="noreferrer" href={`https://rinkeby.etherscan.io/tx/` + whitelistMintState.receipt.transactionHash} className="alert">
+          🦊 Success! Check out your transaction on Etherscan: <a target="_blank" rel="noreferrer" href={`https://rinkeby.etherscan.io/tx/` + whitelistMintState.receipt.transactionHash} className="alert">
             {"https://rinkeby.etherscan.io/tx/" + whitelistMintState.receipt.transactionHash}
           </a>
         </p>
@@ -232,12 +268,12 @@ const Hero = () => {
     }
     if (publicMintState.status === 'Success') {
       setStatus((
-        <p>
+        <div>
           {" "}
           🦊 Success! Check out your transaction on Etherscan: <a target="_blank" rel="noreferrer" href={`https://rinkeby.etherscan.io/tx/` + publicMintState.receipt.transactionHash} className="alert">
             {"https://rinkeby.etherscan.io/tx/" + publicMintState.receipt.transactionHash}
           </a>
-        </p>
+        </div>
       ))
       setMinting(false);
 
@@ -248,12 +284,6 @@ const Hero = () => {
     }
   }, [whitelistMintState.status, publicMintState.status])
 
-
-  // const onPublicMint = async () => {
-  //   const { success, status } = await mintPublic(account, numToMint);
-  //   console.log(status);
-  //   setPublicMintStatus(success);
-  // };
 
   // public timers
 
@@ -276,11 +306,12 @@ const Hero = () => {
   const [timeLeftPublic, setTimeLeftPublic] = useState(calculateTimeLeftPublic());
 
 
+
   useEffect(() => {
     setTimeout(() => {
       setTimeLeftPublic(calculateTimeLeftPublic());
     }, 1000);
-  });
+  }, [timeLeftPublic]);
 
   const timerComponentsPublic = [];
 
@@ -298,6 +329,7 @@ const Hero = () => {
 
 
   // whitelist timer
+
   const calculateTimeLeftWhitelist = () => {
     const difference = +new Date('March 26 2022 10:00:00') - +new Date();
     let timeLeftWhitelist = {};
@@ -321,7 +353,7 @@ const Hero = () => {
     setTimeout(() => {
       setTimeLeftWhitelist(calculateTimeLeftWhitelist());
     }, 1000);
-  });
+  }, [timeLeftWhitelist]);
 
   const timerComponentsWhitelist = [];
 
@@ -372,211 +404,319 @@ const Hero = () => {
           </div>
 
 
-          {stage < 4 && !whitelistClaimable && account ? 
-          (
-            <p className="text-white text-2xl mt-8 text-center">
-              Account: {" "} {shortenAddress(account)} is not whitelisted. <br></br><br></br>
-
-              {timerComponentsPublic.length ? <span>Public Sale will begin in... <br></br> {timerComponentsPublic}</span> : <span>Public Sale will be starting soon...</span>}
-
-            </p>
-          )
-
-          : stage < 2 && whitelistClaimable && account && !claimed ? 
+          {stage < 3 && !account ?
             (
               <p className="text-white text-2xl mt-8 text-center">
-                Account: {" "} {shortenAddress(account)} has 1 Whitelist Mint Available <br></br><br></br>
-  
-                {timerComponentsWhitelist.length ? <span>Whitelist Sale will begin in... <br></br> {timerComponentsPublic}</span> : <span>Whitelist Sale will be starting soon...</span>}
-  
+                {/* Account: {" "} {shortenAddress(account)} is not whitelisted. <br></br><br></br> */}
+
+                {timerComponentsPublic.length ? <span>Whitelist Sale will begin in... <br></br> {timerComponentsWhitelist}</span> : <span>Whitelist Sale will be starting soon...</span>}
+
               </p>
-            ) 
-            
-            : stage == 2  && whitelistClaimable && account && !claimed  ? 
-            (
-            <>
-            <p className="text-white text-2xl mt-8 text-center">
-                Account: {" "} {shortenAddress(account)} has 1 Whitelist Mint Available <br></br><br></br>
-                </p>
-              {/* Minted NFT Ratio */}
-              <p className=" bg-gray-100 rounded-md text-gray-800 font-bold text-lg my-4 py-1 px-3">
-                <span className="text-[#d35c5c]">{`${totalSupply}`}</span> /
-                11,111
-              </p>
+            )
 
-              <div className="flex items-center mt-6 text-3xl font-bold text-gray-200">
-
-
-                <button
-                  className="flex items-center justify-center w-12 h-12 bg-white rounded-md hover:bg-gray-200 text-center disabled:bg-slate-50"
-                  // onClick={decrementCount}
-
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="w-6 h-6 text-[#d35c5c] "
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M20 12H4"
-                    />
-                  </svg>
-                </button>
-
-                <h2 className="mx-8">{count}</h2>
-
-                <button
-                  className="flex items-center justify-center w-12 h-12 bg-white rounded-md text-black hover:bg-gray-200 text-center "
-                  // onClick={incrementCount}
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="w-6 h-6 text-[#d35c5c]"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M12 4v16m8-8H4"
-                    />
-                  </svg>
-                </button>
-              </div>
-
-              <h4 className="mt-2 font-semibold text-center text-white">
-
-                {formatEther((nftPrice * count).toString())} ETH{" "}
-
-                <span className="text-sm text-gray-300"> + GAS</span>
-              </h4>
-
-              {/* Mint Button */}
-              {/* {!status || status.toString().includes("Something") || JSON.stringify(status).includes("transaction") ? */}
-
-              <button
-                disabled={!currentChainId ||
-                  currentChainId !== ChainId.Rinkeby || !account }
-                className="mt-6 py-2 px-4 text-center text-white uppercase bg-[#222222] border-b-4 border-orange-700 rounded  hover:border-orange-400 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none"
-                onClick={handleWhitelistMint}
-              >
-                Mint Cryptid
-              </button>
-
-            </> ) : stage < 4  && whitelistClaimable && account && claimed ? 
-
-
-
-(
-  <p className="text-white text-2xl mt-8 text-center">
-    Account: {" "} {shortenAddress(account)} has claimed their Whitelist Mint. <br></br><br></br>
-
-    {timerComponentsPublic.length ? <span>Public Sale will begin in... <br></br> {timerComponentsPublic}</span> : <span>Public Sale will be starting soon...</span>}
-
-  </p>
-) : 
-
-            
-
+            : 
           
-          stage < 3 && !claimed && whitelistClaimable && account ? (
-            <>
-              {/* Minted NFT Ratio */}
-              <p className=" bg-gray-100 rounded-md text-gray-800 font-bold text-lg my-4 py-1 px-3">
-                <span className="text-[#d35c5c]">{`${totalSupply}`}</span> /
-                11,111
-              </p>
+          stage < 2 && whitelistClaimable && account && !claimed ?
+              (
+                <p className="text-white text-2xl mt-8 text-center">
+                  Account: {" "} {shortenAddress(account)} has 1 Whitelist Mint Available <br></br><br></br>
 
-              <div className="flex items-center mt-6 text-3xl font-bold text-gray-200">
+                  {timerComponentsWhitelist.length ? <span>Whitelist Sale will begin in... <br></br> {timerComponentsPublic}</span> : <span>Whitelist Sale will be starting soon...</span>}
+
+                </p>
+              )
+
+              : stage == 2 && whitelistClaimable && account && !claimed ?
+                (
+                  <>
+                    <p className="text-white text-2xl mt-8 text-center">
+                      Account: {" "} {shortenAddress(account)} has 1 Whitelist Mint Available <br></br><br></br>
+                    </p>
+                    {/* Minted NFT Ratio */}
+                    <p className=" bg-gray-100 rounded-md text-gray-800 font-bold text-lg my-4 py-1 px-3">
+                      <span className="text-[#d35c5c]">{`${totalSupply}`}</span> /
+                      <span className="text-black">{`${totalSaleSupply}`}</span>
+                    </p>
+
+                    <div className="flex items-center mt-6 text-3xl font-bold text-gray-200">
 
 
-                <button
-                  className="flex items-center justify-center w-12 h-12 bg-white rounded-md hover:bg-gray-200 text-center disabled:bg-slate-50"
-                  onClick={decrementCount}
+                      <button
+                        className="flex items-center justify-center w-12 h-12 bg-white rounded-md hover:bg-gray-200 text-center disabled:bg-slate-50"
+                      // onClick={decrementCount}
 
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="w-6 h-6 text-[#d35c5c] "
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M20 12H4"
-                    />
-                  </svg>
-                </button>
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="w-6 h-6 text-[#d35c5c] "
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M20 12H4"
+                          />
+                        </svg>
+                      </button>
 
-                <h2 className="mx-8">{count}</h2>
+                      <h2 className="mx-8">{count}</h2>
 
-                <button
-                  className="flex items-center justify-center w-12 h-12 bg-white rounded-md text-black hover:bg-gray-200 text-center "
-                  onClick={incrementCount}
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="w-6 h-6 text-[#d35c5c]"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M12 4v16m8-8H4"
-                    />
-                  </svg>
-                </button>
-              </div>
+                      <button
+                        className="flex items-center justify-center w-12 h-12 bg-white rounded-md text-black hover:bg-gray-200 text-center "
+                      // onClick={incrementCount}
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="w-6 h-6 text-[#d35c5c]"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M12 4v16m8-8H4"
+                          />
+                        </svg>
+                      </button>
+                    </div>
 
-              <h4 className="mt-2 font-semibold text-center text-white">
+                    <h4 className="mt-2 font-semibold text-center text-white">
 
-                {formatEther((nftPrice * count).toString())} ETH{" "}
+                      {formatEther((nftPrice * count).toString())} ETH{" "}
 
-                <span className="text-sm text-gray-300"> + GAS</span>
-              </h4>
+                      <span className="text-sm text-gray-300"> + GAS</span>
+                    </h4>
 
-              {/* Mint Button */}
-              {/* {!status || status.toString().includes("Something") || JSON.stringify(status).includes("transaction") ? */}
+                    {/* Mint Button */}
 
-              <button
-                disabled={!currentChainId ||
-                  currentChainId !== ChainId.Rinkeby || !account || minting}
-                className="mt-6 py-2 px-4 text-center text-white uppercase bg-[#222222] border-b-4 border-orange-700 rounded  hover:border-orange-400 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none"
-                onClick={handlePublicMint}
-              >
-                Mint Cryptid
-              </button>
 
-            </>
-          ) : (
-            <p className="text-white text-2xl mt-8 text-center">
-              {/* Whitelist Sale Begins in {" "} <br></br> */}
+                    <button
+                      disabled={!currentChainId ||
+                        currentChainId !== ChainId.Rinkeby || !account || minting}
+                      className="mt-6 py-2 px-4 text-center text-white uppercase bg-[#222222] border-b-4 border-orange-700 rounded  hover:border-orange-400 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none"
+                      onClick={handleWhitelistMint}
+                    >
+                      Mint Cryptid
+                    </button>
 
-              {timerComponentsPublic.length ? <span>Whitelist Sale will begin in... <br></br> {timerComponentsPublic}</span> : <span>Whitelist Sale will be starting soon...</span>}
+                  </>) : stage < 3 && whitelistClaimable && account && claimed ?
 
-            </p>
-          )}
+
+
+                  (
+                    <p className="text-white text-2xl mt-8 text-center">
+                      Account: {" "} {shortenAddress(account)} has claimed their Whitelist Mint. <br></br><br></br>
+
+                      {timerComponentsPublic.length ? <span>Public Sale will begin in... <br></br> {timerComponentsPublic}</span> : <span>Public Sale will be starting soon...</span>}
+
+                    </p>
+                  ) : stage < 3 && !whitelistClaimable && account ?
+
+
+
+                  (
+                    <p className="text-white text-2xl mt-8 text-center">
+                      Account: {" "} {shortenAddress(account)} is not on the Whitelist. <br></br><br></br>
+
+                      {timerComponentsPublic.length ? <span>Public Sale will begin in... <br></br> {timerComponentsPublic}</span> : <span>Public Sale will be starting soon...</span>}
+
+                    </p>
+                  ) :
+
+
+
+
+                  stage == 4 && !account ? (
+                    <>
+                      {/* Minted NFT Ratio */}
+                      <p className=" bg-gray-100 rounded-md text-gray-800 font-bold text-lg my-4 py-1 px-3">
+                        <span className="text-[#d35c5c]">{`${totalSupply}`}</span> /
+                        <span className="text-black"> {`${totalSaleSupply}`}</span>
+                      </p>
+
+                      <div className="flex items-center mt-6 text-3xl font-bold text-gray-200">
+
+
+                        <button
+                          className="flex items-center justify-center w-12 h-12 bg-white rounded-md hover:bg-gray-200 text-center disabled:bg-slate-50"
+                          onClick={decrementCount}
+
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="w-6 h-6 text-[#d35c5c] "
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth="2"
+                              d="M20 12H4"
+                            />
+                          </svg>
+                        </button>
+
+                        <h2 className="mx-8">{count}</h2>
+
+                        <button
+                          className="flex items-center justify-center w-12 h-12 bg-white rounded-md text-black hover:bg-gray-200 text-center "
+                          onClick={incrementCount}
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="w-6 h-6 text-[#d35c5c]"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth="2"
+                              d="M12 4v16m8-8H4"
+                            />
+                          </svg>
+                        </button>
+                      </div>
+
+                      <h4 className="mt-2 font-semibold text-center text-white">
+
+                        {formatEther((nftPrice * count).toString())} ETH{" "}
+
+                        <span className="text-sm text-gray-300"> + GAS</span>
+                      </h4>
+
+                      {/* Mint Button */}
+
+
+                      <button
+                        disabled={!currentChainId ||
+                          currentChainId !== ChainId.Rinkeby || !account || minting}
+                        className="mt-6 py-2 px-4 text-center text-white uppercase bg-[#222222] border-b-4 border-orange-700 rounded  hover:border-orange-400 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none"
+                        onClick={handlePublicMint}
+                      >
+                        Mint Cryptid
+                      </button>
+
+                    </>
+                  ) :
+                  
+
+
+
+
+                  stage == 4 && account ? (
+                    <>
+                      {/* Minted NFT Ratio */}
+                      <p className=" bg-gray-100 rounded-md text-gray-800 font-bold text-lg my-4 py-1 px-3">
+                        <span className="text-[#d35c5c]">{`${totalSupply}`}</span> /
+                        <span className="text-black"> {`${totalSaleSupply}`}</span>
+                        
+                      </p>
+
+                      <div className="flex items-center mt-6 text-3xl font-bold text-gray-200">
+
+
+                        <button
+                          className="flex items-center justify-center w-12 h-12 bg-white rounded-md hover:bg-gray-200 text-center disabled:bg-slate-50"
+                          onClick={decrementCount}
+
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="w-6 h-6 text-[#d35c5c] "
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth="2"
+                              d="M20 12H4"
+                            />
+                          </svg>
+                        </button>
+
+                        <h2 className="mx-8">{count}</h2>
+
+                        <button
+                          className="flex items-center justify-center w-12 h-12 bg-white rounded-md text-black hover:bg-gray-200 text-center "
+                          onClick={incrementCount}
+                        >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="w-6 h-6 text-[#d35c5c]"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth="2"
+                              d="M12 4v16m8-8H4"
+                            />
+                          </svg>
+                        </button>
+                      </div>
+
+                      <h4 className="mt-2 font-semibold text-center text-white">
+
+                        {formatEther((nftPrice * count).toString())} ETH{" "}
+
+                        <span className="text-sm text-gray-300"> + GAS</span>
+                      </h4>
+
+                      {/* Mint Button */}
+
+
+                      <button
+                        disabled={!currentChainId ||
+                          currentChainId !== ChainId.Rinkeby || !account || minting}
+                        className="mt-6 py-2 px-4 text-center text-white uppercase bg-[#222222] border-b-4 border-orange-700 rounded  hover:border-orange-400 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none"
+                        onClick={handlePublicMint}
+                      >
+                        Mint Cryptid
+                      </button>
+
+                    </>
+                  ) : soldOut ?
+
+
+
+                  (
+                    <p className="text-white text-2xl mt-8 text-center">
+                      SOLD OUT!
+
+                    </p>
+                  ) 
+                  : (
+                    <p className="text-white text-2xl mt-8 text-center">
+                      {/* Whitelist Sale Begins in {" "} <br></br> */}
+
+                      {timerComponentsPublic.length ? <span>Public Sale will begin in... <br></br> {timerComponentsPublic}</span> : <span>Public Sale will be starting soon...</span>}
+
+                    </p>
+                  )}
 
           {/* Status */}
-
+                    
           {status && (
-            <div className="flex items-center  justify-center px-4 py-3 mt-8  font-semibold selection:bg-cryptid-3 text-white bg-cryptid-2 rounded-md ">
+           
+            <div className="items-center inline-flex justify-center px-4 py-3 mt-8  font-semibold selection:bg-cryptid-3 text-white bg-cryptid-2 rounded-md">
               {status}
+           
             </div>
           )}
+          
           <br></br>
         </div>
       </div>

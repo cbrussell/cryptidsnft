@@ -1,9 +1,9 @@
 import { Contract, utils} from "ethers";
 import { useCall, useContractCall } from "@usedapp/core"
-import cryptidTokenNFT from "../../contract/build/deployments/4/0x4Dab02640555ff4A70Dc677a90D7c8B01bDC1AAa.json";
+import cryptidTokenNFT from "../../contract/build/deployments/4/0xF2dF6f027c2eCb355A219ca1a317c6825A38cAbb.json";
 
 
-const address = "0x4Dab02640555ff4A70Dc677a90D7c8B01bDC1AAa";
+const address = "0xF2dF6f027c2eCb355A219ca1a317c6825A38cAbb";
 
 const { abi: cryptidTokenABI } = cryptidTokenNFT;
 
@@ -15,6 +15,19 @@ export function GetMaxMintAmount() {
   const {value, error } =  useCall({ 
     contract: nftContract, 
     method: "maxMintPerTx", 
+  }) ?? {};
+  if (error) {
+    console.error(error.message)
+    return undefined;
+  } else {
+    return value?.[0]
+  }
+}
+
+export function GetTotalSaleSupply() {
+  const {value, error } =  useCall({ 
+    contract: nftContract, 
+    method: "totalSaleSupply", 
   }) ?? {};
   if (error) {
     console.error(error.message)
