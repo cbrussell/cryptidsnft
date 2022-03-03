@@ -30,14 +30,12 @@ const walletconnect = new WalletConnectConnector({
 
 const Header = () => {
 
-  // const [myAddress, setMyAddress] = useState("0x0");
+  
   const [myEther, setMyEther] = useState("0");
 
 
   const { activateBrowserWallet, account, activate, chainId: currentChainId } = useEthers();
 
-  
-  // const [etherBalance, setEtherBalance] = useState(useEtherBalance(account));
 
   const etherBalance = useEtherBalance(account)
 
@@ -46,73 +44,10 @@ const Header = () => {
   }, [etherBalance]);
 
   
-
-  // console.log(etherBalanceCalculated);
-
-  // useEffect(() => {
-  //   console.log("Current account Ether balance is ", etherBalance);
-  //   if (etherBalanceCalculated) try {
-  //     const balance = useEtherBalance(account);
-  //     const formatted = formatEther(balance);
-  //     console.log(formatted);
-  //     setEtherBalance(formatted);
-  //   } catch(err) {
-  //     console.log('err', err);
-  //     setEtherBalance(0);
-  //   }
-  // }, [etherBalanceCalculated]);
-
-  // console.log(etherBalance);
-
-
-  // useEffect(() => {
-  //   if (!account) {
-  //     return;
-  //   }
-  //     async function checkNFTBalance() {
-  //       useEtherBalance(account).then((result) => {
-  //       setEtherBalance(result);
-  //     }).catch((err) => {
-  //       console.error('err', err);
-  //       setEtherBalance(0);
-  //     });
-  //   }
-  // checkNFTBalance();
-  // }, [account]);
-      
-      
-      
-  //     )
-  //     }
-  //   } catch(err) {
-  //     console.error(err)
-  //   }
-  //   async function checkNFTBalance() {
-  //     sampleNFT.methods.balanceOf(account).call().then((result) => {
-  //       const resultFloat = parseFloat(result, 10);
-  //       setTokenBalance(resultFloat);
-  //     }).catch((err) => {
-  //       console.error('err', err);
-  //       setTokenBalance(0);
-  //     });
-  //   }
-  //   checkNFTBalance();
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [account]);
-  
-  // useEffect(() => {
-  //   console.log("Ether Balance is  " + etherBalanceCalculated);
-  //   if (etherBalanceCalculated) setEtherBalance(etherBalanceCalculated);
-  // }, [etherBalanceCalculated]);
-
-  // console.log("Account is " + account)
-
  
   const accountName = useLookupAddress();
 
-  // console.log("Current Account is " + account);
-  // console.log("Current Chain is " + getChainName(currentChainId));
-
+  
 
   useEffect(() => {
     if (!account) {
@@ -311,28 +246,7 @@ const Header = () => {
           </nav>
 
           {/* Wallet */}
-          {/* <nav aria-label="Wallet Button">
-            <ul className="md:pt-0 " >
-
-              <div>
-                {!account && <button
-                  onClick={() => { activateBrowserWallet(); onClose(); }}
-
-                  className="px-8 py-2 font-extrabold text-black border inline-block exo-font border-black rounded-lg cursor-pointer mt-2 md:mt-0 hover:text-orange-900"
-                >
-                  Connect Wallet
-                </button>
-                }
-                {account &&
-                  <li
-                    className="px-8 py-2 font-extrabold text-black border inline-block exo-font border-black rounded-lg  mt-2 md:mt-0"
-                  >
-
-                    {"Connected: " + String(account).substring(0, 6) + "..." + String(account).substring(38)}
-                  </li>}
-              </div>
-            </ul>
-          </nav> */}
+         
 
 
           {account ? (
@@ -341,7 +255,7 @@ const Header = () => {
                 <span className="text-white block exo-font sm:text-base text-lg ">
 
                   {myEther && myEther}
-                  {/* && <p>{Intl.NumberFormat().format(parseFloat(formatEther(etherBalance))) */}
+               
 
 
                 </span>{" "}
