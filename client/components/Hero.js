@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { useStatus } from "../context/statusContext";
-import useSWR from 'swr'
+import keccak256 from "keccak256";
+import MerkleTree from "merkletreejs";
+
 import { useContractFunction, ChainId, useEthers, useEtherBalance, shortenAddress } from "@usedapp/core";
 import {
   GetMaxMintAmount,
@@ -13,10 +15,11 @@ import {
   GetSalePrice,
   CheckIfClaimed,
 } from "../utils/interact"
-import { parseEther, formatEther } from '@ethersproject/units'
+import { formatEther } from '@ethersproject/units'
 import { Contract, utils } from 'ethers';
 import cryptidTokenNFT from "../../contract/build/deployments/4/0xF2dF6f027c2eCb355A219ca1a317c6825A38cAbb.json";
-
+import marshal_leaves from "../data/test_leaves.json";
+// import root from "../data/test_root.json";
 
 const Hero = () => {
   const address = "0xF2dF6f027c2eCb355A219ca1a317c6825A38cAbb";
@@ -33,8 +36,6 @@ const Hero = () => {
   const [whitelistClaimable, setWhitelistClaimable] = useState(false);
   const [owner, setOwner] = useState("");
 
-
-  const fetcher = (url) => fetch(url).then((res) => res.json());
   const maxMintCalculated = GetMaxMintAmount();
   const nftPriceCalculated = GetSalePrice();
   const stageCalculated = GetStage();
@@ -47,31 +48,57 @@ const Hero = () => {
 
   const { abi: cryptidTokenABI } = cryptidTokenNFT;
   const cryptidTokenNFTInterface = new utils.Interface(cryptidTokenABI);
-  const [contract, setContract] = useState(new Contract(address, cryptidTokenNFTInterface))
+  const [contract, setContract] = useState(new Contract(address, cryptidTokenNFTInterface));
+  const [whitelistProof, setWhitelistProof] = useState([])
 
 
-  let whitelistValid = false;
-  let whitelistProof = [];
-
- 
-  const whitelistRes = useSWR(stage < 5 && account ? `/api/whitelistProof?address=${account}` : null, 
-    fetcher, {revalidateIfStale: false, revalidateOnFocus: false, revalidateOnReconnect: false
-  });
-
-  if (!whitelistRes.error && whitelistRes.data) {
-    const { proof, valid } = whitelistRes.data;
-    whitelistValid = valid;
-    whitelistProof = proof;
-  }
-
- 
   const whitelistClaimableCalculated = Verify((account ?? '0x0000000000000000000000000000000000000000'), whitelistProof);
 
+  useEffect(() => {
+    if (!account) {
+      setWhitelistProof([]);
+      return;
+    } else {
+      const leaves = MerkleTree.unmarshalLeaves(marshal_leaves);
+      const tree = new MerkleTree(leaves, keccak256, { sortPairs: true });
+      setWhitelistProof(tree.getHexProof(keccak256(account)));
+      console.log("New account detected, recalculating Merkle Proof.");
+   
+    }
+ 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [account])
+
   
+
+  // useEffect(() => {
+  //   if (!account) {
+  //     setWhitelistProof([]);
+  //     return;
+  //   }
+  //   async function checkIfClaimed() {
+  //     tree.getHexProof(keccak256(account)).then((result) => {
+  //       setWhitelistProof(result);
+  //     }).catch((err) => {
+  //       setWhitelistProof([]);
+  //     });
+
+  //   }
+  //   checkIfClaimed();
+  // // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [whitelistProofCalculated])
+
   
+  // useEffect(() => {
+  //   const whitelistProofCalculated = (account ? tree.getHexProof(keccak256(account)) : []);
+  //   setWhitelistProof(whitelistProofCalculated);
+
+  // }, [whitelistProofCalculated]);
+
+
   useEffect(() => {
     console.log("Current account whitelist verified status is: ", whitelistClaimableCalculated);
-    if (whitelistClaimableCalculated) setWhitelistClaimable(whitelistClaimableCalculated);
+    setWhitelistClaimable(whitelistClaimableCalculated);
   }, [whitelistClaimableCalculated]);
 
   useEffect(() => {
@@ -86,7 +113,7 @@ const Hero = () => {
 
   useEffect(() => {
     console.log("Current account claimed status is: ", claimedCalculated);
-    if (claimedCalculated) setClaimed(claimedCalculated);
+    setClaimed(claimedCalculated);
   }, [claimedCalculated]);
 
   useEffect(() => {
@@ -146,23 +173,10 @@ const Hero = () => {
       setStatus('Error: Not enough ether for this purchase')
       return
     }
-    let gas;
-    try {
-      gas = await contract.estimateGas.publicMint(count, { value: ethTotal });
-      console.log("Gas estimate is set to " + gas);
-    } catch (err) {
-      setStatus("😞Error: " + err.message);
-    }
-    if (gas) {
-      console.log("Total required ETH for transaction is ", ethTotal, " wei");
-      sendPublicMint(count, { gasLimit: gas.mul(115).div(100), value: ethTotal })
-      console.log("Gas estimate worked!");
-
-    } else {
-      console.log("Error: Gas estimate DID NOT work.");
       sendPublicMint(count, { value: ethTotal })
+      console.log(publicMintState.status)
     }
-  }
+  
 
   const { state: whitelistMintState, send: sendWhitelistMint } = useContractFunction(contract, 'whitelistMint', {})
 
@@ -188,32 +202,11 @@ const Hero = () => {
       console.log("Whitelist is already claimed for account ", account);
       setStatus("Error: Whitelist mint is already claimed")
     }
-
-
-
-    let gas;
-    try {
-      gas = await contract.estimateGas.whitelistMint(whitelistProof, { value: ethTotal });
-      console.log("Gas estimate is set to " + gas);
-    } catch (err) {
-      setStatus("😞Error: " + err.message);
-    }
-    if (gas) {
-      console.log("Total required ETH for transaction is ", ethTotal, " wei");
-      sendWhitelistMint(whitelistProof, { gasLimit: gas.mul(115).div(100), value: ethTotal })
-      console.log("Gas estimate worked!");
-
-    } else {
-      console.log("Error: Gas estimate DID NOT work.");
-      sendWhitelistMint(whitelistProof, { value: ethTotal })
-    }
+    
+    sendWhitelistMint(whitelistProof, { value: ethTotal })
+    
     console.log(whitelistMintState.status)
   }
-
-  // console.log(whitelistMintState)
-
-
-
 
   useEffect(() => {
     if (whitelistMintState.status === 'None' || publicMintState.status === 'None') {
@@ -309,8 +302,6 @@ const Hero = () => {
 
   const [timeLeftPublic, setTimeLeftPublic] = useState(calculateTimeLeftPublic());
 
-
-
   useEffect(() => {
     setTimeout(() => {
       setTimeLeftPublic(calculateTimeLeftPublic());
@@ -372,12 +363,6 @@ const Hero = () => {
       </span>
     );
   })
-
-
-
-
-
-
 
   return (
     <main id="main" className="h-screen py-10 md:py-4  bg-pattern ">

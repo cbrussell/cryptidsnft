@@ -5,7 +5,7 @@ def main():
     print(dev)
     cryptids = CryptidToken[len(CryptidToken)-1]
     print(cryptids)
-    address = "0x12B58f5331a6DC897932AA7FB5101667ACdf03e2"
+    address = "0x3668FfF9416fadE4831D2136cba30e74557E2198"
     transaction = cryptids.undoClaim(address, {"from": dev})
     
     print(f'Claim for {address} removed on: {transaction}')

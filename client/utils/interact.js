@@ -65,6 +65,8 @@ export function CheckIfClaimed(account) {
   }
 }
 
+
+
 export function GetSalePrice() {
   const {value, error} =  useCall({ 
     contract: nftContract, 
