@@ -269,7 +269,7 @@ const Header = () => {
             </div>
           ) : (
             <button
-              className="mx-2   px-3 py-2 sm:px-4  flex items-center justify-center  text-center  exo-font sm:py-2 border rounded text-semibold  font-bold text-white   dark:bg-gray-800  dark:hover:bg-gray-700 focus:outline-none  focus:ring-offset-2 focus:ring-gray-700"
+              className=" flex items-center mx-2   px-3 py-2 sm:px-4  justify-center    text-center  exo-font sm:py-2 border rounded text-semibold  font-bold text-white   dark:bg-cryptid-5 dark:hover:bg-gray-700 focus:outline-none  focus:ring-offset-2 focus:ring-gray-700"
               onClick={() => setIsOpenWalletModal(true)}
             >
               Connect Wallet
