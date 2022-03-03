@@ -264,12 +264,12 @@ const Hero = () => {
     }
     if (publicMintState.status === 'Success') {
       setStatus((
-        <div>
+        <p>
           {" "}
           🦊 Success! Check out your transaction on Etherscan: <a target="_blank" rel="noreferrer" href={`https://rinkeby.etherscan.io/tx/` + publicMintState.receipt.transactionHash} className="alert">
             {"https://rinkeby.etherscan.io/tx/" + publicMintState.receipt.transactionHash}
           </a>
-        </div>
+        </p>
       ))
       setMinting(false);
 
@@ -365,28 +365,29 @@ const Hero = () => {
   })
 
   return (
-    <main id="main" className="h-screen py-10 md:py-4  bg-pattern ">
+    <main id="main" className="h-fit py-10 md:py-0 md:pb-40  bg-pattern ">
+      
       <div className="container max-w-6xl mx-auto flex flex-col items-center pt-4">
         <div className="flex flex-col items-center">
           <div className="flex pb-2">
             <Image
               src="/images/BlankCryptid6.png"
-              width="300"
-              height="300"
+              width="270"
+              height="270"
               alt="Blank Cryptid 1"
               className="rounded-md"
             />
             <Image
               src="/images/BlankCryptid.png"
-              width="350"
-              height="350"
+              width="300"
+              height="300"
               alt="Blank Cryptid 2"
               className="rounded-md"
             />
             <Image
               src="/images/BlankCryptid2.png"
-              width="300"
-              height="300"
+              width="270"
+              height="270"
               alt="Blank Cryptid 3"
               className="rounded-md"
             />
@@ -395,7 +396,7 @@ const Hero = () => {
 
           {stage < 3 && !account ?
             (
-              <p className="text-white text-2xl mt-8 text-center">
+              <p className="text-white text-2xl mt-6 text-center">
                 {/* Account: {" "} {shortenAddress(account)} is not whitelisted. <br></br><br></br> */}
 
                 {timerComponentsPublic.length ? <span>Whitelist Sale will begin in... <br></br> {timerComponentsWhitelist}</span> : <span>Whitelist Sale will be starting soon...</span>}
