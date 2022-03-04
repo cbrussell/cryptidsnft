@@ -37,6 +37,20 @@ export function GetTotalSaleSupply() {
   }
 }
 
+export function GetTotalSupply() {
+  const { value, error } =  useCall({ 
+    contract: nftContract, 
+    method: "totalSupply", 
+    args: [],
+  }) ?? {};
+  if (error) {
+    console.error(error.message)
+    return undefined;
+  } else {
+    return value?.[0]
+  }
+}
+
 export function Verify(account, proof) {
   const { value, error } =  useCall({ 
     contract: nftContract, 
@@ -93,19 +107,7 @@ export function GetStage() {
   }
 }
 
-export function GetTotalSupply() {
-  const { value, error } =  useCall({ 
-    contract: nftContract, 
-    method: "totalSupply", 
-    args: [],
-  }) ?? {};
-  if (error) {
-    console.error(error.message)
-    return undefined;
-  } else {
-    return value?.[0]
-  }
-}
+
 
 export function GetOwner() {
   const { value, error } =  useCall({ 

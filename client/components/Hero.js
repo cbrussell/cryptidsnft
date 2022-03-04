@@ -195,22 +195,26 @@ const Hero = () => {
     }
     if (whitelistMintState.status === 'Mining') {
       setStatus((
-        <p>
+        <p className="text-center">
           {" "}
-          🦊 Minting Cryptid<span className="dots"><span>.</span><span>.</span><span>.</span></span>Check out your transaction on Etherscan: <a target="_blank" rel="noreferrer" href={`https://rinkeby.etherscan.io/tx/` + whitelistMintState.transaction.hash} className="alert">
-            {"https://rinkeby.etherscan.io/tx/" + whitelistMintState.transaction.hash}
+          🦊 Minting Cryptid<span className="dots"><span>.</span><span>.</span><span>.</span></span><br></br>Check out your <a target="_blank" rel="noreferrer" href={`https://rinkeby.etherscan.io/tx/` + whitelistMintState.transaction.hash} className="alert">
+            {/* {"https://rinkeby.etherscan.io/tx/" + whitelistMintState.transaction.hash} */}
+            transaction
           </a>
+          &#160;on EtherScan!
         </p>
       ))
       setMinting(true);
     }
     if (publicMintState.status === 'Mining') {
       setStatus((
-        <p>
+        <p className="text-center">
           {" "}
-          🦊 Minting Cryptid<span className="dots"><span>.</span><span>.</span><span>.</span></span>Check out your transaction on Etherscan: <a target="_blank" rel="noreferrer" href={`https://rinkeby.etherscan.io/tx/` + publicMintState.transaction.hash} className="alert">
-            {"https://rinkeby.etherscan.io/tx/" + publicMintState.transaction.hash}
+          🦊 Minting Cryptid<span className="dots"><span>.</span><span>.</span><span>.</span></span><br></br>Check out your <a target="_blank" rel="noreferrer" href={`https://rinkeby.etherscan.io/tx/` + publicMintState.transaction.hash} className="alert">
+            {/* {"https://rinkeby.etherscan.io/tx/" + publicMintState.transaction.hash} */}
+            transaction
           </a>
+          &#160;on EtherScan!
         </p>
       ))
       setMinting(true);
@@ -225,11 +229,13 @@ const Hero = () => {
     }
     if (whitelistMintState.status === 'Success') {
       setStatus((
-        <p>
+        <p className="text-center">
           {" "}
-          🦊 Success! Check out your transaction on Etherscan: <a target="_blank" rel="noreferrer" href={`https://rinkeby.etherscan.io/tx/` + whitelistMintState.receipt.transactionHash} className="alert">
-            {"https://rinkeby.etherscan.io/tx/" + whitelistMintState.receipt.transactionHash}
+          ✅ Success!<br></br>Check out your <a target="_blank" rel="noreferrer" href={`https://rinkeby.etherscan.io/tx/` + whitelistMintState.receipt.transactionHash} className="alert">
+            {/* {"https://rinkeby.etherscan.io/tx/" + whitelistMintState.receipt.transactionHash} */}
+            transaction
           </a>
+          &#160;on EtherScan!
         </p>
       ))
       setMinting(false);
@@ -237,11 +243,13 @@ const Hero = () => {
     }
     if (publicMintState.status === 'Success') {
       setStatus((
-        <p>
+        <p className="text-center">
           {" "}
-          🦊 Success! Check out your transaction on Etherscan: <a target="_blank" rel="noreferrer" href={`https://rinkeby.etherscan.io/tx/` + publicMintState.receipt.transactionHash} className="alert">
-            {"https://rinkeby.etherscan.io/tx/" + publicMintState.receipt.transactionHash}
+          ✅ Success!<br></br>Check out your <a target="_blank" rel="noreferrer" href={`https://rinkeby.etherscan.io/tx/` + publicMintState.receipt.transactionHash} className="alert">
+            {/* {"https://rinkeby.etherscan.io/tx/" + publicMintState.receipt.transactionHash} */}
+            transaction
           </a>
+          &#160;on EtherScan!
         </p>
       ))
       setMinting(false);

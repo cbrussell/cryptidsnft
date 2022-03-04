@@ -126,8 +126,8 @@ a.alert:active {
 }
 
 a.alert {
-  color: #4b2b22;
-  text-decoration: underline
+
+  text-decoration: underline;
 }
 /* 
 #synopsis{
