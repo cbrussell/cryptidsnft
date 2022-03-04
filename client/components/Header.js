@@ -167,7 +167,7 @@ const Header = () => {
           {/* Synopsis, Docs, FAQ, Links */}
 
           <nav aria-label="Main Menu">
-            <ul className="flex justify-around items-center space-x-10 pt-1 md:pt-0" >
+            <ul className="flex justify-around items-center space-x-10 pt-1 md:pt-0 sm:px-10" >
 
               <li className="text-black text-semibold exo-font hover:text-orange-900">
                 <Link href="#synopsis">
@@ -250,7 +250,7 @@ const Header = () => {
 
 
           {account ? (
-            <div className="py-1 w-auto items-center rounded-lg dark:bg-cryptid-6 mt-2 md:mt-0  p-0.5   exo-font font-bold select-none pointer-events-auto mx-2 sm:flex">
+            <div className="py-1 w-auto items-center rounded-lg bg-cryptid-6 mt-2 md:mt-0  p-0.5   exo-font font-bold select-none pointer-events-auto mx-2 sm:flex">
               <div className="px-2 sm:px-3 py-1 sm:py-2 flex items-center justify-center  md:text-center">
                 <span className="text-white block exo-font sm:text-base text-lg ">
 
@@ -263,17 +263,19 @@ const Header = () => {
                   ETH
                 </span>
               </div>
-              <div className="flex items-center px-2 sm:px-3  justify-center  md:text-center py-2 rounded-lg dark:bg-cryptid-5  text-white text-semibold exo-font sm:text-base text-lg">
+              <div className="flex items-center px-2 sm:px-3  justify-center  md:text-center py-2 rounded-lg bg-cryptid-5  text-white text-semibold exo-font sm:text-base text-lg">
                 {accountName ?? shortenAddress(account)}
               </div>
             </div>
           ) : (
+            <div className="flex justify-around items-center sm:py-2">
             <button
-              className=" flex items-center mx-2   px-3 py-2 sm:px-4  justify-center    text-center  exo-font sm:py-2 border rounded text-semibold  font-bold text-white   dark:bg-cryptid-5 dark:hover:bg-gray-700 focus:outline-none  focus:ring-offset-2 focus:ring-gray-700"
+              className="flex items-center mx-2    px-3 py-2   justify-center   sm:w-1/2 text-center  exo-font  border rounded text-semibold  font-bold text-white   bg-cryptid-5 hover:bg-gray-700 focus:outline-none  focus:ring-offset-2 focus:ring-gray-700"
               onClick={() => setIsOpenWalletModal(true)}
             >
               Connect Wallet
             </button>
+            </div>
           )}
 
 
@@ -342,7 +344,7 @@ const Header = () => {
                 <div className="grid grid-cols-1 divide-y-[1px] sm:divide-y-0 sm:grid-cols-2">
           <div className="flex justify-center px-4 py-3">
             <button
-              className="flex items-center justify-center flex-col shover:bg-gray-100 dark:hover:bg-gray-700 rounded-md"
+              className="flex items-center justify-center flex-col shover:bg-gray-100 hover:bg-gray-700 rounded-md"
               onClick={() => {
                 activateBrowserWallet();
                 onClose();
@@ -362,7 +364,7 @@ const Header = () => {
           </div>
           <div className="flex justify-center px-4 py-3">
             <button
-              className="flex items-center justify-center flex-col hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md"
+              className="flex items-center justify-center flex-col hover:bg-gray-100 hover:bg-gray-700 rounded-md"
               onClick={async () => {
                 try {
                   await activate(walletconnect);
@@ -388,7 +390,7 @@ const Header = () => {
           </div>
           <div className="sm:col-span-2 sm:mt-2 flex justify-center px-4 py-3">
             <button
-              className="flex items-center justify-center flex-col hover:bg-gray-100 dark:hover:bg-gray-700 rounded-md"
+              className="flex items-center justify-center flex-col hover:bg-gray-100 hover:bg-gray-700 rounded-md"
               onClick={async () => {
                 try {
                   await activate(walletLink);

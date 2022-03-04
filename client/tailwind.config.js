@@ -13,6 +13,7 @@ module.exports = {
         'cryptid-5': '#222222',
         'cryptid-6': '#B25E54',
         },
+        screens: { 'sm': { 'max': '640px' } },
       },
     
   },
