@@ -152,7 +152,7 @@ const Header = () => {
           </div>
         )}
       <header className=" inset-x-5 top-0 z-10 h-32 md:h-20 min-w-full justify-center space-x-6 text-white  backdrop-filter ">
-        <div className="md:flex items-center container justify-around  mx-auto max-w-7xl  h-full">
+        <div className="md:flex items-center container justify-around  mx-auto max-w-7xl  h-full ">
           <div className="flex justify-around">
             {/* Logo */}
             <Link href="#">
@@ -167,7 +167,7 @@ const Header = () => {
           {/* Synopsis, Docs, FAQ, Links */}
 
           <nav aria-label="Main Menu">
-            <ul className="flex justify-around items-center space-x-10 pt-1 md:pt-0 sm:px-10" >
+            <ul className="flex justify-around items-center space-x-10 pt-1 md:pt-0  px-2 sm:px-3" >
 
               <li className="text-black text-semibold exo-font hover:text-orange-900">
                 <Link href="#synopsis">
@@ -250,8 +250,8 @@ const Header = () => {
 
 
           {account ? (
-            <div className="py-1 w-auto items-center rounded-lg bg-cryptid-6 mt-2 md:mt-0  p-0.5   exo-font font-bold select-none pointer-events-auto mx-2 sm:flex">
-              <div className="px-2 sm:px-3 py-1 sm:py-2 flex items-center justify-center  md:text-center">
+            <div className="py-1 w-auto md:w-auto items-center rounded-lg bg-cryptid-6 mt-2 md:mt-0  p-0.5   exo-font font-bold select-none pointer-events-auto mx-2 justify-around sm:transform-none flex md:flex">
+              <div className="px-2 sm:px-3 py-1 sm:py-2 items-center  flex  md:text-center  container justify-center ">
                 <span className="text-white block exo-font sm:text-base text-lg ">
 
                   {myEther && myEther}
@@ -263,14 +263,14 @@ const Header = () => {
                   ETH
                 </span>
               </div>
-              <div className="flex items-center px-2 sm:px-3  justify-center  md:text-center py-2 rounded-lg bg-cryptid-5  text-white text-semibold exo-font sm:text-base text-lg">
+              <div className="flex items-center px-2 sm:px-3  justify-center container md:text-center py-2 rounded-lg bg-cryptid-5  text-white text-semibold exo-font sm:text-base text-lg">
                 {accountName ?? shortenAddress(account)}
               </div>
             </div>
           ) : (
-            <div className="flex justify-around items-center sm:py-2">
+            <div className="flex justify-around items-center py-2 sm:py-2">
             <button
-              className="flex items-center mx-2    px-3 py-2   justify-center  md:w-auto sm:w-1/2 text-center  exo-font  border rounded text-semibold  font-bold text-white   bg-cryptid-5 hover:bg-gray-700 focus:outline-none  focus:ring-offset-2 focus:ring-gray-700"
+              className="flex items-center mx-2   px-6 py-2.5 justify-center  md:w-auto sm:w-1/2 text-center  exo-font  border rounded text-semibold  font-bold text-white   bg-cryptid-5 hover:bg-gray-700 focus:outline-none  focus:ring-1 focus:ring-offset-2 focus:ring-gray-900"
               onClick={() => setIsOpenWalletModal(true)}
             >
               Connect Wallet
