@@ -3,6 +3,7 @@ import Image from "next/image";
 import { useStatus } from "../context/statusContext";
 import keccak256 from "keccak256";
 import MerkleTree from "merkletreejs";
+import { ContractAddress } from '../data/contract';
 
 import { useContractFunction, ChainId, useEthers, useEtherBalance, shortenAddress } from "@usedapp/core";
 import {
@@ -17,12 +18,15 @@ import {
 } from "../utils/interact"
 import { formatEther } from '@ethersproject/units'
 import { Contract, utils } from 'ethers';
-import cryptidTokenNFT from "../../contract/build/deployments/4/0xF2dF6f027c2eCb355A219ca1a317c6825A38cAbb.json";
+import cryptidTokenNFT from "../../contract/build/deployments/421611/0xB5d3537C676aD9f07D124ebD7ACE597f9e8D9A76.json";
 import marshal_leaves from "../data/test_leaves.json";
+
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 // import root from "../data/test_root.json";
 
 const Hero = () => {
-  const address = "0xF2dF6f027c2eCb355A219ca1a317c6825A38cAbb";
   const { account, chainId: currentChainId, library, BigNumber } = useEthers();
   const { status, setStatus } = useStatus();
   const [count, setCount] = useState(1);
@@ -48,7 +52,7 @@ const Hero = () => {
 
   const { abi: cryptidTokenABI } = cryptidTokenNFT;
   const cryptidTokenNFTInterface = new utils.Interface(cryptidTokenABI);
-  const [contract, setContract] = useState(new Contract(address, cryptidTokenNFTInterface));
+  const [contract, setContract] = useState(new Contract(ContractAddress, cryptidTokenNFTInterface));
   const [whitelistProof, setWhitelistProof] = useState([])
 
 
@@ -125,7 +129,7 @@ const Hero = () => {
 
   useEffect(() => {
     if (account && library) {
-      setContract(new Contract(address, cryptidTokenNFTInterface, library.getSigner()))
+      setContract(new Contract(ContractAddress, cryptidTokenNFTInterface, library.getSigner()))
     }
     console.log(library);
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -221,10 +225,12 @@ const Hero = () => {
     }
     if (whitelistMintState.status === 'Exception') {
       setStatus("Error:" + whitelistMintState.errorMessage)
+      toast.error(whitelistMintState.errorMessage);
       setMinting(false);
     }
     if (publicMintState.status === 'Exception') {
       setStatus("Error:" + publicMintState.errorMessage)
+      toast.error(publicMintState.errorMessage);
       setMinting(false);
     }
     if (whitelistMintState.status === 'Success') {
@@ -238,6 +244,7 @@ const Hero = () => {
           &#160;on EtherScan!
         </p>
       ))
+      toast.info('Mint success!');
       setMinting(false);
 
     }
@@ -252,6 +259,7 @@ const Hero = () => {
           &#160;on EtherScan!
         </p>
       ))
+      toast.info('Mint success!');
       setMinting(false);
 
     }
@@ -468,7 +476,7 @@ const Hero = () => {
 
                     <button
                       disabled={!currentChainId ||
-                        currentChainId !== ChainId.Rinkeby || !account || minting}
+                        currentChainId !== ChainId.ArbitrumRinkeby || !account || minting}
                       className="mt-6 py-2 px-4 text-center text-white uppercase bg-[#222222] border-b-4 border-orange-700 rounded  hover:border-orange-400 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none"
                       onClick={handleWhitelistMint}
                     >
@@ -569,7 +577,7 @@ const Hero = () => {
 
                         <button
                           disabled={!currentChainId ||
-                            currentChainId !== ChainId.Rinkeby || !account || minting}
+                            currentChainId !== ChainId.ArbitrumRinkeby || !account || minting}
                           className="mt-6 py-2 px-4 text-center text-white uppercase bg-[#222222] border-b-4 border-orange-700 rounded  hover:border-orange-400 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none"
                           onClick={handlePublicMint}
                         >
@@ -651,7 +659,7 @@ const Hero = () => {
 
                           <button
                             disabled={!currentChainId ||
-                              currentChainId !== ChainId.Rinkeby || !account || minting}
+                              currentChainId !== ChainId.ArbitrumRinkeby || !account || minting}
                             className="mt-6 py-2 px-4 text-center text-white uppercase bg-[#222222] border-b-4 border-orange-700 rounded  hover:border-orange-400 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none"
                             onClick={handlePublicMint}
                           >

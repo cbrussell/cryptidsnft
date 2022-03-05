@@ -107,6 +107,10 @@ html, body {
   font-size: large
 }
 
+.Toastify__toast-container {
+  overflow-wrap: anywhere;
+}
+
 
 
 /* visited link */

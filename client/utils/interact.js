@@ -1,15 +1,13 @@
 import { Contract, utils} from "ethers";
 import { useCall, useContractCall } from "@usedapp/core"
-import cryptidTokenNFT from "../../contract/build/deployments/4/0xF2dF6f027c2eCb355A219ca1a317c6825A38cAbb.json";
-
-
-const address = "0xF2dF6f027c2eCb355A219ca1a317c6825A38cAbb";
+import cryptidTokenNFT from "../../contract/build/deployments/421611/0xB5d3537C676aD9f07D124ebD7ACE597f9e8D9A76.json";
+import { ContractAddress } from '../data/contract';
 
 const { abi: cryptidTokenABI } = cryptidTokenNFT;
 
 const cryptidTokenNFTInterface = new utils.Interface(cryptidTokenABI);
 
-const nftContract = new Contract(address, cryptidTokenNFTInterface)
+const nftContract = new Contract(ContractAddress, cryptidTokenNFTInterface)
 
 export function GetMaxMintAmount() {
   const {value, error } =  useCall({ 

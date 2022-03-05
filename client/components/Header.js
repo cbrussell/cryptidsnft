@@ -12,17 +12,19 @@ import Coinbase from "../public/images/coinbase.png";
 import { useEthers, shortenAddress, getChainName, ChainId, chainName, useEtherBalance, useTokenBalance, useLookupAddress} from "@usedapp/core";
 import { WalletLinkConnector } from "@web3-react/walletlink-connector";
 import { WalletConnectConnector } from "@web3-react/walletconnect-connector";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 require('typeface-exo')
 
 const walletLink = new WalletLinkConnector({
-  url: `https://rinkeby.infura.io/v3/${process.env.NEXT_PUBLIC_INFURA_ID}`,
+  url: `https://arbitrum-rinkeby.infura.io/v3/${process.env.NEXT_PUBLIC_INFURA_ID}`,
   appName: "Cryptids Minting dApp",
-  supportedChainIds: [ChainId.Rinkeby]
+  supportedChainIds: [ChainId.ArbitrumRinkeby]
 });
 
 const walletconnect = new WalletConnectConnector({
   rpc: {
-    [ChainId.Rinkeby]: `https://rinkeby.infura.io/v3/${process.env.NEXT_PUBLIC_INFURA_ID}`,
+    [ChainId.ArbitrumRinkeby]: `https://arbitrum-rinkeby.infura.io/v3/${process.env.NEXT_PUBLIC_INFURA_ID}`,
   },
   qrcode: true,
 });
@@ -34,7 +36,7 @@ const Header = () => {
   const [myEther, setMyEther] = useState("0");
 
 
-  const { activateBrowserWallet, account, activate, chainId: currentChainId } = useEthers();
+  const { activateBrowserWallet, account, activate, deactivate, chainId: currentChainId } = useEthers();
 
 
   const etherBalance = useEtherBalance(account)
@@ -70,7 +72,7 @@ const Header = () => {
       try {
         await window.ethereum.request({
           method: "wallet_switchEthereumChain",
-          params: [{ chainId: "0x4" }],
+          params: [{ chainId: "0x66EEB" }],
         });
       } catch (switchError) {
         if (switchError.code === 4902) {
@@ -79,10 +81,10 @@ const Header = () => {
               method: "wallet_addEthereumChain",
               params: [
                 {
-                  chainId: "0x4",
-                  rpcUrls: ["https://rinkey.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161"],
-                  chainName: "Rinkeby",
-                  blockExplorerUrls: ["https://rinkey.etherscan.io"],
+                  chainId: "0x66EEB",
+                  rpcUrls: ["https://arbitrum-rinkeby.infura.io/v3/b0d18bbb81f54079b165803b666e2957"],
+                  chainName: "Arbitrum Testnet",
+                  blockExplorerUrls: ["https://testnet.arbiscan.io/"],
                   nativeCurrency: {
                     name: "ETH",
                     symbol: "ETH",
@@ -114,11 +116,16 @@ const Header = () => {
     
   }, [account]); // eslint-disable-line react-hooks/exhaustive-deps
 
+  const handleClipboard = () => {
+    navigator.clipboard.writeText(account || 'clipboard');
+    toast.info('Wallet Address copied to Clipboard.');
+  };
+
   return (
 
     <>
       {currentChainId &&
-        currentChainId !== ChainId.Rinkeby && (
+        currentChainId !== ChainId.ArbitrumRinkeby && (
           <div className="bg-cryptid-6">
             <div className="max-w-7xl mx-auto py-3 px-3 sm:px-6 lg:px-8">
               <div className="flex sm:items-center lg:justify-between flex-col space-y-2 sm:space-y-0 sm:flex-row">
@@ -131,11 +138,11 @@ const Header = () => {
                   </span>
                   <p className="ml-3 font-medium text-white truncate">
                     <span className="lg:hidden">
-                      Please switch to Rinkeby.
+                      Please switch to ArbitrumRinkeby.
                     </span>
                     <span className="hidden lg:block exo-font">
                       You are currently on the {getChainName(currentChainId)}{" "}
-                      Network. Please switch to Rinkeby.
+                      Network. Please switch to Arbitrum Rinkeby.
                     </span>
                   </p>
                 </div>
@@ -251,7 +258,7 @@ const Header = () => {
 
           {account ? (
             <div className="py-1 w-auto md:w-auto items-center rounded-lg bg-cryptid-6 mt-2 md:mt-0  p-0.5   exo-font font-bold select-none pointer-events-auto mx-2 justify-around sm:transform-none flex md:flex">
-              <div className="px-2 sm:px-3 py-1 sm:py-2 items-center  flex  md:text-center  container justify-center ">
+              <div className="px-2 py-1 sm:py-2 items-center  flex  md:text-center  container justify-center ">
                 <span className="text-white block exo-font sm:text-base text-lg ">
 
                   {myEther && myEther}
@@ -263,18 +270,49 @@ const Header = () => {
                   ETH
                 </span>
               </div>
-              <div className="flex items-center px-2 sm:px-3  justify-center container md:text-center py-2 rounded-lg bg-cryptid-5  text-white text-semibold exo-font sm:text-base text-lg">
+
+              <button
+              className="flex relative items-center px-5 overflow-hidden group justify-center container md:text-center py-1.5 rounded-lg bg-cryptid-5  text-white text-semibold exo-font  sm:text-base text-lg"
+              onClick={handleClipboard}>
+                 <span className='absolute w-0 h-0 transition-all duration-300 ease-out bg-white rounded-full group-hover:w-48 group-hover:h-40 opacity-10'></span>
                 {accountName ?? shortenAddress(account)}
-              </div>
+                </button>
+{/* 
+              <button
+              className='  container md:text-center   rounded-lg relative inline-flex group items-center justify-center  container px-3.5 py-2 m-1 cursor-pointer exo-font sm:text-base text-lg border-b-4 border-l-2 active:border-purple-600 active:shadow-none shadow-lg bg-gradient-to-tr from-purple-600 to-purple-500 border-purple-700 text-white overflow-hidden'
+              onClick={handleClipboard}
+            >
+              <span className='absolute w-0 h-0 transition-all duration-300 ease-out bg-white rounded-full group-hover:w-40 group-hover:h-40 opacity-10'></span>
+              {shortenAddress(account)}
+            </button> */}
+
+              <button
+              className='rounded-lg relative flex w-full  sm:px-3 exo-font group items-center md:text-center  py-1 justify-center px-3 sm:text-base text-lg  m-1 cursor-pointer text-semibold border-b-4 border-l-2 active:border-indigo-600 active:shadow-none shadow-lg bg-gradient-to-tr from-indigo-600 to-indigo-500 border-indigo-700 text-white overflow-hidden'
+              onClick={() => deactivate()}
+            >
+              <span className='absolute w-0 h-0 transition-all duration-300 ease-out bg-white rounded-full group-hover:w-32 group-hover:h-32 opacity-10'></span>
+              Disconnect
+            </button>
             </div>
           ) : (
             <div className="flex justify-around items-center py-2 sm:py-2">
-            <button
+
+            {/* <button
               className="flex items-center mx-2   px-6 py-2.5 justify-center  md:w-auto sm:w-1/2 text-center  exo-font  border rounded text-semibold  font-bold text-white   bg-cryptid-5 hover:bg-gray-700 focus:outline-none  focus:ring-1 focus:ring-offset-2 focus:ring-gray-900"
               onClick={() => setIsOpenWalletModal(true)}
             >
               Connect Wallet
-            </button>
+            </button> */}
+
+            <button
+            className='rounded-lg relative inline-flex exo-font group mx-2  items-center md:w-auto sm:w-1/2   justify-center px-6 py-2 m-1 cursor-pointer text-semibold  font-bold border-b-4 border-l-2 active:border-indigo-600 active:shadow-none shadow-lg bg-gradient-to-tr from-indigo-600 to-indigo-500 border-indigo-700 text-white overflow-hidden'
+            onClick={() => setIsOpenWalletModal(true)}
+          >
+            <span className='absolute w-0 h-0 transition-all duration-300 ease-out bg-white rounded-full group-hover:w-52 group-hover:h-32 opacity-10'></span>
+            Connect Wallet
+          </button>
+
+
             </div>
           )}
 

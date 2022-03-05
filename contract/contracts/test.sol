@@ -9,11 +9,7 @@ import '@openzeppelin/contracts/utils/Counters.sol';
 import '@openzeppelin/contracts/security/Pausable.sol';
 import '@openzeppelin/contracts/utils/cryptography/MerkleProof.sol';
 
-/// @title CryptidToken NFT Contract
-/// @author @chrisrusselljr
-/// @notice You can use this contract to mint, send, and interact with CRYPTIDS
-/// @dev All function calls are currently implemented without side effects
-contract CryptidToken is ERC721, ERC721Enumerable, Pausable, Ownable, ReentrancyGuard{ 
+contract test is ERC721, ERC721Enumerable, Pausable, Ownable, ReentrancyGuard{ 
     using Strings for uint256;
     using Counters for Counters.Counter;
     using MerkleProof for bytes32[];
@@ -78,7 +74,7 @@ contract CryptidToken is ERC721, ERC721Enumerable, Pausable, Ownable, Reentrancy
     }
 
     // Stage 1 - Airdrop
-    function airdropCryptid(
+    function airdropTest(
         uint8 mintAmount, 
         address to
     ) 
@@ -106,6 +102,7 @@ contract CryptidToken is ERC721, ERC721Enumerable, Pausable, Ownable, Reentrancy
         require(salePrice == msg.value, "Incorrect ETH value sent.");
         require(merkleProof.verify(merkleRoot, keccak256(abi.encodePacked(msg.sender))), "Address not on whitelist.");
         require(claimed[msg.sender] == false, "Whitelist mint already claimed."); 
+        require(totalSupply() + 1 <= totalSaleSupply, "Transaction exceeds total sale supply.");  
         claimed[msg.sender] = true;
         _safeMint(msg.sender, _tokenIdCounter.current());
         _tokenIdCounter.increment();

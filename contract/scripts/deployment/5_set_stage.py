@@ -9,7 +9,7 @@ def main():
     print(dev.balance())
     cryptids = CryptidToken[len(CryptidToken)-1]
     print(cryptids)
-    stage = 4
+    stage = 0
     transaction = cryptids.setStage(stage, {"from": dev})
     
     print(f'Success! Stage moved toat {transaction}')

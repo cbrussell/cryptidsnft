@@ -7,15 +7,15 @@
     "absolutePath": "contracts/NonreceiverContract.sol",
     "exportedSymbols": {
       "NonreceiverContract": [
-        823
+        847
       ]
     },
-    "id": 824,
+    "id": 848,
     "license": "MIT",
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 822,
+        "id": 846,
         "literals": [
           "solidity",
           "^",
@@ -32,15 +32,15 @@
         "contractDependencies": [],
         "contractKind": "contract",
         "fullyImplemented": true,
-        "id": 823,
+        "id": 847,
         "linearizedBaseContracts": [
-          823
+          847
         ],
         "name": "NonreceiverContract",
         "nameLocation": "95:19:17",
         "nodeType": "ContractDefinition",
         "nodes": [],
-        "scope": 824,
+        "scope": 848,
         "src": "86:33:17",
         "usedErrors": []
       }
