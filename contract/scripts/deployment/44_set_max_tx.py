@@ -1,7 +1,7 @@
 from brownie import test, accounts, network, config
 import time
 
-# Changes stage
+# Sets Sale Price
 
 def main():
     dev = accounts.add(config['wallets']['from_key'])
@@ -9,10 +9,10 @@ def main():
     print(dev.balance())
     cryptids = test[len(test)-1]
     print(cryptids)
-    stage = 4
-    transaction = cryptids.setStage(stage, {"from": dev})
+    maxTx = 100
+    transaction = cryptids.setMaxMintPerTx(maxTx, {"from": dev})
     
-    print(f'Success! Stage moved toat {transaction}')
+    print(f'Success! Max Mint pet Transaction set to {maxTx} at {transaction}')
 
     print(f'See transaction here: https://testnet.arbiscan.io//tx/{transaction.txid}\n')
 

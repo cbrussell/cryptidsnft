@@ -18,11 +18,11 @@ import {
 } from "../utils/interact"
 import { formatEther } from '@ethersproject/units'
 import { Contract, utils } from 'ethers';
-import cryptidTokenNFT from "../../contract/build/deployments/421611/0xB5d3537C676aD9f07D124ebD7ACE597f9e8D9A76.json";
+import cryptidTokenNFT from "../../contract/build/deployments/421611/0x7641cAAC2c55709018e981cD835F53d7BcA6A791.json";
 import marshal_leaves from "../data/test_leaves.json";
 
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+// import { toast } from 'react-toastify';
+// import 'react-toastify/dist/ReactToastify.css';
 
 // import root from "../data/test_root.json";
 
@@ -138,7 +138,6 @@ const Hero = () => {
   const soldOut = totalSaleSupply && totalSupply && totalSaleSupply?.eq(totalSupply);
 
 
-
   const { state: publicMintState, send: sendPublicMint } = useContractFunction(contract, 'publicMint', {})
 
   const handlePublicMint = async () => {
@@ -201,11 +200,7 @@ const Hero = () => {
       setStatus((
         <p className="text-center">
           {" "}
-          🦊 Minting Cryptid<span className="dots"><span>.</span><span>.</span><span>.</span></span><br></br>Check out your <a target="_blank" rel="noreferrer" href={`https://rinkeby.etherscan.io/tx/` + whitelistMintState.transaction.hash} className="alert">
-            {/* {"https://rinkeby.etherscan.io/tx/" + whitelistMintState.transaction.hash} */}
-            transaction
-          </a>
-          &#160;on EtherScan!
+          🦊 Minting Cryptid<span className="dots"><span>.</span><span>.</span><span>.</span></span><br></br>
         </p>
       ))
       setMinting(true);
@@ -213,38 +208,34 @@ const Hero = () => {
     if (publicMintState.status === 'Mining') {
       setStatus((
         <p className="text-center">
-          {" "}
-          🦊 Minting Cryptid<span className="dots"><span>.</span><span>.</span><span>.</span></span><br></br>Check out your <a target="_blank" rel="noreferrer" href={`https://rinkeby.etherscan.io/tx/` + publicMintState.transaction.hash} className="alert">
-            {/* {"https://rinkeby.etherscan.io/tx/" + publicMintState.transaction.hash} */}
-            transaction
-          </a>
-          &#160;on EtherScan!
-        </p>
+        {" "}
+        🦊 Minting Cryptid<span className="dots"><span>.</span><span>.</span><span>.</span></span><br></br>
+      </p>
       ))
       setMinting(true);
     }
     if (whitelistMintState.status === 'Exception') {
-      setStatus("Error:" + whitelistMintState.errorMessage)
-      toast.error(whitelistMintState.errorMessage);
+      setStatus("Error: " + whitelistMintState.errorMessage)
+      // toast.error(whitelistMintState.errorMessage);
       setMinting(false);
     }
     if (publicMintState.status === 'Exception') {
-      setStatus("Error:" + publicMintState.errorMessage)
-      toast.error(publicMintState.errorMessage);
+      setStatus("Error: " + publicMintState.errorMessage)
+      // toast.error(publicMintState.errorMessage);
       setMinting(false);
     }
     if (whitelistMintState.status === 'Success') {
       setStatus((
         <p className="text-center">
           {" "}
-          ✅ Success!<br></br>Check out your <a target="_blank" rel="noreferrer" href={`https://rinkeby.etherscan.io/tx/` + whitelistMintState.receipt.transactionHash} className="alert">
-            {/* {"https://rinkeby.etherscan.io/tx/" + whitelistMintState.receipt.transactionHash} */}
+          ✅ Success!<br></br>Check out your <a target="_blank" rel="noreferrer" href={`https://testnet.arbiscan.io//tx/` + whitelistMintState.receipt.transactionHash} className="alert">
+            {/* {"https://testnet.arbiscan.io//tx/" + whitelistMintState.receipt.transactionHash} */}
             transaction
           </a>
-          &#160;on EtherScan!
+          &#160;on Arbiscan!
         </p>
       ))
-      toast.info('Mint success!');
+      // toast.info('Mint success!');
       setMinting(false);
 
     }
@@ -252,14 +243,14 @@ const Hero = () => {
       setStatus((
         <p className="text-center">
           {" "}
-          ✅ Success!<br></br>Check out your <a target="_blank" rel="noreferrer" href={`https://rinkeby.etherscan.io/tx/` + publicMintState.receipt.transactionHash} className="alert">
-            {/* {"https://rinkeby.etherscan.io/tx/" + publicMintState.receipt.transactionHash} */}
+          ✅ Success!<br></br>Check out your <a target="_blank" rel="noreferrer" href={`https://testnet.arbiscan.io//tx/` + publicMintState.receipt.transactionHash} className="alert">
+            {/* {"https://testnet.arbiscan.io//tx/" + publicMintState.receipt.transactionHash} */}
             transaction
           </a>
-          &#160;on EtherScan!
+          &#160;on Arbiscan!
         </p>
       ))
-      toast.info('Mint success!');
+      // toast.info('Mint success!');
       setMinting(false);
 
     }
@@ -383,7 +374,7 @@ const Hero = () => {
           </div>
 
 
-          {stage < 3 && !account ?
+          {stage < 3 && !account && !soldOut?
             (
               <p className="text-white text-2xl mt-6 text-center">
 
@@ -510,7 +501,7 @@ const Hero = () => {
 
 
 
-                    stage == 4 && !account ? (
+                    stage == 4 && !account && !soldOut ? (
                       <>
                         {/* Minted NFT Ratio */}
                         <p className=" bg-gray-100 rounded-md text-gray-800 font-bold text-lg my-4 py-1 px-3">
@@ -591,7 +582,7 @@ const Hero = () => {
 
 
 
-                      stage == 4 && account ? (
+                      stage == 4 && account && !soldOut ? (
                         <>
                           {/* Minted NFT Ratio */}
                           <p className=" bg-gray-100 rounded-md text-gray-800 font-bold text-lg my-4 py-1 px-3">
@@ -672,10 +663,87 @@ const Hero = () => {
 
 
                         (
-                          <p className="text-white text-2xl mt-8 text-center">
+                          <>
+                     <p className="text-white text-3xl mt-8 pb-3 text-bold  text-center">
                             SOLD OUT!
 
                           </p>
+                    {/* Minted NFT Ratio */}
+                    <p className=" bg-gray-100 rounded-md text-gray-800 font-bold text-lg my-4 py-1 px-3">
+                      <span className="text-[#d35c5c]">{`${totalSupply}`}</span> /
+                      <span className="text-black">{`${totalSaleSupply}`}</span>
+                    </p>
+
+                    <div className="flex items-center mt-6 text-3xl font-bold text-gray-200">
+
+
+                      <button
+                        className="flex items-center justify-center w-12 h-12 bg-white rounded-md hover:bg-gray-200 text-center disabled:bg-slate-50"
+                      // onClick={decrementCount}
+
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="w-6 h-6 text-[#d35c5c] "
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M20 12H4"
+                          />
+                        </svg>
+                      </button>
+
+                      <h2 className="mx-8">{count}</h2>
+
+                      <button
+                        className="flex items-center justify-center w-12 h-12 bg-white rounded-md text-black hover:bg-gray-200 text-center "
+                      // onClick={incrementCount}
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className="w-6 h-6 text-[#d35c5c]"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M12 4v16m8-8H4"
+                          />
+                        </svg>
+                      </button>
+                    </div>
+
+                    <h4 className="mt-2 font-semibold text-center text-white">
+
+                      {formatEther((nftPrice * count).toString())} ETH{" "}
+
+                      <span className="text-sm text-gray-300"> + GAS</span>
+                    </h4>
+
+                    {/* Mint Button */}
+
+
+                    <button
+                      disabled={!currentChainId ||
+                        currentChainId !== ChainId.ArbitrumRinkeby || !account || minting || soldOut}
+                      className="mt-6 py-2 px-4 text-center text-white uppercase bg-[#222222] border-b-4 border-orange-700 rounded  hover:border-orange-400 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none"
+                      onClick={handleWhitelistMint}
+                    >
+                      Mint Cryptid
+                    </button>
+                   
+                  </>
+
+                          
+                         
                         )
                         : (
                           <p className="text-white text-2xl mt-8 text-center">

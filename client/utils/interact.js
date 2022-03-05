@@ -1,6 +1,6 @@
 import { Contract, utils} from "ethers";
 import { useCall, useContractCall } from "@usedapp/core"
-import cryptidTokenNFT from "../../contract/build/deployments/421611/0xB5d3537C676aD9f07D124ebD7ACE597f9e8D9A76.json";
+import cryptidTokenNFT from "../../contract/build/deployments/421611/0x7641cAAC2c55709018e981cD835F53d7BcA6A791.json";
 import { ContractAddress } from '../data/contract';
 
 const { abi: cryptidTokenABI } = cryptidTokenNFT;
@@ -10,7 +10,7 @@ const cryptidTokenNFTInterface = new utils.Interface(cryptidTokenABI);
 const nftContract = new Contract(ContractAddress, cryptidTokenNFTInterface)
 
 export function GetMaxMintAmount() {
-  const {value, error } =  useCall({ 
+  const { value, error } =  useCall({ 
     contract: nftContract, 
     method: "maxMintPerTx", 
   }) ?? {};
@@ -23,7 +23,7 @@ export function GetMaxMintAmount() {
 }
 
 export function GetTotalSaleSupply() {
-  const {value, error } =  useCall({ 
+  const { value, error } =  useCall({ 
     contract: nftContract, 
     method: "totalSaleSupply", 
   }) ?? {};

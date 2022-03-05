@@ -16,10 +16,10 @@ def main():
         "test",         # name
         "test",         # symbol
         "ipfs://QmW4kLda1gmhFKnBU1qJvyCvDm8g9P4GKoiNcEB972Q9rD/",             # base
-        50,             # whitelist supply
-        50,             # team supply
-        120,            # total supply
-        5,              # max mint per tx
+        9500,             # whitelist supply
+        400,             # team supply
+        11111,            # total supply
+        10,              # max mint per tx
         {"from": dev},  # 129729334, 139723666 for arb, add:  "gas_limit": 80000000000, "allow_revert": True
         publish_source=True,
     )

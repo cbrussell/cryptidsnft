@@ -11,4 +11,4 @@ def main():
     
     print(f'whitelistUsers set on: {transaction}')
 
-    print(f'See transaction here: https://rinkeby.etherscan.io/tx/{transaction.txid}')
+    print(f'See transaction here: https://testnet.arbiscan.io//tx/{transaction.txid}')

@@ -55,7 +55,7 @@ contract CryptidToken is ERC721, ERC721Enumerable, Pausable, Ownable, Reentrancy
 
     // Public Sale (stage=4)
     uint256 public totalSaleSupply;         
-    uint256 public salePrice = 0.01 ether;  
+    uint256 public salePrice = 0.1 ether;  
 
     Stage public stage;
 
@@ -105,6 +105,7 @@ contract CryptidToken is ERC721, ERC721Enumerable, Pausable, Ownable, Reentrancy
         require(stage == Stage.Whitelist, "Whitelist sale not initiated.");
         require(salePrice == msg.value, "Incorrect ETH value sent.");
         require(merkleProof.verify(merkleRoot, keccak256(abi.encodePacked(msg.sender))), "Address not on whitelist.");
+        require(totalSupply()  + 1 <= totalSaleSupply, "Transaction exceeds total sale supply.");  
         require(claimed[msg.sender] == false, "Whitelist mint already claimed."); 
         claimed[msg.sender] = true;
         _safeMint(msg.sender, _tokenIdCounter.current());

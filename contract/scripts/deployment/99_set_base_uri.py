@@ -11,7 +11,7 @@ def main():
     print(f'BaseURI set on: {transaction}')
     print(f'BaseURI set to: {base_uri}')
 
-    print(f'See transaction here: https://rinkeby.etherscan.io/tx/{transaction.txid}')
+    print(f'See transaction here: https://testnet.arbiscan.io//tx/{transaction.txid}')
 
 # QmRieeT9iBqzrzESYC2V94FNdpeS8adSMLA8CDcoQLH1eW
 

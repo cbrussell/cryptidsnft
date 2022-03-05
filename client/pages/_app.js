@@ -1,9 +1,7 @@
 import "../styles/globals.css";
 import { StatusProvider } from "../context/statusContext";
 import { ChainId, DAppProvider } from "@usedapp/core";
-
 import { ToastContainer } from 'react-toastify';
-
 import 'react-toastify/dist/ReactToastify.css';
 
 

@@ -14,5 +14,5 @@ def main():
     
     print(f'Success! Sale Price to set {salePrice} at {transaction}')
 
-    print(f'See transaction here: https://rinkeby.etherscan.io/tx/{transaction.txid}\n')
+    print(f'See transaction here: https://testnet.arbiscan.io//tx/{transaction.txid}\n')
 

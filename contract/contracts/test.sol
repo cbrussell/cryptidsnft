@@ -51,7 +51,7 @@ contract test is ERC721, ERC721Enumerable, Pausable, Ownable, ReentrancyGuard{
 
     // Public Sale (stage=4)
     uint256 public totalSaleSupply;         
-    uint256 public salePrice = 0.01 ether;  
+    uint256 public salePrice = 0.1 ether;  
 
     Stage public stage;
 

@@ -115,7 +115,7 @@ html, body {
 
 /* visited link */
 a.alert:visited {
-  color: #2b1812;
+  /* color: #2b1812; */
 }
 
 /* mouse over link */

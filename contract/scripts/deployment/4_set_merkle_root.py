@@ -13,6 +13,6 @@ def main():
     print(f'Merkle root set at: {transaction}\n')
     print(f'Merkle root set to: {merkle_root}\n')
 
-    print(f'See transaction here: https://rinkeby.etherscan.io/tx/{transaction.txid}\n')
+    print(f'See transaction here: https://testnet.arbiscan.io//tx/{transaction.txid}\n')
 
 
