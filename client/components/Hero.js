@@ -30,8 +30,8 @@ const Hero = () => {
   const { account, chainId: currentChainId, library, BigNumber } = useEthers();
   const { status, setStatus } = useStatus();
   const [count, setCount] = useState(1);
-  const [maxMintAmount, setMaxMintAmount] = useState(0);
-  const [totalSupply, setTotalSupply] = useState(0);
+  // const [maxMintAmount, setMaxMintAmount] = useState(0);
+  // const [totalSupply, setTotalSupply] = useState(0);
   // const [totalSaleSupply, setTotalSaleSupply] = useState(10000);
   const [nftPrice, setNftPrice] = useState(100000000000000000);
   const [stage, setStage] = useState(0);
@@ -97,10 +97,10 @@ const Hero = () => {
     if (stageCalculated) setStage(stageCalculated);
   }, [stageCalculated]);
 
-  useEffect(() => {
-    console.log("Current Minted Supply is " + totalSupplyCalculated);
-    if (totalSupplyCalculated) setTotalSupply(totalSupplyCalculated);
-  }, [totalSupplyCalculated]);
+  // useEffect(() => {
+  //   console.log("Current Minted Supply is " + totalSupplyCalculated);
+  //   if (totalSupplyCalculated) setTotalSupply(totalSupplyCalculated);
+  // }, [totalSupplyCalculated]);
 
   // useEffect(() => {
   //   console.log("Total Sale Supply is " + totalSaleSupplyCalculated);
@@ -135,7 +135,7 @@ const Hero = () => {
   }, [account, library])
 
 
-  const soldOut = totalSaleSupplyCalculated && totalSupply && totalSaleSupplyCalculated?.eq(totalSupply);
+  const soldOut = totalSaleSupplyCalculated && totalSupplyCalculated && totalSaleSupplyCalculated?.eq(totalSupplyCalculated);
 
 
   const { state: publicMintState, send: sendPublicMint } = useContractFunction(contract, 'publicMint', {})
@@ -407,7 +407,7 @@ const Hero = () => {
                     </p>
                     {/* Minted NFT Ratio */}
                     <p className=" bg-gray-100 rounded-md text-gray-800 font-bold text-lg my-4 py-1 px-3">
-                      <span className="text-[#d35c5c]">{`${totalSupply}`}</span> /
+                      <span className="text-[#d35c5c]">{`${totalSupplyCalculated}`}</span> /
                       <span className="text-black">{`${totalSaleSupplyCalculated}`}</span>
                     </p>
 
@@ -508,7 +508,7 @@ const Hero = () => {
                       <>
                         {/* Minted NFT Ratio */}
                         <p className=" bg-gray-100 rounded-md text-gray-800 font-bold text-lg my-4 py-1 px-3">
-                          <span className="text-[#d35c5c]">{`${totalSupply}`}</span> /
+                          <span className="text-[#d35c5c]">{`${totalSupplyCalculated}`}</span> /
                           <span className="text-black"> {`${totalSaleSupplyCalculated}`}</span>
                         </p>
 
@@ -589,7 +589,7 @@ const Hero = () => {
                         <>
                           {/* Minted NFT Ratio */}
                           <p className=" bg-gray-100 rounded-md text-gray-800 font-bold text-lg my-4 py-1 px-3">
-                            <span className="text-[#d35c5c]">{`${totalSupply}`}</span> /
+                            <span className="text-[#d35c5c]">{`${totalSupplyCalculated}`}</span> /
                             <span className="text-black"> {`${totalSaleSupplyCalculated}`}</span>
 
                           </p>
@@ -673,7 +673,7 @@ const Hero = () => {
                           </p>
                     {/* Minted NFT Ratio */}
                     <p className=" bg-gray-100 rounded-md text-gray-800 font-bold text-lg my-4 py-1 px-3">
-                      <span className="text-[#d35c5c]">{`${totalSupply}`}</span> /
+                      <span className="text-[#d35c5c]">{`${totalSupplyCalculated}`}</span> /
                       <span className="text-black">{`${totalSaleSupplyCalculated}`}</span>
                     </p>
 
