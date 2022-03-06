@@ -7,7 +7,9 @@ import 'react-toastify/dist/ReactToastify.css';
 const config = {
   readOnlyChainId: ChainId.Arbitrum,
   readOnlyUrls: {
-    [ChainId.Arbitrum]: `https://arbitrum-mainnet.infura.io/v3/${process.env.NEXT_PUBLIC_INFURA_ID}`
+    [ChainId.Arbitrum]: `https://arbitrum-mainnet.infura.io/v3/${process.env.NEXT_PUBLIC_INFURA_ID}`,
+    [ChainId.ArbitrumRinkeby]: `https://arbitrum-rinkeby.infura.io/v3/${process.env.NEXT_PUBLIC_INFURA_ID}`
+    
   }
 }
 

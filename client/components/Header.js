@@ -19,16 +19,16 @@ require('typeface-exo')
 const walletLink = new WalletLinkConnector({
   url: 'https://arb1.arbitrum.io/rpc',
   appName: "CRYPTIDS",
-  supportedChainIds: [ChainId.Arbitrum]
+  supportedChainIds: [ChainId.Arbitrum, ChainId.ArbitrumRinkeby],
 });
 
 const walletconnect = new WalletConnectConnector({
   rpc: {
     [ChainId.Arbitrum]: `https://arbitrum-mainnet.infura.io/v3/${process.env.NEXT_PUBLIC_INFURA_ID}`,
+    [ChainId.ArbitrumRinkeby]: `https://arbitrum-rinkeby.infura.io/v3/${process.env.NEXT_PUBLIC_INFURA_ID}`,
   },
   bridge: 'https://bridge.walletconnect.org',
   infuraId: process.env.NEXT_PUBLIC_INFURA_ID,
-  pollingInterval: 1500000,
   qrcode: true,
 });
 
@@ -46,11 +46,13 @@ const Header = () => {
 
   useEffect(() => {
     if (etherBalance) setMyEther(Number(formatEther(etherBalance)).toFixed(3));
-  }, [etherBalance]);
+  }, [etherBalance, currentChainId]);
 
-  
- 
+
   const accountName = useLookupAddress();
+
+
+
 
   useEffect(() => {
     if (!account) {
@@ -123,41 +125,43 @@ const Header = () => {
 
   return (
 
+    // <>
+
+    //   {currentChainId &&
+    //     currentChainId !== ChainId.Arbitrum && (
+    //       <div className="bg-cryptid-6">
+    //         <div className="max-w-7xl mx-auto py-3 px-3 sm:px-6 lg:px-8">
+    //           <div className="flex sm:items-center lg:justify-between flex-col space-y-2 sm:space-y-0 sm:flex-row">
+    //             <div className="flex-1 flex items-center">
+    //               <span className="flex p-2 rounded-lg bg-cryptid-3">
+    //                 <SpeakerphoneIcon
+    //                   className="h-6 w-6 text-white"
+    //                   aria-hidden="true"
+    //                 />
+    //               </span>
+    //               <p className="ml-3 font-medium text-white truncate">
+    //                 <span className="lg:hidden">
+    //                   Please switch to Arbitrum Mainnet.
+    //                 </span>
+    //                 <span className="hidden lg:block exo-font">
+    //                   You are currently on the {getChainName(currentChainId)}{" "}
+    //                   Network. Please switch to Arbitrum Mainnet.
+    //                 </span>
+    //               </p>
+    //             </div>
+    //             <div className="flex-shrink-0 w-full sm:mt-0 sm:w-auto">
+    //               <button
+    //                 onClick={switchToArbitrum}
+    //                 className="w-full flex items-center justify-center exo-font px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-yellow-600 bg-white hover:bg-yellow-50"
+    //               >
+    //                 Switch Networks
+    //               </button>
+    //             </div>
+    //           </div>
+    //         </div>
+    //       </div>
+    //     )}
     <>
-      {currentChainId &&
-        currentChainId !== ChainId.Arbitrum && (
-          <div className="bg-cryptid-6">
-            <div className="max-w-7xl mx-auto py-3 px-3 sm:px-6 lg:px-8">
-              <div className="flex sm:items-center lg:justify-between flex-col space-y-2 sm:space-y-0 sm:flex-row">
-                <div className="flex-1 flex items-center">
-                  <span className="flex p-2 rounded-lg bg-cryptid-3">
-                    <SpeakerphoneIcon
-                      className="h-6 w-6 text-white"
-                      aria-hidden="true"
-                    />
-                  </span>
-                  <p className="ml-3 font-medium text-white truncate">
-                    <span className="lg:hidden">
-                      Please switch to Arbitrum Mainnet.
-                    </span>
-                    <span className="hidden lg:block exo-font">
-                      You are currently on the {getChainName(currentChainId)}{" "}
-                      Network. Please switch to Arbitrum Mainnet.
-                    </span>
-                  </p>
-                </div>
-                <div className="flex-shrink-0 w-full sm:mt-0 sm:w-auto">
-                  <button
-                    onClick={switchToArbitrum}
-                    className="w-full flex items-center justify-center exo-font px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-yellow-600 bg-white hover:bg-yellow-50"
-                  >
-                    Switch Networks
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
       <header className=" inset-x-5 top-0 z-10 h-32 md:h-20 min-w-full justify-center space-x-6 text-white  backdrop-filter ">
         <div className="md:flex items-center container justify-around  mx-auto max-w-7xl  h-full ">
           <div className="flex justify-around">
