@@ -83,7 +83,7 @@ const Hero = () => {
   // }, [maxMintCalculated]);
 
   useEffect(() => {
-    console.log("Sale Price is  ", nftPriceCalculated);
+    console.log("Sale Price is:", formatEther(nftPriceCalculated), "ETH");
     if (nftPriceCalculated) setNftPrice(nftPriceCalculated);
   }, [nftPriceCalculated]);
 
