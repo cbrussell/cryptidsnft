@@ -38,14 +38,14 @@ const Hero = () => {
   const [minting, setMinting] = useState(false)
   const [claimed, setClaimed] = useState(false);
   const [whitelistClaimable, setWhitelistClaimable] = useState(false);
-  const [owner, setOwner] = useState("");
+  // const [owner, setOwner] = useState("");
 
   const maxMintCalculated = GetMaxMintAmount();
   const nftPriceCalculated = GetSalePrice();
   const stageCalculated = GetStage();
   const totalSupplyCalculated = GetTotalSupply();
   const totalSaleSupplyCalculated = GetTotalSaleSupply();
-  const ownerCalculated = GetOwner();
+  // const ownerCalculated = GetOwner();
   const etherBalance = useEtherBalance(account);
 
   const claimedCalculated = CheckIfClaimed(account ?? '0x0000000000000000000000000000000000000000');
@@ -107,10 +107,10 @@ const Hero = () => {
   //   if (totalSaleSupplyCalculated) setTotalSaleSupply(totalSaleSupplyCalculated);
   // }, [totalSaleSupplyCalculated]);
 
-  useEffect(() => {
-    console.log("The Owner is " + ownerCalculated);
-    if (ownerCalculated) setOwner(ownerCalculated);
-  }, [ownerCalculated]);
+  // useEffect(() => {
+  //   console.log("The Owner is " + ownerCalculated);
+  //   if (ownerCalculated) setOwner(ownerCalculated);
+  // }, [ownerCalculated]);
 
 
 

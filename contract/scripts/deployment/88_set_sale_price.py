@@ -9,7 +9,7 @@ def main():
     print(dev.balance())
     cryptids = test[len(test)-1]
     print(cryptids)
-    salePrice = '0.001 ether'
+    salePrice = '0.1 ether'
     transaction = cryptids.setSalePrice(salePrice, {"from": dev})
     
     print(f'Success! Sale Price to set {salePrice} at {transaction}')
