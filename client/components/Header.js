@@ -17,15 +17,18 @@ import 'react-toastify/dist/ReactToastify.css';
 require('typeface-exo')
 
 const walletLink = new WalletLinkConnector({
-  url: `https://arbitrum-rinkeby.infura.io/v3/${process.env.NEXT_PUBLIC_INFURA_ID}`,
-  appName: "Cryptids Minting dApp",
-  supportedChainIds: [ChainId.ArbitrumRinkeby]
+  url: 'https://arb1.arbitrum.io/rpc',
+  appName: "CRYPTIDS",
+  supportedChainIds: [ChainId.Arbitrum]
 });
 
 const walletconnect = new WalletConnectConnector({
   rpc: {
-    [ChainId.ArbitrumRinkeby]: `https://arbitrum-rinkeby.infura.io/v3/${process.env.NEXT_PUBLIC_INFURA_ID}`,
+    [ChainId.Arbitrum]: `https://arbitrum-mainnet.infura.io/v3/${process.env.NEXT_PUBLIC_INFURA_ID}`,
   },
+  bridge: 'https://bridge.walletconnect.org',
+  infuraId: process.env.NEXT_PUBLIC_INFURA_ID,
+  pollingInterval: 1500000,
   qrcode: true,
 });
 
@@ -49,8 +52,6 @@ const Header = () => {
  
   const accountName = useLookupAddress();
 
-  
-
   useEffect(() => {
     if (!account) {
       setStatus("🦊 Connect to Metamask using the Connect Wallet button.") 
@@ -72,7 +73,7 @@ const Header = () => {
       try {
         await window.ethereum.request({
           method: "wallet_switchEthereumChain",
-          params: [{ chainId: "0x66EEB" }],
+          params: [{ chainId: "0xa4b1" }],
         });
       } catch (switchError) {
         if (switchError.code === 4902) {
@@ -81,21 +82,20 @@ const Header = () => {
               method: "wallet_addEthereumChain",
               params: [
                 {
-                  chainId: "0x66EEB",
-                  rpcUrls: ["https://arbitrum-rinkeby.infura.io/v3/b0d18bbb81f54079b165803b666e2957"],
-                  chainName: "Arbitrum Testnet",
-                  blockExplorerUrls: ["https://testnet.arbiscan.io/"],
+                  chainId: "0xa4b1",
+                  rpcUrls: ["https://arb1.arbitrum.io/rpc"],
+                  chainName: "Arbitrum One",
+                  blockExplorerUrls: ["https://arbiscan.io"],
                   nativeCurrency: {
-                    name: "ETH",
-                    symbol: "ETH",
+                    name: "AETH",
+                    symbol: "AETH",
                     decimals: 18,
                   },
                 },
               ],
             });
-          } 
-          catch (addError) {
-            setStatus("Something went wrong while switching networks.");
+          } catch (addError) {
+            toast.error("Something went wrong while switching networks.");
           }
         }
       }
@@ -125,7 +125,7 @@ const Header = () => {
 
     <>
       {currentChainId &&
-        currentChainId !== ChainId.ArbitrumRinkeby && (
+        currentChainId !== ChainId.Arbitrum && (
           <div className="bg-cryptid-6">
             <div className="max-w-7xl mx-auto py-3 px-3 sm:px-6 lg:px-8">
               <div className="flex sm:items-center lg:justify-between flex-col space-y-2 sm:space-y-0 sm:flex-row">
@@ -138,11 +138,11 @@ const Header = () => {
                   </span>
                   <p className="ml-3 font-medium text-white truncate">
                     <span className="lg:hidden">
-                      Please switch to ArbitrumRinkeby.
+                      Please switch to Arbitrum Mainnet.
                     </span>
                     <span className="hidden lg:block exo-font">
                       You are currently on the {getChainName(currentChainId)}{" "}
-                      Network. Please switch to Arbitrum Rinkeby.
+                      Network. Please switch to Arbitrum Mainnet.
                     </span>
                   </p>
                 </div>
@@ -272,7 +272,7 @@ const Header = () => {
               </div>
 
               <button
-              className="flex relative items-center px-5 overflow-hidden group justify-center container md:text-center py-1.5 rounded-lg bg-cryptid-5  text-white text-semibold exo-font  sm:text-base text-lg"
+              className="flex relative items-center px-5 overflow-hidden group justify-center container md:text-center py-1 rounded-lg active:border-neutral-800 active:shadow-none shadow-lg bg-gradient-to-tr from-neutral-800 to-neutral-700 border-neutral-900  text-white text-semibold exo-font border-b-4 border-l-2 sm:text-base text-lg"
               onClick={handleClipboard}>
                  <span className='absolute w-0 h-0 transition-all duration-300 ease-out bg-white rounded-full group-hover:w-48 group-hover:h-40 opacity-10'></span>
                 {accountName ?? shortenAddress(account)}
@@ -435,7 +435,7 @@ const Header = () => {
                 } catch (err) {
                   setStatus("😞 Error: " + err.message);
                 } finally {
-                  
+                  onClose();
                 }
               }}
             >

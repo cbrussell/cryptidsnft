@@ -13,5 +13,5 @@ def main():
     print(f'Provenance hash set at: {transaction}')
     print(f'Provenance hash set to: {provenance}')
 
-    print(f'See transaction here: https://testnet.arbiscan.io//tx/{transaction.txid}\n')
+    print(f'See transaction here: https://arbiscan.io/tx/{transaction.txid}\n')
 

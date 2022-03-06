@@ -11,7 +11,7 @@ def main():
     print(f'Active network is: {active_network}')
     
     cryptids = test[len(test)-1]
-    airdrop_amount = 2
+    airdrop_amount = 1
     airdrop_address = "0x12B58f5331a6DC897932AA7FB5101667ACdf03e2"
 
     transaction = cryptids.airdropTest(airdrop_amount, airdrop_address, {"from": dev})

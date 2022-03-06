@@ -14,5 +14,5 @@ def main():
     
     print(f'Success! Max Mint pet Transaction set to {maxTx} at {transaction}')
 
-    print(f'See transaction here: https://testnet.arbiscan.io//tx/{transaction.txid}\n')
+    print(f'See transaction here: https://arbiscan.io/tx/{transaction.txid}\n')
 

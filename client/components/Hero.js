@@ -18,13 +18,13 @@ import {
 } from "../utils/interact"
 import { formatEther } from '@ethersproject/units'
 import { Contract, utils } from 'ethers';
-import cryptidTokenNFT from "../../contract/build/deployments/421611/0x7641cAAC2c55709018e981cD835F53d7BcA6A791.json";
+import cryptidTokenNFT from "../../contract/build/deployments/42161/0x6771619F9527F84e579C2257322F427684B8f24d.json";
 import marshal_leaves from "../data/test_leaves.json";
 
-// import { toast } from 'react-toastify';
-// import 'react-toastify/dist/ReactToastify.css';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-// import root from "../data/test_root.json";
+import root from "../data/test_root.json";
 
 const Hero = () => {
   const { account, chainId: currentChainId, library, BigNumber } = useEthers();
@@ -32,7 +32,7 @@ const Hero = () => {
   const [count, setCount] = useState(1);
   const [maxMintAmount, setMaxMintAmount] = useState(0);
   const [totalSupply, setTotalSupply] = useState(0);
-  const [totalSaleSupply, setTotalSaleSupply] = useState(10000);
+  // const [totalSaleSupply, setTotalSaleSupply] = useState(10000);
   const [nftPrice, setNftPrice] = useState(100000000000000000);
   const [stage, setStage] = useState(0);
   const [minting, setMinting] = useState(false)
@@ -67,21 +67,20 @@ const Hero = () => {
       const tree = new MerkleTree(leaves, keccak256, { sortPairs: true });
       setWhitelistProof(tree.getHexProof(keccak256(account)));
       console.log("New account detected, recalculating Merkle Proof.");
-
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [account])
+  }, [account, currentChainId])
 
   useEffect(() => {
     console.log("Current account whitelist verified status is: ", whitelistClaimableCalculated);
     setWhitelistClaimable(whitelistClaimableCalculated);
-  }, [whitelistClaimableCalculated]);
+  }, [whitelistClaimableCalculated, currentChainId]);
 
-  useEffect(() => {
-    console.log("Max Mint Per Transaction is " + maxMintCalculated);
-    if (maxMintCalculated) setMaxMintAmount(maxMintCalculated);
-  }, [maxMintCalculated]);
+  // useEffect(() => {
+  //   console.log("Max Mint Per Transaction is " + maxMintCalculated);
+  //   if (maxMintCalculated) setMaxMintAmount(maxMintCalculated);
+  // }, [maxMintCalculated]);
 
   useEffect(() => {
     console.log("Sale Price is  ", nftPriceCalculated);
@@ -103,10 +102,10 @@ const Hero = () => {
     if (totalSupplyCalculated) setTotalSupply(totalSupplyCalculated);
   }, [totalSupplyCalculated]);
 
-  useEffect(() => {
-    console.log("Total Sale Supply is " + totalSaleSupplyCalculated);
-    if (totalSaleSupplyCalculated) setTotalSaleSupply(totalSaleSupplyCalculated);
-  }, [totalSaleSupplyCalculated]);
+  // useEffect(() => {
+  //   console.log("Total Sale Supply is " + totalSaleSupplyCalculated);
+  //   if (totalSaleSupplyCalculated) setTotalSaleSupply(totalSaleSupplyCalculated);
+  // }, [totalSaleSupplyCalculated]);
 
   useEffect(() => {
     console.log("The Owner is " + ownerCalculated);
@@ -116,7 +115,7 @@ const Hero = () => {
 
 
   const incrementCount = () => {
-    if (count < maxMintAmount) {
+    if (count < maxMintCalculated) {
       setCount(count + 1);
     }
   };
@@ -135,7 +134,8 @@ const Hero = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [account, library])
 
-  const soldOut = totalSaleSupply && totalSupply && totalSaleSupply?.eq(totalSupply);
+
+  const soldOut = totalSaleSupplyCalculated && totalSupply && totalSaleSupplyCalculated?.eq(totalSupply);
 
 
   const { state: publicMintState, send: sendPublicMint } = useContractFunction(contract, 'publicMint', {})
@@ -216,26 +216,22 @@ const Hero = () => {
     }
     if (whitelistMintState.status === 'Exception') {
       setStatus("Error: " + whitelistMintState.errorMessage)
-      // toast.error(whitelistMintState.errorMessage);
       setMinting(false);
     }
     if (publicMintState.status === 'Exception') {
       setStatus("Error: " + publicMintState.errorMessage)
-      // toast.error(publicMintState.errorMessage);
       setMinting(false);
     }
     if (whitelistMintState.status === 'Success') {
       setStatus((
         <p className="text-center">
           {" "}
-          ✅ Success!<br></br>Check out your <a target="_blank" rel="noreferrer" href={`https://testnet.arbiscan.io//tx/` + whitelistMintState.receipt.transactionHash} className="alert">
-            {/* {"https://testnet.arbiscan.io//tx/" + whitelistMintState.receipt.transactionHash} */}
+          ✅ Success!<br></br>Check out your <a target="_blank" rel="noreferrer" href={`https://arbiscan.io/tx/` + whitelistMintState.receipt.transactionHash} className="alert">
             transaction
           </a>
           &#160;on Arbiscan!
         </p>
       ))
-      // toast.info('Mint success!');
       setMinting(false);
 
     }
@@ -243,14 +239,13 @@ const Hero = () => {
       setStatus((
         <p className="text-center">
           {" "}
-          ✅ Success!<br></br>Check out your <a target="_blank" rel="noreferrer" href={`https://testnet.arbiscan.io//tx/` + publicMintState.receipt.transactionHash} className="alert">
-            {/* {"https://testnet.arbiscan.io//tx/" + publicMintState.receipt.transactionHash} */}
+          ✅ Success!<br></br>Check out your <a target="_blank" rel="noreferrer" href={`https://arbiscan.io/tx/` + publicMintState.receipt.transactionHash} className="alert">
             transaction
           </a>
           &#160;on Arbiscan!
         </p>
       ))
-      // toast.info('Mint success!');
+   
       setMinting(false);
 
     }
@@ -374,7 +369,7 @@ const Hero = () => {
           </div>
 
 
-          {stage < 3 && !account && !soldOut?
+          {stage < 2 && !account && !soldOut?
             (
               <p className="text-white text-2xl mt-6 text-center">
 
@@ -396,7 +391,15 @@ const Hero = () => {
                 </p>
               )
 
-              : stage == 2 && whitelistClaimable && account && !claimed ?
+              
+
+              : stage == 2 && !account ?
+                (
+                  
+                    <p className="text-white text-2xl mt-8 text-center">
+                      Whitelist Sale is <b>Active</b> <br></br><br></br>
+                    </p>
+                   ) : stage == 2 && whitelistClaimable && account && !claimed ?
                 (
                   <>
                     <p className="text-white text-2xl mt-8 text-center">
@@ -405,7 +408,7 @@ const Hero = () => {
                     {/* Minted NFT Ratio */}
                     <p className=" bg-gray-100 rounded-md text-gray-800 font-bold text-lg my-4 py-1 px-3">
                       <span className="text-[#d35c5c]">{`${totalSupply}`}</span> /
-                      <span className="text-black">{`${totalSaleSupply}`}</span>
+                      <span className="text-black">{`${totalSaleSupplyCalculated}`}</span>
                     </p>
 
                     <div className="flex items-center mt-6 text-3xl font-bold text-gray-200">
@@ -467,7 +470,7 @@ const Hero = () => {
 
                     <button
                       disabled={!currentChainId ||
-                        currentChainId !== ChainId.ArbitrumRinkeby || !account || minting}
+                        currentChainId !== ChainId.Arbitrum || !account || minting}
                       className="mt-6 py-2 px-4 text-center text-white uppercase bg-[#222222] border-b-4 border-orange-700 rounded  hover:border-orange-400 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none"
                       onClick={handleWhitelistMint}
                     >
@@ -506,7 +509,7 @@ const Hero = () => {
                         {/* Minted NFT Ratio */}
                         <p className=" bg-gray-100 rounded-md text-gray-800 font-bold text-lg my-4 py-1 px-3">
                           <span className="text-[#d35c5c]">{`${totalSupply}`}</span> /
-                          <span className="text-black"> {`${totalSaleSupply}`}</span>
+                          <span className="text-black"> {`${totalSaleSupplyCalculated}`}</span>
                         </p>
 
                         <div className="flex items-center mt-6 text-3xl font-bold text-gray-200">
@@ -568,7 +571,7 @@ const Hero = () => {
 
                         <button
                           disabled={!currentChainId ||
-                            currentChainId !== ChainId.ArbitrumRinkeby || !account || minting}
+                            currentChainId !== ChainId.Arbitrum || !account || minting}
                           className="mt-6 py-2 px-4 text-center text-white uppercase bg-[#222222] border-b-4 border-orange-700 rounded  hover:border-orange-400 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none"
                           onClick={handlePublicMint}
                         >
@@ -587,7 +590,7 @@ const Hero = () => {
                           {/* Minted NFT Ratio */}
                           <p className=" bg-gray-100 rounded-md text-gray-800 font-bold text-lg my-4 py-1 px-3">
                             <span className="text-[#d35c5c]">{`${totalSupply}`}</span> /
-                            <span className="text-black"> {`${totalSaleSupply}`}</span>
+                            <span className="text-black"> {`${totalSaleSupplyCalculated}`}</span>
 
                           </p>
 
@@ -650,7 +653,7 @@ const Hero = () => {
 
                           <button
                             disabled={!currentChainId ||
-                              currentChainId !== ChainId.ArbitrumRinkeby || !account || minting}
+                              currentChainId !== ChainId.Arbitrum || !account || minting}
                             className="mt-6 py-2 px-4 text-center text-white uppercase bg-[#222222] border-b-4 border-orange-700 rounded  hover:border-orange-400 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none"
                             onClick={handlePublicMint}
                           >
@@ -671,7 +674,7 @@ const Hero = () => {
                     {/* Minted NFT Ratio */}
                     <p className=" bg-gray-100 rounded-md text-gray-800 font-bold text-lg my-4 py-1 px-3">
                       <span className="text-[#d35c5c]">{`${totalSupply}`}</span> /
-                      <span className="text-black">{`${totalSaleSupply}`}</span>
+                      <span className="text-black">{`${totalSaleSupplyCalculated}`}</span>
                     </p>
 
                     <div className="flex items-center mt-6 text-3xl font-bold text-gray-200">
@@ -733,7 +736,7 @@ const Hero = () => {
 
                     <button
                       disabled={!currentChainId ||
-                        currentChainId !== ChainId.ArbitrumRinkeby || !account || minting || soldOut}
+                        currentChainId !== ChainId.Arbitrum || !account || minting || soldOut}
                       className="mt-6 py-2 px-4 text-center text-white uppercase bg-[#222222] border-b-4 border-orange-700 rounded  hover:border-orange-400 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none"
                       onClick={handleWhitelistMint}
                     >

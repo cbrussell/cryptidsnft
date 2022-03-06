@@ -10,4 +10,4 @@ def main():
     
     print(f'Claim for {address} removed on: {transaction}')
 
-    print(f'See transaction here: https://testnet.arbiscan.io//tx/{transaction.txid}')
+    print(f'See transaction here: https://arbiscan.io/tx/{transaction.txid}')

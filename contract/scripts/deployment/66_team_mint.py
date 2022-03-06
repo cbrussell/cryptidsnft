@@ -11,7 +11,7 @@ def main():
     print(f'Active network is: {active_network}\n')
     
     cryptids = test[len(test)-1]
-    amount = 25
+    amount = 1
 
     transaction = cryptids.teamMint(amount, {"from": dev})
 
@@ -23,4 +23,4 @@ def main():
 
 
 
-    print(f'See transaction here: https://testnet.arbiscan.io//tx/{transaction.txid}\n')
+    print(f'See transaction here: https://arbiscan.io/tx/{transaction.txid}\n')
