@@ -471,7 +471,7 @@ const Hero = () => {
             : 
             stage < 2 && !account && !soldOut ?
               (
-                <p className="text-white text-2xl mt-6 text-center">
+                <p className="text-white text-xl mt-6 text-center">
 
                   <br></br>
                   {timerComponentsPublic.length ? <span>Whitelist Sale will begin in... <br></br> {timerComponentsWhitelist}</span> : <span>Whitelist Sale will be starting soon...</span>}
@@ -483,7 +483,7 @@ const Hero = () => {
 
               stage < 2 && whitelistClaimable && account && !claimed ?
                 (
-                  <p className="text-white text-2xl mt-8 text-center">
+                  <p className="text-white text-xl mt-8 text-center">
                     Account: {" "} {shortenAddress(account)} has 1 Whitelist Mint Available <br></br><br></br>
 
                     {timerComponentsWhitelist.length ? <span>Whitelist Sale will begin in... <br></br> {timerComponentsPublic}</span> : <span>Whitelist Sale will be starting soon...</span>}
@@ -496,13 +496,13 @@ const Hero = () => {
                 : stage == 2 && !account ?
                   (
 
-                    <p className="text-white text-2xl mt-8 text-center">
+                    <p className="text-white text-xl mt-8 text-center">
                       Whitelist Sale is <b>Active</b> <br></br><br></br>
                     </p>
                   ) : stage == 2 && whitelistClaimable && account && !claimed ?
                     (
                       <>
-                        <p className="text-white text-2xl mt-8 text-center">
+                        <p className="text-white text-xl mt-8 text-center">
                           Account: {" "} {shortenAddress(account)} has 1 Whitelist Mint Available <br></br><br></br>
                         </p>
                         {/* Minted NFT Ratio */}
@@ -582,7 +582,7 @@ const Hero = () => {
 
 
                       (
-                        <p className="text-white text-2xl mt-8 text-center">
+                        <p className="text-white text-xl mt-8 text-center">
                           Account: {" "} {shortenAddress(account)} has claimed their Whitelist Mint. <br></br><br></br>
 
                           {timerComponentsPublic.length ? <span>Public Sale will begin in... <br></br> {timerComponentsPublic}</span> : <span>Public Sale will be starting soon...</span>}
@@ -593,7 +593,7 @@ const Hero = () => {
 
 
                         (
-                          <p className="text-white text-2xl mt-8 text-center">
+                          <p className="text-white text-xl mt-8 text-center">
                             Account: {" "} {shortenAddress(account)} is not on the Whitelist. <br></br><br></br>
 
                             {timerComponentsPublic.length ? <span>Public Sale will begin in... <br></br> {timerComponentsPublic}</span> : <span>Public Sale will be starting soon...</span>}
@@ -777,7 +777,7 @@ const Hero = () => {
 
                             )
                             : (
-                              <p className="text-white text-2xl mt-8 text-center">
+                              <p className="text-white text-xl mt-8 text-center">
 
 
                                 {timerComponentsPublic.length ? <span>Public Sale will begin in... <br></br> {timerComponentsPublic}</span> : <span>Public Sale will be starting soon...</span>}
