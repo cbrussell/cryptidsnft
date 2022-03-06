@@ -34,7 +34,11 @@ const Hero = () => {
   // const [totalSupply, setTotalSupply] = useState(0);
   // const [totalSaleSupply, setTotalSaleSupply] = useState(10000);
   const [nftPrice, setNftPrice] = useState(100000000000000000);
+
   const [stage, setStage] = useState(0);
+
+  // const stage = 4;
+
   const [minting, setMinting] = useState(false)
   const [claimed, setClaimed] = useState(false);
   const [whitelistClaimable, setWhitelistClaimable] = useState(false);
@@ -42,7 +46,9 @@ const Hero = () => {
 
   const maxMintCalculated = GetMaxMintAmount();
   const nftPriceCalculated = GetSalePrice();
+
   const stageCalculated = GetStage();
+
   const totalSupplyCalculated = GetTotalSupply();
   const totalSaleSupplyCalculated = GetTotalSaleSupply();
   // const ownerCalculated = GetOwner();
@@ -171,6 +177,7 @@ const Hero = () => {
 
   const soldOut = totalSaleSupplyCalculated && totalSupplyCalculated && totalSaleSupplyCalculated?.eq(totalSupplyCalculated);
 
+  // const soldOut = true;
 
   const { state: publicMintState, send: sendPublicMint } = useContractFunction(contract, 'publicMint', {})
 
@@ -403,7 +410,8 @@ const Hero = () => {
           </div>
 
 
-          {currentChainId &&
+          {
+          currentChainId && stage < 2 &&
             currentChainId !== ChainId.Arbitrum && !soldOut ?
             (
               <p className="text-white text-xl mt-6 text-center">
@@ -416,11 +424,56 @@ const Hero = () => {
               </p>
             )
 
-            : stage < 2 && !account && !soldOut ?
+            : 
+            currentChainId && stage == 2 &&
+            currentChainId !== ChainId.Arbitrum && !soldOut ?
+            (
+              <p className="text-white text-xl mt-6 text-center">
+                You are connected to Mainnet. Please <button className="text-yellow-400 underline hover:text-yellow-200" onClick={switchToArbitrum}> switch to Arbitrum. </button><br></br>
+              <p className="text-lg">  (If you are on mobile, switch networks in the wallet app.)</p>
+              
+                
+                <p className="text-white text-xl mt-8 text-center">
+                      Whitelist Sale is <b>Active</b> <br></br><br></br>
+                    </p>
+              </p>
+            )
+
+            : 
+
+            currentChainId && stage == 3 &&
+            currentChainId !== ChainId.Arbitrum && !soldOut ?
+            (
+              <p className="text-white text-xl mt-6 text-center">
+                You are connected to Mainnet. Please <button className="text-yellow-400 underline hover:text-yellow-200" onClick={switchToArbitrum}> switch to Arbitrum. </button><br></br>
+              <p className="text-lg">  (If you are on mobile, switch networks in the wallet app.)</p>
+              
+              <br></br>
+              {timerComponentsPublic.length ? <span>Public Sale will begin in... <br></br> {timerComponentsPublic}</span> : <span>Public Sale will be starting soon...</span>}
+              </p>
+            )
+
+            : 
+            currentChainId && stage == 4 &&
+            currentChainId !== ChainId.Arbitrum && !soldOut ?
+            (
+              <p className="text-white text-xl mt-6 text-center">
+                You are connected to Mainnet. Please <button className="text-yellow-400 underline hover:text-yellow-200" onClick={switchToArbitrum}> switch to Arbitrum. </button><br></br>
+              <p className="text-lg">  (If you are on mobile, switch networks in the wallet app.)</p>
+              
+                
+                <p className="text-white text-xl mt-8 text-center">
+                      Public Sale is <b>Active</b> <br></br><br></br>
+                    </p>
+              </p>
+            )
+
+            : 
+            stage < 2 && !account && !soldOut ?
               (
                 <p className="text-white text-2xl mt-6 text-center">
 
-
+                  <br></br>
                   {timerComponentsPublic.length ? <span>Whitelist Sale will begin in... <br></br> {timerComponentsWhitelist}</span> : <span>Whitelist Sale will be starting soon...</span>}
 
                 </p>
@@ -632,7 +685,7 @@ const Hero = () => {
 
 
 
-                          stage == 4 && account && !soldOut ? (
+                          stage == 4 && account && !soldOut && currentChainId ? (
                             <>
                               {/* Minted NFT Ratio */}
                               <p className=" bg-gray-100 rounded-md text-gray-800 font-bold text-lg my-4 py-1 px-3">
@@ -713,84 +766,12 @@ const Hero = () => {
 
 
                             (
-                              <>
+                              
                                 <p className="text-white text-3xl mt-8 pb-3 text-bold  text-center">
                                   SOLD OUT!
 
                                 </p>
-                                {/* Minted NFT Ratio */}
-                                <p className=" bg-gray-100 rounded-md text-gray-800 font-bold text-lg my-4 py-1 px-3">
-                                  <span className="text-[#d35c5c]">{`${totalSupplyCalculated}`}</span> /
-                                  <span className="text-black">{`${totalSaleSupplyCalculated}`}</span>
-                                </p>
-
-                                <div className="flex items-center mt-6 text-3xl font-bold text-gray-200">
-
-
-                                  <button
-                                    className="flex items-center justify-center w-12 h-12 bg-white rounded-md hover:bg-gray-200 text-center disabled:bg-slate-50"
-                                  // onClick={decrementCount}
-
-                                  >
-                                    <svg
-                                      xmlns="http://www.w3.org/2000/svg"
-                                      className="w-6 h-6 text-[#d35c5c] "
-                                      fill="none"
-                                      viewBox="0 0 24 24"
-                                      stroke="currentColor"
-                                    >
-                                      <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth="2"
-                                        d="M20 12H4"
-                                      />
-                                    </svg>
-                                  </button>
-
-                                  <h2 className="mx-8">{count}</h2>
-
-                                  <button
-                                    className="flex items-center justify-center w-12 h-12 bg-white rounded-md text-black hover:bg-gray-200 text-center "
-                                  // onClick={incrementCount}
-                                  >
-                                    <svg
-                                      xmlns="http://www.w3.org/2000/svg"
-                                      className="w-6 h-6 text-[#d35c5c]"
-                                      fill="none"
-                                      viewBox="0 0 24 24"
-                                      stroke="currentColor"
-                                    >
-                                      <path
-                                        strokeLinecap="round"
-                                        strokeLinejoin="round"
-                                        strokeWidth="2"
-                                        d="M12 4v16m8-8H4"
-                                      />
-                                    </svg>
-                                  </button>
-                                </div>
-
-                                <h4 className="mt-2 font-semibold text-center text-white">
-
-                                  {formatEther((nftPrice * count).toString())} ETH{" "}
-
-                                  <span className="text-sm text-gray-300"> + GAS</span>
-                                </h4>
-
-                                {/* Mint Button */}
-
-
-                                <button
-                                  disabled={!currentChainId ||
-                                    currentChainId !== ChainId.Arbitrum || !account || minting || soldOut}
-                                  className="mt-6 py-2 px-4 text-center text-white uppercase bg-[#222222] border-b-4 border-orange-700 rounded  hover:border-orange-400 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none"
-                                  onClick={handleWhitelistMint}
-                                >
-                                  Mint Cryptid
-                                </button>
-
-                              </>
+                               
 
 
 
