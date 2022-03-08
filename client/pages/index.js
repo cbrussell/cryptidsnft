@@ -6,7 +6,6 @@ import Hero from "../components/Hero";
 import Synopsis from "../components/Synopsis";
 // import Roadmap from "../components/Roadmap";
 import FAQ from "../components/FAQ";
-import Script from 'next/script'
 
 
 export default function Home() {
@@ -23,8 +22,8 @@ export default function Home() {
           content="https://gateway.pinata.cloud/ipfs/QmThg99oeGNYSHChmbeGbG6282XZBfhgD2zn88Z7PKLdy1"
         />
        
-        {/* <script async src="https://cdn.splitbee.io/sb.js"></script> */}
-        <Script src="https://cdn.splitbee.io/sb.js"></Script>
+        <script async src="https://cdn.splitbee.io/sb.js"></script>
+        {/* <Script src="https://cdn.splitbee.io/sb.js"></Script> */}
 
 
         <link
