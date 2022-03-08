@@ -450,7 +450,7 @@ const Hero = () => {
               
               <br></br>
 
-              {timerComponentsPublic.length ? <span>Public Sale will begin in... <br></br> {timerComponentsPublic}</span> : <span>Public Sale will be starting soon...</span>}
+              {/* {timerComponentsPublic.length ? <span>Public Sale will begin in... <br></br> {timerComponentsPublic}</span> : <span>Public Sale will be starting soon...</span>} */}
               Launching Q2 2022
               </p>
             )
@@ -489,7 +489,7 @@ const Hero = () => {
                     Account: {" "} {shortenAddress(account)} has 1 Whitelist Mint Available <br></br><br></br>
 
                     {/* {timerComponentsWhitelist.length ? <span>Whitelist Sale will begin in... <br></br> {timerComponentsPublic}</span> : <span>Whitelist Sale will be starting soon...</span>} */}
-                    Luanching Q2 2022
+                    Launching Q2 2022
                   </p>
                 )
 
