@@ -144,14 +144,14 @@ export default function MyApp() {
               <ul>
                 <li>
                   <p className="text-lg leading-normal text-gray-600 mt-4 text-justify">
-                    CRYPTIDS will be launching on the Arbitrum Network. 
-                    <br></br>
+                    CRYPTIDS will be launching on the Arbitrum Network in Q2.
+                    {/* <br></br>
                     <br></br>
                     The Whitelist Sale will run for 24 hours beginning 
                     Friday, March 25th 2022, 8:00 AM PST/11:00 AM EST. 
                     <br></br>
                     <br></br>The Public sale will beginning
-                    Saturday March 26th 2022, 1:00 PM PST/4:00 PM EST.
+                    Saturday March 26th 2022, 1:00 PM PST/4:00 PM EST. */}
                   </p>
                 </li>
               </ul>
