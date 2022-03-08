@@ -419,8 +419,8 @@ const Hero = () => {
               <p className="text-lg">  (If you are on mobile, switch networks in the wallet app.)</p>
               
                 <br></br>
-                {timerComponentsPublic.length ? <span>Whitelist Sale will begin in... <br></br> {timerComponentsWhitelist}</span> : <span>Whitelist Sale will be starting soon...</span>}
-
+                {/* {timerComponentsPublic.length ? <span>Whitelist Sale will begin in... <br></br> {timerComponentsWhitelist}</span> : <span>Whitelist Sale will be starting soon...</span>} */}
+                Launching Q2 2022
               </p>
             )
 
@@ -449,7 +449,9 @@ const Hero = () => {
               <p className="text-lg">  (If you are on mobile, switch networks in the wallet app.)</p>
               
               <br></br>
+
               {timerComponentsPublic.length ? <span>Public Sale will begin in... <br></br> {timerComponentsPublic}</span> : <span>Public Sale will be starting soon...</span>}
+              Launching Q2 2022
               </p>
             )
 
@@ -474,8 +476,8 @@ const Hero = () => {
                 <p className="text-white text-xl mt-6 text-center">
 
                   <br></br>
-                  {timerComponentsPublic.length ? <span>Whitelist Sale will begin in... <br></br> {timerComponentsWhitelist}</span> : <span>Whitelist Sale will be starting soon...</span>}
-
+                  {/* {timerComponentsPublic.length ? <span>Whitelist Sale will begin in... <br></br> {timerComponentsWhitelist}</span> : <span>Whitelist Sale will be starting soon...</span>} */}
+                  Launching Q2 2022
                 </p>
               )
 
@@ -486,8 +488,8 @@ const Hero = () => {
                   <p className="text-white text-xl mt-8 text-center">
                     Account: {" "} {shortenAddress(account)} has 1 Whitelist Mint Available <br></br><br></br>
 
-                    {timerComponentsWhitelist.length ? <span>Whitelist Sale will begin in... <br></br> {timerComponentsPublic}</span> : <span>Whitelist Sale will be starting soon...</span>}
-
+                    {/* {timerComponentsWhitelist.length ? <span>Whitelist Sale will begin in... <br></br> {timerComponentsPublic}</span> : <span>Whitelist Sale will be starting soon...</span>} */}
+                    Luanching Q2 2022
                   </p>
                 )
 
@@ -780,8 +782,8 @@ const Hero = () => {
                               <p className="text-white text-xl mt-8 text-center">
 
 
-                                {timerComponentsPublic.length ? <span>Public Sale will begin in... <br></br> {timerComponentsPublic}</span> : <span>Public Sale will be starting soon...</span>}
-
+                                {/* {timerComponentsPublic.length ? <span>Public Sale will begin in... <br></br> {timerComponentsPublic}</span> : <span>Public Sale will be starting soon...</span>} */}
+                                Launching Q2 2022
                               </p>
                             )}
 
