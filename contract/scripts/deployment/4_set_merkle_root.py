@@ -8,7 +8,7 @@ def main():
     dev = accounts.add(config['wallets']['from_key'])
     print(dev)
     cryptids = test[len(test)-1]
-    merkle_root = '0x73a84e29f2a98225272c81342548340f86e41bb5d3e0059c992800b8cc1dee8e'
+    merkle_root = '0x79b78f084fb42033eeab74503888f1d33528b6c3f619bd027ab87d4aae8ac651'
     transaction = cryptids.setMerkleRoot(merkle_root, {"from": dev})
     print(f'Merkle root set at: {transaction}\n')
     print(f'Merkle root set to: {merkle_root}\n')

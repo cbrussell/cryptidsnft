@@ -26,6 +26,8 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import root from "../data/test_root.json";
 
+
+
 const Hero = () => {
   const { account, chainId: currentChainId, library, BigNumber } = useEthers();
   const { status, setStatus } = useStatus();
@@ -393,6 +395,7 @@ const Hero = () => {
               alt="Blank Cryptid 1"
               className="rounded-md"
             />
+
             <Image
               src="/images/BlankCryptid.png"
               width="300"
