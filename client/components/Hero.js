@@ -590,7 +590,7 @@ const Hero = () => {
                         <p className="text-white text-xl mt-8 text-center">
                           Account: {" "} {shortenAddress(account)} has claimed their Whitelist Mint. <br></br><br></br>
 
-                          {timerComponentsPublic.length ? <span>Public Sale will begin in... <br></br> {timerComponentsPublic}</span> : <span>Public Sale will be starting soon...</span>}
+                          {/* {timerComponentsPublic.length ? <span>Public Sale will begin in... <br></br> {timerComponentsPublic}</span> : <span>Public Sale will be starting soon...</span>} */}
 
                         </p>
                       ) : stage < 3 && !whitelistClaimable && account ?
