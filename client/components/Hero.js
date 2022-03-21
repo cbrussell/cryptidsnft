@@ -389,7 +389,7 @@ const Hero = () => {
         <div className="flex flex-col items-center">
           <div className="flex pb-2">
             <Image
-              src="/images/BlankCryptid6.png"
+              src="/images/2.gif"
               width="270"
               height="270"
               alt="Blank Cryptid 1"
@@ -397,14 +397,14 @@ const Hero = () => {
             />
 
             <Image
-              src="/images/BlankCryptid.png"
+              src="/images/4.gif"
               width="300"
               height="300"
               alt="Blank Cryptid 2"
               className="rounded-md"
             />
             <Image
-              src="/images/BlankCryptid2.png"
+              src="/images/3.gif"
               width="270"
               height="270"
               alt="Blank Cryptid 3"
