@@ -389,24 +389,27 @@ const Hero = () => {
         <div className="flex flex-col items-center">
           <div className="flex pb-2">
             <Image
-              src="/images/2.gif"
+              src="/images/1.png"
               width="270"
               height="270"
+              unoptimized='true'
               alt="Blank Cryptid 1"
               className="rounded-md"
             />
-
+ 
             <Image
-              src="/images/4.gif"
+              src="/images/3.png"
               width="300"
               height="300"
               alt="Blank Cryptid 2"
+              unoptimized='true'
               className="rounded-md"
             />
             <Image
-              src="/images/3.gif"
+              src="/images/4.png"
               width="270"
               height="270"
+              unoptimized='true'
               alt="Blank Cryptid 3"
               className="rounded-md"
             />
