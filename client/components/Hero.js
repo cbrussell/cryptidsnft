@@ -396,14 +396,34 @@ const Hero = () => {
     '/images/3_blank.png',
     '/images/4_blank.png',
     '/images/5_blank.png',
-  ];
-
-  const rightImages = [
     '/images/6_blank.png',
     '/images/7_blank.png',
     '/images/8_blank.png',
     '/images/9_blank.png',
     '/images/10_blank.png',
+    '/images/11_blank.png',
+    '/images/12_blank.png',
+    '/images/13_blank.png',
+    '/images/14_blank.png',
+    '/images/15_blank.png',
+  ];
+
+  const rightImages = [
+    '/images/16_blank.png',
+    '/images/17_blank.png',
+    '/images/18_blank.png',
+    '/images/19_blank.png',
+    '/images/20_blank.png',
+    '/images/21_blank.png',
+    '/images/22_blank.png',
+    '/images/23_blank.png',
+    '/images/24_blank.png',
+    '/images/25_blank.png',
+    '/images/26_blank.png',
+    '/images/27_blank.png',
+    '/images/28_blank.png',
+    '/images/29_blank.png',
+    '/images/30_blank.png',
   ];
 
   const [randomMainImage, setRandomMainImage] = useState('/images/1.png');
