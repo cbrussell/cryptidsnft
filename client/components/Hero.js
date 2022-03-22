@@ -383,11 +383,31 @@ const Hero = () => {
   })
 
   const mainImages = [
-    '/images/1.png',
-    '/images/2.png',
-    '/images/3.png',
-    '/images/4.png',
-    '/images/5.png',
+    '/images/1_main.png',
+    '/images/2_main.png',
+    '/images/3_main.png',
+    '/images/4_main.png',
+    '/images/5_main.png',
+    '/images/6_main.png',
+    '/images/7_main.png',
+    '/images/8_main.png',
+    '/images/9_main.png',
+    '/images/10_main.png',
+    '/images/11_main.png',
+    '/images/12_main.png',
+    '/images/13_main.png',
+    '/images/14_main.png',
+    '/images/15_main.png',
+    '/images/16_main.png',
+    '/images/17_main.png',
+    '/images/18_main.png',
+    '/images/19_main.png',
+    '/images/20_main.png',
+    '/images/21_main.png',
+    '/images/22_main.png',
+    '/images/23_main.png',
+    '/images/24_main.png',
+    '/images/25_main.png',
   ];
 
   const leftImages = [
@@ -438,46 +458,43 @@ const Hero = () => {
 
   }, []);
 
-  // function randomImage() {
-  //   useEffect(() => {
-  //   return images[Math.floor(Math.random() * images.length)]
-  //   }, []);
-
-
-
-
   return (
     <main id="main" className="h-fit py-10 md:py-0 md:pb-40  bg-pattern ">
 
       <div className="container max-w-6xl mx-auto flex flex-col items-center pt-4">
         <div className="flex flex-col items-center">
           <div className="flex pb-2">
-            <Image
-              src={randomLeftImage}
-              width="270"
-              height="270"
-              unoptimized='true'
-              alt="Blank Cryptid 1"
-              className="rounded-md"
-            />
+     <div className="pt-5">
+              <Image
+                src={randomLeftImage}
+                width="300"
+                height="300"
+                unoptimized='true'
+                alt="Blank Cryptid 1"
+               className="self-center"
+              />
+</div>
 
-
-            <Image
-              src={randomMainImage}
-              width="300"
-              height="300"
-              alt="Blank Cryptid 2"
-              unoptimized='true'
-              className="rounded-md"
-            />
-            <Image
-              src={randomRightImage}
-              width="270"
-              height="270"
-              unoptimized='true'
-              alt="Blank Cryptid 3"
-              className="rounded-md"
-            />
+            <div className="pt-2">
+              <Image
+                src={randomMainImage}
+                width="320"
+                height="320"
+                alt="Blank Cryptid 2"
+                unoptimized='true'
+                className="rounded-md "
+              />
+            </div>
+            <div className="pt-5">
+              <Image
+                src={randomRightImage}
+                width="300"
+                height="300"
+                unoptimized='true'
+                alt="Blank Cryptid 3"
+                className="rounded-md"
+              />
+            </div>
           </div>
 
 
