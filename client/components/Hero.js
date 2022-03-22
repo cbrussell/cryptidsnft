@@ -382,6 +382,50 @@ const Hero = () => {
     );
   })
 
+  const mainImages = [
+    '/images/1.png',
+    '/images/2.png',
+    '/images/3.png',
+    '/images/4.png',
+    '/images/5.png',
+  ];
+
+  const leftImages = [
+    '/images/1_blank.png',
+    '/images/2_blank.png',
+    '/images/3_blank.png',
+    '/images/4_blank.png',
+    '/images/5_blank.png',
+  ];
+
+  const rightImages = [
+    '/images/6_blank.png',
+    '/images/7_blank.png',
+    '/images/8_blank.png',
+    '/images/9_blank.png',
+    '/images/10_blank.png',
+  ];
+
+  const [randomMainImage, setRandomMainImage] = useState('/images/1.png');
+  const [randomLeftImage, setRandomLeftImage] = useState('/images/1_blank.png');
+  const [randomRightImage, setRandomRightImage] = useState('/images/2_blank.png');
+
+  useEffect(() => {
+
+    setRandomMainImage(mainImages[Math.floor(Math.random() * mainImages.length)]);
+    setRandomLeftImage(leftImages[Math.floor(Math.random() * leftImages.length)]);
+    setRandomRightImage(rightImages[Math.floor(Math.random() * rightImages.length)]);
+
+  }, []);
+
+  // function randomImage() {
+  //   useEffect(() => {
+  //   return images[Math.floor(Math.random() * images.length)]
+  //   }, []);
+
+
+
+
   return (
     <main id="main" className="h-fit py-10 md:py-0 md:pb-40  bg-pattern ">
 
@@ -389,16 +433,17 @@ const Hero = () => {
         <div className="flex flex-col items-center">
           <div className="flex pb-2">
             <Image
-              src="/images/1.png"
+              src={randomLeftImage}
               width="270"
               height="270"
               unoptimized='true'
               alt="Blank Cryptid 1"
               className="rounded-md"
             />
- 
+
+
             <Image
-              src="/images/3.png"
+              src={randomMainImage}
               width="300"
               height="300"
               alt="Blank Cryptid 2"
@@ -406,7 +451,7 @@ const Hero = () => {
               className="rounded-md"
             />
             <Image
-              src="/images/4.png"
+              src={randomRightImage}
               width="270"
               height="270"
               unoptimized='true'
@@ -417,69 +462,12 @@ const Hero = () => {
 
 
           {
-          currentChainId && stage < 2 &&
-            currentChainId !== ChainId.Arbitrum && !soldOut ?
-            (
-              <p className="text-white text-xl mt-6 text-center">
-                You are connected to Mainnet. Please <button className="text-yellow-400 underline hover:text-yellow-200" onClick={switchToArbitrum}> switch to Arbitrum. </button><br></br>
-              <p className="text-lg">  (If you are on mobile, switch networks in the wallet app.)</p>
-              
-                <br></br>
-                {/* {timerComponentsPublic.length ? <span>Whitelist Sale will begin in... <br></br> {timerComponentsWhitelist}</span> : <span>Whitelist Sale will be starting soon...</span>} */}
-                Launching Q2 2022
-              </p>
-            )
-
-            : 
-            currentChainId && stage == 2 &&
-            currentChainId !== ChainId.Arbitrum && !soldOut ?
-            (
-              <p className="text-white text-xl mt-6 text-center">
-                You are connected to Mainnet. Please <button className="text-yellow-400 underline hover:text-yellow-200" onClick={switchToArbitrum}> switch to Arbitrum. </button><br></br>
-              <p className="text-lg">  (If you are on mobile, switch networks in the wallet app.)</p>
-              
-                
-                <p className="text-white text-xl mt-8 text-center">
-                      Whitelist Sale is <b>Active</b> <br></br><br></br>
-                    </p>
-              </p>
-            )
-
-            : 
-
-            currentChainId && stage == 3 &&
-            currentChainId !== ChainId.Arbitrum && !soldOut ?
-            (
-              <p className="text-white text-xl mt-6 text-center">
-                You are connected to Mainnet. Please <button className="text-yellow-400 underline hover:text-yellow-200" onClick={switchToArbitrum}> switch to Arbitrum. </button><br></br>
-              <p className="text-lg">  (If you are on mobile, switch networks in the wallet app.)</p>
-              
-              <br></br>
-
-              {/* {timerComponentsPublic.length ? <span>Public Sale will begin in... <br></br> {timerComponentsPublic}</span> : <span>Public Sale will be starting soon...</span>} */}
-              Launching Q2 2022
-              </p>
-            )
-
-            : 
-            currentChainId && stage == 4 &&
-            currentChainId !== ChainId.Arbitrum && !soldOut ?
-            (
-              <p className="text-white text-xl mt-6 text-center">
-                You are connected to Mainnet. Please <button className="text-yellow-400 underline hover:text-yellow-200" onClick={switchToArbitrum}> switch to Arbitrum. </button><br></br>
-              <p className="text-lg">  (If you are on mobile, switch networks in the wallet app.)</p>
-              
-                
-                <p className="text-white text-xl mt-8 text-center">
-                      Public Sale is <b>Active</b> <br></br><br></br>
-                    </p>
-              </p>
-            )
-
-            : 
-            stage < 2 && !account && !soldOut ?
+            currentChainId && stage < 2 &&
+              currentChainId !== ChainId.Arbitrum && !soldOut ?
               (
                 <p className="text-white text-xl mt-6 text-center">
+                  You are connected to Mainnet. Please <button className="text-yellow-400 underline hover:text-yellow-200" onClick={switchToArbitrum}> switch to Arbitrum. </button><br></br>
+                  <p className="text-lg">  (If you are on mobile, switch networks in the wallet app.)</p>
 
                   <br></br>
                   {/* {timerComponentsPublic.length ? <span>Whitelist Sale will begin in... <br></br> {timerComponentsWhitelist}</span> : <span>Whitelist Sale will be starting soon...</span>} */}
@@ -488,310 +476,367 @@ const Hero = () => {
               )
 
               :
-
-              stage < 2 && whitelistClaimable && account && !claimed ?
+              currentChainId && stage == 2 &&
+                currentChainId !== ChainId.Arbitrum && !soldOut ?
                 (
-                  <p className="text-white text-xl mt-8 text-center">
-                    Account: {" "} {shortenAddress(account)} has 1 Whitelist Mint Available <br></br><br></br>
+                  <p className="text-white text-xl mt-6 text-center">
+                    You are connected to Mainnet. Please <button className="text-yellow-400 underline hover:text-yellow-200" onClick={switchToArbitrum}> switch to Arbitrum. </button><br></br>
+                    <p className="text-lg">  (If you are on mobile, switch networks in the wallet app.)</p>
 
-                    {/* {timerComponentsWhitelist.length ? <span>Whitelist Sale will begin in... <br></br> {timerComponentsPublic}</span> : <span>Whitelist Sale will be starting soon...</span>} */}
-                    Launching Q2 2022
-                  </p>
-                )
-
-
-
-                : stage == 2 && !account ?
-                  (
 
                     <p className="text-white text-xl mt-8 text-center">
                       Whitelist Sale is <b>Active</b> <br></br><br></br>
                     </p>
-                  ) : stage == 2 && whitelistClaimable && account && !claimed ?
+                  </p>
+                )
+
+                :
+
+                currentChainId && stage == 3 &&
+                  currentChainId !== ChainId.Arbitrum && !soldOut ?
+                  (
+                    <p className="text-white text-xl mt-6 text-center">
+                      You are connected to Mainnet. Please <button className="text-yellow-400 underline hover:text-yellow-200" onClick={switchToArbitrum}> switch to Arbitrum. </button><br></br>
+                      <p className="text-lg">  (If you are on mobile, switch networks in the wallet app.)</p>
+
+                      <br></br>
+
+                      {/* {timerComponentsPublic.length ? <span>Public Sale will begin in... <br></br> {timerComponentsPublic}</span> : <span>Public Sale will be starting soon...</span>} */}
+                      Launching Q2 2022
+                    </p>
+                  )
+
+                  :
+                  currentChainId && stage == 4 &&
+                    currentChainId !== ChainId.Arbitrum && !soldOut ?
                     (
-                      <>
+                      <p className="text-white text-xl mt-6 text-center">
+                        You are connected to Mainnet. Please <button className="text-yellow-400 underline hover:text-yellow-200" onClick={switchToArbitrum}> switch to Arbitrum. </button><br></br>
+                        <p className="text-lg">  (If you are on mobile, switch networks in the wallet app.)</p>
+
+
                         <p className="text-white text-xl mt-8 text-center">
-                          Account: {" "} {shortenAddress(account)} has 1 Whitelist Mint Available <br></br><br></br>
+                          Public Sale is <b>Active</b> <br></br><br></br>
                         </p>
-                        {/* Minted NFT Ratio */}
-                        <p className=" bg-gray-100 rounded-md text-gray-800 font-bold text-lg my-4 py-1 px-3">
-                          <span className="text-[#d35c5c]">{`${totalSupplyCalculated}`}</span> /
-                          <span className="text-black">{`${totalSaleSupplyCalculated}`}</span>
-                        </p>
+                      </p>
+                    )
 
-                        <div className="flex items-center mt-6 text-3xl font-bold text-gray-200">
-
-
-                          <button
-                            className="flex items-center justify-center w-12 h-12 bg-white rounded-md hover:bg-gray-200 text-center disabled:bg-slate-50"
-                          // onClick={decrementCount}
-
-                          >
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              className="w-6 h-6 text-[#d35c5c] "
-                              fill="none"
-                              viewBox="0 0 24 24"
-                              stroke="currentColor"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth="2"
-                                d="M20 12H4"
-                              />
-                            </svg>
-                          </button>
-
-                          <h2 className="mx-8">{count}</h2>
-
-                          <button
-                            className="flex items-center justify-center w-12 h-12 bg-white rounded-md text-black hover:bg-gray-200 text-center "
-                          // onClick={incrementCount}
-                          >
-                            <svg
-                              xmlns="http://www.w3.org/2000/svg"
-                              className="w-6 h-6 text-[#d35c5c]"
-                              fill="none"
-                              viewBox="0 0 24 24"
-                              stroke="currentColor"
-                            >
-                              <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth="2"
-                                d="M12 4v16m8-8H4"
-                              />
-                            </svg>
-                          </button>
-                        </div>
-
-                        <h4 className="mt-2 font-semibold text-center text-white">
-
-                          {formatEther((nftPrice * count).toString())} ETH{" "}
-
-                          <span className="text-sm text-gray-300"> + GAS</span>
-                        </h4>
-
-                        {/* Mint Button */}
-
-
-                        <button
-                          disabled={!currentChainId ||
-                            currentChainId !== ChainId.Arbitrum || !account || minting}
-                          className="mt-6 py-2 px-4 text-center text-white uppercase bg-[#222222] border-b-4 border-orange-700 rounded  hover:border-orange-400 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none"
-                          onClick={handleWhitelistMint}
-                        >
-                          Mint Cryptid
-                        </button>
-
-                      </>) : stage < 3 && whitelistClaimable && account && claimed ?
-
-
-
+                    :
+                    stage < 2 && !account && !soldOut ?
                       (
-                        <p className="text-white text-xl mt-8 text-center">
-                          Account: {" "} {shortenAddress(account)} has claimed their Whitelist Mint. <br></br><br></br>
+                        <p className="text-white text-xl mt-6 text-center">
 
-                          {/* {timerComponentsPublic.length ? <span>Public Sale will begin in... <br></br> {timerComponentsPublic}</span> : <span>Public Sale will be starting soon...</span>} */}
-
+                          <br></br>
+                          {/* {timerComponentsPublic.length ? <span>Whitelist Sale will begin in... <br></br> {timerComponentsWhitelist}</span> : <span>Whitelist Sale will be starting soon...</span>} */}
+                          Launching Q2 2022
                         </p>
-                      ) : stage < 3 && !whitelistClaimable && account ?
+                      )
 
+                      :
 
-
+                      stage < 2 && whitelistClaimable && account && !claimed ?
                         (
                           <p className="text-white text-xl mt-8 text-center">
-                            Account: {" "} {shortenAddress(account)} is not on the Whitelist. <br></br><br></br>
+                            Account: {" "} {shortenAddress(account)} has 1 Whitelist Mint Available <br></br><br></br>
 
-                            {/* {timerComponentsPublic.length ? <span>Public Sale will begin in... <br></br> {timerComponentsPublic}</span> : <span>Public Sale will be starting soon...</span>} */}
-                          Launching Q2 2022
+                            {/* {timerComponentsWhitelist.length ? <span>Whitelist Sale will begin in... <br></br> {timerComponentsPublic}</span> : <span>Whitelist Sale will be starting soon...</span>} */}
+                            Launching Q2 2022
                           </p>
-                        ) :
+                        )
 
 
 
+                        : stage == 2 && !account ?
+                          (
 
-                        stage == 4 && !account && !soldOut ? (
-                          <>
-                            {/* Minted NFT Ratio */}
-                            <p className=" bg-gray-100 rounded-md text-gray-800 font-bold text-lg my-4 py-1 px-3">
-                              <span className="text-[#d35c5c]">{`${totalSupplyCalculated}`}</span> /
-                              <span className="text-black"> {`${totalSaleSupplyCalculated}`}</span>
+                            <p className="text-white text-xl mt-8 text-center">
+                              Whitelist Sale is <b>Active</b> <br></br><br></br>
                             </p>
-
-                            <div className="flex items-center mt-6 text-3xl font-bold text-gray-200">
-
-
-                              <button
-                                className="flex items-center justify-center w-12 h-12 bg-white rounded-md hover:bg-gray-200 text-center disabled:bg-slate-50"
-                                onClick={decrementCount}
-
-                              >
-                                <svg
-                                  xmlns="http://www.w3.org/2000/svg"
-                                  className="w-6 h-6 text-[#d35c5c] "
-                                  fill="none"
-                                  viewBox="0 0 24 24"
-                                  stroke="currentColor"
-                                >
-                                  <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth="2"
-                                    d="M20 12H4"
-                                  />
-                                </svg>
-                              </button>
-
-                              <h2 className="mx-8">{count}</h2>
-
-                              <button
-                                className="flex items-center justify-center w-12 h-12 bg-white rounded-md text-black hover:bg-gray-200 text-center "
-                                onClick={incrementCount}
-                              >
-                                <svg
-                                  xmlns="http://www.w3.org/2000/svg"
-                                  className="w-6 h-6 text-[#d35c5c]"
-                                  fill="none"
-                                  viewBox="0 0 24 24"
-                                  stroke="currentColor"
-                                >
-                                  <path
-                                    strokeLinecap="round"
-                                    strokeLinejoin="round"
-                                    strokeWidth="2"
-                                    d="M12 4v16m8-8H4"
-                                  />
-                                </svg>
-                              </button>
-                            </div>
-
-                            <h4 className="mt-2 font-semibold text-center text-white">
-
-                              {formatEther((nftPrice * count).toString())} ETH{" "}
-
-                              <span className="text-sm text-gray-300"> + GAS</span>
-                            </h4>
-
-                            {/* Mint Button */}
-
-
-                            <button
-                              disabled={!currentChainId ||
-                                currentChainId !== ChainId.Arbitrum || !account || minting}
-                              className="mt-6 py-2 px-4 text-center text-white uppercase bg-[#222222] border-b-4 border-orange-700 rounded  hover:border-orange-400 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none"
-                              onClick={handlePublicMint}
-                            >
-                              Mint Cryptid
-                            </button>
-
-                          </>
-                        ) :
-
-
-
-
-
-                          stage == 4 && account && !soldOut && currentChainId ? (
-                            <>
-                              {/* Minted NFT Ratio */}
-                              <p className=" bg-gray-100 rounded-md text-gray-800 font-bold text-lg my-4 py-1 px-3">
-                                <span className="text-[#d35c5c]">{`${totalSupplyCalculated}`}</span> /
-                                <span className="text-black"> {`${totalSaleSupplyCalculated}`}</span>
-
-                              </p>
-
-                              <div className="flex items-center mt-6 text-3xl font-bold text-gray-200">
-
-
-                                <button
-                                  className="flex items-center justify-center w-12 h-12 bg-white rounded-md hover:bg-gray-200 text-center disabled:bg-slate-50"
-                                  onClick={decrementCount}
-
-                                >
-                                  <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    className="w-6 h-6 text-[#d35c5c] "
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke="currentColor"
-                                  >
-                                    <path
-                                      strokeLinecap="round"
-                                      strokeLinejoin="round"
-                                      strokeWidth="2"
-                                      d="M20 12H4"
-                                    />
-                                  </svg>
-                                </button>
-
-                                <h2 className="mx-8">{count}</h2>
-
-                                <button
-                                  className="flex items-center justify-center w-12 h-12 bg-white rounded-md text-black hover:bg-gray-200 text-center "
-                                  onClick={incrementCount}
-                                >
-                                  <svg
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    className="w-6 h-6 text-[#d35c5c]"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                    stroke="currentColor"
-                                  >
-                                    <path
-                                      strokeLinecap="round"
-                                      strokeLinejoin="round"
-                                      strokeWidth="2"
-                                      d="M12 4v16m8-8H4"
-                                    />
-                                  </svg>
-                                </button>
-                              </div>
-
-                              <h4 className="mt-2 font-semibold text-center text-white">
-
-                                {formatEther((nftPrice * count).toString())} ETH{" "}
-
-                                <span className="text-sm text-gray-300"> + GAS</span>
-                              </h4>
-
-                              {/* Mint Button */}
-
-
-                              <button
-                                disabled={!currentChainId ||
-                                  currentChainId !== ChainId.Arbitrum || !account || minting}
-                                className="mt-6 py-2 px-4 text-center text-white uppercase bg-[#222222] border-b-4 border-orange-700 rounded  hover:border-orange-400 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none"
-                                onClick={handlePublicMint}
-                              >
-                                Mint Cryptid
-                              </button>
-
-                            </>
-                          ) : soldOut ?
-
-
-
+                          ) : stage == 2 && whitelistClaimable && account && !claimed ?
                             (
-                              
-                                <p className="text-white text-3xl mt-8 pb-3 text-bold  text-center">
-                                  SOLD OUT!
+                              <>
+                                <p className="text-white text-xl mt-8 text-center">
+                                  Account: {" "} {shortenAddress(account)} has 1 Whitelist Mint Available <br></br><br></br>
+                                </p>
+                                {/* Minted NFT Ratio */}
+                                <p className=" bg-gray-100 rounded-md text-gray-800 font-bold text-lg my-4 py-1 px-3">
+                                  <span className="text-[#d35c5c]">{`${totalSupplyCalculated}`}</span> /
+                                  <span className="text-black">{`${totalSaleSupplyCalculated}`}</span>
+                                </p>
+
+                                <div className="flex items-center mt-6 text-3xl font-bold text-gray-200">
+
+
+                                  <button
+                                    className="flex items-center justify-center w-12 h-12 bg-white rounded-md hover:bg-gray-200 text-center disabled:bg-slate-50"
+                                  // onClick={decrementCount}
+
+                                  >
+                                    <svg
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      className="w-6 h-6 text-[#d35c5c] "
+                                      fill="none"
+                                      viewBox="0 0 24 24"
+                                      stroke="currentColor"
+                                    >
+                                      <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth="2"
+                                        d="M20 12H4"
+                                      />
+                                    </svg>
+                                  </button>
+
+                                  <h2 className="mx-8">{count}</h2>
+
+                                  <button
+                                    className="flex items-center justify-center w-12 h-12 bg-white rounded-md text-black hover:bg-gray-200 text-center "
+                                  // onClick={incrementCount}
+                                  >
+                                    <svg
+                                      xmlns="http://www.w3.org/2000/svg"
+                                      className="w-6 h-6 text-[#d35c5c]"
+                                      fill="none"
+                                      viewBox="0 0 24 24"
+                                      stroke="currentColor"
+                                    >
+                                      <path
+                                        strokeLinecap="round"
+                                        strokeLinejoin="round"
+                                        strokeWidth="2"
+                                        d="M12 4v16m8-8H4"
+                                      />
+                                    </svg>
+                                  </button>
+                                </div>
+
+                                <h4 className="mt-2 font-semibold text-center text-white">
+
+                                  {formatEther((nftPrice * count).toString())} ETH{" "}
+
+                                  <span className="text-sm text-gray-300"> + GAS</span>
+                                </h4>
+
+                                {/* Mint Button */}
+
+
+                                <button
+                                  disabled={!currentChainId ||
+                                    currentChainId !== ChainId.Arbitrum || !account || minting}
+                                  className="mt-6 py-2 px-4 text-center text-white uppercase bg-[#222222] border-b-4 border-orange-700 rounded  hover:border-orange-400 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none"
+                                  onClick={handleWhitelistMint}
+                                >
+                                  Mint Cryptid
+                                </button>
+
+                              </>) : stage < 3 && whitelistClaimable && account && claimed ?
+
+
+
+                              (
+                                <p className="text-white text-xl mt-8 text-center">
+                                  Account: {" "} {shortenAddress(account)} has claimed their Whitelist Mint. <br></br><br></br>
+
+                                  {/* {timerComponentsPublic.length ? <span>Public Sale will begin in... <br></br> {timerComponentsPublic}</span> : <span>Public Sale will be starting soon...</span>} */}
 
                                 </p>
-                               
+                              ) : stage < 3 && !whitelistClaimable && account ?
 
 
 
-                            )
-                            : (
-                              <p className="text-white text-xl mt-8 text-center">
+                                (
+                                  <p className="text-white text-xl mt-8 text-center">
+                                    Account: {" "} {shortenAddress(account)} is not on the Whitelist. <br></br><br></br>
+
+                                    {/* {timerComponentsPublic.length ? <span>Public Sale will begin in... <br></br> {timerComponentsPublic}</span> : <span>Public Sale will be starting soon...</span>} */}
+                                    Launching Q2 2022
+                                  </p>
+                                ) :
 
 
-                                {/* {timerComponentsPublic.length ? <span>Public Sale will begin in... <br></br> {timerComponentsPublic}</span> : <span>Public Sale will be starting soon...</span>} */}
-                                Launching Q2 2022
-                              </p>
-                            )}
+
+
+                                stage == 4 && !account && !soldOut ? (
+                                  <>
+                                    {/* Minted NFT Ratio */}
+                                    <p className=" bg-gray-100 rounded-md text-gray-800 font-bold text-lg my-4 py-1 px-3">
+                                      <span className="text-[#d35c5c]">{`${totalSupplyCalculated}`}</span> /
+                                      <span className="text-black"> {`${totalSaleSupplyCalculated}`}</span>
+                                    </p>
+
+                                    <div className="flex items-center mt-6 text-3xl font-bold text-gray-200">
+
+
+                                      <button
+                                        className="flex items-center justify-center w-12 h-12 bg-white rounded-md hover:bg-gray-200 text-center disabled:bg-slate-50"
+                                        onClick={decrementCount}
+
+                                      >
+                                        <svg
+                                          xmlns="http://www.w3.org/2000/svg"
+                                          className="w-6 h-6 text-[#d35c5c] "
+                                          fill="none"
+                                          viewBox="0 0 24 24"
+                                          stroke="currentColor"
+                                        >
+                                          <path
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            strokeWidth="2"
+                                            d="M20 12H4"
+                                          />
+                                        </svg>
+                                      </button>
+
+                                      <h2 className="mx-8">{count}</h2>
+
+                                      <button
+                                        className="flex items-center justify-center w-12 h-12 bg-white rounded-md text-black hover:bg-gray-200 text-center "
+                                        onClick={incrementCount}
+                                      >
+                                        <svg
+                                          xmlns="http://www.w3.org/2000/svg"
+                                          className="w-6 h-6 text-[#d35c5c]"
+                                          fill="none"
+                                          viewBox="0 0 24 24"
+                                          stroke="currentColor"
+                                        >
+                                          <path
+                                            strokeLinecap="round"
+                                            strokeLinejoin="round"
+                                            strokeWidth="2"
+                                            d="M12 4v16m8-8H4"
+                                          />
+                                        </svg>
+                                      </button>
+                                    </div>
+
+                                    <h4 className="mt-2 font-semibold text-center text-white">
+
+                                      {formatEther((nftPrice * count).toString())} ETH{" "}
+
+                                      <span className="text-sm text-gray-300"> + GAS</span>
+                                    </h4>
+
+                                    {/* Mint Button */}
+
+
+                                    <button
+                                      disabled={!currentChainId ||
+                                        currentChainId !== ChainId.Arbitrum || !account || minting}
+                                      className="mt-6 py-2 px-4 text-center text-white uppercase bg-[#222222] border-b-4 border-orange-700 rounded  hover:border-orange-400 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none"
+                                      onClick={handlePublicMint}
+                                    >
+                                      Mint Cryptid
+                                    </button>
+
+                                  </>
+                                ) :
+
+
+
+
+
+                                  stage == 4 && account && !soldOut && currentChainId ? (
+                                    <>
+                                      {/* Minted NFT Ratio */}
+                                      <p className=" bg-gray-100 rounded-md text-gray-800 font-bold text-lg my-4 py-1 px-3">
+                                        <span className="text-[#d35c5c]">{`${totalSupplyCalculated}`}</span> /
+                                        <span className="text-black"> {`${totalSaleSupplyCalculated}`}</span>
+
+                                      </p>
+
+                                      <div className="flex items-center mt-6 text-3xl font-bold text-gray-200">
+
+
+                                        <button
+                                          className="flex items-center justify-center w-12 h-12 bg-white rounded-md hover:bg-gray-200 text-center disabled:bg-slate-50"
+                                          onClick={decrementCount}
+
+                                        >
+                                          <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            className="w-6 h-6 text-[#d35c5c] "
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                            stroke="currentColor"
+                                          >
+                                            <path
+                                              strokeLinecap="round"
+                                              strokeLinejoin="round"
+                                              strokeWidth="2"
+                                              d="M20 12H4"
+                                            />
+                                          </svg>
+                                        </button>
+
+                                        <h2 className="mx-8">{count}</h2>
+
+                                        <button
+                                          className="flex items-center justify-center w-12 h-12 bg-white rounded-md text-black hover:bg-gray-200 text-center "
+                                          onClick={incrementCount}
+                                        >
+                                          <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            className="w-6 h-6 text-[#d35c5c]"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                            stroke="currentColor"
+                                          >
+                                            <path
+                                              strokeLinecap="round"
+                                              strokeLinejoin="round"
+                                              strokeWidth="2"
+                                              d="M12 4v16m8-8H4"
+                                            />
+                                          </svg>
+                                        </button>
+                                      </div>
+
+                                      <h4 className="mt-2 font-semibold text-center text-white">
+
+                                        {formatEther((nftPrice * count).toString())} ETH{" "}
+
+                                        <span className="text-sm text-gray-300"> + GAS</span>
+                                      </h4>
+
+                                      {/* Mint Button */}
+
+
+                                      <button
+                                        disabled={!currentChainId ||
+                                          currentChainId !== ChainId.Arbitrum || !account || minting}
+                                        className="mt-6 py-2 px-4 text-center text-white uppercase bg-[#222222] border-b-4 border-orange-700 rounded  hover:border-orange-400 disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none"
+                                        onClick={handlePublicMint}
+                                      >
+                                        Mint Cryptid
+                                      </button>
+
+                                    </>
+                                  ) : soldOut ?
+
+
+
+                                    (
+
+                                      <p className="text-white text-3xl mt-8 pb-3 text-bold  text-center">
+                                        SOLD OUT!
+
+                                      </p>
+
+
+
+
+                                    )
+                                    : (
+                                      <p className="text-white text-xl mt-8 text-center">
+
+
+                                        {/* {timerComponentsPublic.length ? <span>Public Sale will begin in... <br></br> {timerComponentsPublic}</span> : <span>Public Sale will be starting soon...</span>} */}
+                                        Launching Q2 2022
+                                      </p>
+                                    )}
 
           {/* Status */}
 
