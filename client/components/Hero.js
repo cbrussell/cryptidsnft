@@ -410,6 +410,7 @@ const Hero = () => {
     '/images/25_main.png',
   ];
 
+
   const leftImages = [
     '/images/1_blank.png',
     '/images/2_blank.png',
