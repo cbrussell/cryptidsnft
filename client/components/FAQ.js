@@ -162,7 +162,7 @@ export default function MyApp() {
             <div className="flex items-center justify-between">
               <div>
                 <h2 className="font-bold  uppercase text-lg leading-none text-gray-800">
-                  What is the collection size and mint price ?
+                  What is the collection size and mint price?
                 </h2>
               </div>
               <button
