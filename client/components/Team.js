@@ -29,13 +29,16 @@ export default function MyApp() {
             </p>
             </div>
             <div className="px-7">
-            <Image
+            {/* <Image
               src='/images/3.gif'
               width="300"
               height="300"
               alt="Nosolo Cryptid"
               className="self-center rounded-xl"
-            />
+            /> */}
+            <img src='/images/3.gif' alt="Nosolo Cryptid" className="self-center rounded-xl" width="300" height="300">
+
+            </img>
             <p className=" text-white text-center text-lg leading-9 font-normal">
             <a href="https://twitter.com/no__solo" target="_blank" rel="noreferrer"className="hover:text-cryptid-3">@NoSolo</a>
             </p>
