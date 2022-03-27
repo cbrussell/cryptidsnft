@@ -383,30 +383,15 @@ const Hero = () => {
   })
 
   const mainImages = [
-    '/images/1_main.png',
-    '/images/2_main.png',
-    '/images/3_main.png',
-    '/images/4_main.png',
-    '/images/5_main.png',
-    '/images/6_main.png',
-    '/images/7_main.png',
-    '/images/8_main.png',
-    '/images/9_main.png',
-    '/images/10_main.png',
-    '/images/11_main.png',
-    '/images/12_main.png',
-    '/images/14_main.png',
-    '/images/15_main.png',
-    '/images/16_main.png',
-    '/images/17_main.png',
-    '/images/18_main.png',
-    '/images/19_main.png',
-    '/images/20_main.png',
-    '/images/21_main.png',
-    '/images/22_main.png',
-    '/images/23_main.png',
-    '/images/24_main.png',
-    '/images/25_main.png',
+    '/images/1.png',
+    '/images/2.png',
+    '/images/3.png',
+    '/images/4.png',
+    '/images/5.png',
+    '/images/6.png',
+    '/images/7.png',
+    '/images/8.png',
+    '/images/9.png'
   ];
 
 
