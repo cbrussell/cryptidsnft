@@ -18,7 +18,7 @@ export default function MyApp() {
               width="300"
               height="300"
               unoptimized='true'
-              alt="Blank Cryptid 1"
+              alt="Crussell Cryptid"
               className="self-center rounded-xl"
             />
             <p className=" text-white text-center text-lg leading-9 font-normal">
@@ -33,8 +33,7 @@ export default function MyApp() {
               src='/images/3.GIF'
               width="300"
               height="300"
-              unoptimized='true'
-              alt="Blank Cryptid 1"
+              alt="Nosolo Cryptid"
               className="self-center rounded-xl"
             />
             <p className=" text-white text-center text-lg leading-9 font-normal">
