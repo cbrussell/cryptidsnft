@@ -30,7 +30,7 @@ export default function MyApp() {
             </div>
             <div className="px-7">
             <Image
-              src='/images/3.GIF'
+              src='/images/3.gif'
               width="300"
               height="300"
               alt="Nosolo Cryptid"
