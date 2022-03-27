@@ -395,7 +395,6 @@ const Hero = () => {
     '/images/10_main.png',
     '/images/11_main.png',
     '/images/12_main.png',
-    '/images/13_main.png',
     '/images/14_main.png',
     '/images/15_main.png',
     '/images/16_main.png',
