@@ -1,5 +1,6 @@
 # CryptidsToken
 
-Enter Nos Atomos...
-
-This repository contains all of the required files to generate and deploy Cryptids NFT.
+1. Clone repo
+2. brew install node
+3. npm i next
+4. npm run dev

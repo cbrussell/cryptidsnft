@@ -4,7 +4,7 @@ import Image from "next/image";
 import Header from "../components/Header";
 import Hero from "../components/Hero";
 import Synopsis from "../components/Synopsis";
-// import Roadmap from "../components/Roadmap";
+import Team from "../components/Team";
 import FAQ from "../components/FAQ";
 
 
@@ -14,6 +14,7 @@ export default function Home() {
         <Header />
         <Hero />
         <Synopsis />
+        <Team />
         <FAQ />
     </div>
   );
