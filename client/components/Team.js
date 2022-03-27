@@ -16,7 +16,7 @@ export default function MyApp() {
 
               <img src='/images/33.gif' alt="Chris Cryptid" className="self-center rounded-xl" width="300" height="300"></img>
               <p className=" text-white text-center text-lg leading-9 font-normal">
-                <a href="https://twitter.com/chrisrusselljr" target="_blank" rel="noreferrer" className="hover:text-cryptid-3">@chrisrusselljr</a>
+                <a href="https://twitter.com/chrisrusselljr" target="_blank" rel="noreferrer" className="hover:text-cryptid-3">@Crussell</a>
               </p>
               <p className=" text-white text-center text-lg leading-9 font-normal pb-10">
                 Developer

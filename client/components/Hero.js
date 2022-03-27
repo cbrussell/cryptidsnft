@@ -463,8 +463,8 @@ const Hero = () => {
             <div className="pt-2">
               <Image
                 src={randomMainImage}
-                width="320"
-                height="320"
+                width="310"
+                height="310"
                 alt="Blank Cryptid 2"
                 unoptimized='true'
                 className="rounded-md "
