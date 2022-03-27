@@ -34,7 +34,7 @@ export default function MyApp() {
               </p>
             </div>
             <div className="px-7">
-              <img src='/images/1.gif' alt="Nosolo Cryptid" className="self-center rounded-xl" width="300" height="300">
+              <img src='/images/1.gif' alt="Sentella Cryptid" className="self-center rounded-xl" width="300" height="300">
 
               </img>
               <p className=" text-white text-center text-lg leading-9 font-normal">
@@ -46,11 +46,11 @@ export default function MyApp() {
             </div>
 
             <div className="px-7">
-              <img src='/images/7.gif' alt="Nosolo Cryptid" className="self-center rounded-xl" width="300" height="300">
+              <img src='/images/7.gif' alt="Grove Cryptid" className="self-center rounded-xl" width="300" height="300">
 
               </img>
               <p className=" text-white text-center text-lg leading-9 font-normal">
-                Grove
+                @Grove
               </p>
               <p className=" text-white text-center text-lg leading-9 font-normal pb-10">
                 Lore Master
