@@ -18,7 +18,7 @@ export default function MyApp() {
               <li>
                 <a href="https://twitter.com/cryptidsnft" target="_blank" rel="noreferrer">
                   <svg
-                    className="w-7 h-7 fill-black hover:fill-cryptid-1"
+                    className="w-7 h-7 fill-cryptid-5 hover:fill-cryptid-1"
 
                     viewBox="0 0 512 512"
                     xmlns="http://www.w3.org/2000/svg"
@@ -38,7 +38,7 @@ export default function MyApp() {
               <li>
                 <a href="https://discord.gg/cryptids" target="_blank" rel="noreferrer">
                   <svg
-                    className="w-7 h-7 fill-black hover:fill-cryptid-1"
+                    className="w-7 h-7 fill-cryptid-5 hover:fill-cryptid-1"
 
 
 
@@ -55,7 +55,7 @@ export default function MyApp() {
               <li>
                 <a href="https://medium.com/@TetraTeras" target="_blank" rel="noreferrer">
                   <svg
-                    className="w-9 h-9 fill-black hover:fill-cryptid-1"
+                    className="w-9 h-9 fill-cryptid-5 hover:fill-cryptid-1"
                
                     viewBox="0 0 512 512"
                     xmlns="http://www.w3.org/2000/svg"
