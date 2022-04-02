@@ -382,25 +382,39 @@ const Hero = () => {
     );
   })
 
+  // const mainImages = [
+  //   '/images/1.png',
+  //   '/images/2.png',
+  //   '/images/3.png',
+  //   '/images/4.png',
+  //   '/images/5.png',
+  //   '/images/6.png',
+  //   '/images/7.png',
+  //   '/images/8.png',
+  //   '/images/9.png',
+  //   '/images/12.png',
+  //   '/images/13.png',
+  //   '/images/14.png',
+  //   '/images/15.png',
+  //   '/images/17.png',
+  //   '/images/18.png',
+  //   '/images/20.png',
+  //   '/images/21.png',
+  //   '/images/22.png'
+  // ];
+
   const mainImages = [
-    '/images/1.png',
-    '/images/2.png',
-    '/images/3.png',
-    '/images/4.png',
-    '/images/5.png',
-    '/images/6.png',
-    '/images/7.png',
-    '/images/8.png',
-    '/images/9.png',
-    '/images/12.png',
-    '/images/13.png',
-    '/images/14.png',
-    '/images/15.png',
-    '/images/17.png',
-    '/images/18.png',
-    '/images/20.png',
-    '/images/21.png',
-    '/images/22.png'
+    '/images/10_blank.png',
+    '/images/11_blank.png',
+    '/images/12_blank.png',
+    '/images/13_blank.png',
+    '/images/14_blank.png',
+    '/images/15_blank.png',
+    '/images/26_blank.png',
+    '/images/27_blank.png',
+    '/images/28_blank.png',
+    '/images/29_blank.png',
+    '/images/30_blank.png',
   ];
 
 
@@ -415,12 +429,7 @@ const Hero = () => {
     '/images/7_blank.png',
     '/images/8_blank.png',
     '/images/9_blank.png',
-    '/images/10_blank.png',
-    '/images/11_blank.png',
-    '/images/12_blank.png',
-    '/images/13_blank.png',
-    '/images/14_blank.png',
-    '/images/15_blank.png',
+
   ];
 
   const rightImages = [
@@ -433,12 +442,7 @@ const Hero = () => {
     '/images/22_blank.png',
     '/images/23_blank.png',
     '/images/24_blank.png',
-    '/images/25_blank.png',
-    '/images/26_blank.png',
-    '/images/27_blank.png',
-    '/images/28_blank.png',
-    '/images/29_blank.png',
-    '/images/30_blank.png',
+    '/images/25_blank.png'
   ];
 
   const [randomMainImage, setRandomMainImage] = useState('/images/1.png');

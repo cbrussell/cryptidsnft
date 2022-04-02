@@ -1,8 +1,5 @@
 import React, { useState } from "react";
-import Head from "next/head";
-import Image from "next/image";
 export default function MyApp() {
-
 
   return (
     <div id="team">
@@ -13,8 +10,6 @@ export default function MyApp() {
           </h2>
           <div className="flex flex-wrap justify-center">
             <div className="px-7">
-
-              
               <video width="300" height="300" alt="Crussell Cryptid" className="self-center rounded-xl" autoPlay loop muted playsInline>
                 <source src="/videos/2.mp4" type="video/mp4" />
               </video>
