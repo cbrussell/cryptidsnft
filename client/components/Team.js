@@ -14,7 +14,11 @@ export default function MyApp() {
           <div className="flex flex-wrap justify-center">
             <div className="px-7">
 
-              <img src='/images/33.gif' alt="Chris Cryptid" className="self-center rounded-xl" width="300" height="300"></img>
+              
+              <video width="300" height="300" alt="Crussell Cryptid" className="self-center rounded-xl" autoPlay loop muted playsInline>
+                <source src="/videos/2.mp4" type="video/mp4" />
+              </video>
+
               <p className=" text-white text-center text-lg leading-9 font-normal">
                 <a href="https://twitter.com/chrisrusselljr" target="_blank" rel="noreferrer" className="hover:text-cryptid-3">@Crussell</a>
               </p>
@@ -23,9 +27,10 @@ export default function MyApp() {
               </p>
             </div>
             <div className="px-7">
-              <img src='/images/3.gif' alt="Nosolo Cryptid" className="self-center rounded-xl" width="300" height="300">
-
-              </img>
+             
+              <video width="300" height="300" alt="Nosolo Cryptid" className="self-center rounded-xl" autoPlay loop muted playsInline>
+                <source src="/videos/9.mp4" type="video/mp4" />
+              </video>
               <p className=" text-white text-center text-lg leading-9 font-normal">
                 <a href="https://twitter.com/no__solo" target="_blank" rel="noreferrer" className="hover:text-cryptid-3">@NoSolo</a>
               </p>
@@ -34,9 +39,10 @@ export default function MyApp() {
               </p>
             </div>
             <div className="px-7">
-              <img src='/images/1.gif' alt="Sentella Cryptid" className="self-center rounded-xl" width="300" height="300">
-
-              </img>
+              <video width="300" height="300" alt="Sentella Cryptid" className="self-center rounded-xl" autoPlay loop muted playsInline>
+                <source src="/videos/20.mp4" type="video/mp4" />
+              </video>
+            
               <p className=" text-white text-center text-lg leading-9 font-normal">
                 <a href="https://twitter.com/sen_tella" target="_blank" rel="noreferrer" className="hover:text-cryptid-3">@Sentella</a>
               </p>
@@ -46,9 +52,10 @@ export default function MyApp() {
             </div>
 
             <div className="px-7">
-              <img src='/images/7.gif' alt="Grove Cryptid" className="self-center rounded-xl" width="300" height="300">
-
-              </img>
+             
+              <video width="300" height="300" alt="Grove Cryptid" className="self-center rounded-xl" autoPlay loop muted playsInline>
+                <source src="/videos/7.mp4" type="video/mp4" />
+              </video>
               <p className=" text-white text-center text-lg leading-9 font-normal">
                 @Grove
               </p>

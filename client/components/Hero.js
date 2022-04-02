@@ -445,6 +445,8 @@ const Hero = () => {
   const [randomLeftImage, setRandomLeftImage] = useState('/images/1_blank.png');
   const [randomRightImage, setRandomRightImage] = useState('/images/2_blank.png');
 
+
+
   useEffect(() => {
 
     setRandomMainImage(mainImages[Math.floor(Math.random() * mainImages.length)]);
@@ -459,16 +461,16 @@ const Hero = () => {
       <div className="container max-w-6xl mx-auto flex flex-col items-center pt-4">
         <div className="flex flex-col items-center">
           <div className="flex pb-2">
-     <div className="pt-5">
+            <div className="pt-5">
               <Image
                 src={randomLeftImage}
                 width="300"
                 height="300"
                 unoptimized='true'
                 alt="Blank Cryptid 1"
-               className="self-center"
+                className="self-center"
               />
-</div>
+            </div>
 
             <div className="pt-2">
               <Image
@@ -491,7 +493,7 @@ const Hero = () => {
               />
             </div>
           </div>
-
+          
 
           {
             currentChainId && stage < 2 &&
