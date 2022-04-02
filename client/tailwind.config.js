@@ -13,6 +13,10 @@ module.exports = {
         'cryptid-5': '#222222',
         'cryptid-6': '#B25E54',
         },
+        fontFamily: {
+          "YkarRegular" : ["YKAR Medium", "sans-serif"],
+          "Exo" : ["Exo", "sans-serif"],
+        }
        
       },
     

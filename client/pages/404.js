@@ -3,7 +3,7 @@ import Image from 'next/image'
 
 const NotFound = () => {
     return (
-        <div className="text-center justify-center text-black text-xl mt-8 font-extrabold exo-font ">
+        <div className="text-center justify-center text-black text-xl mt-8 font-extrabold">
             <h1>Oooops...</h1>
             <h2>That page cannot be found.</h2>
             <Image 
