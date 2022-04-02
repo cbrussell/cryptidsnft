@@ -391,8 +391,18 @@ const Hero = () => {
     '/images/6.png',
     '/images/7.png',
     '/images/8.png',
-    '/images/9.png'
+    '/images/9.png',
+    '/images/12.png',
+    '/images/13.png',
+    '/images/14.png',
+    '/images/15.png',
+    '/images/17.png',
+    '/images/18.png',
+    '/images/20.png',
+    '/images/21.png',
+    '/images/22.png'
   ];
+
 
 
   const leftImages = [
