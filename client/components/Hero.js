@@ -445,7 +445,7 @@ const Hero = () => {
     '/images/25_blank.png'
   ];
 
-  const [randomMainImage, setRandomMainImage] = useState('/images/1.png');
+  const [randomMainImage, setRandomMainImage] = useState('/images/10_blank.png');
   const [randomLeftImage, setRandomLeftImage] = useState('/images/1_blank.png');
   const [randomRightImage, setRandomRightImage] = useState('/images/2_blank.png');
 
