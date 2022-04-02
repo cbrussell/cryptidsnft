@@ -24,7 +24,7 @@ export default function MyApp() {
             <div className="px-7">
              
               <video width="300" height="300" alt="Nosolo Cryptid" className="self-center rounded-xl" autoPlay loop muted playsInline>
-                <source src="/videos/9.mp4" type="video/mp4" />
+                <source src="/videos/10.mp4" type="video/mp4" />
               </video>
               <p className=" text-white text-center text-lg leading-9 font-normal">
                 <a href="https://twitter.com/no__solo" target="_blank" rel="noreferrer" className="hover:text-cryptid-3">@NoSolo</a>
@@ -35,7 +35,7 @@ export default function MyApp() {
             </div>
             <div className="px-7">
               <video width="300" height="300" alt="Sentella Cryptid" className="self-center rounded-xl" autoPlay loop muted playsInline>
-                <source src="/videos/20.mp4" type="video/mp4" />
+                <source src="/videos/24.mp4" type="video/mp4" />
               </video>
             
               <p className=" text-white text-center text-lg leading-9 font-normal">
@@ -49,7 +49,7 @@ export default function MyApp() {
             <div className="px-7">
              
               <video width="300" height="300" alt="Grove Cryptid" className="self-center rounded-xl" autoPlay loop muted playsInline>
-                <source src="/videos/7.mp4" type="video/mp4" />
+                <source src="/videos/23.mp4" type="video/mp4" />
               </video>
               <p className=" text-white text-center text-lg leading-9 font-normal">
                 @Grove
