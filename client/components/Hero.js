@@ -509,7 +509,7 @@ const Hero = () => {
 
                   <br></br>
                   {/* {timerComponentsPublic.length ? <span>Whitelist Sale will begin in... <br></br> {timerComponentsWhitelist}</span> : <span>Whitelist Sale will be starting soon...</span>} */}
-                  Launching Q2 2022
+                  Launching Early June 2022
                 </p>
               )
 
@@ -540,7 +540,7 @@ const Hero = () => {
                       <br></br>
 
                       {/* {timerComponentsPublic.length ? <span>Public Sale will begin in... <br></br> {timerComponentsPublic}</span> : <span>Public Sale will be starting soon...</span>} */}
-                      Launching Q2 2022
+                      Launching Ealy June 2022
                     </p>
                   )
 
@@ -566,7 +566,7 @@ const Hero = () => {
 
                           <br></br>
                           {/* {timerComponentsPublic.length ? <span>Whitelist Sale will begin in... <br></br> {timerComponentsWhitelist}</span> : <span>Whitelist Sale will be starting soon...</span>} */}
-                          Launching Q2 2022
+                          Launching Early June 2022
                         </p>
                       )
 
@@ -578,7 +578,7 @@ const Hero = () => {
                             Account: {" "} {shortenAddress(account)} has 1 Whitelist Mint Available <br></br><br></br>
 
                             {/* {timerComponentsWhitelist.length ? <span>Whitelist Sale will begin in... <br></br> {timerComponentsPublic}</span> : <span>Whitelist Sale will be starting soon...</span>} */}
-                            Launching Q2 2022
+                            Launching Early June 2022
                           </p>
                         )
 
@@ -688,7 +688,7 @@ const Hero = () => {
                                     Account: {" "} {shortenAddress(account)} is not on the Whitelist. <br></br><br></br>
 
                                     {/* {timerComponentsPublic.length ? <span>Public Sale will begin in... <br></br> {timerComponentsPublic}</span> : <span>Public Sale will be starting soon...</span>} */}
-                                    Launching Q2 2022
+                                    Launching Early June 2022
                                   </p>
                                 ) :
 
@@ -872,7 +872,7 @@ const Hero = () => {
 
 
                                         {/* {timerComponentsPublic.length ? <span>Public Sale will begin in... <br></br> {timerComponentsPublic}</span> : <span>Public Sale will be starting soon...</span>} */}
-                                        Launching Q2 2022
+                                        Launching Early June 2022
                                       </p>
                                     )}
 
