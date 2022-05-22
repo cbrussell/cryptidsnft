@@ -144,7 +144,7 @@ export default function MyApp() {
               <ul>
                 <li>
                   <p className="text-lg leading-normal text-gray-600 mt-4 text-justify">
-                    CRYPTIDS will be launching on the Arbitrum Network in Q2.
+                    CRYPTIDS will be launching on the Arbitrum Network in early June 2022.
                     {/* <br></br>
                     <br></br>
                     The Whitelist Sale will run for 24 hours beginning 
@@ -220,7 +220,7 @@ export default function MyApp() {
                     Team Supply: 400 (50/founder) <br></br>
                     Trust/Marketing: 211 <br></br>
                     <br></br>
-                    Mint Price: 0.10 ETH
+                    Mint Price: Choose choose your own price! Any contribitons to our project are greatly appreciated! 
 
                   </p>
                 </li>
