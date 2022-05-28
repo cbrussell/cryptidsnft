@@ -55,7 +55,6 @@ contract CryptidToken is ERC721, ERC721Enumerable, Pausable, Ownable, Reentrancy
 
     // Public Sale (stage=4)
     uint256 public totalSaleSupply;         
-    uint256 public salePrice = 0.1 ether;  
 
     Stage public stage;
 
@@ -103,7 +102,7 @@ contract CryptidToken is ERC721, ERC721Enumerable, Pausable, Ownable, Reentrancy
         whenNotPaused 
     {
         require(stage == Stage.Whitelist, "Whitelist sale not initiated.");
-        require(salePrice == msg.value, "Incorrect ETH value sent.");
+        // require(salePrice == msg.value, "Incorrect ETH value sent.");
         require(merkleProof.verify(merkleRoot, keccak256(abi.encodePacked(msg.sender))), "Address not on whitelist.");
         require(totalSupply()  + 1 <= totalSaleSupply, "Transaction exceeds total sale supply.");  
         require(claimed[msg.sender] == false, "Whitelist mint already claimed."); 
@@ -140,7 +139,7 @@ contract CryptidToken is ERC721, ERC721Enumerable, Pausable, Ownable, Reentrancy
         whenNotPaused  
     {
         require(stage == Stage.PublicSale, "Public Sale not initiated.");
-        require(salePrice * mintAmount == msg.value, "Incorrect ETH value sent.");
+        // require(salePrice * mintAmount == msg.value, "Incorrect ETH value sent.");
         require(mintAmount > 0, "Mint amount must be greater than 0.");
         require(totalSupply()  + mintAmount <= totalSaleSupply, "Transaction exceeds total sale supply.");
         require(mintAmount <= maxMintPerTx, "Exceeds max allowed mints per transaction.");  
@@ -204,9 +203,9 @@ contract CryptidToken is ERC721, ERC721Enumerable, Pausable, Ownable, Reentrancy
         withdrawlAddress = _withdrawlAddress;
     }
 
-    function setSalePrice(uint256 _salePrice) external onlyOwner {
-        salePrice = _salePrice;
-    }
+    // function setSalePrice(uint256 _salePrice) external onlyOwner {
+    //     salePrice = _salePrice;
+    // }
 
     function setMaxMintPerTx(uint256 _maxMintPerTx) external onlyOwner {
         maxMintPerTx = _maxMintPerTx;

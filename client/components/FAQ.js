@@ -144,7 +144,7 @@ export default function MyApp() {
               <ul>
                 <li>
                   <p className="text-lg leading-normal text-gray-600 mt-4 text-justify">
-                    CRYPTIDS will be launching on the Arbitrum Network in early June 2022.
+                    CRYPTIDS will be launching on the Arbitrum Network on June 13th
                     {/* <br></br>
                     <br></br>
                     The Whitelist Sale will run for 24 hours beginning 
@@ -214,14 +214,12 @@ export default function MyApp() {
               <ul>
                 <li>
                   <p className="text-lg leading-normal text-gray-600 mt-4 text-justify">
-                    Collection Size: 11,111 <br></br>
-                    Whitelist Supply: 9,500<br></br>
-                    Public Supply: 1,000<br></br>
-                    Team Supply: 400 <br></br>
-                    Trust/Marketing: 211 <br></br>
+                    Collection Size: 7,777<br></br>
+                    Whitelist Supply: 7,300<br></br>
+                    Team Supply: 477<br></br>
                     <br></br>
-                    Mint Price: Choose your own price! Any contribiton to our project is greatly appreciated! 
-
+                    Mint Price: FREE (Or choose your own price!) 
+                    <br></br>Any contribiton to our project is greatly appreciated! 
                   </p>
                 </li>
               </ul>
