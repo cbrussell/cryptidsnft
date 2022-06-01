@@ -20,12 +20,12 @@ function MyApp({ Component, pageProps }) {
       <Head id="home">
         <title>Cryptids</title>
         <meta name="title" content="Cryptids" />
-        <meta name="description" content="Part storybook fantasy, part science-fiction. Cryptids is a generative NFT art project of 11,111 unique mythical creatures. Created by @no__solo and @chrisusselljr." />
+        <meta name="description" content="Part storybook fantasy, part science-fiction. CRYPTIDS is a generative art project of 7,777 fantastic mythical creatures. Created by @no__solo and @chrisusselljr." />
         <link rel="icon" href="/favicon.svg" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="http://www.cryptids.app/" />
         <meta property="og:title" content="Cryptids" />
-        <meta property="og:description" content="Part storybook fantasy, part science-fiction. Cryptids is a generative NFT art project of 11,111 unique mythical creatures. Created by @no__solo and @chrisusselljr." />
+        <meta property="og:description" content="Part storybook fantasy, part science-fiction. CRYPTIDS is a generative art project of 7,777 fantastic mythical creatures. Created by @no__solo and @chrisusselljr." />
         <meta property="og:image" content="https://gateway.pinata.cloud/ipfs/QmX7YrhWoRzTdbSqU65pxn4pS6tUwTQW9WGMPr35iKDpdn" />
         <script async src="https://cdn.splitbee.io/sb.js"></script>
         <link

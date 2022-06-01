@@ -8,4 +8,5 @@ assets/
 git_instructions.txt
 pinata-key.txt
 .DS_Store
+/build
 /contract/build/
