@@ -24,7 +24,7 @@ export default function MyApp() {
             <div className="flex items-center justify-between">
               <div>
                 <h2 className="font-bold uppercase text-lg leading-none cursor-pointer text-gray-800" >
-                  How can I get on the whitelist?
+                  WL?
                 </h2>
               </div>
               <button
@@ -93,7 +93,7 @@ export default function MyApp() {
             <div className="flex items-center justify-between">
               <div>
                 <h2 className="font-bold  uppercase text-lg leading-none text-gray-800 cursor-pointer">
-                  Which network will CRYPTIDS be available and when?
+                  WEN MINT?
                 </h2>
               </div>
               <button
@@ -162,7 +162,7 @@ export default function MyApp() {
             <div className="flex items-center justify-between">
               <div>
                 <h2 className="font-bold  uppercase text-lg leading-none text-gray-800">
-                  What is the collection size and mint price?
+                  SUPPLY?
                 </h2>
               </div>
               <button
@@ -215,11 +215,11 @@ export default function MyApp() {
                 <li>
                   <p className="text-lg leading-normal text-gray-600 mt-4 text-justify">
                     Collection Size: 7,777<br></br>
-                    Whitelist Supply: 7,300<br></br>
-                    Team Supply: 477<br></br>
+                    Whitelist Supply: 7,000<br></br>
+                    Team Supply: 777<br></br>
                     <br></br>
-                    Mint Price: FREE (Or choose your own price!) 
-                    <br></br>Any contribiton to our project is greatly appreciated! 
+                    Mint Price: FREE (Or choose your own price) 
+                    <br></br>Any contribiton to our project is greatly appreciated.
                   </p>
                 </li>
               </ul>
@@ -230,7 +230,7 @@ export default function MyApp() {
             <div className="flex items-center justify-between">
               <div>
                 <h2 className="font-bold  uppercase text-lg leading-none text-gray-800">
-                  Which marketplace will CRYPTIDS be listed on?
+                  MARKETPLACE?
                 </h2>
               </div>
               <button
@@ -288,8 +288,6 @@ export default function MyApp() {
               </ul>
             )}
           </div>
-
-          
         </div>
       </div>
     </div>
