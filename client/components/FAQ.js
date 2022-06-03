@@ -144,7 +144,11 @@ export default function MyApp() {
               <ul>
                 <li>
                   <p className="text-lg leading-normal text-gray-600 mt-4 text-justify">
-                    CRYPTIDS will be launching on the Arbitrum Network on June 13th
+                    Whitelist Sale: June 13th 2022, 10:00 AM PST / 1:00 PM EST<br></br><br></br>
+                    *Public Sale: June 16th 2022, 4:00 PM PST / 7:00 PM EST <br></br><br></br>
+                    Max Mint Per Wallet: 2 CRYPTIDS (EX. 1 WL, 1 Public Mint) <br></br><br></br>
+                    <b>*Any unused whitelist mints will become available for the public sale.</b>
+
                     {/* <br></br>
                     <br></br>
                     The Whitelist Sale will run for 24 hours beginning 
