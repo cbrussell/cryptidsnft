@@ -28,7 +28,7 @@ function MyApp({ Component, pageProps }) {
         <meta property="og:description" content="Part storybook fantasy, part science-fiction. CRYPTIDS is a generative art project of 7,777 fantastic mythical creatures. Created by @no__solo and @chrisusselljr." />
         <meta property="og:image" content="https://gateway.pinata.cloud/ipfs/QmX7YrhWoRzTdbSqU65pxn4pS6tUwTQW9WGMPr35iKDpdn" />
         <script async src="https://cdn.splitbee.io/sb.js"></script>
-        <link
+        {/* <link
           rel="preload"
           href="/fonts/Exo-Regular.woff"
           as="font"
@@ -55,7 +55,7 @@ function MyApp({ Component, pageProps }) {
           as="font"
           crossOrigin=""
           type="font/woff"
-        />
+        /> */}
       </Head>
       <DAppProvider config={config}>
         <StatusProvider>

@@ -76,12 +76,12 @@ export default function MyApp() {
                 <li>
                   <p className="text-lg leading-normal text-gray-600 mt-4 text-justify">
                   Our whitelist is now closed. 
-                  <br></br>
-                  <br></br>
-                  The Pioneer Role was limited to new Discord Members who joined between November 30th 2021 and January 25th 2022.
+                  {/* <br></br>
+                  <br></br> */}
+                  {/* The Pioneer Role was limited to new Discord Members who joined between November 30th 2021 and January 25th 2022.
                   All Pioneers are eligible to sign up for our Whitelist and reserve ONE (1) CRYPTID from our Whitelist Supply.
                   We appreciate our early supporters and aim to make this project&apos;s release accessible, low-stress, and distributed. 
-      
+       */}
                   </p>
                 </li>
               </ul>
@@ -222,8 +222,7 @@ export default function MyApp() {
                     Whitelist Supply: 7,000<br></br>
                     Team Supply: 777<br></br>
                     <br></br>
-                    Mint Price: FREE (Or choose your own price) 
-                    <br></br>Any contribiton to our project is greatly appreciated.
+                    Mint Price: Free 
                   </p>
                 </li>
               </ul>
