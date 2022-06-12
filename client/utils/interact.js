@@ -1,6 +1,6 @@
 import { Contract, utils} from "ethers";
 import { useCall, useContractCall } from "@usedapp/core"
-import cryptidTokenNFT from "../../contract/build/deployments/42161/0x6771619F9527F84e579C2257322F427684B8f24d.json";
+import cryptidTokenNFT from "../../contract/build/deployments/42161/0x5A39174e7F2B669a51Ec179eF49b3eca7ddB96AB.json";
 import { ContractAddress } from '../data/contract';
 
 const { abi: cryptidTokenABI } = cryptidTokenNFT;
@@ -8,19 +8,6 @@ const { abi: cryptidTokenABI } = cryptidTokenNFT;
 const cryptidTokenNFTInterface = new utils.Interface(cryptidTokenABI);
 
 const nftContract = new Contract(ContractAddress, cryptidTokenNFTInterface)
-
-export function GetMaxMintAmount() {
-  const { value, error } =  useCall({ 
-    contract: nftContract, 
-    method: "maxMintPerTx", 
-  }) ?? {};
-  if (error) {
-    console.error(error.message)
-    return undefined;
-  } else {
-    return value?.[0]
-  }
-}
 
 export function GetTotalSaleSupply() {
   const { value, error } =  useCall({ 
@@ -73,21 +60,7 @@ export function CheckIfClaimed(account) {
     console.error(error.message)
     return undefined;
   } else {
-    return  value?.[0] 
-  }
-}
-
-export function GetSalePrice() {
-  const {value, error} =  useCall({ 
-    contract: nftContract, 
-    method: "salePrice", 
-    args: [],
-  }) ?? {};
-  if (error) {
-    console.error(error.message)
-    return undefined;
-  } else {
-    return value?.[0] && (value?.[0]).toString()
+    return  value?.[0].toNumber()
   }
 }
 
@@ -105,8 +78,6 @@ export function GetStage() {
   }
 }
 
-
-
 export function GetOwner() {
   const { value, error } =  useCall({ 
     contract: nftContract, 
@@ -120,4 +91,3 @@ export function GetOwner() {
     return value?.[0]
   }
 }
-

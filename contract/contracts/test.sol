@@ -27,12 +27,11 @@ contract test is ERC721, ERC721Enumerable, Pausable, Ownable, ReentrancyGuard{
     bytes32 public merkleRoot;
     string public provenanceHash;
     string public baseURI = "";
-    string public baseExtension = ".json";
-    uint256 public maxMintPerTx;     
+    string public baseExtension = ".json";    
     bool public tokenURIFrozen = false;
     bool public provenanceHashFrozen = false;
 
-    address public withdrawlAddress = 0x12B58f5331a6DC897932AA7FB5101667ACdf03e2;
+    address public withdrawlAddress = 0xa2062484E6e705272e98d20e40f154172ec9f305;
 
     // ~ Sale stages ~
     // stage 0: Init
@@ -41,9 +40,8 @@ contract test is ERC721, ERC721Enumerable, Pausable, Ownable, ReentrancyGuard{
     // stage 3: Team Mint 
     // stage 4: Public Sale
 
-    // Whitelist mint (stage=2)
-    uint256 public whitelistSupply;                       
-    mapping(address => bool) public claimed;              
+    // Whitelist mint (stage=2)                   
+    mapping(address => uint256) public claimed;          
     
     // Team Mint (stage=3)
     uint256 public teamMintSupply;                          
@@ -51,7 +49,6 @@ contract test is ERC721, ERC721Enumerable, Pausable, Ownable, ReentrancyGuard{
 
     // Public Sale (stage=4)
     uint256 public totalSaleSupply;         
-    uint256 public salePrice = 0.1 ether;  
 
     Stage public stage;
 
@@ -59,23 +56,19 @@ contract test is ERC721, ERC721Enumerable, Pausable, Ownable, ReentrancyGuard{
         string memory _name,
         string memory _symbol,
         string memory _baseURI,
-        uint256 _whitelistSupply,
         uint256 _teamMintSupply,
-        uint256 _totalSaleSupply,
-        uint256 _maxMintPerTx
+        uint256 _totalSaleSupply
 
     )   ERC721(_name, _symbol) {
-        whitelistSupply = _whitelistSupply;
         teamMintSupply = _teamMintSupply;
         totalSaleSupply = _totalSaleSupply;
-        maxMintPerTx = _maxMintPerTx;
         baseURI = _baseURI;
         _tokenIdCounter.increment();
     }
 
     // Stage 1 - Airdrop
-    function airdropTest(
-        uint8 mintAmount, 
+    function airdrop(
+        uint256 mintAmount, 
         address to
     ) 
         external
@@ -94,23 +87,21 @@ contract test is ERC721, ERC721Enumerable, Pausable, Ownable, ReentrancyGuard{
         bytes32[] calldata merkleProof
     ) 
         external
-        payable 
         nonReentrant 
         whenNotPaused 
     {
         require(stage == Stage.Whitelist, "Whitelist sale not initiated.");
-        require(salePrice == msg.value, "Incorrect ETH value sent.");
-        require(merkleProof.verify(merkleRoot, keccak256(abi.encodePacked(msg.sender))), "Address not on whitelist.");
-        require(claimed[msg.sender] == false, "Whitelist mint already claimed."); 
-        require(totalSupply() + 1 <= totalSaleSupply, "Transaction exceeds total sale supply.");  
-        claimed[msg.sender] = true;
+        require(merkleProof.verify(merkleRoot, keccak256(abi.encodePacked(msg.sender))), "Address not in whitelist.");
+        require(totalSupply()  + 1 <= totalSaleSupply - teamMintSupply, "Transaction exceeds whitelist supply.");  
+        require(claimed[msg.sender] < 1, "Whitelist mint already claimed."); 
+        claimed[msg.sender] += 1;
         _safeMint(msg.sender, _tokenIdCounter.current());
         _tokenIdCounter.increment();
     }
 
     // Stage 3 - Team Mint
     function teamMint(
-        uint8 mintAmount
+        uint256 mintAmount
     ) 
         external 
         onlyOwner 
@@ -128,22 +119,17 @@ contract test is ERC721, ERC721Enumerable, Pausable, Ownable, ReentrancyGuard{
 
     // Stage 4 - Public Mint
     function publicMint(
-        uint256 mintAmount
     ) 
         external
-        payable 
         nonReentrant 
         whenNotPaused  
     {
         require(stage == Stage.PublicSale, "Public Sale not initiated.");
-        require(salePrice * mintAmount == msg.value, "Incorrect ETH value sent.");
-        require(mintAmount > 0, "Mint amount must be greater than 0.");
-        require(totalSupply()  + mintAmount <= totalSaleSupply, "Transaction exceeds total sale supply.");
-        require(mintAmount <= maxMintPerTx, "Exceeds max allowed mints per transaction.");  
-        for (uint256 i = 1; i <= mintAmount; i++) {
-            _safeMint(msg.sender, _tokenIdCounter.current());
-            _tokenIdCounter.increment();
-        }
+        require(totalSupply()  + 1 <= totalSaleSupply, "Transaction exceeds total sale supply.");
+        require(claimed[msg.sender] < 2, "Max 2 per wallet."); 
+        claimed[msg.sender] += 1;
+        _safeMint(msg.sender, _tokenIdCounter.current());
+        _tokenIdCounter.increment();
     }
 
     //Owner functions
@@ -156,13 +142,8 @@ contract test is ERC721, ERC721Enumerable, Pausable, Ownable, ReentrancyGuard{
     }
 
     // to be used in case of manual override
-    function setClaim(address wlAddress) external onlyOwner{
-        claimed[wlAddress] = true;
-    }
-
-    // to be used in case of WL error
-    function undoClaim(address wlAddress) external onlyOwner{
-        claimed[wlAddress] = false;
+    function setClaim(address wlAddress, uint256 amount) external onlyOwner{
+        claimed[wlAddress] = amount;
     }
 
     function setMerkleRoot(bytes32 _merkleRoot) external onlyOwner {
@@ -198,14 +179,6 @@ contract test is ERC721, ERC721Enumerable, Pausable, Ownable, ReentrancyGuard{
 
     function setWithdrawlAddress(address _withdrawlAddress) external onlyOwner {
         withdrawlAddress = _withdrawlAddress;
-    }
-
-    function setSalePrice(uint256 _salePrice) external onlyOwner {
-        salePrice = _salePrice;
-    }
-
-    function setMaxMintPerTx(uint256 _maxMintPerTx) external onlyOwner {
-        maxMintPerTx = _maxMintPerTx;
     }
 
     function withdraw() external onlyOwner {
@@ -265,4 +238,4 @@ contract test is ERC721, ERC721Enumerable, Pausable, Ownable, ReentrancyGuard{
         return super.supportsInterface(interfaceId);
     }
 
-}
+} 

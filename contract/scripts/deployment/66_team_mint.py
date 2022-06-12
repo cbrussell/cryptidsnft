@@ -11,7 +11,7 @@ def main():
     print(f'Active network is: {active_network}\n')
     
     cryptids = test[len(test)-1]
-    amount = 1
+    amount = 3
 
     transaction = cryptids.teamMint(amount, {"from": dev})
 

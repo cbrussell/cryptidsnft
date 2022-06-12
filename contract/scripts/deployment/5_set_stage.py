@@ -12,7 +12,7 @@ def main():
     stage = 0
     transaction = cryptids.setStage(stage, {"from": dev})
     
-    print(f'Success! Stage moved toat {transaction}')
+    print(f'Success! Stage moved to {transaction}')
 
     print(f'See transaction here: https://arbiscan.io/tx/{transaction.txid}\n')
 

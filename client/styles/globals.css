@@ -4,6 +4,8 @@
 
 @font-face {
   font-family: 'YkarRegular';
+  font-style: normal;
+  font-weight: 300;
   font-display: optional;
   src: url('/fonts/YkarRegular.woff2') format('woff2'),
   url('/fonts/YkarRegular.woff') format('woff');
@@ -12,6 +14,8 @@
 
 @font-face {
   font-family: 'Exo';
+  font-style: normal;
+  font-weight: 300;
   font-display: optional;
   src: url('/fonts/Exo-Regular.woff2') format('woff2'),
   url('/fonts/Exo-Regular.woff') format('woff');

@@ -14,7 +14,7 @@ def main():
     airdrop_amount = 1
     airdrop_address = "0x12B58f5331a6DC897932AA7FB5101667ACdf03e2"
 
-    transaction = cryptids.airdropTest(airdrop_amount, airdrop_address, {"from": dev})
+    transaction = cryptids.airdrop(airdrop_amount, airdrop_address, {"from": dev})
 
     balance = cryptids.balanceOf(airdrop_address)
 

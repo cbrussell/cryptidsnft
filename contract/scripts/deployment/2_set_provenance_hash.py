@@ -15,3 +15,5 @@ def main():
 
     print(f'See transaction here: https://arbiscan.io/tx/{transaction.txid}\n')
 
+    # brownie run scripts/deployment/2_set_provenance_hash.py --network arb-test 
+

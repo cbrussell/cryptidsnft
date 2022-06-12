@@ -1,4 +1,4 @@
-from brownie import test, accounts, network, config
+from brownie import Cryptids, accounts, network, config
 import time
 
 # Set merkle root
@@ -7,8 +7,8 @@ import time
 def main():
     dev = accounts.add(config['wallets']['from_key'])
     print(dev)
-    cryptids = test[len(test)-1]
-    merkle_root = '0x79b78f084fb42033eeab74503888f1d33528b6c3f619bd027ab87d4aae8ac651'
+    cryptids = Cryptids[len(Cryptids)-1]
+    merkle_root = '0x8cb56ab831ffaca5c21d4bc10ce59db087ecd1a99085264b9d3293bb4fb9c268'
     transaction = cryptids.setMerkleRoot(merkle_root, {"from": dev})
     print(f'Merkle root set at: {transaction}\n')
     print(f'Merkle root set to: {merkle_root}\n')

@@ -9,11 +9,11 @@ import '@openzeppelin/contracts/utils/Counters.sol';
 import '@openzeppelin/contracts/security/Pausable.sol';
 import '@openzeppelin/contracts/utils/cryptography/MerkleProof.sol';
 
-/// @title CryptidToken NFT Contract
+/// @title Cryptids NFT Contract
 /// @author @chrisrusselljr
 /// @notice You can use this contract to mint, send, and interact with CRYPTIDS
 /// @dev All function calls are currently implemented without side effects
-contract CryptidToken is ERC721, ERC721Enumerable, Pausable, Ownable, ReentrancyGuard{ 
+contract Cryptids is ERC721, ERC721Enumerable, Pausable, Ownable, ReentrancyGuard{ 
     using Strings for uint256;
     using Counters for Counters.Counter;
     using MerkleProof for bytes32[];
@@ -31,8 +31,7 @@ contract CryptidToken is ERC721, ERC721Enumerable, Pausable, Ownable, Reentrancy
     bytes32 public merkleRoot;
     string public provenanceHash;
     string public baseURI = "";
-    string public baseExtension = ".json";
-    uint256 public maxMintPerTx;     
+    string public baseExtension = ".json";    
     bool public tokenURIFrozen = false;
     bool public provenanceHashFrozen = false;
 
@@ -45,9 +44,8 @@ contract CryptidToken is ERC721, ERC721Enumerable, Pausable, Ownable, Reentrancy
     // stage 3: Team Mint 
     // stage 4: Public Sale
 
-    // Whitelist mint (stage=2)
-    uint256 public whitelistSupply;                       
-    mapping(address => bool) public claimed;              
+    // Whitelist mint (stage=2)                   
+    mapping(address => uint256) public claimed;          
     
     // Team Mint (stage=3)
     uint256 public teamMintSupply;                          
@@ -62,23 +60,19 @@ contract CryptidToken is ERC721, ERC721Enumerable, Pausable, Ownable, Reentrancy
         string memory _name,
         string memory _symbol,
         string memory _baseURI,
-        uint256 _whitelistSupply,
         uint256 _teamMintSupply,
-        uint256 _totalSaleSupply,
-        uint256 _maxMintPerTx
+        uint256 _totalSaleSupply
 
     )   ERC721(_name, _symbol) {
-        whitelistSupply = _whitelistSupply;
         teamMintSupply = _teamMintSupply;
         totalSaleSupply = _totalSaleSupply;
-        maxMintPerTx = _maxMintPerTx;
         baseURI = _baseURI;
         _tokenIdCounter.increment();
     }
 
     // Stage 1 - Airdrop
     function airdropCryptid(
-        uint8 mintAmount, 
+        uint256 mintAmount, 
         address to
     ) 
         external
@@ -97,23 +91,21 @@ contract CryptidToken is ERC721, ERC721Enumerable, Pausable, Ownable, Reentrancy
         bytes32[] calldata merkleProof
     ) 
         external
-        payable 
         nonReentrant 
         whenNotPaused 
     {
         require(stage == Stage.Whitelist, "Whitelist sale not initiated.");
-        // require(salePrice == msg.value, "Incorrect ETH value sent.");
-        require(merkleProof.verify(merkleRoot, keccak256(abi.encodePacked(msg.sender))), "Address not on whitelist.");
-        require(totalSupply()  + 1 <= totalSaleSupply, "Transaction exceeds total sale supply.");  
-        require(claimed[msg.sender] == false, "Whitelist mint already claimed."); 
-        claimed[msg.sender] = true;
+        require(merkleProof.verify(merkleRoot, keccak256(abi.encodePacked(msg.sender))), "Address not in whitelist.");
+        require(totalSupply()  + 1 <= totalSaleSupply - teamMintSupply, "Transaction exceeds whitelist supply.");  
+        require(claimed[msg.sender] < 1, "Whitelist mint already claimed."); 
+        claimed[msg.sender] += 1;
         _safeMint(msg.sender, _tokenIdCounter.current());
         _tokenIdCounter.increment();
     }
 
     // Stage 3 - Team Mint
     function teamMint(
-        uint8 mintAmount
+        uint256 mintAmount
     ) 
         external 
         onlyOwner 
@@ -131,22 +123,17 @@ contract CryptidToken is ERC721, ERC721Enumerable, Pausable, Ownable, Reentrancy
 
     // Stage 4 - Public Mint
     function publicMint(
-        uint256 mintAmount
     ) 
         external
-        payable 
         nonReentrant 
         whenNotPaused  
     {
         require(stage == Stage.PublicSale, "Public Sale not initiated.");
-        // require(salePrice * mintAmount == msg.value, "Incorrect ETH value sent.");
-        require(mintAmount > 0, "Mint amount must be greater than 0.");
-        require(totalSupply()  + mintAmount <= totalSaleSupply, "Transaction exceeds total sale supply.");
-        require(mintAmount <= maxMintPerTx, "Exceeds max allowed mints per transaction.");  
-        for (uint256 i = 1; i <= mintAmount; i++) {
-            _safeMint(msg.sender, _tokenIdCounter.current());
-            _tokenIdCounter.increment();
-        }
+        require(totalSupply()  + 1 <= totalSaleSupply, "Transaction exceeds total sale supply.");
+        require(claimed[msg.sender] < 2, "Max 2 Cryptids per wallet."); 
+        claimed[msg.sender] += 1;
+        _safeMint(msg.sender, _tokenIdCounter.current());
+        _tokenIdCounter.increment();
     }
 
     //Owner functions
@@ -158,14 +145,8 @@ contract CryptidToken is ERC721, ERC721Enumerable, Pausable, Ownable, Reentrancy
         _unpause();
     }
 
-    // to be used in case of manual override
-    function setClaim(address wlAddress) external onlyOwner{
-        claimed[wlAddress] = true;
-    }
-
-    // to be used in case of WL error
-    function undoClaim(address wlAddress) external onlyOwner{
-        claimed[wlAddress] = false;
+    function setClaim(address wlAddress, uint256 amount) external onlyOwner{
+        claimed[wlAddress] = amount;
     }
 
     function setMerkleRoot(bytes32 _merkleRoot) external onlyOwner {
@@ -201,14 +182,6 @@ contract CryptidToken is ERC721, ERC721Enumerable, Pausable, Ownable, Reentrancy
 
     function setWithdrawlAddress(address _withdrawlAddress) external onlyOwner {
         withdrawlAddress = _withdrawlAddress;
-    }
-
-    // function setSalePrice(uint256 _salePrice) external onlyOwner {
-    //     salePrice = _salePrice;
-    // }
-
-    function setMaxMintPerTx(uint256 _maxMintPerTx) external onlyOwner {
-        maxMintPerTx = _maxMintPerTx;
     }
 
     function withdraw() external onlyOwner {
@@ -268,4 +241,4 @@ contract CryptidToken is ERC721, ERC721Enumerable, Pausable, Ownable, Reentrancy
         return super.supportsInterface(interfaceId);
     }
 
-}
+} 

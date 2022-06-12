@@ -10,3 +10,4 @@ def main():
     transaction = cryptids.freezeProvenanceHash({"from": dev})
     print(f'Provenance hash frozen at: {transaction}')
 
+ # brownie run scripts/deployment/3_freeze_provenance_hash.py --network arb-test

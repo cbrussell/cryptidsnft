@@ -13,3 +13,6 @@ __pycache__/
 .Trash/*
 .vercel
 .vscode/
+venv/*
+venv/
+contract/build/*
