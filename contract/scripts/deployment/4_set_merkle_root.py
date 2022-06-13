@@ -8,7 +8,7 @@ def main():
     dev = accounts.add(config['wallets']['from_key'])
     print(dev)
     cryptids = Cryptids[len(Cryptids)-1]
-    merkle_root = '0x8cb56ab831ffaca5c21d4bc10ce59db087ecd1a99085264b9d3293bb4fb9c268'
+    merkle_root = '0x0d74c03d95df3c3c976c3c5b67deee1fc6c8d2323dfdfaa7be515b46635ca973'
     transaction = cryptids.setMerkleRoot(merkle_root, {"from": dev})
     print(f'Merkle root set at: {transaction}\n')
     print(f'Merkle root set to: {merkle_root}\n')
@@ -16,3 +16,4 @@ def main():
     print(f'See transaction here: https://arbiscan.io/tx/{transaction.txid}\n')
 
 
+# brownie run scripts/deployment/4_set_merkle_root.py --network arbitrum-main
