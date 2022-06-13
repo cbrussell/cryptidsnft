@@ -1,11 +1,11 @@
-from brownie import CryptidToken, accounts, network, config
+from brownie import Cryptids, accounts, network, config
 
 def main():
     dev = accounts.add(config['wallets']['from_key'])
     print(dev)
-    cryptids = CryptidToken[len(CryptidToken)-1]
+    cryptids = Cryptids[len(Cryptids)-1]
     print(cryptids)
-    base_uri = "ipfs://QmRLLfvoQQgbRoPodzVtjhPynmk9Kc1CvPvg6ucC9w9gmZ" + "/"
+    base_uri = "ipfs://QmSA6jdQbyswLgXiYRocR53TENZtL1bBDnpnNNtLs48Bsc" + "/"
     transaction = cryptids.setBaseURI(base_uri, {"from": dev})
 
     print(f'BaseURI set on: {transaction}')

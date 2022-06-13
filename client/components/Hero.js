@@ -493,10 +493,15 @@ const Hero = () => {
 
                         : stage == 2 && !account ?
                           (
-
+<>
+                                <p className=" bg-gray-100 rounded-md text-gray-800 font-bold text-lg my-4 py-1 px-3">
+                                  <span className="text-[#d35c5c]">{`${totalSupplyCalculated}`}</span> /
+                                  <span className="text-black">{`${totalSaleSupplyCalculated}`}</span>
+                                </p>
                             <p className="text-white text-xl mt-8 text-center">
                               Whitelist Sale is <b>Active</b> <br></br><br></br>
                             </p>
+                            </>
                           ) : stage == 2 && whitelistClaimable && account && claimed === 0 ?
                             (
                               <>
@@ -534,23 +539,36 @@ const Hero = () => {
 
 
                               (
+                                <>
+                                <p className=" bg-gray-100 rounded-md text-gray-800 font-bold text-lg my-4 py-1 px-3">
+                                  <span className="text-[#d35c5c]">{`${totalSupplyCalculated}`}</span> /
+                                  <span className="text-black">{`${totalSaleSupplyCalculated}`}</span>
+                                </p>
                                 <p className="text-white text-xl mt-8 text-center">
                                   Account: {" "} {shortenAddress(account)} has claimed their Whitelist Mint 😊 <br></br><br></br>
 
                                   {timerComponentsPublic.length ? <span>Public Sale will begin in... <br></br> {timerComponentsPublic}</span> : <span>Public Sale will be starting soon...</span>}
 
                                 </p>
+                                
+                                </>
+                                
                               ) : stage < 3 && !whitelistClaimable && account ?
-
-
+                                
 
                                 (
+                                  <>
+                                <p className=" bg-gray-100 rounded-md text-gray-800 font-bold text-lg my-4 py-1 px-3">
+                                  <span className="text-[#d35c5c]">{`${totalSupplyCalculated}`}</span> /
+                                  <span className="text-black">{`${totalSaleSupplyCalculated}`}</span>
+                                </p>
                                   <p className="text-white text-xl mt-8 text-center">
                                     Account: {" "} {shortenAddress(account)} is not on the Whitelist 😔 <br></br><br></br>
 
                                     {timerComponentsPublic.length ? <span>Public Sale will begin in... <br></br> {timerComponentsPublic}</span> : <span>Public Sale will be starting soon...</span>}
                                     {/* Launching Early June 2022 */}
                                   </p>
+                                  </>
                                 ) :
 
 
@@ -779,12 +797,19 @@ const Hero = () => {
                                     
                                     </>
                                     : (
+
+                                      <>
+                                <p className=" bg-gray-100 rounded-md text-gray-800 font-bold text-lg my-4 py-1 px-3">
+                                  <span className="text-[#d35c5c]">{`${totalSupplyCalculated}`}</span> /
+                                  <span className="text-black">{`${totalSaleSupplyCalculated}`}</span>
+                                </p>
                                       <p className="text-white text-xl mt-8 text-center">
 
 
                                         {timerComponentsPublic.length ? <span>Public Sale will begin in... <br></br> {timerComponentsPublic}</span> : <span>Public Sale will be starting soon...</span>}
                                   
                                       </p>
+                                      </>
                                     )}
 
           {/* Status */}
