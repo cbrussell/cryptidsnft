@@ -10,7 +10,7 @@ def main():
     print(f'Ruinnng functions as dev: {dev}')
     print(f'Active network is: {active_network}')
 
-    addresses = ['0x7CA764b5fD488Fe90C894D5205e3268bDf18B527']
+    addresses = ['0xB5BBeB36b38D025f6dfb7D3f7458fF5BeE89058D']
 
 
     
