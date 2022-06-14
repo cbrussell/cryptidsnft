@@ -144,11 +144,11 @@ const Header = () => {
     
             <ul className="flex justify-around items-center space-x-10 pt-1 md:pt-0  px-2 sm:px-3" >
 
-              <li className="text-black text-semibold exo-font hover:text-orange-900">
+              {/* <li className="text-black text-semibold exo-font hover:text-orange-900">
                 <Link href="#synopsis">
                   <a>synopsis</a>
                 </Link>
-              </li>
+              </li> */}
 
               <li className="text-black text-semibold exo-font hover:text-orange-900">
                 <Link href="#team">
@@ -167,6 +167,13 @@ const Header = () => {
                   <a>docs</a>
                 </a>
               </li>
+
+              <li className="text-black text-semibold exo-font hover:text-orange-900">
+                <a href="https://trove.treasure.lol/collection/cryptids/" target="_blank" rel="noreferrer" >
+                  <a>buy/sell</a>
+                </a>
+              </li>
+
 
 
              
