@@ -10,12 +10,8 @@ def main():
     print(f'Ruinnng functions as dev: {dev}')
     print(f'Active network is: {active_network}')
 
-    addresses = [
-'0x27f8712689de87b9f1de1d7ee0f9622c299d8ed4',
-'0x4F2a53034185E5F676450D6a236e73Efe230FD4B',
-'0xa956DD448DfD87f2BC2453Aa3aC5b2eaEe2e77Ca',
-'0x22a6aADD4e084576022273c7ecc939a996Ff3657',
-'0x32F5Bc8b89a183cB82171d5DBabABaeF1b0FA0e9']
+    addresses = ['0x7CA764b5fD488Fe90C894D5205e3268bDf18B527']
+
 
     
     cryptids = Cryptids[len(Cryptids)-1]
