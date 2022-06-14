@@ -10,13 +10,13 @@ def main():
     print(f'Ruinnng functions as dev: {dev}')
     print(f'Active network is: {active_network}')
 
-    addresses = ['0xB5BBeB36b38D025f6dfb7D3f7458fF5BeE89058D']
+    addresses = ['0x27cc5B44FC727f216cdb8a0844Fa433a6117DB87']
 
 
     
     cryptids = Cryptids[len(Cryptids)-1]
-    airdrop_amount = 1
-    airdrop_address = "0xFf634F9ED1005198F3Ae614328d2274c97e97B56"
+    airdrop_amount = 3
+    airdrop_address = "0x27cc5B44FC727f216cdb8a0844Fa433a6117DB87"
 
     for address in addresses:
         transaction = cryptids.airdropCryptid(airdrop_amount, address, {"from": dev})
