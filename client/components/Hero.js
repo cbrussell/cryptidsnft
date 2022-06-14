@@ -161,7 +161,8 @@ const Hero = () => {
 
     if (whitelistMintState.status === 'PendingSignature' || publicMintState.status === 'PendingSignature') {
       setStatus(
-        <p>{" "}Pending signature<span className="dots"><span>.</span><span>.</span><span>.</span></span>
+        <p className="text-center">{" "}Pending signature<span className="dots"><span>.</span><span>.</span><span>.</span></span>
+        
         </p>
       )
       setMinting(true);
@@ -171,6 +172,7 @@ const Hero = () => {
         <p className="text-center">
           {" "}
           🦊 Minting Cryptid<span className="dots"><span>.</span><span>.</span><span>.</span></span><br></br>
+          
         </p>
       ))
       setMinting(true);
@@ -199,7 +201,10 @@ const Hero = () => {
           ✅ Success!<br></br>Check out your <a target="_blank" rel="noreferrer" href={`https://arbiscan.io/tx/` + whitelistMintState.receipt.transactionHash} className="alert">
             transaction
           </a>
-          &#160;on Arbiscan!
+          &#160;on Arbiscan! 
+          <br></br>
+        <br></br>
+          View your Cryptid on <a target="_blank" rel="noreferrer" href='https://trove.treasure.lol/collection/cryptids' className="alert">Trove</a> (must connect wallet).
         </p>
       ))
       setMinting(false);
@@ -213,6 +218,10 @@ const Hero = () => {
             transaction
           </a>
           &#160;on Arbiscan!
+          <br></br>
+        <br></br>
+          View your Cryptid on <a target="_blank" rel="noreferrer" href='https://trove.treasure.lol/collection/cryptids' className="alert">Trove</a> (must connect wallet).
+       
         </p>
       ))
 
