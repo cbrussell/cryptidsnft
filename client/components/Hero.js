@@ -204,7 +204,7 @@ const Hero = () => {
           &#160;on Arbiscan! 
           <br></br>
         <br></br>
-          View your Cryptid on <a target="_blank" rel="noreferrer" href='https://trove.treasure.lol/collection/cryptids' className="alert">Trove</a> (must connect wallet).
+        View your Cryptid on <a target="_blank" rel="noreferrer" href={`https://trove.treasure.lol/user/` + account} className="alert">Trove</a>
         </p>
       ))
       setMinting(false);
@@ -220,7 +220,7 @@ const Hero = () => {
           &#160;on Arbiscan!
           <br></br>
         <br></br>
-          View your Cryptid on <a target="_blank" rel="noreferrer" href='https://trove.treasure.lol/collection/cryptids' className="alert">Trove</a> (must connect wallet).
+        View your Cryptid on <a target="_blank" rel="noreferrer" href={`https://trove.treasure.lol/user/` + account} className="alert">Trove</a>
        
         </p>
       ))
