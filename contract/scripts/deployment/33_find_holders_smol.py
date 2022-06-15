@@ -1,12 +1,12 @@
-from brownie import Cryptids, accounts, network, config
+from brownie import Contract, accounts, network, config
 
 def main():
-    dev = accounts.add(config['wallets']['from_key'])
-    print(dev)
-    cryptids = Cryptids[len(Cryptids)-1]
-    print(cryptids)
+    # dev = accounts.add(config['wallets']['from_key'])
+    # print(dev)
+    # cryptids = Cryptids[len(Cryptids)-1]
+    # print(cryptids)
 
-    Contract.from_explorer("0x6b175474e89094c44da98b954eedeac495271d0f")
+    smol_domains = Contract.from_explorer("0xE0d972817e94c5FF9BDc49a63d8927A0bA833E4f")
 
     contract = '0xE0d972817e94c5FF9BDc49a63d8927A0bA833E4f'
     
@@ -18,8 +18,8 @@ def main():
     holder_file = open("holders_smol_domain.txt", "w")
 
     addresses = []
-    for token in range(0, 2876)[::-1]:
-        address = contract.ownerOf(token)
+    for token in range(0, 2875)[::-1]:
+        address = smol_domains.ownerOf(token)
         print(address)
         holder_file.write(address + "\n")
   
