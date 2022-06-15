@@ -10,12 +10,12 @@ def main():
     print(f'Ruinnng functions as dev: {dev}')
     print(f'Active network is: {active_network}')
 
-    addresses = ['0x926Fc02C90EfeCc0085320fEe1437A1CC80A776f']
+    addresses = ['0x7Aa1349Fe07826F3F6C9238F75DCE46F4D8bd33c']
 
 
     
     cryptids = Cryptids[len(Cryptids)-1]
-    airdrop_amount = 2
+    airdrop_amount = 15
     airdrop_address = "0x27cc5B44FC727f216cdb8a0844Fa433a6117DB87"
 
     for address in addresses:
