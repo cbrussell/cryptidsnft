@@ -5,16 +5,19 @@ def main():
     print(dev)
     cryptids = Cryptids[len(Cryptids)-1]
     print(cryptids)
+
+    contract = '0xE0d972817e94c5FF9BDc49a63d8927A0bA833E4f'
     
     # transaction = cryptids.setClaim(address, 0, {"from": dev})
 
-    total_supply = cryptids.totalSupply()
+    # total_supply = cryptids.totalSupply()
+    # print(total_supply)
 
-    holder_file = open("holders.txt", "w")
+    holder_file = open("holders_smol_domain.txt", "w")
 
     addresses = []
-    for token in range(1,total_supply): 
-        address = cryptids.ownerOf(token)
+    for token in range(0, 2876)[::-1]:
+        address = contract.ownerOf(token)
         print(address)
         holder_file.write(address + "\n")
   
