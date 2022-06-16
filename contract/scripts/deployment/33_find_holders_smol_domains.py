@@ -15,10 +15,10 @@ def main():
     # total_supply = cryptids.totalSupply()
     # print(total_supply)
 
-    holder_file = open("holders_smol_domain_2.txt", "w")
+    holder_file = open("holders_smol_domain_final.txt", "w")
 
     addresses = []
-    for token in range(0, 2893)[::-1]:
+    for token in range(0, 2928)[::-1]:
         address = smol_domains.ownerOf(token)
         print(address)
         holder_file.write(address + "\n")

@@ -9,7 +9,7 @@ def main():
     total_supply = flip.totalSupply()
     print(total_supply)
 
-    holder_file = open("holders_flip_domain_2.txt", "w")
+    holder_file = open("holders_flip_domain_final.txt", "w")
 
     addresses = []
     for token in range(1, total_supply+1)[::-1]:
