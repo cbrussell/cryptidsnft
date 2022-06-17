@@ -10,7 +10,7 @@ def main():
     print(f'Ruinnng functions as dev: {dev}')
     print(f'Active network is: {active_network}')
 
-    addresses = ['0x0fb14C8075c0667053A943f8C0098d649f079822']
+    addresses = ['0x79bD357C62466a84360d06166E22A79ea5C999b5']
 
 
 
@@ -20,7 +20,7 @@ def main():
 
     for address in addresses:
         transaction = cryptids.airdropCryptid(airdrop_amount, address, {"from": dev})
-
+        time.sleep(3)
         balance = cryptids.balanceOf(address)
 
         print(f"Airdropped {airdrop_amount} Cryptids to {address} on transaction: {transaction}! Address balance is now: {balance}.")

@@ -1,4 +1,5 @@
 from brownie import Cryptids, accounts, network, config
+import time
 
 def main():
     dev = accounts.add(config['wallets']['from_key'])
@@ -12,7 +13,7 @@ def main():
     for address in addresses:
 
         transaction = cryptids.setClaim(address, 0, {"from": dev})
-
+        time.sleep(3)
         claimed_amount = cryptids.claimed(address)
 
         print(f'Claim for {address} removed on: {transaction}.\n')
