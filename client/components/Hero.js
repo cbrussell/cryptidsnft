@@ -239,7 +239,7 @@ const Hero = () => {
   // public timers
 
   const calculateTimeLeftPublic = () => {
-    const difference = +new Date(Date.UTC(2022,5,16,23,0,0)) - +new Date();
+    const difference = +new Date(Date.UTC(2022,5,17,19,0,0)) - +new Date();
     let timeLeftPublic = {};
 
     if (difference > 0) {
