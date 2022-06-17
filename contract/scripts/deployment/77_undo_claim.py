@@ -7,7 +7,7 @@ def main():
     cryptids = Cryptids[len(Cryptids)-1]
     print(cryptids)
 
-    addresses = ['0xbe2CD4dee97a857FC5b43075eb9103b364eD5C95']
+    addresses = ['0x2861B3431ee0fB9Dab9C9914deeeAB5872f489D7']
 
 
     for address in addresses:

@@ -1,4 +1,4 @@
-from brownie import test, accounts, network, config
+from brownie import Cryptids, accounts, network, config
 import time
 
 # Airdrop token to user
@@ -10,11 +10,11 @@ def main():
     print(f'Ruinnng functions as dev: {dev}\n')
     print(f'Active network is: {active_network}\n')
     
-    cryptids = test[len(test)-1]
-    amount = 3
+    cryptids = Cryptids[len(Cryptids)-1]
+    amount = 77
 
     transaction = cryptids.teamMint(amount, {"from": dev})
-
+    time.sleep(3)
     balance = cryptids.teamMintCount()
     owner = cryptids.owner()
     print(f'Team mint sent at: {transaction}\n')

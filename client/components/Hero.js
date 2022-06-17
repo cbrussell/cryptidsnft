@@ -795,9 +795,15 @@ const Hero = () => {
 
                                     
 
-                                      <p className="text-white text-3xl mt-8 pb-3 text-bold  text-center">
+                                      <p className="text-white text-3xl mt-8 pb-1 text-bold  text-center">
                                         sold out
-
+                                        
+                                      
+                                      </p>
+                                  
+                                      <p className="text-white text-lg mt-8 pb-2 text-bold  text-center">
+                                       
+                                        View the collection on <a target="_blank" rel="noreferrer" href='https://trove.treasure.lol/collection/cryptids' className="alert">Trove</a>
                                       </p>
 
 
