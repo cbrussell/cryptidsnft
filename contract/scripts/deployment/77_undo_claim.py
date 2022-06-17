@@ -7,10 +7,14 @@ def main():
     cryptids = Cryptids[len(Cryptids)-1]
     print(cryptids)
 
-    addresses = ['0xfdFe0847CD314D7c3855A6F19D83E92355Cd4E8a']
+    addresses = ['0xbe2CD4dee97a857FC5b43075eb9103b364eD5C95']
 
 
     for address in addresses:
+
+        pre_claimed_amount = cryptids.claimed(address)
+
+        print(f"Account {address} has claimed {pre_claimed_amount} Cryptids.\n")
 
         transaction = cryptids.setClaim(address, 0, {"from": dev})
         time.sleep(3)
