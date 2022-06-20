@@ -1,9 +1,0 @@
-{
-    "css.lint.unknownAtRules": "ignore",
-    "solidity.compileUsingRemoteVersion": "latest",
-    "css.validate": false,
-    "less.validate": false,
-    "scss.validate": false,
-    "solidity.defaultCompiler": "remote",
-    
-}
