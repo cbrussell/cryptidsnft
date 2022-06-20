@@ -4,7 +4,6 @@ __pycache__
 .hypothesis/
 reports/
 assets/
-*.yaml
 git_instructions.txt
 pinata-key.txt
 .DS_Store

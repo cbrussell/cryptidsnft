@@ -1,0 +1,14 @@
+dependencies: 
+   - OpenZeppelin/openzeppelin-contracts@4.5.0
+compiler:  
+  solc:
+    remappings:  
+      - '@openzeppelin=OpenZeppelin/openzeppelin-contracts@4.5.0'
+    version: 0.8.11
+    optimizer:
+      enabled: true
+      runs: 200
+wallets:
+  from_key: ${PRIVATE_KEY}
+networks:
+  default: development #arb-test
